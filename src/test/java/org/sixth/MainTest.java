@@ -13,7 +13,13 @@ import java.util.ArrayList;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MainTest {
+    @Autowired
+    ConnectionDB test;
     @Test
     public void contextLoads(){
+        ArrayList<User> res = test.SearchAllUser();
+        for (int i = 0; i < res.size(); i++) {
+            System.out.println(res.get(i));
+        }
     }
 }

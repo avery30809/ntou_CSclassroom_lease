@@ -1,16 +1,23 @@
 package org.sixth.database;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.sql.*;
 import java.util.ArrayList;
 
+@Component
 public class ConnectionDB {
-    final static String mysqlURL = "jdbc:mysql://localhost:3306/sql_software?serverTimezone=UTC";
-    final static String user = "root";
-    final static String password = "Choco_La";
-    public static ArrayList<User> SearchAllUser() {
+    @Value("${spring.datasource.url}")
+    private String url;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
+    public ArrayList<User> SearchAllUser() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(mysqlURL, user, password);
+            Connection connection = DriverManager.getConnection(url, username, password);
             if(!connection.isClosed()) {
                 //透過連接物件 拖出一個互動命令物件
                 Statement st = connection.createStatement();
