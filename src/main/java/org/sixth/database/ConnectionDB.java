@@ -18,6 +18,7 @@ public class ConnectionDB {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, username, password);
+            if(connection == null) throw new ClassNotFoundException();
             if(!connection.isClosed()) {
                 //透過連接物件 拖出一個互動命令物件
                 Statement st = connection.createStatement();
@@ -26,7 +27,7 @@ public class ConnectionDB {
                 ArrayList<User> res = new ArrayList<>();
                 while(rs.next()){
                     res.add(new User(rs.getNString("username"), rs.getNString("useraccount"),
-                            rs.getNString("password"), rs.getNString("gmail")));
+                            rs.getNString("pwd"), rs.getNString("gmail")));
                 }
                 //處理完了 關閉連接
                 connection.close();
