@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .container {
+      border: solid;  
+      display: flex;
+      flex-direction: column; /* 垂直排列子元素 */
+      justify-content: center; /* 垂直置中 */
+      align-items: center; /* 水平置中 */
+      height: 97vh; /*根据需要调整父容器的高度*/
+    }
+
+    .box {
+      width: 500px; /* 设置方格的宽度 */
+      height: auto; /* 让高度自适应文本的高度 */
+      border: solid 2px black; /* 添加边框 */
+      background-color: white; /* 添加背景颜色 */
+      margin: 10px; /* 添加一些间距以分隔两个方格 */
+
+      /* 设置文本 */
+      text-align: center; /* 文本居中 */
+      font-size: 50px; /* 设置文本大小 */
+      color: black; /* 设置文本颜色 */
+    }
+
+    .date {
+        margin-top: 200px;
+    }
+    .datePicker {
+      padding-left: 20px; 
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box date">
+      <label for="datePicker">選擇日期：</label>
+      <br>
+      <input type="date" id="datePicker" name="datePicker" onchange="updateLabel()">
+    </div>
+    <div class="box">
+      查詢
+      <form action="AllClassRoom.html" method="get">
+        <input type="submit" value="提交">
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function updateLabel() {
+        const datePicker = document.getElementById("datePicker");
+        const selectedDate = datePicker.value;
+        const label = document.querySelector('label[for="datePicker"]');
+        label.textContent = "選擇日期：" + selectedDate;
+    }
+  </script>
+</body>
+</html>
