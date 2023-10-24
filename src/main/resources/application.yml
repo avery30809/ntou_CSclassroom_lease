@@ -1,8 +1,0 @@
-server:
-  port: 1484
-
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/sql_software?serverTimezone=UTC
-    username: Choco_La
-    password: CoCoNuT
