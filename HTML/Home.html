@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
   <style>
+    .top-column button {
+      position: absolute;
+      top: 2%;
+      right: 1%;
+      background-color: white;
+      border: none;
+      color: rgb(13, 179, 235);
+      width: 110px;
+      height: 30px;
+      font-size: .7em;
+      text-decoration: none;
+    }
+    .top-column button:hover {
+      text-decoration: underline;
+      color: rgb(0, 79, 250);
+    }
+
     .container {
-      border: solid;  
       display: flex;
       flex-direction: column; /* 垂直排列子元素 */
       justify-content: center; /* 垂直置中 */
@@ -33,6 +50,9 @@
   </style>
 </head>
 <body>
+  <div class="top-column">
+    <h1 style="display:block">海大教室借用平台<button id="login-signup">登入/註冊</button></h1>
+  </div>
   <div class="container">
     <div class="box date">
       <label for="datePicker">選擇日期：</label>
@@ -40,8 +60,8 @@
       <input type="date" id="datePicker" name="datePicker" onchange="updateLabel()">
     </div>
     <div class="box">
-      查詢
-      <form action="AllClassRoom.html" method="get">
+      查詢  
+      <form action="AllClassRoom.html" method="POST">
         <input type="submit" value="提交">
       </form>
     </div>
@@ -54,6 +74,8 @@
         const label = document.querySelector('label[for="datePicker"]');
         label.textContent = "選擇日期：" + selectedDate;
     }
+    document.getElementById("login-signup").addEventListener("click", function(event){
+      window.location.href = "../LoginTest/test.php";},false);
   </script>
 </body>
 </html>

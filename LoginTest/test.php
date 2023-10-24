@@ -153,28 +153,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     login();
                 }
             }
-
-            if(window.name = "")
-            {
-                window.name = "login";
-                window.addEventListener("load", login, false);
-            }
-            else if(window.name = "login")
-            {
-                window.name = "login";
-                window.addEventListener("load", login, false);
-            }
-            else if(window.name = "registration")
-            {
-                window.name = "registration";
-                window.addEventListener("load", registration, false);
-            }
-
+            window.addEventListener("load", login, false);
         </script>
     </head>
     <body id = "body">
         <!--輸入錯誤的話就alert有錯誤並重新刷新頁面-->
-        <?php if(isset($_GET['error'])){$error = urldecode($_GET['error']);echo '<script>alert("帳號或密碼錯誤");window.location.replace("test.php");</script>';}?>
+        <?php if(isset($_GET['error'])){$error = urldecode($_GET['error']);echo '<script>alert("帳號或密碼錯誤");window.location.reload();</script>';}?>
         <div id = "display"></div>
     </body>
 </html>
