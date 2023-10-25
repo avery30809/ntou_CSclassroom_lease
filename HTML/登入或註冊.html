@@ -50,6 +50,7 @@
             font-size: 13px;
             margin: 15px 0 10px;
         }
+
         /* 按鈕樣式 */
         .container button {
             /* background-color: #512da8;
@@ -64,12 +65,6 @@
             margin-top: 10px;
             cursor: pointer;
         }
-
-        /* 隱藏按鈕樣式 */
-        /* .container button.hidden {
-            background-color: transparent;
-            border-color: #fff;
-        } */
 
         /* 表單樣式 */
         .container form {
@@ -203,35 +198,64 @@
         .container.active .toggle-right {
             transform: translateX(200%);
         }
+
+        .email {
+            display: flex;
+            flex-direction: row;
+            height: 50px;
+        }
+
+        .email-text {
+            width: 250px !important;
+        }
+
+        .verification-button {
+            width: 50px;
+            border-radius: 10px;
+            font-weight: 600;
+            color: white !important;
+            text-decoration: none;
+            font-size: 15px !important;
+            padding-top: 2px !important;
+            /* padding-bottom: 10px !important; */
+            padding-left: 11px;
+            padding-right: 1px;
+            margin-left: 8px !important;
+            background-color: rgba(220, 84, 84, 0.607);
+            color: white;
+        }
     </style>
 </head>
 
 <body>
     <div class="container" id="container">
 
-        <!-- 註冊表單 -->
+        <!-- 登入表單 -->
         <div class="form-container sign-up">
             <form>
-                <h1>註冊帳號</h1>
-                <div class="social-icons">
-                </div>
-                <input type="text" placeholder="Name">
+                <h1>登入</h1>
                 <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <button>Sign Up</button>
+                <input type="password" placeholder="密碼">
+                <a href="#">忘記密碼了嗎 ?</a>
+                <button>Sign In</button>
             </form>
         </div>
 
-        <!-- 登入表單 -->
+        <!--註冊表單 -->
         <div class="form-container sign-in">
             <form>
-                <h1>登入</h1>
-                <div class="social-icons">
+                <h1>註冊帳號</h1>
+                <br>
+                <input type="text" placeholder="姓名">
+                <div class="email">
+                    <input type="email" class="email-text" placeholder="Email">
+                    <a href="AllClassRoom.html" target="_blank" class="verification-button">驗證</a>
                 </div>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <a href="#">忘記密碼了嗎 ?</a>
-                <button>Sign In</button>
+                <input type="text" placeholder="驗證碼">
+                <input type="password" placeholder="密碼">
+                <input type="password" placeholder="確認密碼">
+
+                <button>Sign Up</button>
             </form>
         </div>
 
@@ -240,18 +264,19 @@
             <div class="toggle">
                 <!-- 切換容器中包含的兩個切換面板 -->
 
-                <!-- 左側切換面板 - 登入 -->
+                <!-- 左側切換面板 - 註冊 -->
                 <div class="toggle-panel toggle-left">
                     <h1>歡迎回來!</h1>
-                    <p>填寫詳細資料已註冊帳號</p>
-                    <button class="hidden" id="login">登入</button>
-                </div>
-
-                <!-- 右側切換面板 - 註冊 -->
-                <div class="toggle-panel toggle-right">
-                    <h1>你好，使用者!</h1>
                     <p>輸入你的個人信息已登入系統</p>
                     <button class="hidden" id="register">註冊</button>
+                </div>
+
+                <!-- 右側切換面板 - 登入 -->
+                <div class="toggle-panel toggle-right">
+                    <h1>你好，使用者!</h1>
+                    <p>填寫詳細資料已註冊帳號</p>
+                    <button class="hidden" id="login">登入</button>
+
                 </div>
             </div>
         </div>
@@ -263,14 +288,15 @@
 
         const loginBtn = document.getElementById('login');
 
-        registerBtn.addEventListener('click', () => {
+        loginBtn.addEventListener('click', () => {
             container.classList.add("active");
         });
 
 
-        loginBtn.addEventListener('click', () => {
+        registerBtn.addEventListener('click', () => {
             container.classList.remove("active");
         });
+
     </script>
 </body>
 
