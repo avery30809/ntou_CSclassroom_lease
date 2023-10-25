@@ -291,14 +291,14 @@
                 <!-- 左側切換面板 - 登入 -->
                 <div class="toggle-panel toggle-left">
                     <h1>歡迎回來!</h1>
-                    <p>填寫詳細資料已註冊帳號</p>
+                    <p>填寫詳細資料以註冊帳號</p>
                     <button class="hidden" id="login">登入</button>
                 </div>
 
                 <!-- 右側切換面板 - 註冊 -->
                 <div class="toggle-panel toggle-right">
                     <h1>你好，使用者!</h1>
-                    <p>輸入你的個人信息已登入系統</p>
+                    <p>輸入你的個人信息以登入系統</p>
                     <button class="hidden" id="register">註冊</button>
                 </div>
             </div>
