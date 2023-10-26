@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Custom Dropdown Select Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .droplist {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* height: 100vh; */
+        }
+
+        .select-menu {
+            width: 380px;
+            margin-top: 100px;
+            border: 2px solid;
+        }
+
+        .select-menu .select-btn {
+            display: flex;
+            height: 55px;
+            background: hsl(0, 100%, 100%);
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 400;
+            /* border-radius: 8px; */
+            align-items: center;
+            cursor: pointer;
+            justify-content: space-between;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .select-btn .sBtn-img {
+            width: 50px;
+            transition: 0.3s;
+        }
+
+        .select-menu.active .select-btn i {
+            transform: rotate(-180deg);
+        }
+
+        .select-menu.active {
+            border-bottom: 1px solid;
+        }
+
+        .select-menu .options {
+            position: absolute;
+            padding: 20px;
+            margin-top: 10px;
+            background: #fff;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .select-menu.active .options {
+            display: block;
+            border: 2px solid;
+            border-top: none;
+            margin-top: 5px;
+            width: 380px;
+        }
+
+        .options .option {
+            display: flex;
+            cursor: pointer;
+            height: 55px;
+            background: #ffffff;
+            align-items: center;
+            padding: 0 16px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid;
+
+        }
+
+        /* 當鼠標停在選項上時 */
+        .options .option:hover {
+            background: #F2F2F2;
+        }
+
+        .option .option-text {
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* 查詢介面 */
+        .query {
+            margin-top: 100px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 3800 px;
+            height: 58px;
+            border: 2px solid;
+            border-left: none;
+        }
+
+        .query .queryButton {
+            cursor: pointer;
+            border: none;
+            background-color: white;
+        }
+
+        .query .queryImage {
+            width: 50px;
+        }
+
+        /* 未查詢時的介面 */
+        .query .blank {
+            width: 400px;
+            height: 58px;
+            padding-left: 10px;
+            border: 2px solid;
+            border-left: none;
+        }
+
+        /* 查詢教室介面 */
+        .query .inputClassRoomName {
+            display: none;
+            width: 400px;
+            height: 58px;
+            padding-left: 10px;
+            border: 2px solid;
+            border-left: none;
+        }
+
+        /* 查詢時段介面 */
+        .query .inputTimeInterval {
+            display: none;
+            position: flex;
+            width: 400px;
+            height: 58px;
+            border: 2px solid;
+            border-left: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .time {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        /* ----------------------------------------------------------------- */
+        /* 查詢結果 */
+        .content-container {
+            width: 832px;
+            max-height: 80%;
+            /* 設定最大高度，超過部分會出現滾動條 */
+            overflow-y: hidden;
+            /* 啟用垂直滾動條 */
+            border: 2px solid black;
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .content-container .text {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* 中間的間隔 */
+        .gap{
+            margin-right: 200px;
+            margin-left: 200px;
+        }
+
+        /* 換行 */
+        .text .wrap {
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #000;
+        }
+
+        /* 教室名稱(文字) */
+        .classroomName {
+            text-decoration: underline;
+            /*加底線*/
+            cursor: pointer;
+            /* 讓游標變成手指 */
+        }
+
+
+        /* -------------------------- */
+        /* 彈跳視窗 */
+
+        /* 彈跳視窗的樣式(預設為關閉) */
+        .popup {
+            width: 400px;
+            max-height: 80%;
+            /* 設定最大高度，超過部分會出現滾動條 */
+            overflow-y: auto;
+            /* 啟用垂直滾動條 */
+            display: none;
+            /* 初始時隱藏 */
+            background-color: white;
+            border-radius: 6px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0 30px 30px;
+            border: 2px solid #000;
+        }
+
+        .open-popup {
+            display: block;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* 關閉按鈕 */
+        .popup .close {
+            width: 50px;
+            height: 50px;
+            border: transparent;
+            background: transparent;
+
+            position: absolute;
+            top: 10px;
+            right: 10px;
+
+        }
+
+        /* 關閉按鈕圖片 */
+        .popup .close img {
+            max-width: 100%;
+            max-height: 100%;
+            cursor: pointer;
+        }
+
+        .popup .content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+        }
+
+        .popup .content .wrap {
+            width: 100%;
+            border-bottom: 1px solid #000;
+        }
+
+        /* -------------------------- */
+        /* 借用狀態Bar */
+        .totalBar {
+            /* 總共100 * 2.5(放大倍數) */
+            width: 250px; 
+            background-color: #ccc;
+            height: 20px;
+            border-radius: 30px;
+        }
+        .nowState-bar {
+            /* 占30% * 2.5(放大倍數) */
+            width: 75px;
+            height: 100px;
+            height: 20px;
+            background-color: #4CAF50;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="droplist">
+        <div class="select-menu">
+            <div class="select-btn">
+                <span class="sBtn-text">請選擇查詢條件</span>
+                <img class="sBtn-img" src="dropdownIcon.png">
+            </div>
+
+            <ul class="options">
+                <li class="option">
+                    <span class="option-text">選擇特定時段</span>
+                </li>
+                <li class="option">
+                    <span class="option-text">輸入教室名稱</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="query">
+            <input class="blank" type="text" placeholder="">
+
+            <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱">
+
+            <div class="inputTimeInterval">
+
+                <input class="time" type="time">
+                <img class="queryImage" src="right.png" alt="Query">
+                <input class="time" type="time">
+            </div>
+
+            <form action="AllClassRoom.html" method="get">
+                <button type="submit" class="queryButton">
+                    <img class="queryImage" src="queryIcon.png" alt="Query">
+                </button>
+            </form>
+        </div>
+
+
+    </div>
+
+    <div class="content-container">
+        <div class="text">
+            <!-- <h1>以下是查詢的教室目前狀態</h1> -->
+            <span>教室名稱</span>
+            <span class="gap">教室位置</span>
+            <span>借用情況</span>
+            <div class="wrap"></div>
+
+
+            <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+            <span class="gap">ECG608</span>
+            <!-- 狀態條 -->
+            <div class="totalBar">
+                <div class="nowState-bar">30%</div>
+            </div>
+
+
+
+        </div>
+        
+
+        <!-- 彈跳視窗內容 -->
+        <div id="popup" class="popup">
+            <h1>XXX教室</h1>
+            <button type="button" onclick="closePopupClassroom()" class="close">
+                <img src="close.png" alt="Close">
+            </button>
+            <div class="content">
+                <span>起始時間</span><span>結束時間</span><span>借用狀態</span>
+                <div class="wrap"></div>
+                <span>9 a.m.</span><span>10 a.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>10 a.m.</span><span>11 a.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>11 a.m.</span><span>12 p.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>12 p.m.</span><span>13 p.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>13 p.m.</span><span>14 p.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>14 p.m.</span><span>15 p.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>15 p.m.</span><span>16 p.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>16 p.m.</span><span>17 p.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>17 p.m.</span><span>18 p.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>18 p.m.</span><span>19 p.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <span>19 p.m.</span><span>20 p.m.</span><span>未借用</span>
+                <div class="wrap"></div>
+                <!-- <p></p>
+            <p></p> -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const optionMenu = document.querySelector(".select-menu"),
+            selectBtn = optionMenu.querySelector(".select-btn"),
+            options = optionMenu.querySelectorAll(".option"),
+            sBtn_text = optionMenu.querySelector(".sBtn-text"),
+            queryBlank = document.querySelector(".blank"),
+            queryClassRoom = document.querySelector(".inputClassRoomName"),
+            queryTimeInterval = document.querySelector(".inputTimeInterval");
+
+        selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));
+
+        options.forEach(option => {
+            option.addEventListener("click", () => {
+                let selectedOption = option.querySelector(".option-text").innerText;
+                sBtn_text.innerText = selectedOption;
+
+                if (selectedOption === "輸入教室名稱") {
+                    queryBlank.style.display = "none";
+                    queryClassRoom.style.display = "flex";
+                    queryTimeInterval.style.display = "none";
+
+                }
+                else if (selectedOption === "選擇特定時段") {
+                    queryBlank.style.display = "none";
+                    queryClassRoom.style.display = "none";
+                    queryTimeInterval.style.display = "flex";
+                }
+                else {
+                    queryBlank.style.display = "flex";
+                    queryClassRoom.style.display = "none";
+                    queryTimeInterval.style.display = "none";
+                }
+
+                optionMenu.classList.remove("active");
+            })
+        })
+
+
+
+
+
+
+        let popup = document.getElementById("popup");
+
+        // 開啟彈跳視窗的函數
+        function showPopupClassroom() {
+            popup.classList.add("open-popup");
+        }
+
+        function closePopupClassroom() {
+            popup.classList.remove("open-popup");
+        }
+    </script>
+
+</body>
+
+</html>
