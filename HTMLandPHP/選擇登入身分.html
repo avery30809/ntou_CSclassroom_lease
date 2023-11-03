@@ -32,7 +32,7 @@
             display: flex;
             align-items: center;
             justify-content: space-evenly;
-            
+
         }
 
         .cards .card {
@@ -51,23 +51,24 @@
             transform: translateY(-10px);
         }
 
-        .cards .card img{
+        .cards .card img {
             max-width: 95%;
             max-height: 95%;
         }
 
-        .cards .card h5{
+        .cards .card h5 {
             text-align: center;
             padding-top: 20px;
             font-size: 35px;
         }
 
-        .cards .card p{
+        .cards .card p {
             text-align: center;
             padding-top: 10px;
             font-size: 25px;
         }
-        .cards .card button{
+
+        .cards .card button {
             margin-left: 60%;
             margin-top: 35px;
             background-color: white;
@@ -80,8 +81,6 @@
 
             cursor: pointer;
         }
-        
-        
     </style>
 </head>
 
@@ -92,17 +91,24 @@
                 <img src="user.jpg">
                 <h5>User</h5>
                 <p>一般使用者<br>提供給借用教室的學生</p>
-                <button>Next</button>
+                <button onclick="SignIn_Out()">Next</button>
             </div>
             <div class="card">
                 <img src="user.jpg">
                 <h5>Administrator</h5>
                 <p>教室系統管理員<br>提供給管理系統的工作人員</p>
-                <button>Next</button>
+                <button onclick="SignIn_Out()">Next</button>
             </div>
         </div>
     </div>
 
+
+
+    <script>
+        function SignIn_Out() {
+            window.location.href = "登入或註冊.php"; 
+        }
+    </script>
 </body>
 
 </html>
