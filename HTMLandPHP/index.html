@@ -13,6 +13,22 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        /* 顯示從Home得到的查詢日期 */
+        .datePickerValue {
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            font-size: 40px;
+        }
+
+
+        /* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+        /* 以下是整體功能 */
+        .total {
+            margin-top: 20px;
+        }
+
+        /* 1. 下拉式選單 */
         .droplist {
             display: flex;
             align-items: center;
@@ -21,7 +37,7 @@
         }
 
         .select-menu {
-            width: 380px;
+            width: 680px;
             margin-top: 100px;
             border: 2px solid;
         }
@@ -93,7 +109,7 @@
             color: #333;
         }
 
-        /* 查詢介面 */
+        /* 2. 查詢介面 */
         .query {
             margin-top: 100px;
 
@@ -152,10 +168,10 @@
             margin-right: 20px;
         }
 
-        /* ----------------------------------------------------------------- */
+        /* --------------------------------------------------------------------------------------------------------------------------------------------------- */
         /* 查詢結果 */
         .content-container {
-            width: 832px;
+            width: 1132px;
             max-height: 80%;
             /* 設定最大高度，超過部分會出現滾動條 */
             overflow-y: hidden;
@@ -171,7 +187,7 @@
         }
 
         /* 中間的間隔 */
-        .gap{
+        .gap {
             margin-right: 200px;
             margin-left: 200px;
         }
@@ -193,12 +209,12 @@
         }
 
 
-        /* -------------------------- */
+        /* --------------------------------------------------------------------------------------------------------------------------------------------------- */
         /* 彈跳視窗 */
 
         /* 彈跳視窗的樣式(預設為關閉) */
         .popup {
-            width: 400px;
+            width: 600px;
             max-height: 80%;
             /* 設定最大高度，超過部分會出現滾動條 */
             overflow-y: auto;
@@ -240,12 +256,14 @@
             max-height: 100%;
             cursor: pointer;
         }
+        .popup h1{
+            margin-top: 30px;
+        }
 
         .popup .content {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-
         }
 
         .popup .content .wrap {
@@ -256,124 +274,140 @@
         /* -------------------------- */
         /* 借用狀態Bar */
         .totalBar {
-            /* 總共100 * 2.5(放大倍數) */
-            width: 250px; 
+            /* 總共100 * 5.5(放大倍數) */
+            width: 550px;
             background-color: #ccc;
             height: 20px;
             border-radius: 30px;
         }
+
         .nowState-bar {
-            /* 占30% * 2.5(放大倍數) */
-            width: 75px;
+            /* 占30% * 5.5(放大倍數) */
+            width: 165px;
             height: 100px;
             height: 20px;
             background-color: #4CAF50;
             border-radius: 20px;
             text-align: center;
         }
-        
     </style>
 </head>
 
 <body>
-    <div class="droplist">
-        <div class="select-menu">
-            <div class="select-btn">
-                <span class="sBtn-text">請選擇查詢條件</span>
-                <img class="sBtn-img" src="dropdownIcon.png">
+
+    <div class="datePickerValue">
+        <p id="selectedDatePlaceholder"></p>
+    </div>
+
+
+    <div class="total">
+
+        <div class="droplist">
+            <div class="select-menu">
+                <div class="select-btn">
+                    <span class="sBtn-text">請選擇查詢條件</span>
+                    <img class="sBtn-img" src="dropdownIcon.png">
+                </div>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">選擇特定時段</span>
+                    </li>
+                    <li class="option">
+                        <span class="option-text">輸入教室名稱</span>
+                    </li>
+                </ul>
             </div>
 
-            <ul class="options">
-                <li class="option">
-                    <span class="option-text">選擇特定時段</span>
-                </li>
-                <li class="option">
-                    <span class="option-text">輸入教室名稱</span>
-                </li>
-            </ul>
+            <div class="query">
+                <input class="blank" type="text" placeholder="">
+
+                <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱">
+
+                <div class="inputTimeInterval">
+
+                    <input class="time" type="time">
+                    <img class="queryImage" src="right.png" alt="Query">
+                    <input class="time" type="time">
+                </div>
+
+                <form action="AllClassRoom.html" method="get">
+                    <button type="submit" class="queryButton">
+                        <img class="queryImage" src="queryIcon.png" alt="Query">
+                    </button>
+                </form>
+            </div>
+
+
         </div>
 
-        <div class="query">
-            <input class="blank" type="text" placeholder="">
+        <div class="content-container">
+            <div class="text">
+                <!-- <h1>以下是查詢的教室目前狀態</h1> -->
+                <span>教室名稱</span>
+                <span class="gap">教室位置</span>
+                <span>借用情況</span>
+                <div class="wrap"></div>
 
-            <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱">
 
-            <div class="inputTimeInterval">
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">ECG608</span>
+                <!-- 狀態條 -->
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
 
-                <input class="time" type="time">
-                <img class="queryImage" src="right.png" alt="Query">
-                <input class="time" type="time">
+
+
             </div>
 
-            <form action="AllClassRoom.html" method="get">
-                <button type="submit" class="queryButton">
-                    <img class="queryImage" src="queryIcon.png" alt="Query">
+
+            <!-- 彈跳視窗內容 -->
+            <div id="popup" class="popup">
+                <h1>XXX教室</h1>
+                <button type="button" onclick="closePopupClassroom()" class="close">
+                    <img src="close.png" alt="Close">
                 </button>
-            </form>
-        </div>
-
-
-    </div>
-
-    <div class="content-container">
-        <div class="text">
-            <!-- <h1>以下是查詢的教室目前狀態</h1> -->
-            <span>教室名稱</span>
-            <span class="gap">教室位置</span>
-            <span>借用情況</span>
-            <div class="wrap"></div>
-
-
-            <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-            <span class="gap">ECG608</span>
-            <!-- 狀態條 -->
-            <div class="totalBar">
-                <div class="nowState-bar">30%</div>
-            </div>
-
-
-
-        </div>
-        
-
-        <!-- 彈跳視窗內容 -->
-        <div id="popup" class="popup">
-            <h1>XXX教室</h1>
-            <button type="button" onclick="closePopupClassroom()" class="close">
-                <img src="close.png" alt="Close">
-            </button>
-            <div class="content">
-                <span>起始時間</span><span>結束時間</span><span>借用狀態</span>
-                <div class="wrap"></div>
-                <span>9 a.m.</span><span>10 a.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>10 a.m.</span><span>11 a.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>11 a.m.</span><span>12 p.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>12 p.m.</span><span>13 p.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>13 p.m.</span><span>14 p.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>14 p.m.</span><span>15 p.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>15 p.m.</span><span>16 p.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>16 p.m.</span><span>17 p.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>17 p.m.</span><span>18 p.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>18 p.m.</span><span>19 p.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <span>19 p.m.</span><span>20 p.m.</span><span>未借用</span>
-                <div class="wrap"></div>
-                <!-- <p></p>
+                <div class="content">
+                    <span>起始時間</span><span>結束時間</span><span>借用狀態</span>
+                    <div class="wrap"></div>
+                    <span>9 a.m.</span><span>10 a.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>10 a.m.</span><span>11 a.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>11 a.m.</span><span>12 p.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>12 p.m.</span><span>13 p.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>13 p.m.</span><span>14 p.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>14 p.m.</span><span>15 p.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>15 p.m.</span><span>16 p.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>16 p.m.</span><span>17 p.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>17 p.m.</span><span>18 p.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>18 p.m.</span><span>19 p.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <span>19 p.m.</span><span>20 p.m.</span><span>未借用</span>
+                    <div class="wrap"></div>
+                    <!-- <p></p>
             <p></p> -->
+                </div>
             </div>
         </div>
     </div>
-
     <script>
+
+        // 獲取查詢的日期值
+        const selectedDate = localStorage.getItem("selectedDate");
+        if (selectedDate) {
+            document.getElementById("selectedDatePlaceholder").textContent = "以下是" + selectedDate + "教室狀態查詢結果";
+        }
+
+        // 大部分功能
         const optionMenu = document.querySelector(".select-menu"),
             selectBtn = optionMenu.querySelector(".select-btn"),
             options = optionMenu.querySelectorAll(".option"),
@@ -410,11 +444,7 @@
             })
         })
 
-
-
-
-
-
+        //彈跳視窗
         let popup = document.getElementById("popup");
 
         // 開啟彈跳視窗的函數

@@ -35,80 +35,80 @@
     }
 
     .top-column h1 {
-            margin-left: 2%;
-            margin-top: 1%;
-            font-size: 100px;
-            color: white;
-        }
+      margin-left: 2%;
+      margin-top: 1%;
+      font-size: 100px;
+      color: white;
+    }
 
-        .top-column button {
-            position: absolute;
-            top: 2%;
-            right: 1%;
-            /* background-color: white; */
-            background-color: none;
-            border: none;
-            font-size: 60px;
-            color: rgb(13, 179, 235);
+    .top-column button {
+      position: absolute;
+      top: 2%;
+      right: 1%;
+      /* background-color: white; */
+      background-color: none;
+      border: none;
+      font-size: 60px;
+      color: rgb(13, 179, 235);
 
-            text-decoration: none;
-        }
+      text-decoration: none;
+    }
 
-        .top-column button:hover {
-            cursor: pointer;
-            text-decoration: underline;
-            color: rgb(0, 79, 250);
-        }
+    .top-column button:hover {
+      cursor: pointer;
+      text-decoration: underline;
+      color: rgb(0, 79, 250);
+    }
 
-        .function {
-            display: flex;
-            flex-direction: row;
-            /* border: solid; */
-            justify-content: center;
-            align-items: center;
+    .function {
+      display: flex;
+      flex-direction: row;
+      /* border: solid; */
+      justify-content: center;
+      align-items: center;
 
-            height: 80%;
-        }
+      height: 80%;
+    }
 
-        .box {
-            width: 80%;
-            height: 130px;
-            border-radius: 50px;
-            background-color: rgba(25, 89, 179, 0.436);
+    .box {
+      width: 80%;
+      height: 130px;
+      border-radius: 50px;
+      background-color: rgba(25, 89, 179, 0.436);
 
-            border: solid;
+      border: solid;
 
-            text-align: center;
-            font-size: 70px;
-            color: aliceblue;
-        }
+      text-align: center;
+      font-size: 70px;
+      color: aliceblue;
+    }
 
-        .date {
-            height: 70px;
-            padding-top: 10px;
-        }
+    .date {
+      height: 70px;
+      padding-top: 10px;
+    }
 
-        .date img {
-            width: 10%;
-            height: 100%;
-            object-fit: cover;
-            padding-top: 10px;
-            padding-left: 10px;
-        }
+    .date img {
+      width: 10%;
+      height: 100%;
+      object-fit: cover;
+      padding-top: 10px;
+      padding-left: 10px;
+    }
 
-        .date label {
-            margin-top: 300px;
-        }
+    .date label {
+      margin-top: 300px;
+    }
 
-        .date input[type="date"] {
-            width: 500px;
-            height: 100px;
-            /* padding-top: 10px; */
-            /* padding-bottom: 1px; */
-            font-size: 60px;
-            background-color: rgba(187, 187, 187, 0.788);
-        }
-    </style>
+    .date input[type="date"] {
+      width: 500px;
+      height: 100px;
+      /* padding-top: 10px; */
+      /* padding-bottom: 1px; */
+      font-size: 60px;
+      background-color: rgba(187, 187, 187, 0.788);
+    }
+  </style>
   </style>
 </head>
 
@@ -136,7 +136,7 @@
                             <img src="queryIcon.png">
                             <input type="submit" value="提交">
                         </form> -->
-              <a href="AllClassRoom.html" target="_blank" class="verification-button"><img src="queryIcon.png"></a>
+              <a href="index.html" target="_blank" class="verification-button"><img src="queryIcon.png"></a>
             </span>
 
           </div>
@@ -150,12 +150,17 @@
   </div>
 
   <script>
-    // function updateLabel() {
-    //   const datePicker = document.getElementById("datePicker");
-    //   const selectedDate = datePicker.value;
-    //   const label = document.querySelector('label[for="datePicker"]');
-    //   label.textContent = "選擇日期：" + selectedDate;
-    // }
+    function updateLabel() {
+      const datePicker = document.getElementById("datePicker");
+      const selectedDate = datePicker.value;
+      // const label = document.querySelector('label[for="datePicker"]');
+      // label.textContent = "選擇日期：" + selectedDate;
+      // 存儲選定的日期到本地存儲
+      localStorage.setItem("selectedDate", selectedDate);
+      // 導航到 "next.html"
+      // window.location.href = "next.html";
+
+    }
     document.getElementById("login-signup").addEventListener("click", function (event) {
       window.location.href = "登入或註冊.php";
     }, false);
