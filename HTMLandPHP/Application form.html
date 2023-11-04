@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application form</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+
+        .container {
+            width: 40vw;
+            height: 85vh;
+            margin-top: 3%;
+
+            border-radius: 50px;
+            border: solid;
+        }
+
+        .content {
+            margin-left: 20px;
+            margin-right: 10px;
+            padding: 0;
+            font-size: 40px;
+        }
+
+        .content h5 {
+            margin: 0;
+            margin-bottom: 10px;
+            padding-top: 15px;
+            padding-left: 10px;
+            font-size: 60px;
+        }
+
+        .date {
+
+            text-align: right;
+            font-size: 30px !important;
+            margin-left: 180px;
+        }
+
+        .line_block {
+            height: 30%;
+        }
+
+        .line_block img {
+            max-width: 10%;
+            max-height: 10%;
+
+            margin-top: 0px;
+            padding: 0;
+        }
+
+        .line_block span {
+            font-size: 60px;
+        }
+
+        .line_block sup {
+            font-size: 20px;
+        }
+
+        .line_block P {
+            font-size: 40px;
+        }
+
+        .quention_text {
+            width: 100%;
+            height: 100% !important;
+            margin: 0;
+            font-size: 30px !important;
+        }
+
+        textarea {
+            width: 95%;
+            height: 90px;
+            margin-top: 10px;
+            padding-bottom: 10px;
+            resize: none;
+            outline: none;
+            border: 1px solid #aaa;
+
+            font-size: 30px;
+        }
+
+        input {
+            width: 70%;
+            font-size: 30px;
+        }
+
+        hr {
+            margin: 20px;
+            margin-left: 0 ;
+        }
+
+        button{
+            /* border-radius: 10px; */
+            font-size: 30px !important;
+            margin-left: 43%;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <h5>XXX教室<sub class="date">2023/10/20</sub></h5>
+            
+            <div class="line_block">
+                <span>1:00 <sup>PM</sup> </span>
+                <img src="right.png">
+                <span>2:00 <sup>PM</sup> </span>
+                <hr>
+
+                <span class="quention_text">借用目的 :</span>
+                <textarea placeholder="text"></textarea>
+                <hr>
+
+                <span class="quention_text">聯絡手機 :</span>
+                <input type="tel" pattern="09\d{2}-\d{6}" placeholder="09xx-xxxxxx" required>
+                <hr>
+                <button onclick="SendOut()">送出</button>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function SendOut() {
+            window.location.href = "登入或註冊.php"; 
+        }
+    </script>
+</body>
+
+</html>
