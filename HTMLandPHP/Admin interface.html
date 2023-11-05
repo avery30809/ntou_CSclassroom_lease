@@ -112,6 +112,7 @@
         }
 
         .menu-items li a .link-name {
+            padding-left: 10px;
             font-size: 18px;
             font-weight: 400;
             color: #707070;
@@ -175,24 +176,7 @@
         }
 
 
-/* -------------------------------------------- */
-
-
-        .board-content {
-            margin-top: 100px;
-        }
-
-
-        .test2 {
-            display: none;
-            border: solid;
-        }
-
-        .test2.show {
-            display: block;
-        } 
-
-/* ------------------------------- */
+/* 借用請求-------------------------------------------------------------------- */
 
         .borrowRequest{
             display: none;
@@ -270,6 +254,40 @@
         .content.show {
             display: flex;
         }
+        
+        
+/* 鑰匙歸還狀態-------------------------------------------- */
+.board-content {
+            margin-top: 100px;
+        }
+
+
+        .keyrecord {
+            display: none;
+            border: solid;
+        }
+
+        .keyrecord.show {
+            display: block;
+            border: solid;
+
+        } 
+
+        .keyrecordTitle{
+            border-bottom: 1px solid;
+            display: flex;
+            justify-content: space-between;
+            font-size: 30px !important;
+        }
+        .keyrecordContent{
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-between;
+            font-size: 25px !important;
+
+        }
+/* -------------------------------------------------------------------------- */
+
     </style>
 </head>
 
@@ -287,27 +305,29 @@
         <!-- 左下半部欄位 -->
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#" onclick="clearAll() , showTest1()" >
-                        <i><img src="request48.png" alt=""></i>
+                <li><a href="#" onclick="clearAll() , showBorrowRequest()" >
+                        <i><img src="request40.png" alt=""></i>
                         <span class="link-name">借用請求</span>
                     </a></li>
-                <li><a href="#" onclick="clearAll() , showTest2()">
-                        <i class="uil uil-files-landscapes"></i>
-                        <span class="link-name">Content</span>
+                <li><a href="#" onclick="clearAll() , showKeyrecord()">
+                        <i><img src="keyrecord40.png" alt=""></i>
+                        <span class="link-name">鑰匙借用紀錄</span>
                     </a></li>
             </ul>
         </div>
     </nav>
 
     <section class="board">
+        <!-- 右上半部欄位  -->
         <div class="top">
             <i class="sidebar-toggle"><img src="left.png" class="leftArrow" id="leftArrow"></i>
             <img src="user.jpg" alt="">
-            <!-- <button id="board-button" class="hidden">board Button</button> -->
 
         </div>
 
+        <!-- 右下半部欄位  -->
         <div class="board-content">
+            <!-- 借用請求 -->
             <div class="borrowRequest" id="borrowRequest">
 
 
@@ -337,9 +357,22 @@
                     </div>
                 </div>
             </div>
-
-            <div class="test2" id="test2">
-                <p>test2</p>
+            <!-- 鑰匙歸還狀態 -->
+            <div class="keyrecord" id="keyrecord">
+                <div class="keyrecordTitle">
+                    <span>借用者</span>
+                    <span>借用時間</span>
+                    <span>預計歸還時間</span>
+                    <span>借用狀態</span>
+                    
+                </div>
+                
+                <div class="keyrecordContent">
+                    <span>艾利</span>
+                    <span>4.PM</span>
+                    <span>5.PM</span>
+                    <span>未歸還</span>
+                </div>
             </div>
         </div>
     </section>
@@ -363,33 +396,23 @@
 
 
         // 當點擊左側選當後在右側顯示
-        let test2 = document.getElementById("test2");
         let borrowRequest = document.getElementById("borrowRequest");
+        let keyrecord = document.getElementById("keyrecord");
 
 
         function clearAll(){
             borrowRequest.classList.remove("show");
-            test2.classList.remove("show");
+            keyrecord.classList.remove("show");
 
         }
 
-        function showTest1() {
-            // test1.classList.add("show");
+        function showBorrowRequest() {
             borrowRequest.classList.add("show");
 
         }
-        function showTest2() {
-            test2.classList.add("show");
+        function showKeyrecord() {
+            keyrecord.classList.add("show");
         }
-
-
-
-
-
-
-
-
-
 
 
         // 用按鈕選擇條件清單
