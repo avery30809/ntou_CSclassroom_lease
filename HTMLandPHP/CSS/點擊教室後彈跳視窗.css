@@ -1,0 +1,64 @@
+/* 教室名稱(文字) */
+.classroomName {
+    text-decoration: underline;
+    /*加底線*/
+    cursor: pointer;
+    /* 讓游標變成手指 */
+}
+
+/* 彈跳視窗的樣式(預設為關閉) */
+.popup {
+    width: 400px;
+    max-height: 80%;
+    /* 設定最大高度，超過部分會出現滾動條 */
+    overflow-y: auto;
+    /* 啟用垂直滾動條 */
+    display: none;
+    /* 初始時隱藏 */
+    background-color: white;
+    border-radius: 6px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0 30px 30px;
+    border: 2px solid #000;
+}
+
+.open-popup {
+    display: block;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 關閉按鈕 */
+.popup .close {
+    width: 50px;
+    height: 50px;
+    border: transparent;
+    background: transparent;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+}
+
+/* 關閉按鈕圖片 */
+.popup .close img {
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+}
+
+.popup .content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+}
+
+.popup .content .wrap {
+    width: 100%;
+    border-bottom: 1px solid #000;
+    }
