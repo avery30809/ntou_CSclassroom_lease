@@ -1,7 +1,6 @@
 <?php
-    //登入後端
     session_start();
-
+    //登入後端
     if(isset($_POST['sign-in-submit'])){
 
         $account = $_POST["account"];
@@ -46,19 +45,19 @@
 
         <!-- 註冊表單 -->
         <div class="form-container sign-up">
-            <form method="POST">
+            <form id="signup-form" method="POST">
                 <h1>註冊帳號</h1>
-                <input type="text" placeholder="姓名">
+                <input type="text" id="signup_username" name="username" placeholder="姓名" required>
                 <div class="email">
-                    <input type="text" class="email-text" placeholder="學號" id="studentID">
+                    <input type="text" id="signup_account" class="email-text" name="account" placeholder="學號">
                     <span style="color: grey; position: relative; top: 27px;font-size: 50%;width: 100px">@mail.ntou.edu.tw</span>
                     <button id="vertify" class="verification-button">驗證</button>
                 </div>
-                <input type="text" placeholder="驗證碼">
-                <input type="password" placeholder="密碼">
-                <input type="password" placeholder="確認密碼">
+                <input type="text" id="signup_verification_code" name="verification_code" placeholder="驗證碼" required>
+                <input type="password" id="signup_pwd" name="pwd" placeholder="密碼" required>
+                <input type="password" id="signup_confirm_pwd" name="confirm_pwd" placeholder="確認密碼" required>
 
-                <button>Sign Up</button>
+                <button type="submit" name="sign-up-submit">Sign Up</button>
             </form>
         </div>
 
@@ -120,28 +119,61 @@
 
         const loginBtn = document.getElementById('login');
         const vertifyBtn = document.getElementById('vertify');
+
+        const signupform = document.getElementById("signup-form");
         registerBtn.addEventListener('click', () => {
             container.classList.add("active");
         });
 
+        signupform.addEventListener("submit",(event)=>{
+            event.preventDefault();
+
+            const formData = new FormData();
+            const username = document.getElementById("signup_username").value;
+            const account = document.getElementById("signup_account").value;
+            const code = document.getElementById("signup_verification_code").value;
+            const pwd = document.getElementById("signup_pwd").value;
+            const confirm_pwd = document.getElementById("signup_confirm_pwd").value;
+            console.log(typeof(code));
+            formData.append("username",username);
+            formData.append("account",account);
+            formData.append("verification_code",code);
+            formData.append("pwd",pwd);
+            formData.append("confirm_pwd",confirm_pwd);
+            fetch('註冊後端.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                window.alert(data);
+            });
+        });
 
         loginBtn.addEventListener('click', () => {
             container.classList.remove("active");
         });
-        vertifyBtn.addEventListener('click', () => {
-            event.preventDefault(); // 阻止表單預設的提交行為
-            const formData = new FormData();
-            const email = document.getElementById("studentID").value + "@mail.ntou.edu.tw";
-            formData.append("email", email);
 
-            fetch('sendemail/sender.php', {
-                method: 'POST',
-                body: formData
-            });
-            vertifyBtn.disabled = true;
-            setTimeout(()=>{
-                vertifyBtn.disabled = false; 
-            },5*60*1000);
+        vertifyBtn.addEventListener('click', () => {
+            const ID = document.getElementById("signup_account").value;
+            if(ID !== "") {
+                const formData = new FormData();
+                const email = ID + "@mail.ntou.edu.tw";
+                formData.append("email", email);
+
+                fetch('sendemail/sender.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                vertifyBtn.disabled = true;
+                setTimeout(()=>{
+                    vertifyBtn.disabled = false; 
+                },5*60*1000);
+                window.alert("請去海大信箱接收驗證碼\n記得在海大信箱選擇日期！");
+            }
+            else {
+                window.alert("請輸入學號");
+            }
         });
     </script>
 </body>
