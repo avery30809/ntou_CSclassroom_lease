@@ -40,8 +40,8 @@ body {
 }
 /* 按鈕樣式 */
 .container button {
-    /* background-color: #512da8;
-    color: #fff; */
+    background-color: #512da8;
+    color: #fff;
     font-size: 12px;
     padding: 10px 45px;
     border: 1px solid transparent;
@@ -65,7 +65,7 @@ body {
 }
 /* 輸入框樣式 */
 .container input {
-    background-color: #eee;
+    background-color: rgb(227, 227, 227);
     border: none;
     margin: 8px 0;
     padding: 10px 15px;
@@ -192,10 +192,10 @@ body {
     padding: 0px !important;
     margin-top: 0px !important;
     margin-left: 5px !important;
-    background-color: rgba(220, 84, 84, 0.607);
+    background-color: rgba(220, 84, 84, 0.607) !important;
     color: white;
 }
 .verification-button:disabled {
     cursor: default;
-    background-color: lightgray;
+    background-color: lightgray !important;
 }

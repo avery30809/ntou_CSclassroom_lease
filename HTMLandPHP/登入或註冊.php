@@ -146,7 +146,8 @@
             })
             .then(response => response.text())
             .then(data => {
-                window.alert(data);
+                window.alert(data.replace(" ", "\n"));
+                if(data == "註冊成功！") window.location.reload();
             });
         });
 
