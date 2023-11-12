@@ -10,7 +10,7 @@
 <body>
 
   <div class="container">
-    <img src="classroom cover.jpg">
+    <img src="image/classroom cover.jpg">
 
     <div class="overlay">
 
@@ -31,7 +31,7 @@
                             <img src="queryIcon.png">
                             <input type="submit" value="提交">
                         </form> -->
-              <a href="index.html" target="_self" class="verification-button"><img src="queryIcon.png"></a>
+              <a href="index.html" target="_self" class="verification-button"><img src="image/queryIcon.png"></a>
             </span>
 
           </div>
@@ -73,7 +73,7 @@
     //已登入
     if(localStorage.getItem("username") !== null) {
       document.getElementById("login-signup").id = "login-signup-completed";
-      document.getElementById("login-signup-completed").innerHTML = "<img src='usericon.png' class='usericon'>"+localStorage.getItem("username");
+      document.getElementById("login-signup-completed").innerHTML = "<img src='image/usericon.png' class='usericon'>"+localStorage.getItem("username");
       document.getElementById("login-signup-completed").addEventListener("click", function(event) {
         localStorage.removeItem("username");
         document.getElementById("login-signup-completed").id = "login-signup";

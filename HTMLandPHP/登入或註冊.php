@@ -19,7 +19,7 @@
         $username = $conn->query("SELECT username FROM userdata WHERE useraccount = '$account' AND pwd = '$password'")->fetch_assoc()["username"];
         if (!empty($username)) {
             //使用者
-            //紀錄已登入的使用者名稱，並回首頁\
+            //紀錄已登入的使用者名稱，並回首頁
             echo "
             <script>
                 localStorage.setItem('username', '$username');
