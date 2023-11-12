@@ -37,16 +37,56 @@
             <div class="query">
                 <input class="blank" type="text" placeholder="">
 
-                <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱">
+                <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱" list="classroomNameList">
+                <datalist id="classroomNameList">
+                    <option>B07</option>
+                    <option>INS101</option>
+                    <option>INS105</option>
+                    <option>INS203</option>
+                    <option>INS205</option>
+                    <option>INS212</option>
+                    <option>INS301</option>
+                    <option>INS303</option>
+                    <option>INS407</option>
+                    <option>INS409</option>
+                    <option>ECGB107</option>
+                    <option>ECG607</option>
+                    <option>ECG610</option>
+                </datalist>
 
                 <div class="inputTimeInterval">
-
-                    <input class="time" type="time">
+                    <input class="time" type="time" id="time1" list="startTimeList">
+                    <datalist id="startTimeList">
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                    </datalist>
                     <img class="queryImage" src="right.png" alt="Query">
-                    <input class="time" type="time">
+                    <input class="time" type="time" id="time2" list="endTimeList">
+                    <datalist id="endTimeList">
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                    </datalist>
                 </div>
 
-                <form action="index.html" method="get">
+                <form method="get" id="form">
                     <button type="submit" class="queryButton">
                         <img class="queryImage" src="queryIcon.png" alt="Query">
                     </button>
@@ -57,7 +97,7 @@
         </div>
 
         <div class="content-container">
-            <div class="text">
+            <div class="text" id="showClassroom">
                 <!-- <h1>以下是查詢的教室目前狀態</h1> -->
                 <span>教室名稱</span>
                 <span class="gap">教室位置</span>
@@ -65,8 +105,92 @@
                 <div class="wrap"></div>
 
                 <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">ECG608</span>
+                <span class="gap">B07</span>
                 <!-- 狀態條 -->
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+                
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">INS101</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">INS105</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">INS203</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">INS205</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">INS212</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">INS301</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">INS303</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">INS407</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">INS409</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">ECGB107</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">ECG607</span>
+                <div class="totalBar">
+                    <div class="nowState-bar">30%</div>
+                </div>
+                <div class="wrap"></div>
+
+                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
+                <span class="gap">ECG610</span>
                 <div class="totalBar">
                     <div class="nowState-bar">30%</div>
                 </div>
@@ -127,6 +251,57 @@
             queryClassRoom = document.querySelector(".inputClassRoomName"),
             queryTimeInterval = document.querySelector(".inputTimeInterval");
 
+        //以後會被資料庫所取代
+        const allClassroomName = ["B07", "INS101", "INS105", "INS203", "INS205", "INS212", "INS301", "INS303", "INS407", "INS409", "ECGB107", "ECG607", "ECG610"],
+            startTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
+            endTime = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
+            condition = [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
+
+        //顯示以教室名稱或特定時段搜尋的結果
+        
+        form.addEventListener("submit", () => 
+        {
+            event.preventDefault();    
+            let properClassroomName = false,
+                intervalVacant = true,
+                queryStartTime = document.getElementById("time1").value,
+                queryEndTime = document.getElementById("time2").value;
+
+            for(let i = 0; i < allClassroomName.length; i++)
+            {
+                if(queryClassRoom.value == allClassroomName[i]) properClassroomName = true;
+            }
+            
+            if(properClassroomName)
+            {
+                document.getElementById("showClassroom").innerHTML = '<span>教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
+                document.getElementById("showClassroom").innerHTML += '<div class="wrap"></div><span onclick="showPopupClassroom()" class="classroomName">XXX教室</span><span class="gap">' + queryClassRoom.value + '</span><div class="totalBar"><div class="nowState-bar">30%</div></div>';
+                queryClassRoom.value = "";
+            }
+            else if(queryStartTime != "" && queryEndTime != "" && queryStartTime < queryEndTime)
+            {
+                document.getElementById("showClassroom").innerHTML = '<span>教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
+                for(let i = 0; i < allClassroomName.length; i++)
+                {
+                    for(let j = 0; j < startTime.length; j++)
+                    {
+                        if(startTime[j] >= queryStartTime && endTime[j] <= queryEndTime && condition[j] == 0)
+                        {
+                            intervalVacant = false;
+                            break;
+                        }
+                    }
+                    if(intervalVacant)
+                    {
+                        document.getElementById("showClassroom").innerHTML += '<div class="wrap"></div><span onclick="showPopupClassroom()" class="classroomName">XXX教室</span><span class="gap">' + allClassroomName[i] + '</span><div class="totalBar"><div class="nowState-bar">30%</div></div>';
+                    }            
+                    intervalVacant = true;        
+                }
+                document.getElementById("time1").value = "";
+                document.getElementById("time2").value = "";   
+            }        
+        })
+
         selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));
 
         options.forEach(option => {
@@ -166,8 +341,6 @@
         function closePopupClassroom() {
             popup.classList.remove("open-popup");
         }
-
-
 
         //檢查是否登入
         function CheckAuthentication() {
