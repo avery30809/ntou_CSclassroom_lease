@@ -97,94 +97,6 @@
         <div class="content-container">
             <div class="text" id="showClassroom">
                 <!-- <h1>以下是查詢的教室目前狀態</h1> -->
-                <span>教室名稱</span>
-                <span class="gap">教室位置</span>
-                <span>借用情況</span>
-                <div class="wrap"></div>
-                
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">INS101</span>
-                <!-- 狀態條 -->
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">INS105</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">INS203</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">INS205</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">INS212</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">INS301</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">INS303</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">INS407</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">INS409</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">ECGB107</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">ECG607</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">ECG610</span>
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
             </div>
 
 
@@ -243,13 +155,34 @@
             queryTimeInterval = document.querySelector(".inputTimeInterval");
 
         //以後會被資料庫所取代
-        const allClassroomName = ["INS101", "INS105", "INS203", "INS205", "INS212", "INS301", "INS303", "INS407", "INS409", "ECGB107", "ECG607", "ECG610"],
-            startTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
+        let allClassroomName = [];
+        const startTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
             endTime = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
             condition = [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
 
+        fetch("獲取教室名稱.php")
+        .then(response => response.json())
+        .then(datas => {
+            datas.forEach((data)=>{
+                allClassroomName.push(data[0]);
+            });
+        });
+
+        //列出所有教室狀態
+        function showDefault() {
+            let content = "";
+            content += '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span>\
+            <span>借用情況</span><div class="wrap"></div>';
+
+            allClassroomName.forEach((classroom)=>{
+                content += `<span onclick="showPopupClassroom()" class="classroomName">${classroom}</span><span class="gap">\
+                    ${classroom.slice(0,3)=="INS"?"電資大樓":"電粽大樓"}</span><div class="totalBar">\
+                    <div class="nowState-bar">30%</div></div><div class="wrap"></div>`;
+            });
+            document.getElementById("showClassroom").innerHTML = content;
+        }
+
         //顯示以教室名稱或特定時段搜尋的結果
-        
         form.addEventListener("submit", () => 
         {
             event.preventDefault();    
@@ -340,6 +273,8 @@
 
             window.location.href = "選擇登入身分.html"
         }
+
+        window.addEventListener("load", showDefault, false);
 
     </script>
 

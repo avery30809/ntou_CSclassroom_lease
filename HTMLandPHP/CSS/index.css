@@ -195,6 +195,7 @@
 
 /* 教室名稱(文字) */
 .classroomName {
+    width: 70px;
     text-decoration: underline;
     /*加底線*/
     cursor: pointer;
