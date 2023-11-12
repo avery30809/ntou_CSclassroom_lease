@@ -12,16 +12,19 @@
 
         if($account == $admin["useraccount"] && $password == $admin["pwd"]) {
             //管理員
+            //todo
             header("Location: AllClassRoom.html");
             exit();
         } 
-        $username = $conn->query("SELECT username FROM userdata WHERE useraccount = '$account' AND pwd = '$password'")->fetch_assoc();
+        $username = $conn->query("SELECT username FROM userdata WHERE useraccount = '$account' AND pwd = '$password'")->fetch_assoc()["username"];
         if (!empty($username)) {
             //使用者
-            //紀錄已登入的使用者名稱
-            $_SESSION['username'] = $username;
-            //回上一頁
-            echo "<script>window.history.go(-3)</script>";
+            //紀錄已登入的使用者名稱，並回首頁\
+            echo "
+            <script>
+                localStorage.setItem('username', '$username');
+                window.location.assign('Home.html');
+            </script>";
         } else {
             $_SESSION['Error']='Invalid account or password';
         }

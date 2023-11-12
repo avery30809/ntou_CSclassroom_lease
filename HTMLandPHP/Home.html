@@ -31,7 +31,7 @@
                             <img src="queryIcon.png">
                             <input type="submit" value="提交">
                         </form> -->
-              <a href="index.html" target="_blank" class="verification-button"><img src="queryIcon.png"></a>
+              <a href="index.html" target="_self" class="verification-button"><img src="queryIcon.png"></a>
             </span>
 
           </div>
@@ -70,6 +70,22 @@
       return dateToString(resultDate);
     }
 
+    //已登入
+    if(localStorage.getItem("username") !== null) {
+      document.getElementById("login-signup").id = "login-signup-completed";
+      document.getElementById("login-signup-completed").innerHTML = "<img src='usericon.png' class='usericon'>"+localStorage.getItem("username");
+      document.getElementById("login-signup-completed").addEventListener("click", function(event) {
+        localStorage.removeItem("username");
+        document.getElementById("login-signup-completed").id = "login-signup";
+        window.location.reload();
+      }, false);
+    }
+    else {//未登入
+      document.getElementById("login-signup").addEventListener("click", function (event) {
+        window.location.href = "選擇登入身分.html";
+      }, false);
+    }
+
     function updateLabel() {
       const selectedDate = datePicker.value;
       // const label = document.querySelector('label[for="datePicker"]');
@@ -80,9 +96,6 @@
       // window.location.href = "next.html";
 
     }
-    document.getElementById("login-signup").addEventListener("click", function (event) {
-      window.location.href = "選擇登入身分.html";
-    }, false);
   </script>
 </body>
 
