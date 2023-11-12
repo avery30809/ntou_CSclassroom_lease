@@ -50,6 +50,7 @@
     const datePicker = document.getElementById("datePicker");
 
     datePicker.value = dateToString(now);
+    localStorage.setItem("selectedDate", dateToString(now));
     datePicker.min = dateToString(now);
     datePicker.max = add30(now);
 
