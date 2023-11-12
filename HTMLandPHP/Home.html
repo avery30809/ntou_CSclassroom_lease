@@ -45,8 +45,32 @@
   </div>
 
   <script>
+    const now = new Date();
+
+    const datePicker = document.getElementById("datePicker");
+
+    datePicker.value = dateToString(now);
+    datePicker.min = dateToString(now);
+    datePicker.max = add30(now);
+
+    function dateToString(date) {
+      let temp = new Date(date);
+      //格式化日，如果小於9，前面補0
+      let day = ("0" + temp.getDate()).slice(-2);
+      //格式化月，如果小於9，前面補0
+      let month = ("0" + (temp.getMonth() + 1)).slice(-2);
+      //拼裝完整日期格式
+      let result = temp.getFullYear()+"-"+(month)+"-"+(day);
+      return result;
+    }
+
+    function add30(date) {
+      let resultDate = new Date(date);
+      resultDate.setDate(resultDate.getDate() + 30);
+      return dateToString(resultDate);
+    }
+
     function updateLabel() {
-      const datePicker = document.getElementById("datePicker");
       const selectedDate = datePicker.value;
       // const label = document.querySelector('label[for="datePicker"]');
       // label.textContent = "選擇日期：" + selectedDate;
@@ -57,7 +81,7 @@
 
     }
     document.getElementById("login-signup").addEventListener("click", function (event) {
-      window.location.href = "登入或註冊.php";
+      window.location.href = "選擇登入身分.html";
     }, false);
   </script>
 </body>
