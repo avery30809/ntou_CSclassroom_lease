@@ -39,7 +39,6 @@
 
                 <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱" list="classroomNameList">
                 <datalist id="classroomNameList">
-                    <option>B07</option>
                     <option>INS101</option>
                     <option>INS105</option>
                     <option>INS203</option>
@@ -103,17 +102,10 @@
                 <span class="gap">教室位置</span>
                 <span>借用情況</span>
                 <div class="wrap"></div>
-
-                <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
-                <span class="gap">B07</span>
-                <!-- 狀態條 -->
-                <div class="totalBar">
-                    <div class="nowState-bar">30%</div>
-                </div>
-                <div class="wrap"></div>
                 
                 <span onclick="showPopupClassroom()" class="classroomName">XXX教室</span>
                 <span class="gap">INS101</span>
+                <!-- 狀態條 -->
                 <div class="totalBar">
                     <div class="nowState-bar">30%</div>
                 </div>
@@ -252,7 +244,7 @@
             queryTimeInterval = document.querySelector(".inputTimeInterval");
 
         //以後會被資料庫所取代
-        const allClassroomName = ["B07", "INS101", "INS105", "INS203", "INS205", "INS212", "INS301", "INS303", "INS407", "INS409", "ECGB107", "ECG607", "ECG610"],
+        const allClassroomName = ["INS101", "INS105", "INS203", "INS205", "INS212", "INS301", "INS303", "INS407", "INS409", "ECGB107", "ECG607", "ECG610"],
             startTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
             endTime = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
             condition = [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
