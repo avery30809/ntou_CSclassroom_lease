@@ -11,13 +11,17 @@
         $admin = $result->fetch_assoc();
 
         if($account == $admin["useraccount"] && $password == $admin["pwd"]) {
+            //管理員
             header("Location: AllClassRoom.html");
             exit();
         } 
         $username = $conn->query("SELECT username FROM userdata WHERE useraccount = '$account' AND pwd = '$password'")->fetch_assoc();
         if (!empty($username)) {
-            header("Location: AllClassRoom.html");
-            exit();
+            //使用者
+            //紀錄已登入的使用者名稱
+            $_SESSION['username'] = $username;
+            //回上一頁
+            echo "<script>window.history.go(-3)</script>";
         } else {
             $_SESSION['Error']='Invalid account or password';
         }
@@ -125,6 +129,7 @@
             container.classList.add("active");
         });
 
+        //註冊
         signupform.addEventListener("submit",(event)=>{
             event.preventDefault();
 
@@ -154,7 +159,7 @@
         loginBtn.addEventListener('click', () => {
             container.classList.remove("active");
         });
-
+        //驗證
         vertifyBtn.addEventListener('click', () => {
             const ID = document.getElementById("signup_account").value;
             if(ID !== "") {
