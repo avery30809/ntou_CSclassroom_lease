@@ -120,6 +120,12 @@
     background-color: white;
 }
 
+.query .queryButton:disabled {
+    cursor: default;
+    border: none;
+    background-color: rgb(218, 218, 218);
+}
+
 .query .queryImage {
     width: 50px;
 }
@@ -157,8 +163,72 @@
 }
 
 .time {
-    margin-left: 20px;
-    margin-right: 20px;
+    border: none;
+    border-bottom: 2px solid lightgray;
+    width: 160px;
+    height: 30px;
+}
+/*調整指標*/
+.time:hover {
+    cursor: pointer;
+}
+/*取消方框*/
+.time:focus {
+    outline: none;
+}
+.time:disabled {
+    cursor: default;
+    background-color: #ccc;
+}
+.selectTime {
+    position: relative;
+    width: 160px;
+}
+.selectTime:nth-child(1) {
+    margin-right: 10px;
+}
+.selectTime:nth-child(2) {
+    margin-left: 10px;
+}
+.selectTime::before {
+    position: absolute;
+    background-image: url("../image/dropdownIcon.png");
+    background-size: 25px 25px;
+    pointer-events: none;
+    top: 2px;
+    right: 1px;
+    width: 25px;
+    height: 25px;
+    content: "";
+}
+
+/* 時間列表 */
+.dropdownStart,
+.dropdownEnd {
+    position: absolute;
+    display: none; /* 初始隱藏下拉列表 */
+    width: 100%;
+}
+.startList,
+.endList {
+    list-style: none;
+    font-size: 18px;
+    background-color: white;
+    z-index: 1;
+    height: 150px;
+    overflow-y: scroll;
+}
+.startList li,
+.endList li {
+    text-align: center;
+    padding-block: 5px;
+    border-bottom: 2px solid lightgray;
+    border-inline: 2px solid lightgray;
+}
+.startList li:hover,
+.endList li:hover {
+    cursor: pointer;
+    background-color:rgb(90, 163, 223);
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------------------------- */

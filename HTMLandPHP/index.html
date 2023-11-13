@@ -35,7 +35,7 @@
             </div>
 
             <div class="query">
-                <input class="blank" type="text" placeholder="">
+                <input class="blank" type="text" placeholder="" disabled>
 
                 <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱" list="classroomNameList">
                 <datalist id="classroomNameList">
@@ -54,39 +54,37 @@
                 </datalist>
 
                 <div class="inputTimeInterval">
-                    <input class="time" type="time" id="time1" list="startTimeList">
-                    <datalist id="startTimeList">
-                        <option>09:00</option>
-                        <option>10:00</option>
-                        <option>11:00</option>
-                        <option>12:00</option>
-                        <option>13:00</option>
-                        <option>14:00</option>
-                        <option>15:00</option>
-                        <option>16:00</option>
-                        <option>17:00</option>
-                        <option>18:00</option>
-                        <option>19:00</option>
-                    </datalist>
+                    <div class="selectTime">
+                        <input class="time" type="text" id="time1" placeholder="開始時間" readonly>
+                        <div class="dropdownStart">
+                            <ul class="startList">
+                                <li>09:00</li>
+                                <li>10:00</li>
+                                <li>11:00</li>
+                                <li>12:00</li>
+                                <li>13:00</li>
+                                <li>14:00</li>
+                                <li>15:00</li>
+                                <li>16:00</li>
+                                <li>17:00</li>
+                                <li>18:00</li>
+                                <li>19:00</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
                     <img class="queryImage" src="image/right.png" alt="Query">
-                    <input class="time" type="time" id="time2" list="endTimeList">
-                    <datalist id="endTimeList">
-                        <option>10:00</option>
-                        <option>11:00</option>
-                        <option>12:00</option>
-                        <option>13:00</option>
-                        <option>14:00</option>
-                        <option>15:00</option>
-                        <option>16:00</option>
-                        <option>17:00</option>
-                        <option>18:00</option>
-                        <option>19:00</option>
-                        <option>20:00</option>
-                    </datalist>
+                    <div class="selectTime">
+                        <input class="time" type="text" id="time2" placeholder="結束時間" readonly disabled>
+                        <div class="dropdownEnd">
+                            <ul class="endList">
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <form method="get" id="form">
-                    <button type="submit" class="queryButton">
+                    <button type="submit" class="queryButton" disabled>
                         <img class="queryImage" src="image/queryIcon.png" alt="Query">
                     </button>
                 </form>
@@ -157,8 +155,8 @@
         //以後會被資料庫所取代
         let allClassroomName = [];
         const startTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-            endTime = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
-            condition = [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
+            endTime =     ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
+            condition =   [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
 
         fetch("獲取教室名稱.php")
         .then(response => response.json())
@@ -177,11 +175,55 @@
 
             allClassroomName.forEach((classroom)=>{
                 content += `<span onclick="showPopupClassroom()" class="classroomName">${classroom}</span><span class="gap">\
-                    ${classroom.slice(0,3)=="INS"?"電資大樓":"電粽大樓"}</span><div class="totalBar">\
+                    ${classroom.slice(0,3)=="INS"?"電資大樓":"電綜大樓"}</span><div class="totalBar">\
                     <div class="nowState-bar">30%</div></div><div class="wrap"></div>`;
             });
             document.getElementById("showClassroom").innerHTML = content;
         }
+
+        //下拉式選單
+        //選完開始才可以選結束時間
+        document.querySelectorAll(".startList li").forEach((item)=>{
+            item.addEventListener("click", ()=>{
+                document.getElementById("time1").value = item.textContent;
+                document.getElementById("time2").removeAttribute("disabled");
+                document.getElementById("time2").value = "";
+                //讓結束時間可以保持必定比開始時間大
+                let i = startTime.indexOf(document.getElementById("time1").value);
+                let myList = document.querySelector(".endList");
+                myList.innerHTML = "";
+                endTime.slice(i).forEach((time)=>{
+                    let newItem = document.createElement("li");
+                    newItem.textContent = time;
+                    //更新endList的eventlistener
+                    newItem.addEventListener("click", ()=>{
+                        document.getElementById("time2").value = newItem.textContent;
+                    })
+                    myList.appendChild(newItem);
+                })
+            })
+        })
+        document.getElementById("time1").addEventListener("click", ()=>{
+            event.stopPropagation();
+            let temp = document.querySelector(".dropdownStart");
+            temp.style.display = temp.style.display==="block"?"none":"block";
+            document.querySelector(".dropdownEnd").style.display = "none";
+            optionMenu.classList.remove("active");
+        })
+        document.getElementById("time2").addEventListener("click", ()=>{
+            event.stopPropagation();
+            let temp = document.querySelector(".dropdownEnd");
+            temp.style.display = temp.style.display==="block"?"none":"block";
+            document.querySelector(".dropdownStart").style.display = "none";
+            optionMenu.classList.remove("active");
+        })
+        document.addEventListener("click", (event)=>{
+            let a = document.querySelector(".dropdownStart"),
+                b = document.querySelector(".dropdownEnd");
+            a.style.display = "none";
+            b.style.display = "none";
+            optionMenu.classList.remove("active");
+        })
 
         //顯示以教室名稱或特定時段搜尋的結果
         form.addEventListener("submit", () => 
@@ -224,10 +266,14 @@
                 }
                 document.getElementById("time1").value = "";
                 document.getElementById("time2").value = "";   
+                document.getElementById("time2").setAttribute("disabled", true);
             }        
         })
 
-        selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));
+        selectBtn.addEventListener("click", () => {
+            event.stopPropagation();
+            optionMenu.classList.toggle("active");
+        });
 
         options.forEach(option => {
             option.addEventListener("click", () => {
@@ -238,17 +284,22 @@
                     queryBlank.style.display = "none";
                     queryClassRoom.style.display = "flex";
                     queryTimeInterval.style.display = "none";
-
+                    queryBlank.removeAttribute("disabled");
+                    document.querySelector(".queryButton").removeAttribute("disabled");
                 }
                 else if (selectedOption === "選擇特定時段") {
                     queryBlank.style.display = "none";
                     queryClassRoom.style.display = "none";
                     queryTimeInterval.style.display = "flex";
+                    queryBlank.removeAttribute("disabled");
+                    document.querySelector(".queryButton").removeAttribute("disabled");
                 }
                 else {
                     queryBlank.style.display = "flex";
                     queryClassRoom.style.display = "none";
                     queryTimeInterval.style.display = "none";
+                    queryBlank.setAttribute("disabled", true);
+                    document.querySelector(".queryButton").setAttribute("disabled", true);
                 }
 
                 optionMenu.classList.remove("active");
