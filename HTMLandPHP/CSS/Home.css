@@ -1,17 +1,31 @@
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(233, 229, 229, 0.31);
+}
+
 .container {
-    position: relative;
-    height: 95vh;
-    width: 98vw;
-    padding-left: 0px
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .container img {
-    padding-top: 0px;
     width: 100%;
-    height: 101%;
+    height: 100%;
     object-fit: cover;
     opacity: 0.9;
-    border-radius: 10px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .usericon {
@@ -26,91 +40,125 @@
     font-size: 40px;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.top-column {
-    padding-top: 15px;
-    padding-bottom: 1px;
+.top-row {
+    /* padding-top: 15px;
+    padding-bottom: 1px; */
     height: 20%;
 }
 
-.top-column h1 {
-    margin-left: 2%;
-    margin-top: 1%;
-    font-size: 100px;
-    color: white;
+.top-row p {
+    padding-left: 2vw;
+    font-size: 5.5vw;
+    color: rgb(8, 8, 8);
 }
 
-.top-column button {
+
+.top-row button {
     position: absolute;
-    top: 2%;
-    right: 1%;
-    /* background-color: white; */
-    background-color: none;
+    top: 5%;
+    right: 2%;
     border: none;
-    font-size: 60px;
-    color: rgb(13, 179, 235);
+    font-size: 50px;
+    background-color: #EAF4FD;
+    color: rgb(13, 157, 235);
 
     text-decoration: none;
 }
 
-.top-column button:hover {
+.top-row button:hover {
     cursor: pointer;
     text-decoration: underline;
     color: rgb(0, 79, 250);
 }
 
-.function {
-    display: flex;
+.bottom-row {
     flex-direction: row;
-    /* border: solid; */
-    justify-content: center;
-    align-items: center;
+    height: 60%;
+    width: 50vw;
+}
 
-    height: 80%;
+.bottom-row p {
+    margin-left: 5%;
+
+    line-height: 6vh;
+    font-size: 2vw;
+    color: rgb(8, 8, 8);
 }
 
 .box {
-    width: 80%;
-    height: 130px;
-    border-radius: 50px;
-    background-color: rgba(25, 89, 179, 0.436);
 
-    border: solid;
+    width: 70%;
+    height: 15vh;
+
+    border-radius: 50px;
+    background-color: #EAF4FD;;
+    
+    margin-left: 5%;
+    margin-top: 10%;
+
 
     text-align: center;
-    font-size: 70px;
+    font-size: 2vw;
     color: aliceblue;
 }
 
-.date {
-    height: 70px;
-    padding-top: 10px;
+.box:hover {
+    transform: translateY(-2px);
 }
 
-.date img {
-    width: 10%;
+.chooseText {
+    display: flex;
+
     height: 100%;
-    object-fit: cover;
-    padding-top: 10px;
-    padding-left: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50px;
+
 }
 
-.date label {
-    margin-top: 300px;
+.chooseText button {
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    border-radius: 40px;
+    background-color: #a9d5fc;;
+
+}
+
+.chooseText.delete{
+    display: none;
+}
+
+.date {
+    display: none;
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+    background-color: #a9d5fc;;
+
+}
+.date.show {
+    display: flex;
+    
 }
 
 .date input[type="date"] {
-    width: 500px;
-    height: 100px;
-    /* padding-top: 10px; */
-    /* padding-bottom: 1px; */
-    font-size: 60px;
-    background-color: rgba(187, 187, 187, 0.788);
+    height: 100%;
+    /* width: 100%; */
+    font-size: 3vw;
+    padding-left: 4vw;
+    padding-right: 1vw;
+
+    background-color:  #a9d5fc;
+    border-radius: 50px;
+    border: none;
+
 }
+
+#datePicker::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+

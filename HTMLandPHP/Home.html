@@ -10,32 +10,30 @@
 <body>
 
   <div class="container">
-    <img src="image/classroom cover.jpg">
+    <img src="image/classroom cover.png">
 
     <div class="overlay">
 
-      <div class="top-column">
-        <h1>海大教室借用平台</h1>
+      <div class="top-row">
+        <p>海大教室借用平台</p>
         <button id="login-signup">登入/註冊</button>
       </div>
 
-      <div class="function">
-
-
+      <div class="bottom-row">
+        <p>透過海大教室借用平台，便捷地尋找理想教室，簡單預訂，讓借用流程輕鬆便捷，提高使用效率，滿足不同需求。
+        </p>
         <div class="box">
-          <div class="date">
-            <label for="datePicker">選擇日期：</label>
-            <input type="date" id="datePicker" name="datePicker" onchange="updateLabel()">
-            <span>
-              <!-- <form action="AllClassRoom.html" method="POST">
-                            <img src="queryIcon.png">
-                            <input type="submit" value="提交">
-                        </form> -->
-              <a href="index.html" target="_self" class="verification-button"><img src="image/queryIcon.png"></a>
-            </span>
+          <div id="chooseText" class="chooseText">
 
+            <button onclick="showDateform()">點擊這選擇查詢日期</button>
           </div>
 
+          <div id="choosedate" class="date">
+            <input type="date" id="datePicker" name="datePicker" onchange="updateLabel()">
+            <span>
+              <a href="index.html" target="_self" class="verification-button"><img src="image/queryIcon.png"></a>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -49,6 +47,9 @@
 
     const datePicker = document.getElementById("datePicker");
 
+    let chooseText = document.getElementById("chooseText");
+    let choosedate = document.getElementById("choosedate");
+
     datePicker.value = dateToString(now);
     localStorage.setItem("selectedDate", dateToString(now));
     datePicker.min = dateToString(now);
@@ -61,7 +62,7 @@
       //格式化月，如果小於9，前面補0
       let month = ("0" + (temp.getMonth() + 1)).slice(-2);
       //拼裝完整日期格式
-      let result = temp.getFullYear()+"-"+(month)+"-"+(day);
+      let result = temp.getFullYear() + "-" + (month) + "-" + (day);
       return result;
     }
 
@@ -72,10 +73,10 @@
     }
 
     //已登入
-    if(localStorage.getItem("username") !== null) {
+    if (localStorage.getItem("username") !== null) {
       document.getElementById("login-signup").id = "login-signup-completed";
-      document.getElementById("login-signup-completed").innerHTML = "<img src='image/usericon.png' class='usericon'>"+localStorage.getItem("username");
-      document.getElementById("login-signup-completed").addEventListener("click", function(event) {
+      document.getElementById("login-signup-completed").innerHTML = "<img src='image/usericon.png' class='usericon'>" + localStorage.getItem("username");
+      document.getElementById("login-signup-completed").addEventListener("click", function (event) {
         localStorage.removeItem("username");
         document.getElementById("login-signup-completed").id = "login-signup";
         window.location.reload();
@@ -96,6 +97,13 @@
       // 導航到 "next.html"
       // window.location.href = "next.html";
 
+    }
+
+
+    function showDateform() {
+      chooseText.classList.add("delete");
+      choosedate.classList.add("show");
+      
     }
   </script>
 </body>
