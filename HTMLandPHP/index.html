@@ -20,11 +20,14 @@
         <div class="droplist">
             <div class="select-menu">
                 <div class="select-btn">
-                    <span class="sBtn-text">請選擇查詢條件</span>
+                    <span class="sBtn-text">顯示所有教室</span>
                     <img class="sBtn-img" src="image/dropdownIcon.png">
                 </div>
 
                 <ul class="options">
+                    <li class="option">
+                        <span class="option-text">顯示所有教室</span>
+                    </li>
                     <li class="option">
                         <span class="option-text">選擇特定時段</span>
                     </li>
@@ -300,6 +303,7 @@
                     queryTimeInterval.style.display = "none";
                     queryBlank.setAttribute("disabled", true);
                     document.querySelector(".queryButton").setAttribute("disabled", true);
+                    showDefault();
                 }
 
                 optionMenu.classList.remove("active");
