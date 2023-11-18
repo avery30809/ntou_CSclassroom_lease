@@ -7,17 +7,68 @@
 
 /* 顯示從Home得到的查詢日期 */
 .datePickerValue {
-    position: absolute;
-    top: 30px;
-    left: 20px;
-    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 15px;
+
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(159, 210, 247);
+    /* border: solid; */
 }
 
+.datePickerValue h5 {
+    font-size: 50px;
+    color: white;
+}
+
+
+/* 登入按鈕 */
+.top-row{
+    display: flex;
+    background-color: rgb(159, 210, 247);
+    height: 50px;
+    /* border:solid; */
+}
+
+.top-row button {
+
+    border: none;
+    font-size: 20px;
+    background-color: #EAF4FD;
+    color: rgb(13, 157, 235); 
+    margin-left: auto;
+    margin-top: 15px;
+    margin-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    text-decoration: none;
+    border-radius: 10px;
+}
+.top-row img{
+    width: 40px;
+}
+.top-row p{
+    margin-right: auto;
+    margin-top: 15px;
+    margin-left: 25px;
+    /* border: solid; */
+}
+.top-row button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(0, 79, 250);
+}
 
 /* --------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 以下是整體功能 */
 .total {
-    margin-top: 20px;
+    height: 100vh;
+    margin-top: 0;
+    background-color: rgb(243, 246, 253);
+
 }
 
 /* 1. 下拉式選單 */
@@ -25,18 +76,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgb(159, 210, 247);
+
     /* height: 100vh; */
 }
 
 .select-menu {
     width: 680px;
-    margin-top: 100px;
-    border: 2px solid;
+    /* margin-top: 100px; */
+    border: 2px solid white;
+    border-right: 2px solid black;
+    border-top-left-radius: 30px;
+    /*+16 line*/
+    border-bottom-left-radius: 30px;
+
+    margin-bottom: 20px;
 }
 
 .select-menu .select-btn {
     display: flex;
-    height: 55px;
+    height: 70px;
     background: hsl(0, 100%, 100%);
     padding: 20px;
     font-size: 18px;
@@ -46,6 +105,11 @@
     cursor: pointer;
     justify-content: space-between;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+    border-top-left-radius: 20px;
+    /*-16 line*/
+    border-bottom-left-radius: 20px;
+
 }
 
 .select-btn .sBtn-img {
@@ -58,24 +122,29 @@
 }
 
 .select-menu.active {
-    border-bottom: 1px solid;
+    /* border-bottom: 1px solid;        */
 }
 
 .select-menu .options {
+    display: none;
     position: absolute;
     padding: 20px;
-    margin-top: 10px;
-    background: #fff;
+    /* margin-top: 10px; */
+    /* background: #ffbb6d; */
+    background: white;
+
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-    display: none;
+    /* border-radius: 20px; */
+
 }
 
 .select-menu.active .options {
     display: block;
-    border: 2px solid;
-    border-top: none;
-    margin-top: 5px;
-    width: 380px;
+    border: 1px solid;
+    /* border-top: none; */
+    width: 650px !important;
+    border-radius: 20px;
+
 }
 
 .options .option {
@@ -93,7 +162,8 @@
 
 /* 當鼠標停在選項上時 */
 .options .option:hover {
-    background: #F2F2F2;
+    background: #ffbb6d;
+    /* background: #ffffff; */
 }
 
 .option .option-text {
@@ -103,21 +173,32 @@
 
 /* 2. 查詢介面 */
 .query {
-    margin-top: 100px;
-
+    /* margin-top: 100px; */
     display: flex;
     justify-content: center;
     align-items: center;
     width: 3800 px;
-    height: 58px;
-    border: 2px solid;
+    height: 73.5px;
     border-left: none;
+    background-color: #ffffff;
+
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    margin-bottom: 20px;
 }
 
 .query .queryButton {
+
+    width: 45px;
     cursor: pointer;
     border: none;
     background-color: white;
+    margin-right: 5px;
+    /* border-top-right-radius: 20px; */
+    /* border-bottom-right-radius: 20px; */
+    border: 2px solid white;
+    margin-right: 10px;
+
 }
 
 .query .queryButton:disabled {
@@ -127,7 +208,8 @@
 }
 
 .query .queryImage {
-    width: 50px;
+    width: 45px;
+    margin-right: 10px;
 }
 
 /* 未查詢時的介面 */
@@ -135,7 +217,7 @@
     width: 400px;
     height: 58px;
     padding-left: 10px;
-    border: 2px solid;
+    border: 2px solid white;
     border-left: none;
 }
 
@@ -145,7 +227,8 @@
     width: 400px;
     height: 58px;
     padding-left: 10px;
-    border: 2px solid;
+    margin-left: 10px;
+    border: 2px solid white;
     border-left: none;
     font-size: 35px;
 }
@@ -154,42 +237,54 @@
 .query .inputTimeInterval {
     display: none;
     position: flex;
+    margin-left: 10px;
     width: 400px;
     height: 58px;
-    border: 2px solid;
+    border: 2px solid white;
     border-left: none;
     justify-content: center;
     align-items: center;
 }
 
 .time {
-    border: none;
-    border-bottom: 2px solid lightgray;
     width: 160px;
     height: 30px;
+    padding-left: 10px;
+
+    border: none;
+    border-bottom: 2px solid rgb(242, 174, 14);
+    font-size: 18px;
 }
+
 /*調整指標*/
 .time:hover {
     cursor: pointer;
 }
+
 /*取消方框*/
 .time:focus {
     outline: none;
 }
+
 .time:disabled {
     cursor: default;
     background-color: #ccc;
+    border-bottom: none;
 }
+
 .selectTime {
     position: relative;
     width: 160px;
 }
+
 .selectTime:nth-child(1) {
     margin-right: 10px;
 }
+
 .selectTime:nth-child(2) {
     margin-left: 10px;
 }
+
 .selectTime::before {
     position: absolute;
     background-image: url("../image/dropdownIcon.png");
@@ -206,9 +301,11 @@
 .dropdownStart,
 .dropdownEnd {
     position: absolute;
-    display: none; /* 初始隱藏下拉列表 */
+    display: none;
+    /* 初始隱藏下拉列表 */
     width: 100%;
 }
+
 .startList,
 .endList {
     list-style: none;
@@ -218,6 +315,7 @@
     height: 150px;
     overflow-y: scroll;
 }
+
 .startList li,
 .endList li {
     text-align: center;
@@ -225,23 +323,30 @@
     border-bottom: 2px solid lightgray;
     border-inline: 2px solid lightgray;
 }
+
 .startList li:hover,
 .endList li:hover {
     cursor: pointer;
-    background-color:rgb(90, 163, 223);
+    background-color: rgb(90, 163, 223);
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 查詢結果 */
 .content-container {
-    width: 1132px;
-    max-height: 80%;
-    /* 設定最大高度，超過部分會出現滾動條 */
-    overflow-y: hidden;
-    /* 啟用垂直滾動條 */
-    border: 2px solid black;
+    width: 1138px;
+    height: 65%;
+
     padding: 20px;
     margin: 0 auto;
+    margin-top: 10px;
+
+    /* 設定最大高度，超過部分會出現滾動條 */
+    overflow-y: auto;
+    /* 啟用垂直滾動條 */
+
+    background: white;
+    border: 1px solid rgb(105, 102, 102);
+    /* border-top: none;; */
 }
 
 .content-container .text {
@@ -349,9 +454,10 @@
     flex-wrap: wrap;
 }
 
-.popup span{
+.popup span {
     padding-top: 10px;
 }
+
 .popup .content .wrap {
     width: 100%;
     border-bottom: 1px solid #000;

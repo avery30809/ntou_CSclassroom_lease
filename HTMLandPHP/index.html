@@ -10,12 +10,19 @@
 
 <body>
 
-    <div class="datePickerValue">
-        <p id="selectedDatePlaceholder"></p>
-    </div>
-
-
     <div class="total">
+
+        <div class="top-row">
+            
+
+            <p><a href="Home.html" target="_self" class="verification-button"><img src="image/home.png" alt=""></a></p>
+
+            <button id="login-signup">登入/註冊</button>
+        </div>
+
+        <div class="datePickerValue">
+            <h5 id="selectedDatePlaceholder"></h5>
+        </div>
 
         <div class="droplist">
             <div class="select-menu">
@@ -75,7 +82,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <img class="queryImage" src="image/right.png" alt="Query">
                     <div class="selectTime">
                         <input class="time" type="text" id="time2" placeholder="結束時間" readonly disabled>
@@ -85,7 +92,6 @@
                         </div>
                     </div>
                 </div>
-
                 <form method="get" id="form">
                     <button type="submit" class="queryButton" disabled>
                         <img class="queryImage" src="image/queryIcon.png" alt="Query">
@@ -98,6 +104,41 @@
         <div class="content-container">
             <div class="text" id="showClassroom">
                 <!-- <h1>以下是查詢的教室目前狀態</h1> -->
+                <span>起始時間</span><span>結束時間</span><span>借用狀態</span>
+                <div class="wrap"></div>
+                <span>9 a.m.</span><span>10 a.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>10 a.m.</span><span>11 a.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>11 a.m.</span><span>12 p.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>12 p.m.</span><span>13 p.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>13 p.m.</span><span>14 p.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>14 p.m.</span><span>15 p.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>15 p.m.</span><span>16 p.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>16 p.m.</span><span>17 p.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>17 p.m.</span><span>18 p.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>18 p.m.</span><span>19 p.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
+                <span>19 p.m.</span><span>20 p.m.</span><span onclick="CheckAuthentication()"
+                    class="classroomState">未借用</span>
+                <div class="wrap"></div>
             </div>
 
 
@@ -110,27 +151,38 @@
                 <div class="content">
                     <span>起始時間</span><span>結束時間</span><span>借用狀態</span>
                     <div class="wrap"></div>
-                    <span>9 a.m.</span><span>10 a.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>9 a.m.</span><span>10 a.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>10 a.m.</span><span>11 a.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>10 a.m.</span><span>11 a.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>11 a.m.</span><span>12 p.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>11 a.m.</span><span>12 p.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>12 p.m.</span><span>13 p.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>12 p.m.</span><span>13 p.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>13 p.m.</span><span>14 p.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>13 p.m.</span><span>14 p.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>14 p.m.</span><span>15 p.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>14 p.m.</span><span>15 p.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>15 p.m.</span><span>16 p.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>15 p.m.</span><span>16 p.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>16 p.m.</span><span>17 p.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>16 p.m.</span><span>17 p.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>17 p.m.</span><span>18 p.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>17 p.m.</span><span>18 p.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>18 p.m.</span><span>19 p.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>18 p.m.</span><span>19 p.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>19 p.m.</span><span>20 p.m.</span><span onclick="CheckAuthentication()" class="classroomState">未借用</span>
+                    <span>19 p.m.</span><span>20 p.m.</span><span onclick="CheckAuthentication()"
+                        class="classroomState">未借用</span>
                     <div class="wrap"></div>
                     <!-- <p></p>
             <p></p> -->
@@ -143,7 +195,7 @@
         // 獲取查詢的日期值
         const selectedDate = localStorage.getItem("selectedDate");
         if (selectedDate) {
-            document.getElementById("selectedDatePlaceholder").textContent = "以下是" + selectedDate + "教室狀態查詢結果";
+            document.getElementById("selectedDatePlaceholder").textContent = selectedDate + " 教室狀態查詢結果";
         }
 
         // 大部分功能
@@ -158,17 +210,17 @@
         //以後會被資料庫所取代
         let allClassroomName = [];
         const startTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-            endTime =     ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
-            condition =   [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
+            endTime = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
+            condition = [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
 
         fetch("獲取教室名稱.php")
-        .then(response => response.json())
-        .then(datas => {
-            datas.forEach((data)=>{
-                allClassroomName.push(data[0]);
+            .then(response => response.json())
+            .then(datas => {
+                datas.forEach((data) => {
+                    allClassroomName.push(data[0]);
+                });
+                showDefault();
             });
-            showDefault();
-        });
 
         //列出所有教室狀態
         function showDefault() {
@@ -176,9 +228,9 @@
             content += '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span>\
             <span>借用情況</span><div class="wrap"></div>';
 
-            allClassroomName.forEach((classroom)=>{
+            allClassroomName.forEach((classroom) => {
                 content += `<span onclick="showPopupClassroom()" class="classroomName">${classroom}</span><span class="gap">\
-                    ${classroom.slice(0,3)=="INS"?"電資大樓":"電綜大樓"}</span><div class="totalBar">\
+                    ${classroom.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span><div class="totalBar">\
                     <div class="nowState-bar">30%</div></div><div class="wrap"></div>`;
             });
             document.getElementById("showClassroom").innerHTML = content;
@@ -186,8 +238,8 @@
 
         //下拉式選單
         //選完開始才可以選結束時間
-        document.querySelectorAll(".startList li").forEach((item)=>{
-            item.addEventListener("click", ()=>{
+        document.querySelectorAll(".startList li").forEach((item) => {
+            item.addEventListener("click", () => {
                 document.getElementById("time1").value = item.textContent;
                 document.getElementById("time2").removeAttribute("disabled");
                 document.getElementById("time2").value = "";
@@ -195,32 +247,32 @@
                 let i = startTime.indexOf(document.getElementById("time1").value);
                 let myList = document.querySelector(".endList");
                 myList.innerHTML = "";
-                endTime.slice(i).forEach((time)=>{
+                endTime.slice(i).forEach((time) => {
                     let newItem = document.createElement("li");
                     newItem.textContent = time;
                     //更新endList的eventlistener
-                    newItem.addEventListener("click", ()=>{
+                    newItem.addEventListener("click", () => {
                         document.getElementById("time2").value = newItem.textContent;
                     })
                     myList.appendChild(newItem);
                 })
             })
         })
-        document.getElementById("time1").addEventListener("click", ()=>{
+        document.getElementById("time1").addEventListener("click", () => {
             event.stopPropagation();
             let temp = document.querySelector(".dropdownStart");
-            temp.style.display = temp.style.display==="block"?"none":"block";
+            temp.style.display = temp.style.display === "block" ? "none" : "block";
             document.querySelector(".dropdownEnd").style.display = "none";
             optionMenu.classList.remove("active");
         })
-        document.getElementById("time2").addEventListener("click", ()=>{
+        document.getElementById("time2").addEventListener("click", () => {
             event.stopPropagation();
             let temp = document.querySelector(".dropdownEnd");
-            temp.style.display = temp.style.display==="block"?"none":"block";
+            temp.style.display = temp.style.display === "block" ? "none" : "block";
             document.querySelector(".dropdownStart").style.display = "none";
             optionMenu.classList.remove("active");
         })
-        document.addEventListener("click", (event)=>{
+        document.addEventListener("click", (event) => {
             let a = document.querySelector(".dropdownStart"),
                 b = document.querySelector(".dropdownEnd");
             a.style.display = "none";
@@ -229,48 +281,40 @@
         })
 
         //顯示以教室名稱或特定時段搜尋的結果
-        form.addEventListener("submit", () => 
-        {
-            event.preventDefault();    
+        form.addEventListener("submit", () => {
+            event.preventDefault();
             let properClassroomName = false,
                 intervalVacant = true,
                 queryStartTime = document.getElementById("time1").value,
                 queryEndTime = document.getElementById("time2").value;
 
-            for(let i = 0; i < allClassroomName.length; i++)
-            {
-                if(queryClassRoom.value == allClassroomName[i]) properClassroomName = true;
+            for (let i = 0; i < allClassroomName.length; i++) {
+                if (queryClassRoom.value == allClassroomName[i]) properClassroomName = true;
             }
-            
-            if(properClassroomName)
-            {
+
+            if (properClassroomName) {
                 document.getElementById("showClassroom").innerHTML = '<span>教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
                 document.getElementById("showClassroom").innerHTML += '<div class="wrap"></div><span onclick="showPopupClassroom()" class="classroomName">XXX教室</span><span class="gap">' + queryClassRoom.value + '</span><div class="totalBar"><div class="nowState-bar">30%</div></div>';
                 queryClassRoom.value = "";
             }
-            else if(queryStartTime != "" && queryEndTime != "" && queryStartTime < queryEndTime)
-            {
+            else if (queryStartTime != "" && queryEndTime != "" && queryStartTime < queryEndTime) {
                 document.getElementById("showClassroom").innerHTML = '<span>教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
-                for(let i = 0; i < allClassroomName.length; i++)
-                {
-                    for(let j = 0; j < startTime.length; j++)
-                    {
-                        if(startTime[j] >= queryStartTime && endTime[j] <= queryEndTime && condition[j] == 0)
-                        {
+                for (let i = 0; i < allClassroomName.length; i++) {
+                    for (let j = 0; j < startTime.length; j++) {
+                        if (startTime[j] >= queryStartTime && endTime[j] <= queryEndTime && condition[j] == 0) {
                             intervalVacant = false;
                             break;
                         }
                     }
-                    if(intervalVacant)
-                    {
+                    if (intervalVacant) {
                         document.getElementById("showClassroom").innerHTML += '<div class="wrap"></div><span onclick="showPopupClassroom()" class="classroomName">XXX教室</span><span class="gap">' + allClassroomName[i] + '</span><div class="totalBar"><div class="nowState-bar">30%</div></div>';
-                    }            
-                    intervalVacant = true;        
+                    }
+                    intervalVacant = true;
                 }
                 document.getElementById("time1").value = "";
-                document.getElementById("time2").value = "";   
+                document.getElementById("time2").value = "";
                 document.getElementById("time2").setAttribute("disabled", true);
-            }        
+            }
         })
 
         selectBtn.addEventListener("click", () => {
