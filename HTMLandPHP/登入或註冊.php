@@ -19,11 +19,11 @@
             header("Location: Admin interface.html");
             exit();
         } 
-        $userID = $conn->query("SELECT userID FROM userdata WHERE useraccount = '$account' AND pwd = '$password'")->fetch_assoc()["userID"];
-        if (!empty($userID)) {
+        $result = $conn->query("SELECT userID FROM userdata WHERE useraccount = '$account' AND pwd = '$password'")->fetch_assoc();
+        if ($result) {
             //使用者
             //紀錄已登入的使用者名稱，並回首頁
-            $_SESSION["userID"] = $userID;
+            $_SESSION["userID"] = $result["userID"];
             header("Location: Home.html");
             exit();
         } else {
