@@ -48,19 +48,22 @@
             <!-- 借用請求 -->
             <div class="borrowRequest" id="borrowRequest">
 
-
+                <!-- 兩個按鈕選擇顯示立即還是預約 -->
                 <div class="conditions">
-                    <button class="immediately" id="immediately" onclick="openImmediatelyForm()">立即借用</button>
-                    <button class="reserve" id="reserve" onclick="openReserveForm()">預約借用</button>
+                    <button class="immediately" id="immediately"
+                        onclick="clearAllForm(),openImmediatelyForm()">立即借用</button>
+                    <button class="reserve" id="reserve" onclick="clearAllForm(),openReserveForm()">預約借用</button>
                 </div>
+
+
                 <div class="immediatelyForm">
                     <div class="content">
                         <div class="title">
-                            <p>XXX教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg"
-                                    onclick="openImmediatelyFormContent()">
+                            <p>XXX教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg1"
+                                    onclick="immediatelyFormtoggleContent('immediatelyFormcontent1','immediatelyFormImg1')">
                             </p>
                         </div>
-                        <div class="text" id="immediatelyFormcontent">
+                        <div class="text" id="immediatelyFormcontent1">
                             <p>艾利</p>
                             <p>借用目的 : 研究項目討論</p>
                             <div class="accounting">
@@ -74,15 +77,39 @@
                         </div>
                     </div>
 
+                    <div class="content">
+                        <div class="title">
+                            <p>XXX教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg2"
+                                    onclick="immediatelyFormtoggleContent('immediatelyFormcontent2','immediatelyFormImg2')">
+                            </p>
+                        </div>
+                        <div class="text" id="immediatelyFormcontent2">
+                            <p>艾利</p>
+                            <p>借用目的 : 研究項目討論</p>
+                            <div class="accounting">
+                                <p>Start Time : </p>
+                                <p>End Time : </p>
+                                <p>2023/10/20 10.am</p>
+                                <p>2023/10/20 11.am</p>
+                                <button>拒絕</button>
+                                <button>同意</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                 </div>
 
                 <div class="reserveForm">
                     <div class="content">
                         <div class="title">
-                            <p>XXX教室<img src="image/dropdownIcon48.png" id="reserveFormImg"onclick="openReserveFormContent()">
+                            <p>YYY教室<img src="image/dropdownIcon48.png" id="reserveFormImg1"
+                                    onclick="immediatelyFormtoggleContent('reserveFormcontent1','reserveFormImg1')">
                             </p>
                         </div>
-                        <div class="text" id="reserveFormcontent">
+                        <div class="text" id="reserveFormcontent1">
                             <p>艾利</p>
                             <p>借用目的 : 研究項目討論</p>
                             <div class="accounting">
@@ -95,7 +122,44 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="content">
+                        <div class="title">
+                            <p>YYY教室<img src="image/dropdownIcon48.png" id="reserveFormImg2"
+                                    onclick="immediatelyFormtoggleContent('reserveFormcontent2','reserveFormImg2')">
+                            </p>
+                        </div>
+                        <div class="text" id="reserveFormcontent2">
+                            <p>艾利</p>
+                            <p>借用目的 : 研究項目討論</p>
+                            <div class="accounting">
+                                <p>Start Time : </p>
+                                <p>End Time : </p>
+                                <p>2023/10/20 10.am</p>
+                                <p>2023/10/20 11.am</p>
+                                <button>拒絕</button>
+                                <button class="acceptButton">同意</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <p>YYY教室<img src="image/dropdownIcon48.png" id="reserveFormImg3"
+                                    onclick="immediatelyFormtoggleContent('reserveFormcontent3','reserveFormImg3')">
+                            </p>
+                        </div>
+                        <div class="text" id="reserveFormcontent3">
+                            <p>艾利</p>
+                            <p>借用目的 : 研究項目討論</p>
+                            <div class="accounting">
+                                <p>Start Time : </p>
+                                <p>End Time : </p>
+                                <p>2023/10/20 10.am</p>
+                                <p>2023/10/20 11.am</p>
+                                <button>拒絕</button>
+                                <button class="acceptButton">同意</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 鑰匙借用紀錄 -->
@@ -157,50 +221,63 @@
 
 
         // 用按鈕選擇條件清單
+
+        //-----點擊按鈕後改變顏色
         let immediatelyButton = document.querySelector(".immediately");
         let reserveButton = document.querySelector(".reserve");
 
+        //-----點擊按鈕後顯示多個清單
         let immediatelyForm = document.querySelector(".immediatelyForm");
         let reserveForm = document.querySelector(".reserveForm");
+
+
+        //-----點擊箭頭後顯示清單內容(1.內容,2.圖片)
         let immediatelyFormBody = document.getElementById("immediatelyFormcontent");
         let immediatelyFormImage = document.getElementById("immediatelyFormImg");
 
         let reserveFormBody = document.getElementById("reserveFormcontent");
         let reserveFormImage = document.getElementById("reserveFormImg");
 
-        function openImmediatelyForm() {
+        ///////////////////////////////////////////////////////////////////////////////////
+        function clearAllForm() {
+            immediatelyButton.classList.remove("show");
             reserveButton.classList.remove("show");
-            immediatelyFormBody.classList.remove("show");
-            reserveFormBody.classList.remove("show");
-            immediatelyFormImage.classList.remove("show");
-            reserveFormImage.classList.remove("show");
 
-            immediatelyButton.classList.add("show");
+            immediatelyForm.classList.remove("show");
             reserveForm.classList.remove("show");
+
+        }
+        function openImmediatelyForm() {
+            immediatelyButton.classList.add("show");
             immediatelyForm.classList.add("show");
         }
 
         function openReserveForm() {
             reserveButton.classList.add("show");
             reserveForm.classList.add("show");
-            
-            immediatelyButton.classList.remove("show");
-            immediatelyForm.classList.remove("show");
-
         }
 
-        // 點箭頭控制清單開關
-
-        function openImmediatelyFormContent() {
-            reserveFormBody.classList.remove("show");
+        //點箭頭控制清單開關
+        // function openImmediatelyFormContent() {
+        //     immediatelyFormBody.classList.toggle("show");
+        //     immediatelyFormImage.classList.toggle("show");
+        // }
+        // function openReserveFormContent() {
+        //     reserveFormBody.classList.toggle("show");
+        //     reserveFormImage.classList.toggle("show");
+        // }
+        ////////////////////////////////////////////////////////////////////////////////////
+        function immediatelyFormtoggleContent(immediatelyFormBodyId, immediatelyFormImageId) {
+            let immediatelyFormBody = document.getElementById(immediatelyFormBodyId);
+            let immediatelyFormImage = document.getElementById(immediatelyFormImageId);
             immediatelyFormBody.classList.toggle("show");
             immediatelyFormImage.classList.toggle("show");
         }
-        function openReserveFormContent() {
-            immediatelyFormBody.classList.remove("show");
-            reserveFormBody.classList.toggle("show");
-            reserveFormImage.classList.toggle("show");
-
+        function ReserveFormtoggleContent(ReserveFormBodyId, ReserveFormImageId) {
+            let ReserveFormBody = document.getElementById(ReserveFormBodyId);
+            let ReserveFormImage = document.getElementById(ReserveFormImageId);
+            ReserveFormBody.classList.toggle("show");
+            ReserveFormImage.classList.toggle("show");
         }
     </script>
 </body>

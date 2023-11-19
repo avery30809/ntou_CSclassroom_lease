@@ -78,8 +78,8 @@
             <div class="Applyrequest" id="Applyrequest">
                 <div class="content">
                     <div class="title">
-                        <p>XXX教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg"
-                                onclick="toggleContent('ApplyrequestConntent1')">
+                        <p>XXX教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg1"
+                                onclick="toggleContent('ApplyrequestConntent1','immediatelyFormImg1')">
                         </p>
                     </div>
                     <!-- 申請內容，若還在審查中，class為accounting，否則為OK -->
@@ -97,8 +97,8 @@
 
                 <div class="content">
                     <div class="title">
-                        <p>YYY教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg"
-                                onclick="toggleContent('ApplyrequestConntent2')">
+                        <p>YYY教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg2"
+                                onclick="toggleContent('ApplyrequestConntent2','immediatelyFormImg2')">
                         </p>
                     </div>
                     <!-- 申請內容，若還在審查中，class為accounting，否則為OK -->
@@ -134,9 +134,11 @@
             Applyrequest.classList.add("show");
         }
 
-        function toggleContent(contentId) {
-            let content = document.getElementById(contentId);
-            content.classList.toggle("show");
+        function toggleContent(ApplyrequestConntentId,ApplyrequestImageId) {
+            let ApplyrequestConntent = document.getElementById(ApplyrequestConntentId);
+            let ApplyrequestImage = document.getElementById(ApplyrequestImageId);
+            ApplyrequestConntent.classList.toggle("show");
+            ApplyrequestImage.classList.toggle("show");
         }
         // function openImmediatelyFormContent1() {
         //     ApplyrequestConntent1.classList.toggle("show");
