@@ -17,7 +17,7 @@
 
             <p><a href="Home.html" target="_self" class="verification-button"><img src="image/home.png" alt=""></a></p>
 
-            <button id="login-signup">登入/註冊</button>
+            <button id="login-signup"></button>
         </div>
 
         <div class="datePickerValue">
@@ -166,8 +166,13 @@
         fetch("獲取身分資訊.php")
         .then(response => response.json())
         .then(data => {
-            if(data.error === undefined) 
+            if(data.error === undefined) {
                 user = data;
+                document.getElementById("login-signup").innerHTML = "<img src='image/usericon.png'>" + user.username;
+                document.getElementById("login-signup").addEventListener("click", function (event) {
+                    window.location.href = "使用者介面.html";
+                }, false);
+            }
             else {
                 //沒有登入就回首頁
                 window.alert("請先登入！");
