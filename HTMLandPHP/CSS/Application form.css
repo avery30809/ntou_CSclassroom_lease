@@ -1,16 +1,70 @@
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-.container {
-    width: 40vw;
-    height: 85vh;
-    margin-top: 3%;
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(216, 239, 255);
+    margin-top: 40px;
+    width: 100vw;
+}
 
-    border-radius: 50px;
+/* 按鈕選擇---------------------------------------------- */
+.conditions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 70vw;
+    border: solid;
+    box-shadow:2px 2px 10px #06C ;
+}
+
+.conditions button {
+    width: 50%;
+    font-size: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: 600;
+    background-color: white;
+    cursor: pointer;
+    border: 3px solid;
+}
+
+.conditions button:hover {
+    background-color: #e5e5e5;
+}
+
+.immediately.show {
+    background-color: rgb(255, 159, 57);
+}
+
+.immediately.show:hover {
+    background-color: rgb(255, 159, 57);
+}
+
+.reserve.show {
+    background-color: rgb(255, 159, 57);
+}
+
+.reserve.show:hover {
+    background-color: rgb(255, 159, 57);
+}
+
+/* 表單---------------------------------------------- */
+
+.form-container {
+    width: 70vw;
+    background-color: white;
+    box-shadow:2px 2px 10px #06C ;
+    /* border-bottom-left-radius: 15px; */
+    /* border-bottom-right-radius: 15px; */
     border: solid;
 }
 
@@ -18,47 +72,55 @@ body {
     margin-left: 20px;
     margin-right: 10px;
     padding: 0;
-    font-size: 40px;
 }
 
 .content h5 {
+    display: flex;
+    flex-direction: row;
     margin: 0;
     margin-bottom: 10px;
     padding-top: 15px;
     padding-left: 10px;
     font-size: 60px;
+    /* border: solid; */
 }
 
 .date {
 
-    text-align: right;
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    padding-top: 30px;
+    padding-right: 10px;
+
     font-size: 30px !important;
-    margin-left: 180px;
 }
 
 .line_block {
     height: 30%;
+    padding-bottom: 20px;
+    /* border: solid; */
 }
 
 .line_block img {
-    max-width: 10%;
-    max-height: 10%;
+    width: 6%;
 
-    margin-top: 0px;
-    padding: 0;
+    padding-right: 15px;
+    padding-top: 10px;
+    /* border: solid; */
+
 }
 
 .line_block span {
     font-size: 60px;
+    /* border: solid; */
+
 }
 
 .line_block sup {
     font-size: 20px;
 }
 
-.line_block P {
-    font-size: 40px;
-}
 
 .quention_text {
     width: 100%;
@@ -86,13 +148,14 @@ input {
 
 hr {
     margin: 20px;
-    margin-left: 0 ;
+    margin-left: 0;
 }
 
-button{
+.line_block button {
     /* border-radius: 10px; */
+    width: 30%;
     font-size: 30px !important;
-    margin-left: 43%;
+    margin-left: 35%;
     margin-top: 20px;
     cursor: pointer;
 }

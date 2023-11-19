@@ -9,10 +9,19 @@
 </head>
 
 <body>
-    <div class="container">
+    
+    <!-- 按鈕選擇----------------------------------------------  -->
+
+    <div class="conditions">
+        <button class="immediately" id="immediately" onclick="openImmediatelyForm()">立即借用</button>
+        <button class="reserve" id="reserve" onclick="openReserveForm()">預約借用</button>
+    </div>
+    
+    <!--  表單----------------------------------------------  -->
+    <div class="form-container">
         <div class="content">
             <h5>XXX教室<sub class="date">2023/10/20</sub></h5>
-            
+
             <div class="line_block">
                 <span>1:00 <sup>PM</sup> </span>
                 <img src="image/right.png">
@@ -31,9 +40,26 @@
 
         </div>
     </div>
+
     <script>
-        function SendOut() {
-            window.location.href = "登入或註冊.php"; 
+        // 用按鈕選擇條件清單
+        let immediatelyButton = document.querySelector(".immediately");
+        let reserveButton = document.querySelector(".reserve");
+
+        function openImmediatelyForm() {
+            reserveButton.classList.remove("show");
+
+            immediatelyButton.classList.add("show");
+        }
+
+        function openReserveForm() {
+            reserveButton.classList.add("show");
+
+            immediatelyButton.classList.remove("show");
+
+        }
+        function SendOut() { //點擊表單送出後的操作
+           //待完成
         }
     </script>
 </body>
