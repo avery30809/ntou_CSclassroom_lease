@@ -166,7 +166,7 @@
         fetch("獲取身分資訊.php")
         .then(response => response.json())
         .then(data => {
-            if(data.error !== undefined) 
+            if(data.error === undefined) 
                 user = data;
             else {
                 //沒有登入就回首頁
