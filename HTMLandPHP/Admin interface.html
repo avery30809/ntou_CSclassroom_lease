@@ -17,12 +17,13 @@
             </div>
 
             <span class="logo_name">Admin</span>
+
         </div>
 
         <!-- 左下半部欄位 -->
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#" onclick="clearAll() , showBorrowRequest()" >
+                <li><a href="#" onclick="clearAll() , showBorrowRequest()">
                         <i><img src="image/request40.png" alt=""></i>
                         <span class="link-name">借用請求</span>
                     </a></li>
@@ -53,37 +54,60 @@
                     <button class="reserve" id="reserve" onclick="openReserveForm()">預約借用</button>
                 </div>
                 <div class="immediatelyForm">
-                    <div class="title">
-                        <p>title
-                            <img src="image/dropdownIcon48.png" id="immediatelyFormImg" onclick="openImmediatelyFormContent()">
-                        </p>
+                    <div class="content">
+                        <div class="title">
+                            <p>XXX教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg"
+                                    onclick="openImmediatelyFormContent()">
+                            </p>
+                        </div>
+                        <div class="text" id="immediatelyFormcontent">
+                            <p>艾利</p>
+                            <p>借用目的 : 研究項目討論</p>
+                            <div class="accounting">
+                                <p>Start Time : </p>
+                                <p>End Time : </p>
+                                <p>2023/10/20 10.am</p>
+                                <p>2023/10/20 11.am</p>
+                                <button>拒絕</button>
+                                <button>同意</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="content" id="immediatelyFormcontent">
-                        <p>text</p>
-                    </div>
+
                 </div>
-        
+
                 <div class="reserveForm">
-                    <div class="title">
-                        <p>title2
-                            <img src="image/dropdownIcon48.png" id="reserveFormImg" onclick="openReserveFormContent()">
-                        </p>
+                    <div class="content">
+                        <div class="title">
+                            <p>XXX教室<img src="image/dropdownIcon48.png" id="reserveFormImg"onclick="openReserveFormContent()">
+                            </p>
+                        </div>
+                        <div class="text" id="reserveFormcontent">
+                            <p>艾利</p>
+                            <p>借用目的 : 研究項目討論</p>
+                            <div class="accounting">
+                                <p>Start Time : </p>
+                                <p>End Time : </p>
+                                <p>2023/10/20 10.am</p>
+                                <p>2023/10/20 11.am</p>
+                                <button>拒絕</button>
+                                <button class="acceptButton">同意</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="content" id="reserveFormcontent">
-                        <p>text2</p>
-                    </div>
+
                 </div>
             </div>
-            <!-- 鑰匙歸還狀態 -->
+            <!-- 鑰匙借用紀錄 -->
             <div class="keyrecord" id="keyrecord">
                 <div class="keyrecordTitle">
                     <span>借用者</span>
                     <span>借用時間</span>
                     <span>預計歸還時間</span>
                     <span>借用狀態</span>
-                    
+
                 </div>
-                
+
                 <div class="keyrecordContent">
                     <span>艾利</span>
                     <span>4.PM</span>
@@ -107,7 +131,7 @@
                 leftArrow.classList.add("show");
             } else {
                 localStorage.setItem("status", "open");
-                leftArrow.classList.remove("show");    
+                leftArrow.classList.remove("show");
             }
         })
 
@@ -117,7 +141,7 @@
         let keyrecord = document.getElementById("keyrecord");
 
 
-        function clearAll(){
+        function clearAll() {
             borrowRequest.classList.remove("show");
             keyrecord.classList.remove("show");
 
@@ -133,6 +157,9 @@
 
 
         // 用按鈕選擇條件清單
+        let immediatelyButton = document.querySelector(".immediately");
+        let reserveButton = document.querySelector(".reserve");
+
         let immediatelyForm = document.querySelector(".immediatelyForm");
         let reserveForm = document.querySelector(".reserveForm");
         let immediatelyFormBody = document.getElementById("immediatelyFormcontent");
@@ -142,22 +169,28 @@
         let reserveFormImage = document.getElementById("reserveFormImg");
 
         function openImmediatelyForm() {
+            reserveButton.classList.remove("show");
             immediatelyFormBody.classList.remove("show");
             reserveFormBody.classList.remove("show");
             immediatelyFormImage.classList.remove("show");
             reserveFormImage.classList.remove("show");
 
+            immediatelyButton.classList.add("show");
             reserveForm.classList.remove("show");
             immediatelyForm.classList.add("show");
         }
 
         function openReserveForm() {
-            immediatelyForm.classList.remove("show");
+            reserveButton.classList.add("show");
             reserveForm.classList.add("show");
+            
+            immediatelyButton.classList.remove("show");
+            immediatelyForm.classList.remove("show");
+
         }
 
         // 點箭頭控制清單開關
-        
+
         function openImmediatelyFormContent() {
             reserveFormBody.classList.remove("show");
             immediatelyFormBody.classList.toggle("show");
