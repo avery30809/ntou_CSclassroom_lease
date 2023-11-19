@@ -82,23 +82,21 @@
     fetch("獲取身分資訊.php")
     .then(response => response.json())
     .then(data => {
-      if(data.error !== undefined) 
+      //已登入
+      if(data.error === undefined) {
         user = data;
+        document.getElementById("login-signup").innerHTML = "<img src='image/usericon.png' class='usericon'>" + user.username;
+        document.getElementById("login-signup").addEventListener("click", function (event) {
+          window.location.href = "使用者介面.html";
+        }, false);
+      }
+      //未登入
+      else {
+        document.getElementById("login-signup").addEventListener("click", function (event) {
+          window.location.href = "選擇登入身分.html";
+        }, false);
+      }
     });
-
-    //已登入
-    if (user.username !== "") {
-      document.getElementById("login-signup").id = "login-signup-completed";
-      document.getElementById("login-signup-completed").innerHTML = "<img src='image/usericon.png' class='usericon'>" + user.username;
-      document.getElementById("login-signup-completed").addEventListener("click", function (event) {
-        window.location.href = "使用者介面.html";
-      }, false);
-    }
-    else {//未登入
-      document.getElementById("login-signup").addEventListener("click", function (event) {
-        window.location.href = "選擇登入身分.html";
-      }, false);
-    }
 
     function updateLabel() {
       const selectedDate = datePicker.value;
