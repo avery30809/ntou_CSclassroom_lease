@@ -2,9 +2,9 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>海大教室借用平台</title>
-  <link rel="stylesheet" href="CSS/Home.css">
+    <meta charset="utf-8">
+    <title>海大教室借用平台</title>
+    <link rel="stylesheet" href="CSS/Home.css">
 </head>
 
 <body>
@@ -72,14 +72,26 @@
       return dateToString(resultDate);
     }
 
+    //獲取使用者身分
+    let user = {
+      username: "",
+      useraccount: "",
+      email: "",
+      phone: null
+    };
+    fetch("獲取身分資訊.php")
+    .then(response => response.json())
+    .then(data => {
+      if(data.error !== undefined) 
+        user = data;
+    });
+
     //已登入
-    if (localStorage.getItem("username") !== null) {
+    if (user.username !== "") {
       document.getElementById("login-signup").id = "login-signup-completed";
-      document.getElementById("login-signup-completed").innerHTML = "<img src='image/usericon.png' class='usericon'>" + localStorage.getItem("username");
+      document.getElementById("login-signup-completed").innerHTML = "<img src='image/usericon.png' class='usericon'>" + user.username;
       document.getElementById("login-signup-completed").addEventListener("click", function (event) {
-        localStorage.removeItem("username");
-        document.getElementById("login-signup-completed").id = "login-signup";
-        window.location.reload();
+        window.location.href = "使用者介面.html";
       }, false);
     }
     else {//未登入

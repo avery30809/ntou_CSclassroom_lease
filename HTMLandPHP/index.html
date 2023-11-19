@@ -156,6 +156,24 @@
         </div>
     </div>
     <script>
+        //獲取使用者身分
+        let user = {
+            username: "",
+            useraccount: "",
+            email: "",
+            phone: null
+        };
+        fetch("獲取身分資訊.php")
+        .then(response => response.json())
+        .then(data => {
+            if(data.error !== undefined) 
+                user = data;
+            else {
+                //沒有登入就回首頁
+                window.alert("請先登入！");
+                window.location.href = "Home.html";
+            }
+        });
 
         // 獲取查詢的日期值
         const selectedDate = localStorage.getItem("selectedDate");

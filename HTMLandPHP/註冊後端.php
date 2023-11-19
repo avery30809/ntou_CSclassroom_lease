@@ -24,7 +24,7 @@
                     echo '帳號已存在';
                 }
                 else {
-                    $conn->query("INSERT INTO userdata (username, useraccount, pwd, gmail)VALUES ('$username','$account','$password','$email')");
+                    $conn->query("INSERT INTO userdata (username, useraccount, pwd, email)VALUES ('$username','$account','$password','$email')");
                     echo '註冊成功！';
                 }
             }

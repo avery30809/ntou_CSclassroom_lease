@@ -1,5 +1,8 @@
 <?php
     session_start();
+    //登入過就不會到這個畫面
+    if(isset($_SESSION["userID"])) header("Location: Home.html");
+
     //登入後端
     if(isset($_POST['sign-in-submit'])){
 
@@ -12,19 +15,17 @@
 
         if($account == $admin["useraccount"] && $password == $admin["pwd"]) {
             //管理員
-            //todo
-            header("Location: AllClassRoom.html");
+            $_SESSION["admin"] = "login";
+            header("Location: Admin interface.html");
             exit();
         } 
-        $username = $conn->query("SELECT username FROM userdata WHERE useraccount = '$account' AND pwd = '$password'")->fetch_assoc()["username"];
-        if (!empty($username)) {
+        $userID = $conn->query("SELECT userID FROM userdata WHERE useraccount = '$account' AND pwd = '$password'")->fetch_assoc()["userID"];
+        if (!empty($userID)) {
             //使用者
             //紀錄已登入的使用者名稱，並回首頁
-            echo "
-            <script>
-                localStorage.setItem('username', '$username');
-                window.location.assign('Home.html');
-            </script>";
+            $_SESSION["userID"] = $userID;
+            header("Location: Home.html");
+            exit();
         } else {
             $_SESSION['Error']='Invalid account or password';
         }
@@ -142,7 +143,7 @@
             const code = document.getElementById("signup_verification_code").value;
             const pwd = document.getElementById("signup_pwd").value;
             const confirm_pwd = document.getElementById("signup_confirm_pwd").value;
-            console.log(typeof(code));
+
             formData.append("username",username);
             formData.append("account",account);
             formData.append("verification_code",code);
