@@ -117,7 +117,7 @@
     transition: 0.3s;
 }
 
-.select-menu.active .select-btn i {
+.select-menu.active .select-btn img {
     transform: rotate(-180deg);
 }
 
