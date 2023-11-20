@@ -29,15 +29,9 @@ body {
 }
 
 .usericon {
-    position: relative;
-    top: 10px;
-    width: 50px !important;
-    height: 50px !important;
-}
-
-#login-signup-completed {
-    padding-bottom: 5px;
-    font-size: 40px;
+    float: left;
+    width: 69px !important;
+    height: 69px !important;
 }
 
 .top-row {
