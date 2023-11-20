@@ -16,29 +16,29 @@
                 <img src="image/usericon.png" alt="">
             </div>
 
-            <span class="logo_name">艾利</span>
+            <span class="logo_name"></span>
 
         </div>
 
         <!-- 左下半部欄位 -->
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#" onclick="clearAll() , showEditstate()">
+                <li><button onclick="clearAll() , showEditstate()">
                         <i><img src="image/user indormation.png" alt=""></i>
                         <span class="link-name">編輯個人資訊</span>
-                    </a></li>
+                    </button></li>
 
-                <li><a href="#" onclick="clearAll() , showApplyrequest()">
+                <li><button onclick="clearAll() , showApplyrequest()">
                         <i><img src="image/applyrequest.png" alt=""></i>
                         <span class="link-name">申請紀錄</span>
-                    </a></li>
+                    </button></li>
 
             </ul>
             <ul class="logout-mode">
-                <li class="logout"><a href="#" onclick="">
+                <li class="logout"><button id="logoutBtn">
                         <i><img src="image/logoutIcon.png" alt=""></i>
                         <span class="link-name">登出</span>
-                    </a></li>
+                    </button></li>
             </ul>
 
         </div>
@@ -120,6 +120,29 @@
     <script>
         let userInformation = document.getElementById("userInformation");
         let Applyrequest = document.getElementById("Applyrequest");
+        const logoutButton = document.getElementById("logoutBtn");
+        const logoName = document.querySelector(".logo_name");
+
+        //獲取使用者身分
+        let user = {
+            username: "",
+            useraccount: "",
+            email: "",
+            phone: null
+        };
+        fetch("獲取身分資訊.php")
+        .then(response => response.json())
+        .then(data => {
+            if(data.error === undefined) {
+                user = data;
+                logoName.innerHTML = user.username;
+            }
+            else {
+                //沒有登入就回首頁
+                window.alert("請先登入！");
+                window.location.href = "Home.html";
+            }
+        });
 
         function clearAll() {
             Applyrequest.classList.remove("show");
@@ -146,6 +169,11 @@
         // function openImmediatelyFormContent2() {
         //     ApplyrequestConntent2.classList.toggle("show");
         // }
+
+        logoutButton.addEventListener("click", ()=>{
+            fetch("使用者登出.php");
+            window.location.href = "Home.html";
+        }, false);
 
     </script>
 </body>

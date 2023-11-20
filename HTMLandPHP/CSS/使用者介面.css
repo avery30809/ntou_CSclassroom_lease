@@ -5,6 +5,12 @@
     font-family: 'Poppins', sans-serif;
 }
 
+button {
+    border: none;
+    cursor: pointer;
+    width: 221px;
+}
+
 body {
     min-height: 100vh;
     /* background-color: #96e1ff; */
@@ -77,12 +83,12 @@ nav .menu-items {
     list-style: none;
 }
 
-.menu-items li a:hover {
+.menu-items li button:hover {
     background-color: white;
     border-radius: 20px;
 }
 
-.menu-items li a {
+.menu-items li button {
     display: flex;
     align-items: center;
     height: 60px;
@@ -90,7 +96,7 @@ nav .menu-items {
     position: relative;
 }
 
-.nav-links li a:hover:before {
+.nav-links li button:hover:before {
     content: "";
     position: absolute;
     left: -7px;
@@ -100,12 +106,12 @@ nav .menu-items {
     background-color: rgb(255, 200, 0);
 }
 
-.nav-links li a:hover i,
-.nav-links li a:hover .link-name {
+.nav-links li button:hover i,
+.nav-links li button:hover .link-name {
     color: rgb(255, 200, 0);
 }
 
-.menu-items li a i {
+.menu-items li button i {
     font-size: 24px;
     min-width: 45px;
     height: 100%;
@@ -116,7 +122,7 @@ nav .menu-items {
     margin-left: 5px;
 }
 
-.menu-items li a .link-name {
+.menu-items li button .link-name {
     padding-left: 20px;
     font-size: 18px;
     font-weight: 600;
@@ -125,7 +131,7 @@ nav .menu-items {
 }
 
 
-nav.close li a .link-name {
+nav.close li button .link-name {
     opacity: 0;
     pointer-events: none;
 }
@@ -135,12 +141,8 @@ nav.close li a .link-name {
     border-top: 1px solid rgb(119, 98, 7);
 }
 
-.menu-items .logout-mode:hover {
-    background-color: rgb(139, 75, 43);
 
-}
-
-.menu-items .logout-mode li a:hover {
+.menu-items .logout-mode li button:hover {
     background-color: rgb(139, 75, 43);
 }
 
