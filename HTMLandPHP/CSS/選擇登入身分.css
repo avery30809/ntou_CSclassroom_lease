@@ -9,11 +9,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to top, #d2f7ee, #eed7c8);
-    /* background: linear-gradient(to top, rgb(167, 244, 224), rgb(138, 207, 233)); */
+    /* background: linear-gradient(to top, #d2f7ee, #eed7c8); */
+    background: linear-gradient(to bottom, #c8e1f8, #fee4e9);
 
-
-    background-color: #dbe6fd;
     position: relative;
 }
 
@@ -39,14 +37,13 @@ body {
     height: 80vh;
     margin-top: 30px;
     background: #ffffff;
-    /* background: linear-gradient(to bottom, #a1fae5, #ffcba8); */
-    background: linear-gradient(to top, #d2f7ee, #eed7c8);
-    /* background: linear-gradient(to top, rgb(167, 244, 224), rgb(138, 207, 233)); */
+    /* background: linear-gradient(to top, #d2f7ee, #eed7c8); */
+    background: linear-gradient(to bottom, #c9e1f9, #fae9ec);
 
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.4s ease;
-    
+
 }
 
 .cards .card:hover {
@@ -56,7 +53,7 @@ body {
 }
 
 .cards .card img {
-    
+
     max-width: 75%;
     max-height: 75%;
     margin-left: 50px;
@@ -89,7 +86,7 @@ body {
     cursor: pointer;
 }
 
-.cards .card button:hover{
+.cards .card button:hover {
     background-color: rgb(207, 204, 204);
     /* background: linear-gradient(to right, #90ffe3, #ffc299); */
 
