@@ -130,7 +130,7 @@
             email: "",
             phone: null
         };
-        fetch("獲取身分資訊.php")
+        fetch("獲取身分資訊.php", {method: 'POST'})
         .then(response => response.json())
         .then(data => {
             if(data.error === undefined) {
@@ -171,7 +171,7 @@
         // }
 
         logoutButton.addEventListener("click", ()=>{
-            fetch("使用者登出.php");
+            fetch("使用者登出.php", {method: 'POST'});
             window.location.href = "Home.html";
         }, false);
 
