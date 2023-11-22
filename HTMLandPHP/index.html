@@ -15,7 +15,7 @@
         <div class="top-row">
             
 
-            <p><a href="Home.html" target="_self" class="verification-button"><img src="image/home.png" alt=""></a></p>
+            <p><a href="Home.html" target="_self" class="verification-button"><img id="homeIcon" alt=""></a></p>
 
             <button id="login-signup"></button>
         </div>
@@ -28,7 +28,7 @@
             <div class="select-menu">
                 <div class="select-btn">
                     <span class="sBtn-text">顯示所有教室</span>
-                    <img class="sBtn-img" src="image/dropdownIcon.png">
+                    <img class="sBtn-img" id="dropdownIcon">
                 </div>
 
                 <ul class="options">
@@ -48,20 +48,7 @@
                 <input class="blank" type="text" placeholder="" disabled>
 
                 <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱" list="classroomNameList">
-                <datalist id="classroomNameList">
-                    <option>INS101</option>
-                    <option>INS105</option>
-                    <option>INS203</option>
-                    <option>INS205</option>
-                    <option>INS212</option>
-                    <option>INS301</option>
-                    <option>INS303</option>
-                    <option>INS407</option>
-                    <option>INS409</option>
-                    <option>ECGB107</option>
-                    <option>ECG607</option>
-                    <option>ECG610</option>
-                </datalist>
+                <datalist id="classroomNameList"></datalist>
 
                 <div class="inputTimeInterval">
                     <div class="selectTime">
@@ -83,7 +70,7 @@
                         </div>
                     </div>
 
-                    <img class="queryImage" src="image/right.png" alt="Query">
+                    <img class="queryImage" id="rightIcon" alt="Query">
                     <div class="selectTime">
                         <input class="time" type="text" id="time2" placeholder="結束時間" readonly disabled>
                         <div class="dropdownEnd">
@@ -94,7 +81,7 @@
                 </div>
                 <form method="get" id="form">
                     <button type="submit" class="queryButton" disabled>
-                        <img class="queryImage" src="image/queryIcon.png" alt="Query">
+                        <img class="queryImage" id="queryIcon" alt="Query">
                     </button>
                 </form>
             </div>
@@ -109,44 +96,44 @@
 
             <!-- 彈跳視窗內容 -->
             <div id="popup" class="popup">
-                <h1>XXX教室</h1>
+                <h1 id="popupName">XXX教室</h1>
                 <button type="button" onclick="closePopupClassroom()" class="close">
-                    <img src="image/close.png" alt="Close">
+                    <img id="closeIcon" alt="Close">
                 </button>
                 <div class="content">
                     <span>起始時間</span><span>結束時間</span><span>借用狀態</span>
                     <div class="wrap"></div>
-                    <span>9 a.m.</span><span>10 a.m.</span><span onclick="CheckAuthentication()"
+                    <span>9 a.m.</span><span>10 a.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>10 a.m.</span><span>11 a.m.</span><span onclick="CheckAuthentication()"
+                    <span>10 a.m.</span><span>11 a.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>11 a.m.</span><span>12 p.m.</span><span onclick="CheckAuthentication()"
+                    <span>11 a.m.</span><span>12 p.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>12 p.m.</span><span>13 p.m.</span><span onclick="CheckAuthentication()"
+                    <span>12 p.m.</span><span>13 p.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>13 p.m.</span><span>14 p.m.</span><span onclick="CheckAuthentication()"
+                    <span>13 p.m.</span><span>14 p.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>14 p.m.</span><span>15 p.m.</span><span onclick="CheckAuthentication()"
+                    <span>14 p.m.</span><span>15 p.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>15 p.m.</span><span>16 p.m.</span><span onclick="CheckAuthentication()"
+                    <span>15 p.m.</span><span>16 p.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>16 p.m.</span><span>17 p.m.</span><span onclick="CheckAuthentication()"
+                    <span>16 p.m.</span><span>17 p.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>17 p.m.</span><span>18 p.m.</span><span onclick="CheckAuthentication()"
+                    <span>17 p.m.</span><span>18 p.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>18 p.m.</span><span>19 p.m.</span><span onclick="CheckAuthentication()"
+                    <span>18 p.m.</span><span>19 p.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>19 p.m.</span><span>20 p.m.</span><span onclick="CheckAuthentication()"
+                    <span>19 p.m.</span><span>20 p.m.</span><span
                         class="classroomState">未借用</span>
                     <div class="wrap"></div>
                     <!-- <p></p>
@@ -156,6 +143,25 @@
         </div>
     </div>
     <script>
+        //preload image
+        let image = {
+            home: new Image(),
+            dropdownIcon: new Image(),
+            right: new Image(),
+            queryIcon: new Image(),
+            close: new Image(),
+            usericon: new Image()
+        }
+        for(const [key, value] of Object.entries(image)) {
+            value.src = `image/${key}.png`;
+        }
+        document.getElementById("homeIcon").src = image.home.src;
+        document.getElementById("dropdownIcon").src = image.dropdownIcon.src;
+        document.getElementById("rightIcon").src = image.right.src;
+        document.getElementById("queryIcon").src = image.queryIcon.src;
+        document.getElementById("closeIcon").src = image.close.src;
+
+
         //獲取使用者身分
         let user = {
             username: "",
@@ -163,12 +169,13 @@
             email: "",
             phone: null
         };
-        fetch("獲取身分資訊.php")
+        fetch("獲取身分資訊.php", {method: 'POST'})
         .then(response => response.json())
         .then(data => {
             if(data.error === undefined) {
                 user = data;
-                document.getElementById("login-signup").innerHTML = "<img src='image/usericon.png'>" + user.username;
+                document.getElementById("login-signup").innerHTML = "<img id='usericon'>" + user.username;
+                document.getElementById("usericon").src = image.usericon.src;
                 document.getElementById("login-signup").addEventListener("click", function (event) {
                     window.location.href = "使用者介面.html";
                 }, false);
@@ -181,11 +188,11 @@
         });
 
         // 獲取查詢的日期值
-        const selectedDate = localStorage.getItem("selectedDate");
-        if (selectedDate) {
-            document.getElementById("selectedDatePlaceholder").textContent = selectedDate + " 教室狀態查詢結果";
-        }
-
+        fetch("搜尋日期.php", {method: 'POST'})
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("selectedDatePlaceholder").textContent = data.date + " 教室狀態查詢結果";
+        });
         // 大部分功能
         const optionMenu = document.querySelector(".select-menu"),
             selectBtn = optionMenu.querySelector(".select-btn"),
@@ -201,11 +208,14 @@
             endTime = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
             condition = [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
 
-        fetch("獲取教室名稱.php")
+        fetch("獲取教室名稱.php", {method: 'POST'})
             .then(response => response.json())
             .then(datas => {
                 datas.forEach((data) => {
                     allClassroomName.push(data[0]);
+                    let room = document.createElement("option")
+                    room.innerHTML = data[0];
+                    document.getElementById("classroomNameList").appendChild(room);
                 });
                 showDefault();
             });
@@ -213,13 +223,10 @@
         //列出所有教室狀態
         function showDefault() {
             let content = "";
-            content += '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span>\
-            <span>借用情況</span><div class="wrap"></div>';
+            content += '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
 
             allClassroomName.forEach((classroom) => {
-                content += `<span onclick="showPopupClassroom()" class="classroomName">${classroom}</span><span class="gap">\
-                    ${classroom.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span><div class="totalBar">\
-                    <div class="nowState-bar">30%</div></div><div class="wrap"></div>`;
+                content += `<div class="wrap"></div><span onclick="showPopupClassroom(event)" class="classroomName">${classroom}</span><span class="gap">${classroom.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span><div class="totalBar"><div class="nowState-bar">30%</div></div>`;
             });
             document.getElementById("showClassroom").innerHTML = content;
         }
@@ -260,33 +267,40 @@
             document.querySelector(".dropdownStart").style.display = "none";
             optionMenu.classList.remove("active");
         })
+        //監聽所有點擊事件 關閉彈跳視窗與下拉式選單
         document.addEventListener("click", (event) => {
             let a = document.querySelector(".dropdownStart"),
                 b = document.querySelector(".dropdownEnd");
             a.style.display = "none";
             b.style.display = "none";
             optionMenu.classList.remove("active");
+            popup.classList.remove("open-popup");
         })
 
         //顯示以教室名稱或特定時段搜尋的結果
         form.addEventListener("submit", () => {
             event.preventDefault();
-            let properClassroomName = false,
+            let properClassroomName = [],
                 intervalVacant = true,
                 queryStartTime = document.getElementById("time1").value,
                 queryEndTime = document.getElementById("time2").value;
 
+            let searchMethod = sBtn_text.innerHTML=="輸入教室名稱"?true:false;//true 找教室名稱 false 找特定時間
             for (let i = 0; i < allClassroomName.length; i++) {
-                if (queryClassRoom.value == allClassroomName[i]) properClassroomName = true;
+                if (allClassroomName[i].startsWith(queryClassRoom.value)) properClassroomName.push(allClassroomName[i]);
             }
 
-            if (properClassroomName) {
-                document.getElementById("showClassroom").innerHTML = '<span>教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
-                document.getElementById("showClassroom").innerHTML += '<div class="wrap"></div><span onclick="showPopupClassroom()" class="classroomName">XXX教室</span><span class="gap">' + queryClassRoom.value + '</span><div class="totalBar"><div class="nowState-bar">30%</div></div>';
+            if (searchMethod) {
+                let content = "";
+                content = '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
+                properClassroomName.forEach((roomName)=>{
+                    content += `<div class="wrap"></div><span onclick="showPopupClassroom(event)" class="classroomName">${roomName}</span><span class="gap">${roomName.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span><div class="totalBar"><div class="nowState-bar">30%</div></div>`;
+                },false);
                 queryClassRoom.value = "";
+                document.getElementById("showClassroom").innerHTML = content;
             }
-            else if (queryStartTime != "" && queryEndTime != "" && queryStartTime < queryEndTime) {
-                document.getElementById("showClassroom").innerHTML = '<span>教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
+            else if (queryStartTime != "" && queryEndTime != "") {
+                document.getElementById("showClassroom").innerHTML = '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
                 for (let i = 0; i < allClassroomName.length; i++) {
                     for (let j = 0; j < startTime.length; j++) {
                         if (startTime[j] >= queryStartTime && endTime[j] <= queryEndTime && condition[j] == 0) {
@@ -295,7 +309,7 @@
                         }
                     }
                     if (intervalVacant) {
-                        document.getElementById("showClassroom").innerHTML += '<div class="wrap"></div><span onclick="showPopupClassroom()" class="classroomName">XXX教室</span><span class="gap">' + allClassroomName[i] + '</span><div class="totalBar"><div class="nowState-bar">30%</div></div>';
+                        document.getElementById("showClassroom").innerHTML += '<div class="wrap"></div><span onclick="showPopupClassroom(event)" class="classroomName">XXX教室</span><span class="gap">' + allClassroomName[i] + '</span><div class="totalBar"><div class="nowState-bar">30%</div></div>';
                     }
                     intervalVacant = true;
                 }
@@ -344,22 +358,27 @@
 
         //彈跳視窗
         let popup = document.getElementById("popup");
+        popup.addEventListener("click", (event)=>{event.stopPropagation();},false);
 
         // 點擊教室開啟彈跳視窗的函數
-        function showPopupClassroom() {
+        function showPopupClassroom(event) {
+            event.stopPropagation();
             popup.classList.add("open-popup");
+            let roomName = event.target.innerHTML;
+            document.getElementById("popupName").innerHTML = roomName;
         }
 
         function closePopupClassroom() {
             popup.classList.remove("open-popup");
         }
 
-        //檢查是否登入
-        function CheckAuthentication() {
+        function getRoomStatus() {
+            fetch()
+        }
 
-            //缺少檢查函數
-
-            window.location.href = "選擇登入身分.html"
+        function calcRoomStatus() {
+            let ans = "";
+            return `${ans}%`;
         }
 
     </script>
