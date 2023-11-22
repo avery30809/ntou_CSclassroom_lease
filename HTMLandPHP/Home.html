@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>海大教室借用平台</title>
-    <link rel="stylesheet" href="CSS/Home.css">
+  <meta charset="utf-8">
+  <title>海大教室借用平台</title>
+  <link rel="stylesheet" href="CSS/Home.css">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
           <div id="choosedate" class="date">
             <input type="date" id="datePicker" name="datePicker" onchange="updateLabel()">
             <span>
-              <a href="index.html" target="_self" class="verification-button"><img src="image/queryIcon.png"></a>
+              <button class="verification-button"><img src="image/queryIcon.png"></button>
             </span>
           </div>
         </div>
@@ -46,6 +46,8 @@
     const now = new Date();
 
     const datePicker = document.getElementById("datePicker");
+    const queryButton = document.querySelector(".verification-button");
+    queryButton.addEventListener("click", searchDate, false);
 
     let chooseText = document.getElementById("chooseText");
     let choosedate = document.getElementById("choosedate");
@@ -54,6 +56,8 @@
     localStorage.setItem("selectedDate", dateToString(now));
     datePicker.min = dateToString(now);
     datePicker.max = add30(now);
+
+    let selectedDate = datePicker.value;
 
     function dateToString(date) {
       let temp = new Date(date);
@@ -79,7 +83,7 @@
       email: "",
       phone: null
     };
-    fetch("獲取身分資訊.php")
+    fetch("獲取身分資訊.php", {method: 'POST'})
     .then(response => response.json())
     .then(data => {
       //已登入
@@ -99,16 +103,19 @@
     });
 
     function updateLabel() {
-      const selectedDate = datePicker.value;
-      // const label = document.querySelector('label[for="datePicker"]');
-      // label.textContent = "選擇日期：" + selectedDate;
-      // 存儲選定的日期到本地存儲
-      localStorage.setItem("selectedDate", selectedDate);
-      // 導航到 "next.html"
-      // window.location.href = "next.html";
-
+      selectedDate = datePicker.value;
     }
 
+    function searchDate() {
+      const formdata = new FormData();
+      formdata.append("date", selectedDate);
+
+      fetch("搜尋日期.php", {
+        method: 'POST',
+        body: formdata
+      });
+      window.location.href = "index.html";
+    }
 
     function showDateform() {
       chooseText.classList.add("delete");
