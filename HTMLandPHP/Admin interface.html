@@ -31,6 +31,14 @@
                         <i><img src="image/keyrecord40.png" alt=""></i>
                         <span class="link-name">鑰匙借用紀錄</span>
                     </a></li>
+                <li><a href="#" onclick="clearAll() , showClassSchedule()">
+                        <i><img src="image/keyrecord40.png" alt=""></i>
+                        <span class="link-name">課表排程</span>
+                    </a></li>
+                <li><a href="#" onclick="clearAll() , showClassroomInquiry()">
+                        <i><img src="image/keyrecord40.png" alt=""></i>
+                        <span class="link-name">教室查詢</span>
+                    </a></li>
             </ul>
         </div>
     </nav>
@@ -179,10 +187,283 @@
                     <span>未歸還</span>
                 </div>
             </div>
+
+            <!-- 課表排程 -->
+            <div class="classSchedule" id="classSchedule">
+
+                <!-- 兩個按鈕選擇顯示快速新增還是課表新增 -->
+                <div class="classScheduleConditions">
+                    <button class="fastAdd" id="fastAdd" onclick="clearAllForm(),openFastAddForm()">快速新增</button>
+                    <button class="classAdd" id="classAdd" onclick="clearAllForm(),openClassAddForm()">課表新增</button>
+                </div>
+
+                <!-- 快速新增 -->
+                <div class="fastAddForm">
+                    <div class="classScheduleTitle">
+                        <h1>新增</h1>
+                        <span>課程新增: <input type="text"></span>
+
+                        <span>教室名稱: <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱"
+                                list="classroomNameList"></span>
+                        <datalist id="classroomNameList"></datalist>
+                        <span>開始小時:
+                            <select name="" id="">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </span>
+
+                        <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
+                        <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
+                        <button>提交</button>
+                    </div>
+
+                </div>
+                <!-- 課表新增 -->
+                <div class="classAddForm">
+                    <div class="classScheduleTitle">
+                        <h1>新增</h1>
+                        <div class="classScheduleContent">
+                            <span>教室名稱: <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱"
+                                    list="classroomNameList"></span>
+                            <datalist id="classroomNameList"></datalist>
+                            <table border="1">
+                                <tr>
+                                    <td></td>
+                                    <td>禮拜一</td>
+                                    <td>禮拜二</td>
+                                    <td>禮拜三</td>
+                                    <td>禮拜四</td>
+                                    <td>禮拜五</td>
+                                    <td>禮拜六</td>
+                                    <td>禮拜日</td>
+                                <tr>
+                                <tr>
+                                    <td>第0節</td>
+                                    <td>
+                                        <!-- 新增方塊 -->
+                                        <div class="addBlock">
+                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
+                                            <span>開始小時 :
+                                                <select name="" id="">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </span>
+                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <button>提交</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!-- 新增方塊 -->
+                                        <div class="addBlock">
+                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
+                                            <span>開始小時 :
+                                                <select name="" id="">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </span>
+                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <button>提交</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!-- 新增方塊 -->
+                                        <div class="addBlock">
+                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
+                                            <span>開始小時 :
+                                                <select name="" id="">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </span>
+                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <button>提交</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!-- 新增方塊 -->
+                                        <div class="addBlock">
+                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
+                                            <span>開始小時 :
+                                                <select name="" id="">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </span>
+                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <button>提交</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!-- 新增方塊 -->
+                                        <div class="addBlock">
+                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
+                                            <span>開始小時 :
+                                                <select name="" id="">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </span>
+                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <button>提交</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!-- 新增方塊 -->
+                                        <div class="addBlock">
+                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
+                                            <span>開始小時 :
+                                                <select name="" id="">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </span>
+                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <button>提交</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!-- 新增方塊 -->
+                                        <div class="addBlock">
+                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
+                                            <span>開始小時 :
+                                                <select name="" id="">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </span>
+                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
+                                            <button>提交</button>
+                                        </div>
+                                    </td>
+                                <tr>
+                                <tr>
+                                    <td>第1節</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                <tr>
+                            </table>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- 教室查詢 -->
+            <div class="ClassroomInquiry" id="ClassroomInquiry">
+                <div class="ClassroomInquiryTitle">
+                    <h1>找教室</h1>
+
+                </div>
+
+                <div class="ClassroomInquiryContent">
+                    <span>教室名稱: <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱"
+                            list="classroomNameList"></span>
+                    <datalist id="classroomNameList"></datalist>
+
+                    <button>提交</button>
+                    
+                    <span>選擇日期: <input type="date" id="datePicker" name="datePicker"></span>
+                    <button>提交</button>
+                </div>
+            </div>
         </div>
     </section>
 
     <script>
+
+        fetch("獲取教室名稱.php", { method: 'POST' })
+            .then(response => response.json())
+            .then(datas => {
+                datas.forEach((data) => {
+                    allClassroomName.push(data[0]);
+                    let room = document.createElement("option")
+                    room.innerHTML = data[0];
+                    document.getElementById("classroomNameList").appendChild(room);
+                });
+            });
+
+
         const body = document.querySelector("body"),
             sidebar = body.querySelector("nav"),
             leftArrow = document.getElementById("leftArrow");
@@ -203,12 +484,15 @@
         // 當點擊左側選當後在右側顯示
         let borrowRequest = document.getElementById("borrowRequest");
         let keyrecord = document.getElementById("keyrecord");
+        let classSchedule = document.getElementById("classSchedule");
+        let ClassroomInquiry = document.getElementById("ClassroomInquiry");
 
 
         function clearAll() {
             borrowRequest.classList.remove("show");
             keyrecord.classList.remove("show");
-
+            classSchedule.classList.remove("show");
+            ClassroomInquiry.classList.remove("show");
         }
 
         function showBorrowRequest() {
@@ -219,7 +503,13 @@
             keyrecord.classList.add("show");
         }
 
+        function showClassSchedule() {
+            classSchedule.classList.add("show");
+        }
 
+        function showClassroomInquiry() {
+            ClassroomInquiry.classList.add("show");
+        }
         // 用按鈕選擇條件清單
 
         //-----點擊按鈕後改變顏色
@@ -227,8 +517,13 @@
         let reserveButton = document.querySelector(".reserve");
 
         //-----點擊按鈕後顯示多個清單
+        //// 1.借用請求
         let immediatelyForm = document.querySelector(".immediatelyForm");
         let reserveForm = document.querySelector(".reserveForm");
+
+        //// 2. 課表排程
+        let fastAddForm = document.querySelector(".fastAddForm");
+        let classAddForm = document.querySelector(".classAddForm");
 
 
         //-----點擊箭頭後顯示清單內容(1.內容,2.圖片)
@@ -240,13 +535,21 @@
 
         ///////////////////////////////////////////////////////////////////////////////////
         function clearAllForm() {
+            //// 1.借用請求
             immediatelyButton.classList.remove("show");
             reserveButton.classList.remove("show");
 
             immediatelyForm.classList.remove("show");
             reserveForm.classList.remove("show");
 
+            //// 2. 課表排程
+            fastAddForm.classList.remove("show");
+            classAddForm.classList.remove("show");
+
+
         }
+
+        //// 1.借用請求
         function openImmediatelyForm() {
             immediatelyButton.classList.add("show");
             immediatelyForm.classList.add("show");
@@ -257,6 +560,14 @@
             reserveForm.classList.add("show");
         }
 
+        //// 2. 課表排程
+        function openFastAddForm() {
+
+            fastAddForm.classList.add("show");
+        }
+        function openClassAddForm() {
+            classAddForm.classList.add("show");
+        }
         //點箭頭控制清單開關
         // function openImmediatelyFormContent() {
         //     immediatelyFormBody.classList.toggle("show");

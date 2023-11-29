@@ -349,13 +349,10 @@ nav.close~.board .top {
 
 .keyrecord {
     display: none;
-    /* border: solid; */
 }
 
 .keyrecord.show {
     display: block;
-    /* border: solid; */
-
 }
 
 .keyrecordTitle {
@@ -376,4 +373,111 @@ nav.close~.board .top {
 
 .keyrecordContent:hover {
     background-color: red;
+}
+
+/* 課表排程-------------------------------------------- */
+.board-content {
+    margin-left: 10px;
+}
+
+.classSchedule {
+    display: none;
+}
+
+.classSchedule.show {
+    display: block;
+}
+
+
+.fastAddForm {
+    display: none;
+    margin-top: 20px;
+}
+
+.fastAddForm.show{
+    display: block;
+}
+
+.classAddForm {
+    display: none;
+    margin-top: 20px;
+}
+
+.classAddForm.show{
+    display: block;
+}
+
+
+
+.classScheduleTitle {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px !important;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
+}
+.classScheduleTitle h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.classScheduleContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 25px !important;
+    /* border: solid; */
+}
+
+.classSchedule table{
+    border-collapse: collapse; /* 合併邊框，只顯示內邊框 */
+    margin-top: 10px;
+}
+.classSchedule .addBlock{
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+}
+.classSchedule span{
+    margin-right:auto;
+
+}
+
+.classSchedule button{
+    width: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 教室搜尋-------------------------------------------- */
+.board-content {
+    margin-top: 100px;
+    margin-left: 10px;
+}
+
+.ClassroomInquiry {
+    display: none;
+}
+
+.ClassroomInquiry.show {
+    display: flex;
+    flex-direction: column;
+}
+
+.ClassroomInquiryTitle h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ClassroomInquiryContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 25px !important;
+}
+
+.ClassroomInquiryContent button{
+    width: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
