@@ -204,6 +204,7 @@
 
         //以後會被資料庫所取代
         let allClassroomName = [];
+        let activities = {};
         const startTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
             endTime = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
             condition = [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
@@ -217,16 +218,38 @@
                     room.innerHTML = data[0];
                     document.getElementById("classroomNameList").appendChild(room);
                 });
-                showDefault();
             });
+
+        fetch("當日所有教室使用情形.php", {method: 'POST'})
+        .then(response => response.json())
+        .then(datas => {
+            allClassroomName.forEach((room) => {
+                activities[room] = datas[room];
+            });
+            showDefault();
+        });
+
+        //計算借用情況
+        function roomCondition(room) {
+            let count = 0;
+            activities[room].forEach((activity)=>{
+                if(activity == "") count++;
+            });
+            return `${(100-(count*100/startTime.length)).toFixed(2)}%`;
+        }
+
+        //查詢結果格式
+        function showResult(room) {
+            return `<span onclick="showPopupClassroom(event)" class="classroomName">${room}</span><span class="gap">${room.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span><div class="totalBar"><div class="nowState-bar">${roomCondition(room)}</div></div><div class="wrap"></div>`
+        }
 
         //列出所有教室狀態
         function showDefault() {
             let content = "";
-            content += '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
+            content += '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span><div class="wrap"></div>';
 
             allClassroomName.forEach((classroom) => {
-                content += `<div class="wrap"></div><span onclick="showPopupClassroom(event)" class="classroomName">${classroom}</span><span class="gap">${classroom.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span><div class="totalBar"><div class="nowState-bar">30%</div></div>`;
+                content += showResult(classroom);
             });
             document.getElementById("showClassroom").innerHTML = content;
         }
@@ -280,42 +303,37 @@
         //顯示以教室名稱或特定時段搜尋的結果
         form.addEventListener("submit", () => {
             event.preventDefault();
-            let properClassroomName = [],
-                intervalVacant = true,
-                queryStartTime = document.getElementById("time1").value,
+            let queryStartTime = document.getElementById("time1").value,
                 queryEndTime = document.getElementById("time2").value;
 
             let searchMethod = sBtn_text.innerHTML=="輸入教室名稱"?true:false;//true 找教室名稱 false 找特定時間
-            for (let i = 0; i < allClassroomName.length; i++) {
-                if (allClassroomName[i].startsWith(queryClassRoom.value)) properClassroomName.push(allClassroomName[i]);
-            }
 
             if (searchMethod) {
-                let content = "";
-                content = '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
+                let properClassroomName = [];
+                for (let i = 0; i < allClassroomName.length; i++) {
+                    if (allClassroomName[i].startsWith(queryClassRoom.value)) properClassroomName.push(allClassroomName[i]);
+                }
+                let content = '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span><div class="wrap"></div>';
                 properClassroomName.forEach((roomName)=>{
-                    content += `<div class="wrap"></div><span onclick="showPopupClassroom(event)" class="classroomName">${roomName}</span><span class="gap">${roomName.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span><div class="totalBar"><div class="nowState-bar">30%</div></div>`;
+                    content += showResult(roomName);
                 },false);
                 queryClassRoom.value = "";
                 document.getElementById("showClassroom").innerHTML = content;
             }
             else if (queryStartTime != "" && queryEndTime != "") {
-                document.getElementById("showClassroom").innerHTML = '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span>';
-                for (let i = 0; i < allClassroomName.length; i++) {
-                    for (let j = 0; j < startTime.length; j++) {
-                        if (startTime[j] >= queryStartTime && endTime[j] <= queryEndTime && condition[j] == 0) {
-                            intervalVacant = false;
-                            break;
-                        }
-                    }
-                    if (intervalVacant) {
-                        document.getElementById("showClassroom").innerHTML += '<div class="wrap"></div><span onclick="showPopupClassroom(event)" class="classroomName">XXX教室</span><span class="gap">' + allClassroomName[i] + '</span><div class="totalBar"><div class="nowState-bar">30%</div></div>';
-                    }
-                    intervalVacant = true;
+                let content = '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span><div class="wrap"></div>';
+                const properClassroomName = new Set();
+                for(let i=startTime.findIndex((element)=>element == queryStartTime); i<=endTime.findIndex((element)=>element == queryEndTime); i++) {
+                    allClassroomName.forEach((room)=>{
+                        if(activities[room][i] == "")
+                            properClassroomName.add(room);
+                    });
                 }
-                document.getElementById("time1").value = "";
-                document.getElementById("time2").value = "";
-                document.getElementById("time2").setAttribute("disabled", true);
+                allClassroomName.forEach((roomName)=>{
+                    if(properClassroomName.has(roomName))
+                        content += showResult(roomName);
+                },false);
+                document.getElementById("showClassroom").innerHTML = content;
             }
         })
 
@@ -370,15 +388,6 @@
 
         function closePopupClassroom() {
             popup.classList.remove("open-popup");
-        }
-
-        function getRoomStatus() {
-            fetch()
-        }
-
-        function calcRoomStatus() {
-            let ans = "";
-            return `${ans}%`;
         }
 
     </script>
