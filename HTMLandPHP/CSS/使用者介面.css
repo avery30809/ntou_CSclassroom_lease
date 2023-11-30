@@ -24,7 +24,7 @@ nav {
     height: 100%;
     width: 250px;
     padding: 10px 14px;
-    background-color: rgba(210, 210, 210, 0.2);
+    background-color: #4870ea;
     border-right: 1px solid #e6e5e5;
     text-shadow: 0px 15px 5px rgba(0, 0, 0, 0.1), 10px 20px 5px rgba(0, 0, 0, 0.04), -10px 20px 5px rgba(0, 0, 0, 0.04);
     transition: all 0.5s ease;
@@ -83,8 +83,13 @@ nav .menu-items {
     list-style: none;
 }
 
+.menu-items li button {
+    background-color: #4870ea;
+    border-radius: 20px;
+}
+
 .menu-items li button:hover {
-    background-color: white;
+    background-color: rgb(255, 252, 252);
     border-radius: 20px;
 }
 
@@ -96,6 +101,10 @@ nav .menu-items {
     position: relative;
 }
 
+.nav-links li {
+    margin-top: 10px;
+}
+
 .nav-links li button:hover:before {
     content: "";
     position: absolute;
@@ -103,7 +112,7 @@ nav .menu-items {
     height: 50px;
     width: 5px;
     /* border-radius: 50%; */
-    background-color: rgb(255, 200, 0);
+    background-color: rgb(255, 201, 7);
 }
 
 .nav-links li button:hover i,
@@ -126,7 +135,7 @@ nav .menu-items {
     padding-left: 20px;
     font-size: 18px;
     font-weight: 600;
-    color: #000000;
+    color: #ffffff;
     transition: all 0.2s ease;
 }
 
@@ -138,22 +147,23 @@ nav.close li button .link-name {
 
 .menu-items .logout-mode {
     padding-top: 10px;
-    border-top: 1px solid rgb(119, 98, 7);
+    border-top: 1px solid rgb(77, 63, 3);
 }
 
 
 .menu-items .logout-mode li button:hover {
-    background-color: rgb(139, 75, 43);
+    background-color:rgba(91, 89, 89, 0.607) !important;
 }
 
-/* 右下方欄位-------------------------------------------- */
+
+/* 右方欄位-------------------------------------------- */
 .board {
     position: relative;
     left: 250px;
-    background-color: #ffffff;
+    background-color: #f3f2f2;
+
     min-height: 100vh;
     width: calc(100% - 250px);
-    padding: 10px 14px;
     transition: all 0.5s ease;
 }
 
@@ -162,15 +172,38 @@ nav.close~.board {
     width: calc(100% - 73px);
 }
 
+/* 右上方欄位-------------------------------------------- */
 
+.board-top {
+    height: 7vh;
+    display: flex;
+    /* background-color: #ffffff; */
+    /* border: solid; */
 
-
-/* 編輯使用者資訊-------------------------------------------- */
-.board-content {
-    margin-top: 100px;
-    margin-left: 10px;
+}
+.board-top a{
+    margin-left: auto;
+    text-decoration: none;
 }
 
+.board-top img {
+    max-width: 100%; /* 圖片寬度不超過容器的寬度 */
+    max-height: 100%; /* 圖片高度不超過容器的高度 */
+    height: auto; /* 保持原始比例 */
+    width: auto; /* 保持原始比例 */
+    margin-right: 15px;
+    padding-top: 15px;
+    padding-left: 5px;
+}
+
+/* 右下方欄位-------------------------------------------- */
+.board-content {
+    margin-left: 10px;
+    /* background-color: #ffffff; */
+
+}
+
+/* 編輯使用者資訊-------------------------------------------- */
 
 .userInformation {
     display: none;
@@ -181,19 +214,75 @@ nav.close~.board {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    border: solid;
+}
 
+.boardTitle {
+    display: flex;
+    width: 80%;
+    margin-right: auto;
+    margin-left: 5%;
+    padding-bottom: 10px;
+
+    font-weight: 600;
+    font-size: 30px;
+
+}
+
+.hr {
+    border-bottom: 1px solid;
+    margin-bottom: 5px;
 }
 
 .userInformation .userInformationContent {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    margin-left: 15% !important;
 
-    margin: 10px;
+}
+
+.quention_text {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    margin-top: 20px;
+
+    font-weight: 600;
+    font-size: 25px;
 }
 
 .userInformation .userInformationContent input {
+    /* margin-left: 10px; */
+    width: 50%;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+.verification-button {
+    width: 80px;
     margin-left: 10px;
+    background-color: rgba(220, 84, 84, 0.607) !important;
+    color: white;
+
+    border-radius: 10px;
+    text-decoration: none;
+
+    font-weight: 600;
+    font-size: 25px;
+
+}
+
+.saveUserInformation {
+    width: 80px;
+    margin-top: 15px;
+
+    background-color: rgba(220, 84, 84, 0.607) !important;
+    color: white;
+
+    border-radius: 5px;
+    text-decoration: none;
+
+    font-weight: 600;
+    font-size: 25px;
 }
 
 /* //////////////////////////////////////////////// */
@@ -210,6 +299,7 @@ nav.close~.board {
     border: solid;
     margin: 10px;
     border-radius: 20px;
+    background-color: rgb(255, 255, 255);
 }
 
 .title {

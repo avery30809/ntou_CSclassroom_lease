@@ -35,7 +35,8 @@
 
             </ul>
             <ul class="logout-mode">
-                <li class="logout"><button id="logoutBtn">
+                <li class="logout">
+                    <button id="logoutBtn">
                         <i><img src="image/logoutIcon.png" alt=""></i>
                         <span class="link-name">登出</span>
                     </button></li>
@@ -46,26 +47,32 @@
 
     <section class="board">
         <!-- 右下半部欄位  -->
+        <div class="board-top">
+           <a href="Home.html"><img src="image/home.png"></a> 
+        </div>
         <div class="board-content">
 
             <!--編輯使用者資訊 -->
             <div class="userInformation" id="userInformation">
-                <!-- <img src="image/request40.png" alt=""> -->
+                <div class="boardTitle">編輯個人資訊</div>
+                <div class="hr"></div>
                 <div class="userInformationContent">
                     <p class="quention_text">姓名 : </p>
                     <input type="text">
                 </div>
                 <div class="userInformationContent">
-                    <p class="quention_text">帳號 : </p>
+                    <p class="quention_text">學號 :
+                        <button id="vertify" class="verification-button">驗證</button>
+                    </p>
                     <input type="text">
-                </div>
-                <div class="userInformationContent">
-                    <p class="quention_text">密碼 : </p>
-                    <input type="text">
-                </div>
 
+                </div>
                 <div class="userInformationContent">
-                    <p class="quention_text">Email : </p>
+                    <p class="quention_text">舊密碼 : </p>
+                    <input type="text">
+                </div>
+                <div class="userInformationContent">
+                    <p class="quention_text">新密碼 : </p>
                     <input type="text">
                 </div>
                 <div class="userInformationContent">
@@ -73,9 +80,15 @@
                     <input type="text">
                 </div>
 
+                <div class="userInformationContent">
+                    <button class="saveUserInformation" onclick="">儲存</button>
+                </div>
             </div>
 
+            <!--申請紀錄 -->
             <div class="Applyrequest" id="Applyrequest">
+                <div class="boardTitle">申請紀錄</div>
+                <div class="hr"></div>
                 <div class="content">
                     <div class="title">
                         <p>XXX教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg1"
@@ -130,19 +143,19 @@
             email: "",
             phone: null
         };
-        fetch("獲取身分資訊.php", {method: 'POST'})
-        .then(response => response.json())
-        .then(data => {
-            if(data.error === undefined) {
-                user = data;
-                logoName.innerHTML = user.username;
-            }
-            else {
-                //沒有登入就回首頁
-                window.alert("請先登入！");
-                window.location.href = "Home.html";
-            }
-        });
+        fetch("獲取身分資訊.php", { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error === undefined) {
+                    user = data;
+                    logoName.innerHTML = user.username;
+                }
+                else {
+                    //沒有登入就回首頁
+                    window.alert("請先登入！");
+                    window.location.href = "Home.html";
+                }
+            });
 
         function clearAll() {
             Applyrequest.classList.remove("show");
@@ -157,7 +170,7 @@
             Applyrequest.classList.add("show");
         }
 
-        function toggleContent(ApplyrequestConntentId,ApplyrequestImageId) {
+        function toggleContent(ApplyrequestConntentId, ApplyrequestImageId) {
             let ApplyrequestConntent = document.getElementById(ApplyrequestConntentId);
             let ApplyrequestImage = document.getElementById(ApplyrequestImageId);
             ApplyrequestConntent.classList.toggle("show");
@@ -170,8 +183,8 @@
         //     ApplyrequestConntent2.classList.toggle("show");
         // }
 
-        logoutButton.addEventListener("click", ()=>{
-            fetch("使用者登出.php", {method: 'POST'});
+        logoutButton.addEventListener("click", () => {
+            fetch("使用者登出.php", { method: 'POST' });
             window.location.href = "Home.html";
         }, false);
 
