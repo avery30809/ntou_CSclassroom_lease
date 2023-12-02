@@ -384,16 +384,16 @@
 
 /* 借用狀態Bar */
 .totalBar {
-    /* 總共100 * 5.5(放大倍數) */
-    width: 550px;
+    /* 總共100 * 2.5(放大倍數) */
+    width: 250px;
     background-color: #ccc;
     height: 20px;
     border-radius: 30px;
 }
 
 .nowState-bar {
-    /* 占30% * 5.5(放大倍數) */
-    width: 165px;
+    /* 占30% * 2.5(放大倍數) + 1px(當 0px 時) */
+    width:  0%;
     height: 100px;
     height: 20px;
     background-color: #4CAF50;
