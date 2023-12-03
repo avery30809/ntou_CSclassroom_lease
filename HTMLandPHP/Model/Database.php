@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/../inc/bootstrap.php";
 class Database
 {
     protected $connection = null;
@@ -11,20 +12,19 @@ class Database
                 throw new Exception("Could not connect to database.");   
             }
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());   
+            throw new Exception($e->getMessage());
         }			
     }
-    public function select($query = "" , $params = [])
+    public function query($query = "" , $params = [])
     {
         try {
             $stmt = $this->executeStatement( $query , $params );
-            $result = $stmt->get_result()->fetch_all();				
+            $result = $stmt->get_result()->fetch_all();
             $stmt->close();
-            return $result;
+            return sizeof($result)===0 ? false : $result;
         } catch(Exception $e) {
-            throw New Exception( $e->getMessage() );
+            return false;
         }
-        return false;
     }
     private function executeStatement($query = "" , $params = [])
     {
@@ -33,7 +33,7 @@ class Database
             if($stmt === false) {
                 throw New Exception("Unable to do prepared statement: " . $query);
             }
-            if( $params ) {
+            if(sizeof($params)!==0) {
                 $stmt->execute($params);
             } else {
                 $stmt->execute();

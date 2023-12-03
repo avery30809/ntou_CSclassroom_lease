@@ -13,7 +13,7 @@
         <!-- 左上半部欄位  -->
         <div class="logo-name">
             <div class="logo-image">
-                <img src="image/usericon.png" alt="">
+                <img src="../image/usericon.png" alt="">
             </div>
 
             <span class="logo_name"></span>
@@ -23,13 +23,13 @@
         <!-- 左下半部欄位 -->
         <div class="menu-items">
             <ul class="nav-links">
-                <li><button onclick="clearAll() , showEditstate()">
-                        <i><img src="image/user indormation.png" alt=""></i>
+                <li><button id="menuBtn1">
+                        <i><img src="../image/user indormation.png" alt=""></i>
                         <span class="link-name">編輯個人資訊</span>
                     </button></li>
 
-                <li><button onclick="clearAll() , showApplyrequest()">
-                        <i><img src="image/applyrequest.png" alt=""></i>
+                <li><button id="menuBtn2">
+                        <i><img src="../image/applyrequest.png" alt=""></i>
                         <span class="link-name">申請紀錄</span>
                     </button></li>
 
@@ -37,7 +37,7 @@
             <ul class="logout-mode">
                 <li class="logout">
                     <button id="logoutBtn">
-                        <i><img src="image/logoutIcon.png" alt=""></i>
+                        <i><img src="../image/logoutIcon.png" alt=""></i>
                         <span class="link-name">登出</span>
                     </button></li>
             </ul>
@@ -48,7 +48,7 @@
     <section class="board">
         <!-- 右下半部欄位  -->
         <div class="board-top">
-            <a href="Home.html"><img src="image/home.png"></a> 
+            <a href="Home.html"><img src="../image/home.png"></a> 
         </div>
         <div class="board-content">
 
@@ -91,9 +91,7 @@
                 <div class="hr"></div>
                 <div class="content">
                     <div class="title">
-                        <p>XXX教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg1"
-                                onclick="toggleContent('ApplyrequestConntent1','immediatelyFormImg1')">
-                        </p>
+                        <p>XXX教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg1"></p>
                     </div>
                     <!-- 申請內容，若還在審查中，class為accounting，否則為OK -->
                     <div class="text" id="ApplyrequestConntent1">
@@ -110,9 +108,7 @@
 
                 <div class="content">
                     <div class="title">
-                        <p>YYY教室 <img src="image/dropdownIcon48.png" id="immediatelyFormImg2"
-                                onclick="toggleContent('ApplyrequestConntent2','immediatelyFormImg2')">
-                        </p>
+                        <p>YYY教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg2"></p>
                     </div>
                     <!-- 申請內容，若還在審查中，class為accounting，否則為OK -->
                     <div class="text" id="ApplyrequestConntent2">
@@ -130,65 +126,7 @@
         </div>
     </section>
 
-    <script>
-        let userInformation = document.getElementById("userInformation");
-        let Applyrequest = document.getElementById("Applyrequest");
-        const logoutButton = document.getElementById("logoutBtn");
-        const logoName = document.querySelector(".logo_name");
-
-        //獲取使用者身分
-        let user = {
-            username: "",
-            useraccount: "",
-            email: "",
-            phone: null
-        };
-        fetch("獲取身分資訊.php", { method: 'POST' })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error === undefined) {
-                    user = data;
-                    logoName.innerHTML = user.username;
-                }
-                else {
-                    //沒有登入就回首頁
-                    window.alert("請先登入！");
-                    window.location.href = "Home.html";
-                }
-            });
-
-        function clearAll() {
-            Applyrequest.classList.remove("show");
-            userInformation.classList.remove("show");
-
-        }
-        function showEditstate() {
-            userInformation.classList.add("show");
-        }
-
-        function showApplyrequest() {
-            Applyrequest.classList.add("show");
-        }
-
-        function toggleContent(ApplyrequestConntentId, ApplyrequestImageId) {
-            let ApplyrequestConntent = document.getElementById(ApplyrequestConntentId);
-            let ApplyrequestImage = document.getElementById(ApplyrequestImageId);
-            ApplyrequestConntent.classList.toggle("show");
-            ApplyrequestImage.classList.toggle("show");
-        }
-        // function openImmediatelyFormContent1() {
-        //     ApplyrequestConntent1.classList.toggle("show");
-        // }
-        // function openImmediatelyFormContent2() {
-        //     ApplyrequestConntent2.classList.toggle("show");
-        // }
-
-        logoutButton.addEventListener("click", () => {
-            fetch("使用者登出.php", { method: 'POST' });
-            window.location.href = "Home.html";
-        }, false);
-
-    </script>
+    <script src="../Assets/JS/使用者介面.js"></script>
 </body>
 
 </html>

@@ -3,42 +3,6 @@
     //登入過就不會到這個畫面
     if(isset($_SESSION["userID"])) header("Location: Home.html");
 
-    $op = 1;
-    if(isset($_POST["operation"])) {
-        $op = $_POST["operation"];
-    }
-    //登入後端
-    if(isset($_POST['sign-in-submit'])){
-        $account = $_POST["account"];
-        $password = $_POST["password"];
-
-        require_once('database/connect.php');
-        if($op == 2) {
-            $result = $conn->query("SELECT useraccount, pwd FROM userdata WHERE isAdmin = TRUE");
-            $admin = $result->fetch_assoc();
-
-            if($account == $admin["useraccount"] && $password == $admin["pwd"]) {
-                //管理員
-                $_SESSION["admin"] = "login";
-                header("Location: Admin interface.html");
-                exit();
-            } else {
-                $_SESSION['Error']='Invalid account or password';
-            }
-        }
-        else if($op == 1) {
-            $result = $conn->query("SELECT userID FROM userdata WHERE useraccount = '$account' AND pwd = '$password' AND isAdmin = FALSE")->fetch_assoc();
-            if ($result) {
-                //使用者
-                //紀錄已登入的使用者名稱，並回首頁
-                $_SESSION["userID"] = $result["userID"];
-                header("Location: Home.html");
-                exit();
-            } else {
-                $_SESSION['Error']='Invalid account or password';
-            }
-        }
-    }
     if (isset($_SESSION['verification_code']) && isset($_SESSION['verification_code_expiration'])) {
         // 檢查是否過期
         if (time() > $_SESSION['verification_code_expiration']) {
@@ -54,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登入測試</title>
-    <link rel="stylesheet" href="CSS/登入或註冊.css">
+    <link rel="stylesheet" href="../Assets/CSS/登入或註冊.css">
 </head>
 
 <body>
@@ -80,30 +44,11 @@
 
         <!-- 登入表單 -->
         <div class="form-container sign-in">
-            <form method="POST">
+            <form id="login-form" method="POST">
                 <h1>登入</h1>
-                <?php
-                    if(isset($_SESSION["Error"])){
-                        echo '<h1 id="error-message" style="color: red; font-size: 90%">帳號或密碼錯誤</h1>';
-                        echo '<script>
-                            let element = document.getElementById("error-message");
-                            if(element) {
-                                element.style.display = "block";
-                                element.style.transition = "opacity 4s";
-                                element.style.opacity = 1;
-                                setTimeout(function() {
-                                    element.style.opacity = 0;
-                                }, 10);
-                                setTimeout(function() {
-                                    element.style.display = "none";
-                                }, 3000);
-                            }
-                        </script>';
-                        unset($_SESSION['Error']);
-                    }
-                ?>
-                <input type="text" name="account" placeholder="學號">
-                <input type="password" name="password" placeholder="密碼">
+                <h1 id="error-message" style="color: red; font-size: 90%; display: none;">帳號或密碼錯誤</h1>
+                <input type="text" id="signin_account" name="account" placeholder="學號">
+                <input type="password" id="signin_pwd" name="password" placeholder="密碼">
                 <a href="#">忘記密碼了嗎 ?</a>
                 <button type="submit" name="sign-in-submit">Sign In</button>
             </form>
@@ -130,71 +75,7 @@
             </div>
         </div>
     </div>
-    <script>
-        const container = document.getElementById('container');
-        const registerBtn = document.getElementById('register');
-
-        const loginBtn = document.getElementById('login');
-        const vertifyBtn = document.getElementById('vertify');
-
-        const signupform = document.getElementById("signup-form");
-        registerBtn.addEventListener('click', () => {
-            container.classList.add("active");
-        });
-
-        //註冊
-        signupform.addEventListener("submit",(event)=>{
-            event.preventDefault();
-
-            const formData = new FormData();
-            const username = document.getElementById("signup_username").value;
-            const account = document.getElementById("signup_account").value;
-            const code = document.getElementById("signup_verification_code").value;
-            const pwd = document.getElementById("signup_pwd").value;
-            const confirm_pwd = document.getElementById("signup_confirm_pwd").value;
-
-            formData.append("username",username);
-            formData.append("account",account);
-            formData.append("verification_code",code);
-            formData.append("pwd",pwd);
-            formData.append("confirm_pwd",confirm_pwd);
-            fetch('註冊後端.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                window.alert(data.replace(" ", "\n"));
-                if(data == "註冊成功！") window.location.reload();
-            });
-        });
-
-        loginBtn.addEventListener('click', () => {
-            container.classList.remove("active");
-        });
-        //驗證
-        vertifyBtn.addEventListener('click', () => {
-            const ID = document.getElementById("signup_account").value;
-            if(ID !== "") {
-                const formData = new FormData();
-                const email = ID + "@mail.ntou.edu.tw";
-                formData.append("email", email);
-
-                fetch('sendemail/sender.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                vertifyBtn.disabled = true;
-                setTimeout(()=>{
-                    vertifyBtn.disabled = false; 
-                },5*60*1000);
-                window.alert("請去海大信箱接收驗證碼\n記得在海大信箱選擇日期！");
-            }
-            else {
-                window.alert("請輸入學號");
-            }
-        });
-    </script>
+    <script src="../Assets/JS/登入或註冊.js"></script>
 </body>
 
 </html>

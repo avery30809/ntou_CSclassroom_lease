@@ -41,21 +41,27 @@ document.addEventListener("DOMContentLoaded", ()=>{
         email: "",
         phone: null
     };
-    fetch("../../BackEnd/獲取身分資訊.php", {method: 'POST'})
+    let testForm = new FormData();
+    testForm.append("action", "getUserProfile");
+    fetch("../../Controller/Api/UserController.php", {
+        method: 'POST',
+        body: testForm
+    })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         //已登入
         if(data.error === undefined) {
             user = data;
-            document.getElementById("login-signup").innerHTML = "<img src='image/usericon.png' class='usericon'>" + user.username;
+            document.getElementById("login-signup").innerHTML = "<img src='../../image/usericon.png' class='usericon'>" + user.username;
             document.getElementById("login-signup").addEventListener("click", function (event) {
-                window.location.href = "使用者介面.html";
+                window.location.href = "../../Pages/使用者介面.html";
             }, false);
         }
         //未登入
         else {
             document.getElementById("login-signup").addEventListener("click", function (event) {
-                window.location.href = "選擇登入身分.html";
+                window.location.href = "../../Pages/選擇登入身分.html";
             }, false);
         }
     });
@@ -67,12 +73,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function searchDate() {
         const formdata = new FormData();
         formdata.append("date", selectedDate);
+        formdata.append("action", "getUserProfile");
 
-        fetch("../../BackEnd/搜尋日期.php", {
+        fetch("../../Controller/Api/UserController.php", {
             method: 'POST',
             body: formdata
         });
-        window.location.href = "index.html";
+        window.location.href = "../../Pages/index.html";
     }
 
     function showDateform() {
