@@ -1,3 +1,1 @@
-LoginTest/database/connect.php
-HTMLandPHP/database/connect.php
-HTMLandPHP/sendemail/sender.php
+HTMLandPHP/inc/config.php

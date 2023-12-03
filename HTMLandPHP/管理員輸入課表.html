@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>輸入學期課表</title>
+    </head>
+    <body>
+        <h1>新增</h1>
+        <form id="schedule">
+            <label>課程名稱: </label>
+            <input type="text" id="name"><br>
+            <label>教室名稱: </label>
+            <select id="place"></select><br>
+            <label>開始小時: </label>
+            <select id="hour">
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+            </select><br>
+            <label>開始日期: </label>
+            <input type="date" id="start"><br>
+            <label>結束日期: </label>
+            <input type="date" id="end"><br>
+            <input type="submit">
+        </form>
+        <h1>查詢</h1>
+        <h2>找教室</h2>
+        <form id="searchByName">
+            <label>教室名稱: </label>
+            <input type="text" id="searchName"><br>
+            <input type="submit">
+        </form>
+        <h2>找日期</h2>
+        <form id="searchByTime">
+            <label>選擇日期: </label>
+            <input type="date" id="searchDate"><br>
+            <input type="submit">
+        </form>
+        <div id="result"></div>
+
+        <script>
+            const insertForm = document.getElementById("schedule");
+            const placeBox = document.getElementById("place");
+            const hourBox = document.getElementById("hour")
+            const nameBox = document.getElementById("name");
+            const startBox = document.getElementById("start"),
+                    endBox = document.getElementById("end");
+            startBox.addEventListener("change", ()=>{
+                endBox.min = startBox.value;
+            },false);
+
+            let classrooms = [];
+
+            fetch("獲取教室名稱.php", {method: 'POST'})
+            .then(response=>response.json())
+            .then(datas=>{
+                datas.forEach((data)=>{
+                    let nop = document.createElement("option");
+                    nop.innerHTML = data[0];
+                    classrooms.push(data[0]);
+                    document.getElementById("place").appendChild(nop);
+                })
+            });
+
+            insertForm.addEventListener("submit", (event)=>{
+                event.preventDefault();
+                const form = new FormData();
+                form.append("activity", nameBox.value);
+                form.append("place", placeBox.value);
+                form.append("hour", hourBox.value);
+                form.append("start", startBox.value);
+                form.append("end", endBox.value);
+                fetch("插入課表.php", {
+                    method: 'POST',
+                    body: form
+                })
+                .then(response=>response.text())
+                .then(data=>{
+                    window.alert("新增課程成功！");
+                })
+            }, false);
+
+            const searchNameForm = document.getElementById("searchByName");
+            const searchNameBox = document.getElementById("searchName");
+            searchNameForm.addEventListener("submit", (event)=>{
+                event.preventDefault();
+                const form = new FormData();
+                form.append("room", searchNameBox.value);
+                fetch("找教室列所有行程.php", {
+                    method: 'POST',
+                    body: form
+                })
+                .then(response=>response.text())
+                .then(data=>{
+                    document.getElementById("result").innerHTML = data;
+                })
+            }, false);
+
+            const searchTimeForm = document.getElementById("searchByTime");
+            const searchTimeBox = document.getElementById("searchDate");
+            searchTimeForm.addEventListener("submit", (event)=>{
+                event.preventDefault();
+                const form = new FormData();
+                form.append("date", searchTimeBox.value);
+                fetch("當日所有教室使用情形.php", {
+                    method: 'POST',
+                    body: form
+                })
+                .then(response=>response.text())
+                .then(data=>{
+                    document.getElementById("result").innerHTML = data;
+                })
+            }, false);
+        </script>
+    </body>
+</html>
