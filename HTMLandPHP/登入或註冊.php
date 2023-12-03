@@ -3,31 +3,40 @@
     //登入過就不會到這個畫面
     if(isset($_SESSION["userID"])) header("Location: Home.html");
 
+    $op = 1;
+    if(isset($_POST["operation"])) {
+        $op = $_POST["operation"];
+    }
     //登入後端
     if(isset($_POST['sign-in-submit'])){
-
         $account = $_POST["account"];
         $password = $_POST["password"];
 
         require_once('database/connect.php');
-        $result = $conn->query("SELECT useraccount, pwd FROM userdata WHERE isAdmin = TRUE");
-        $admin = $result->fetch_assoc();
+        if($op == 2) {
+            $result = $conn->query("SELECT useraccount, pwd FROM userdata WHERE isAdmin = TRUE");
+            $admin = $result->fetch_assoc();
 
-        if($account == $admin["useraccount"] && $password == $admin["pwd"]) {
-            //管理員
-            $_SESSION["admin"] = "login";
-            header("Location: Admin interface.html");
-            exit();
-        } 
-        $result = $conn->query("SELECT userID FROM userdata WHERE useraccount = '$account' AND pwd = '$password'")->fetch_assoc();
-        if ($result) {
-            //使用者
-            //紀錄已登入的使用者名稱，並回首頁
-            $_SESSION["userID"] = $result["userID"];
-            header("Location: Home.html");
-            exit();
-        } else {
-            $_SESSION['Error']='Invalid account or password';
+            if($account == $admin["useraccount"] && $password == $admin["pwd"]) {
+                //管理員
+                $_SESSION["admin"] = "login";
+                header("Location: Admin interface.html");
+                exit();
+            } else {
+                $_SESSION['Error']='Invalid account or password';
+            }
+        }
+        else if($op == 1) {
+            $result = $conn->query("SELECT userID FROM userdata WHERE useraccount = '$account' AND pwd = '$password' AND isAdmin = FALSE")->fetch_assoc();
+            if ($result) {
+                //使用者
+                //紀錄已登入的使用者名稱，並回首頁
+                $_SESSION["userID"] = $result["userID"];
+                header("Location: Home.html");
+                exit();
+            } else {
+                $_SESSION['Error']='Invalid account or password';
+            }
         }
     }
     if (isset($_SESSION['verification_code']) && isset($_SESSION['verification_code_expiration'])) {

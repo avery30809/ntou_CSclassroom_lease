@@ -15,13 +15,13 @@
                 <img src="image/user.png">
                 <h5>User</h5>
                 <p>一般使用者<br>提供給借用教室的學生</p>
-                <button onclick="SignIn_Out()">Next</button>
+                <button onclick="SignIn_Out(1)">Next</button>
             </div>
             <div class="card">
                 <img src="image/administrator.png">
                 <h5>Administrator</h5>
                 <p>教室系統管理員<br>提供給管理系統的工作人員</p>
-                <button onclick="SignIn_Out()">Next</button>
+                <button onclick="SignIn_Out(2)">Next</button>
             </div>
         </div>
     </div>
@@ -29,8 +29,22 @@
 
 
     <script>
-        function SignIn_Out() {
-            window.location.href = "登入或註冊.php"; 
+
+        function SignIn_Out(op) {
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = '登入或註冊.php';
+
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'operation';
+            input.value = op;
+
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+
+            form.submit();
         }
     </script>
 </body>
