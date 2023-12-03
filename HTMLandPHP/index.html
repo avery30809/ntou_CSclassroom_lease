@@ -13,84 +13,93 @@
     <div class="total">
 
         <div class="top-row">
-            
 
-            <p><a href="Home.html" target="_self" class="verification-button"><img id="homeIcon" alt=""></a></p>
+            <div class="changePage">
+                <a href="Home.html" target="_self" class="verification-button"><img id="homeIcon" alt=""></a>
 
-            <button id="login-signup"></button>
-        </div>
-
-        <div class="datePickerValue">
-            <h5 id="selectedDatePlaceholder"></h5>
-        </div>
-
-        <div class="droplist">
-            <div class="select-menu">
-                <div class="select-btn">
-                    <span class="sBtn-text">顯示所有教室</span>
-                    <img class="sBtn-img" id="dropdownIcon">
-                </div>
-
-                <ul class="options">
-                    <li class="option">
-                        <span class="option-text">顯示所有教室</span>
-                    </li>
-                    <li class="option">
-                        <span class="option-text">選擇特定時段</span>
-                    </li>
-                    <li class="option">
-                        <span class="option-text">輸入教室名稱</span>
-                    </li>
-                </ul>
+                <button id="login-signup"></button>
             </div>
 
-            <div class="query">
-                <input class="blank" type="text" placeholder="" disabled>
 
-                <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱" list="classroomNameList">
-                <datalist id="classroomNameList"></datalist>
+            <div class="datePickerValue">
+                <h5 id="selectedDatePlaceholder"></h5>
+            </div>
 
-                <div class="inputTimeInterval">
-                    <div class="selectTime">
-                        <input class="time" type="text" id="time1" placeholder="開始時間" readonly>
-                        <div class="dropdownStart">
-                            <ul class="startList">
-                                <li>09:00</li>
-                                <li>10:00</li>
-                                <li>11:00</li>
-                                <li>12:00</li>
-                                <li>13:00</li>
-                                <li>14:00</li>
-                                <li>15:00</li>
-                                <li>16:00</li>
-                                <li>17:00</li>
-                                <li>18:00</li>
-                                <li>19:00</li>
-                            </ul>
-                        </div>
+            <div class="droplist">
+
+                <div class="select-menu">
+                    <div class="select-btn">
+                        <span class="sBtn-text">顯示所有教室</span>
+                        <img class="sBtn-img" id="dropdownIcon">
                     </div>
 
-                    <img class="queryImage" id="rightIcon" alt="Query">
-                    <div class="selectTime">
-                        <input class="time" type="text" id="time2" placeholder="結束時間" readonly disabled>
-                        <div class="dropdownEnd">
-                            <ul class="endList">
-                            </ul>
-                        </div>
-                    </div>
+                    <ul class="options">
+                        <li class="option">
+                            <span class="option-text">顯示所有教室</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">選擇特定時段</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">輸入教室名稱</span>
+                        </li>
+                    </ul>
                 </div>
-                <form method="get" id="form">
-                    <button type="submit" class="queryButton" disabled>
-                        <img class="queryImage" id="queryIcon" alt="Query">
-                    </button>
-                </form>
+
+                <div class="query">
+                    <input class="blank" type="text" placeholder="" disabled>
+
+                    <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱" list="classroomNameList">
+                    <datalist id="classroomNameList"></datalist>
+
+                    <div class="inputTimeInterval">
+                        <div class="selectTime">
+                            <input class="time" type="text" id="time1" placeholder="開始時間" readonly>
+                            <div class="dropdownStart">
+                                <ul class="startList">
+                                    <li>09:00</li>
+                                    <li>10:00</li>
+                                    <li>11:00</li>
+                                    <li>12:00</li>
+                                    <li>13:00</li>
+                                    <li>14:00</li>
+                                    <li>15:00</li>
+                                    <li>16:00</li>
+                                    <li>17:00</li>
+                                    <li>18:00</li>
+                                    <li>19:00</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <img class="queryImage" id="rightIcon" alt="Query">
+                        <div class="selectTime">
+                            <input class="time" type="text" id="time2" placeholder="結束時間" readonly disabled>
+                            <div class="dropdownEnd">
+                                <ul class="endList">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <form method="get" id="form">
+                        <button type="submit" class="queryButton" disabled>
+                            <img class="queryImage" id="queryIcon" alt="Query">
+                        </button>
+                    </form>
+                </div>
+
             </div>
 
         </div>
+
 
         <div class="content-container">
             <div class="text" id="showClassroom">
                 <!-- <h1>以下是查詢的教室目前狀態</h1> -->
+                <div class="showClassroomTitle"> </div>
+                <div class="Allclassroom">
+                </div>
+
             </div>
 
 
@@ -103,38 +112,27 @@
                 <div class="content">
                     <span>起始時間</span><span>結束時間</span><span>借用狀態</span>
                     <div class="wrap"></div>
-                    <span>9 a.m.</span><span>10 a.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>9 a.m.</span><span>10 a.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>10 a.m.</span><span>11 a.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>10 a.m.</span><span>11 a.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>11 a.m.</span><span>12 p.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>11 a.m.</span><span>12 p.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>12 p.m.</span><span>13 p.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>12 p.m.</span><span>13 p.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>13 p.m.</span><span>14 p.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>13 p.m.</span><span>14 p.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>14 p.m.</span><span>15 p.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>14 p.m.</span><span>15 p.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>15 p.m.</span><span>16 p.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>15 p.m.</span><span>16 p.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>16 p.m.</span><span>17 p.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>16 p.m.</span><span>17 p.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>17 p.m.</span><span>18 p.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>17 p.m.</span><span>18 p.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>18 p.m.</span><span>19 p.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>18 p.m.</span><span>19 p.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
-                    <span>19 p.m.</span><span>20 p.m.</span><span
-                        class="classroomState">未借用</span>
+                    <span>19 p.m.</span><span>20 p.m.</span><span class="classroomState">未借用</span>
                     <div class="wrap"></div>
                     <!-- <p></p>
             <p></p> -->
@@ -152,7 +150,7 @@
             close: new Image(),
             usericon: new Image()
         }
-        for(const [key, value] of Object.entries(image)) {
+        for (const [key, value] of Object.entries(image)) {
             value.src = `image/${key}.png`;
         }
         document.getElementById("homeIcon").src = image.home.src;
@@ -169,30 +167,30 @@
             email: "",
             phone: null
         };
-        fetch("獲取身分資訊.php", {method: 'POST'})
-        .then(response => response.json())
-        .then(data => {
-            if(data.error === undefined) {
-                user = data;
-                document.getElementById("login-signup").innerHTML = "<img id='usericon'>" + user.username;
-                document.getElementById("usericon").src = image.usericon.src;
-                document.getElementById("login-signup").addEventListener("click", function (event) {
-                    window.location.href = "使用者介面.html";
-                }, false);
-            }
-            else {
-                //沒有登入就回首頁
-                window.alert("請先登入！");
-                window.location.href = "Home.html";
-            }
-        });
+        fetch("獲取身分資訊.php", { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error === undefined) {
+                    user = data;
+                    document.getElementById("login-signup").innerHTML = "<img id='usericon'>" + user.username;
+                    document.getElementById("usericon").src = image.usericon.src;
+                    document.getElementById("login-signup").addEventListener("click", function (event) {
+                        window.location.href = "使用者介面.html";
+                    }, false);
+                }
+                else {
+                    //沒有登入就回首頁
+                    window.alert("請先登入！");
+                    window.location.href = "Home.html";
+                }
+            });
 
         // 獲取查詢的日期值
-        fetch("搜尋日期.php", {method: 'POST'})
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("selectedDatePlaceholder").textContent = data.date + " 教室狀態查詢結果";
-        });
+        fetch("搜尋日期.php", { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("selectedDatePlaceholder").textContent = data.date + " 教室狀態查詢結果";
+            });
         // 大部分功能
         const optionMenu = document.querySelector(".select-menu"),
             selectBtn = optionMenu.querySelector(".select-btn"),
@@ -209,7 +207,7 @@
             endTime = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
             condition = [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
 
-        fetch("獲取教室名稱.php", {method: 'POST'})
+        fetch("獲取教室名稱.php", { method: 'POST' })
             .then(response => response.json())
             .then(datas => {
                 datas.forEach((data) => {
@@ -220,33 +218,41 @@
                 });
             });
 
-        fetch("當日所有教室使用情形.php", {method: 'POST'})
-        .then(response => response.json())
-        .then(datas => {
-            allClassroomName.forEach((room) => {
-                activities[room] = datas[room];
+        fetch("當日所有教室使用情形.php", { method: 'POST' })
+            .then(response => response.json())
+            .then(datas => {
+                allClassroomName.forEach((room) => {
+                    activities[room] = datas[room];
+                });
+                showDefault();
             });
-            showDefault();
-        });
 
         //計算借用情況
         function roomCondition(room) {
             let count = 0;
-            activities[room].forEach((activity)=>{
-                if(activity == "") count++;
+            activities[room].forEach((activity) => {
+                if (activity == "") count++;
             });
-            return `${(100-(count*100/startTime.length)).toFixed(2)}%`;
+            return `${(100 - (count * 100 / startTime.length)).toFixed(2)}%`;
         }
 
         //查詢結果格式
         function showResult(room) {
-            return `<span onclick="showPopupClassroom(event)" class="classroomName">${room}</span><span class="gap">${room.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span><div class="totalBar"><div class="nowState-bar">${roomCondition(room)}</div></div><div class="wrap"></div>`
+            return `<div class="Allclassroom">
+                        <span onclick="showPopupClassroom(event)" class="classroomName">${room}</span>
+                        <span class="gap">${room.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span>
+                        <span class="gap">${room.slice(0, 3) == "INS" ? "電資大樓" : "電綜大樓"}</span>
+                        <div class="totalBar gap">
+                            <div class="nowState-bar">${roomCondition(room)}</div>
+                        </div>
+                        <div class="wrap"></div>
+                    </div>`
         }
 
         //列出所有教室狀態
         function showDefault() {
             let content = "";
-            content += '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span><div class="wrap"></div>';
+            content += '<div class="showClassroomTitle"><span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span class="gap">教室課表</span><span class="gap">借用情況</span><div class="wrap"></div></div>';
 
             allClassroomName.forEach((classroom) => {
                 content += showResult(classroom);
@@ -306,33 +312,33 @@
             let queryStartTime = document.getElementById("time1").value,
                 queryEndTime = document.getElementById("time2").value;
 
-            let searchMethod = sBtn_text.innerHTML=="輸入教室名稱"?true:false;//true 找教室名稱 false 找特定時間
+            let searchMethod = sBtn_text.innerHTML == "輸入教室名稱" ? true : false;//true 找教室名稱 false 找特定時間
 
             if (searchMethod) {
                 let properClassroomName = [];
                 for (let i = 0; i < allClassroomName.length; i++) {
                     if (allClassroomName[i].startsWith(queryClassRoom.value)) properClassroomName.push(allClassroomName[i]);
                 }
-                let content = '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span><div class="wrap"></div>';
-                properClassroomName.forEach((roomName)=>{
+                let content = '<div class="showClassroomTitle"><span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span class="gap">教室課表</span><span class="gap">借用情況</span><div class="wrap"></div></div>';
+                properClassroomName.forEach((roomName) => {
                     content += showResult(roomName);
-                },false);
+                }, false);
                 queryClassRoom.value = "";
                 document.getElementById("showClassroom").innerHTML = content;
             }
             else if (queryStartTime != "" && queryEndTime != "") {
-                let content = '<span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span>借用情況</span><div class="wrap"></div>';
+                let content = '<div class="showClassroomTitle"><span style="width: 70px;">教室名稱</span><span class="gap">教室位置</span><span class="gap">教室課表</span><span class="gap">借用情況</span><div class="wrap"></div></div>';
                 const properClassroomName = new Set();
-                for(let i=startTime.findIndex((element)=>element == queryStartTime); i<=endTime.findIndex((element)=>element == queryEndTime); i++) {
-                    allClassroomName.forEach((room)=>{
-                        if(activities[room][i] == "")
+                for (let i = startTime.findIndex((element) => element == queryStartTime); i <= endTime.findIndex((element) => element == queryEndTime); i++) {
+                    allClassroomName.forEach((room) => {
+                        if (activities[room][i] == "")
                             properClassroomName.add(room);
                     });
                 }
-                allClassroomName.forEach((roomName)=>{
-                    if(properClassroomName.has(roomName))
+                allClassroomName.forEach((roomName) => {
+                    if (properClassroomName.has(roomName))
                         content += showResult(roomName);
-                },false);
+                }, false);
                 document.getElementById("showClassroom").innerHTML = content;
             }
         })
@@ -376,7 +382,7 @@
 
         //彈跳視窗
         let popup = document.getElementById("popup");
-        popup.addEventListener("click", (event)=>{event.stopPropagation();},false);
+        popup.addEventListener("click", (event) => { event.stopPropagation(); }, false);
 
         // 點擊教室開啟彈跳視窗的函數
         function showPopupClassroom(event) {
