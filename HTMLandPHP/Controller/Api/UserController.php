@@ -77,13 +77,48 @@ class UserController extends BaseController
 
             if ($result) {
                 $_SESSION["userID"] = $result[0];
-                echo "登入成功！ $op";
+                $this->sendOutput("登入成功！ $op");
             } else {
-                echo "帳號或密碼錯誤";
+                $this->sendOutput("帳號或密碼錯誤");
             }
         } catch (Exception $e) {
             // 處理例外情況
-            echo "發生錯誤：" . $e->getMessage();
+            $this->sendOutput("發生錯誤：" . $e->getMessage());
+        }
+    }
+    //註冊
+    private function handleRegister() {
+        //確認是否驗證過email
+        if(isset($_SESSION['verification_code'])) {
+            if($_SESSION['verification_code_expiration']<time()) {
+                $this->sendOutput("驗證碼過期 請重新認證");
+                return;
+            }
+            $username = $_POST["username"];
+            $account = $_POST["account"];
+            $verification_code = $_POST["verification_code"];
+            $password = $_POST["pwd"];
+            $confirm_pwd = $_POST["confirm_pwd"];
+            $email = "$account@mail.ntou.edu.tw";
+            if($verification_code != $_SESSION['verification_code']){
+                $this->sendOutput('驗證碼錯誤');
+            }
+            else if($password !== $confirm_pwd) {
+                $this->sendOutput('密碼不匹配 請確認密碼');
+            }
+            else {
+                $result = $this->userModel->register($username, $account, $password, $email);
+                //確認帳號是第一次註冊
+                if($result) $this->sendOutput('帳號已存在');
+                else{
+                    unset($_SESSION["verification_code"]);
+                    unset($_SESSION["verification_code_expiration"]);
+                    $this->sendOutput('註冊成功！');
+                };
+            }
+        }
+        else {
+            $this->sendOutput('請先進行認證');
         }
     }
 /* 

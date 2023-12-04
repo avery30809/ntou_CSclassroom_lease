@@ -19,9 +19,11 @@ class Database
     {
         try {
             $stmt = $this->executeStatement( $query , $params );
-            $result = $stmt->get_result()->fetch_all();
-            $stmt->close();
-            return sizeof($result)===0 ? false : $result;
+            if(str_starts_with($query, "SELECT")){
+                $result = $stmt->get_result()->fetch_all();
+                $stmt->close();
+                return sizeof($result)===0 ? false : $result;
+            }
         } catch(Exception $e) {
             return false;
         }

@@ -67,7 +67,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
         formData.append("verification_code",code);
         formData.append("pwd",pwd);
         formData.append("confirm_pwd",confirm_pwd);
-        fetch('註冊後端.php', {
+        formData.append("action", "register");
+        fetch('../../Controller/Api/UserController.php', {
             method: 'POST',
             body: formData
         })
@@ -88,16 +89,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
             const formData = new FormData();
             const email = ID + "@mail.ntou.edu.tw";
             formData.append("email", email);
+            formData.append("action", "verification");
 
-            fetch('sendemail/sender.php', {
+            fetch('../../Controller/Api/VerificationController.php', {
                 method: 'POST',
                 body: formData
-            });
-            vertifyBtn.disabled = true;
-            setTimeout(()=>{
-                vertifyBtn.disabled = false; 
-            },5*60*1000);
-            window.alert("請去海大信箱接收驗證碼\n記得在海大信箱選擇日期！");
+            })
+            .then(response=>response.text())
+            .then(data=>{
+                window.alert(data.replace(" ", "\n"));
+            })
         }
         else {
             window.alert("請輸入學號");

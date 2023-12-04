@@ -3,13 +3,34 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once __DIR__ . "/../../inc/bootstrap.php";
 class VerificationController extends BaseController{
-    public function sendVerificationCode() {
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $userEmail = $_POST['email'];
-            $verificationCodeModel = new VerificationCodeModel();
-            $code = $verificationCodeModel->generateCode();
-            $this->sendEmail($userEmail, $code);
+    public function handleRequest() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $action = isset($_POST["action"]) ? $_POST["action"] : null;
+            switch($action) {
+                case 'verification':
+                    $this->sendVerificationCode();
+                    break;
+                default:
+                    break;
+            }
         }
+    }
+    private function sendVerificationCode() {
+        $userEmail = $_POST['email'];
+        if(isset($_SESSION['verification_code_expiration'])) {
+            if($_SESSION['verification_code_expiration'] > time()) {
+                date_default_timezone_set("Asia/Taipei");
+                $mytime = date('H:i:s', $_SESSION['verification_code_expiration']);
+                $this->sendOutput("請於 $mytime 後嘗試");
+            } else {
+                unset($_SESSION['verification_code_expiration']);
+                unset($_SESSION['verification_code']);
+            }
+        }
+        $verificationCodeModel = new VerificationCodeModel();
+        $code = $verificationCodeModel->generateCode();
+        $this->sendEmail($userEmail, $code);
+        $this->sendOutput("請去海大信箱接收驗證碼 記得在海大信箱選擇日期！");
     }
 
     private function sendEmail($userEmail, $code) {
@@ -36,7 +57,7 @@ class VerificationController extends BaseController{
             $mail->Body = "Your verification code is: $code";
             $mail->IsHTML(true); //設定郵件內容為HTML
             
-            $mail->addAddress($email);
+            $mail->addAddress($userEmail);
             if ($mail->send()) {
                 $_SESSION['verification_code'] = $code;
                 // 設置驗證碼的過期時間為5分鐘後的時間戳
@@ -46,4 +67,4 @@ class VerificationController extends BaseController{
     }
 }
 $test = new VerificationController();
-$test->sendVerificationCode();
+$test->handleRequest();
