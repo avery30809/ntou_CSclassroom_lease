@@ -1,17 +1,3 @@
-<?php
-    session_start();
-    //登入過就不會到這個畫面
-    if(isset($_SESSION["userID"])) header("Location: Home.html");
-
-    if (isset($_SESSION['verification_code']) && isset($_SESSION['verification_code_expiration'])) {
-        // 檢查是否過期
-        if (time() > $_SESSION['verification_code_expiration']) {
-            unset($_SESSION['verification_code']);
-            unset($_SESSION['verification_code_expiration']);
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +18,7 @@
                 <div class="email">
                     <input type="text" id="signup_account" class="email-text" name="account" placeholder="學號">
                     <span style="color: grey; position: relative; top: 27px;font-size: 50%;width: 100px">@mail.ntou.edu.tw</span>
-                    <button id="vertify" class="verification-button">驗證</button>
+                    <button id="vertify" class="verification-button" type="button">驗證</button>
                 </div>
                 <input type="text" id="signup_verification_code" name="verification_code" placeholder="驗證碼" required>
                 <input type="password" id="signup_pwd" name="pwd" placeholder="密碼" required>
