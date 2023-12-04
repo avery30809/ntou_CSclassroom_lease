@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理員介面</title>
     <link rel="stylesheet" href="../Assets/CSS/Admin interface.css">
+    <script src="../Assets/JS/Admin_interface.js"></script>
 </head>
 
 <body>
@@ -23,22 +24,22 @@
         <!-- 左下半部欄位 -->
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#" onclick="clearAll() , showBorrowRequest()">
+                <li><button class="menu-borrowRequest">
                         <i><img src="../image/request40.png" alt=""></i>
                         <span class="link-name">借用請求</span>
-                    </a></li>
-                <li><a href="#" onclick="clearAll() , showKeyrecord()">
+                    </button></li>
+                <li><button class="menu-keyRecord">
                         <i><img src="../image/keyrecord40.png" alt=""></i>
                         <span class="link-name">鑰匙借用紀錄</span>
-                    </a></li>
-                <li><a href="#" onclick="clearAll() , showClassSchedule()">
+                    </button></li>
+                <li><button class="menu-classSchedule">
                         <i><img src="../image/keyrecord40.png" alt=""></i>
                         <span class="link-name">課表排程</span>
-                    </a></li>
-                <li><a href="#" onclick="clearAll() , showClassroomInquiry()">
+                    </button></li>
+                <li><button class="menu-classroomInquiry">
                         <i><img src="../image/keyrecord40.png" alt=""></i>
                         <span class="link-name">教室查詢</span>
-                    </a></li>
+                    </button></li>
             </ul>
         </div>
     </nav>
@@ -58,20 +59,17 @@
 
                 <!-- 兩個按鈕選擇顯示立即還是預約 -->
                 <div class="conditions">
-                    <button class="immediately" id="immediately"
-                        onclick="clearAllForm(),openImmediatelyForm()">立即借用</button>
-                    <button class="reserve" id="reserve" onclick="clearAllForm(),openReserveForm()">預約借用</button>
+                    <button class="immediately" id="immediately">立即借用</button>
+                    <button class="reserve" id="reserve">預約借用</button>
                 </div>
 
 
                 <div class="immediatelyForm">
                     <div class="content">
                         <div class="title">
-                            <p>XXX教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg1"
-                                    onclick="immediatelyFormtoggleContent('immediatelyFormcontent1','immediatelyFormImg1')">
-                            </p>
+                            <p>XXX教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg1" alt="immediatelyFormImg2"></p>
                         </div>
-                        <div class="text" id="immediatelyFormcontent1">
+                        <div class="text" id="immediatelyFormContent1">
                             <p>艾利</p>
                             <p>借用目的 : 研究項目討論</p>
                             <div class="accounting">
@@ -87,11 +85,9 @@
 
                     <div class="content">
                         <div class="title">
-                            <p>XXX教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg2"
-                                    onclick="immediatelyFormtoggleContent('immediatelyFormcontent2','immediatelyFormImg2')">
-                            </p>
+                            <p>XXX教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg2" alt="immediatelyFormImg2"></p>
                         </div>
-                        <div class="text" id="immediatelyFormcontent2">
+                        <div class="text" id="immediatelyFormContent2">
                             <p>艾利</p>
                             <p>借用目的 : 研究項目討論</p>
                             <div class="accounting">
@@ -113,11 +109,9 @@
                 <div class="reserveForm">
                     <div class="content">
                         <div class="title">
-                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg1"
-                                    onclick="immediatelyFormtoggleContent('reserveFormcontent1','reserveFormImg1')">
-                            </p>
+                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg1" alt="reserveFormImg1"> </p>
                         </div>
-                        <div class="text" id="reserveFormcontent1">
+                        <div class="text" id="reserveFormContent1">
                             <p>艾利</p>
                             <p>借用目的 : 研究項目討論</p>
                             <div class="accounting">
@@ -132,11 +126,9 @@
                     </div>
                     <div class="content">
                         <div class="title">
-                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg2"
-                                    onclick="immediatelyFormtoggleContent('reserveFormcontent2','reserveFormImg2')">
-                            </p>
+                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg2" alt="reserveFormImg2"></p>
                         </div>
-                        <div class="text" id="reserveFormcontent2">
+                        <div class="text" id="reserveFormContent2">
                             <p>艾利</p>
                             <p>借用目的 : 研究項目討論</p>
                             <div class="accounting">
@@ -151,11 +143,9 @@
                     </div>
                     <div class="content">
                         <div class="title">
-                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg3"
-                                    onclick="immediatelyFormtoggleContent('reserveFormcontent3','reserveFormImg3')">
-                            </p>
+                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg3" alt="reserveFormImg3"></p>
                         </div>
-                        <div class="text" id="reserveFormcontent3">
+                        <div class="text" id="reserveFormContent3">
                             <p>艾利</p>
                             <p>借用目的 : 研究項目討論</p>
                             <div class="accounting">
@@ -171,8 +161,8 @@
                 </div>
             </div>
             <!-- 鑰匙借用紀錄 -->
-            <div class="keyrecord" id="keyrecord">
-                <div class="keyrecordTitle">
+            <div class="keyRecord" id="keyRecord">
+                <div class="keyRecordTitle">
                     <span>借用者</span>
                     <span>借用時間</span>
                     <span>預計歸還時間</span>
@@ -180,7 +170,7 @@
 
                 </div>
 
-                <div class="keyrecordContent">
+                <div class="keyRecordContent">
                     <span>艾利</span>
                     <span>4.PM</span>
                     <span>5.PM</span>
@@ -193,8 +183,8 @@
 
                 <!-- 兩個按鈕選擇顯示快速新增還是課表新增 -->
                 <div class="classScheduleConditions">
-                    <button class="fastAdd" id="fastAdd" onclick="clearAllForm(),openFastAddForm()">快速新增</button>
-                    <button class="classAdd" id="classAdd" onclick="clearAllForm(),openClassAddForm()">課表新增</button>
+                    <button class="fastAdd" id="fastAdd">快速新增</button>
+                    <button class="classAdd" id="classAdd">課表新增</button>
                 </div>
 
                 <!-- 快速新增 -->
@@ -430,13 +420,13 @@
             </div>
 
             <!-- 教室查詢 -->
-            <div class="ClassroomInquiry" id="ClassroomInquiry">
-                <div class="ClassroomInquiryTitle">
+            <div class="classroomInquiry" id="classroomInquiry">
+                <div class="classroomInquiryTitle">
                     <h1>找教室</h1>
 
                 </div>
 
-                <div class="ClassroomInquiryContent">
+                <div class="classroomInquiryContent">
                     <span>教室名稱: <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱"
                             list="classroomNameList"></span>
                     <datalist id="classroomNameList"></datalist>
@@ -450,147 +440,6 @@
         </div>
     </section>
 
-    <script>
-
-        fetch("獲取教室名稱.php", { method: 'POST' })
-            .then(response => response.json())
-            .then(datas => {
-                datas.forEach((data) => {
-                    allClassroomName.push(data[0]);
-                    let room = document.createElement("option")
-                    room.innerHTML = data[0];
-                    document.getElementById("classroomNameList").appendChild(room);
-                });
-            });
-
-
-        const body = document.querySelector("body"),
-            sidebar = body.querySelector("nav"),
-            leftArrow = document.getElementById("leftArrow");
-        sidebarToggle = body.querySelector(".sidebar-toggle");
-
-        sidebarToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("close");
-            if (sidebar.classList.contains("close")) {
-                localStorage.setItem("status", "close");
-                leftArrow.classList.add("show");
-            } else {
-                localStorage.setItem("status", "open");
-                leftArrow.classList.remove("show");
-            }
-        })
-
-
-        // 當點擊左側選當後在右側顯示
-        let borrowRequest = document.getElementById("borrowRequest");
-        let keyrecord = document.getElementById("keyrecord");
-        let classSchedule = document.getElementById("classSchedule");
-        let ClassroomInquiry = document.getElementById("ClassroomInquiry");
-
-
-        function clearAll() {
-            borrowRequest.classList.remove("show");
-            keyrecord.classList.remove("show");
-            classSchedule.classList.remove("show");
-            ClassroomInquiry.classList.remove("show");
-        }
-
-        function showBorrowRequest() {
-            borrowRequest.classList.add("show");
-
-        }
-        function showKeyrecord() {
-            keyrecord.classList.add("show");
-        }
-
-        function showClassSchedule() {
-            classSchedule.classList.add("show");
-        }
-
-        function showClassroomInquiry() {
-            ClassroomInquiry.classList.add("show");
-        }
-        // 用按鈕選擇條件清單
-
-        //-----點擊按鈕後改變顏色
-        let immediatelyButton = document.querySelector(".immediately");
-        let reserveButton = document.querySelector(".reserve");
-
-        //-----點擊按鈕後顯示多個清單
-        //// 1.借用請求
-        let immediatelyForm = document.querySelector(".immediatelyForm");
-        let reserveForm = document.querySelector(".reserveForm");
-
-        //// 2. 課表排程
-        let fastAddForm = document.querySelector(".fastAddForm");
-        let classAddForm = document.querySelector(".classAddForm");
-
-
-        //-----點擊箭頭後顯示清單內容(1.內容,2.圖片)
-        let immediatelyFormBody = document.getElementById("immediatelyFormcontent");
-        let immediatelyFormImage = document.getElementById("immediatelyFormImg");
-
-        let reserveFormBody = document.getElementById("reserveFormcontent");
-        let reserveFormImage = document.getElementById("reserveFormImg");
-
-        ///////////////////////////////////////////////////////////////////////////////////
-        function clearAllForm() {
-            //// 1.借用請求
-            immediatelyButton.classList.remove("show");
-            reserveButton.classList.remove("show");
-
-            immediatelyForm.classList.remove("show");
-            reserveForm.classList.remove("show");
-
-            //// 2. 課表排程
-            fastAddForm.classList.remove("show");
-            classAddForm.classList.remove("show");
-
-
-        }
-
-        //// 1.借用請求
-        function openImmediatelyForm() {
-            immediatelyButton.classList.add("show");
-            immediatelyForm.classList.add("show");
-        }
-
-        function openReserveForm() {
-            reserveButton.classList.add("show");
-            reserveForm.classList.add("show");
-        }
-
-        //// 2. 課表排程
-        function openFastAddForm() {
-
-            fastAddForm.classList.add("show");
-        }
-        function openClassAddForm() {
-            classAddForm.classList.add("show");
-        }
-        //點箭頭控制清單開關
-        // function openImmediatelyFormContent() {
-        //     immediatelyFormBody.classList.toggle("show");
-        //     immediatelyFormImage.classList.toggle("show");
-        // }
-        // function openReserveFormContent() {
-        //     reserveFormBody.classList.toggle("show");
-        //     reserveFormImage.classList.toggle("show");
-        // }
-        ////////////////////////////////////////////////////////////////////////////////////
-        function immediatelyFormtoggleContent(immediatelyFormBodyId, immediatelyFormImageId) {
-            let immediatelyFormBody = document.getElementById(immediatelyFormBodyId);
-            let immediatelyFormImage = document.getElementById(immediatelyFormImageId);
-            immediatelyFormBody.classList.toggle("show");
-            immediatelyFormImage.classList.toggle("show");
-        }
-        function ReserveFormtoggleContent(ReserveFormBodyId, ReserveFormImageId) {
-            let ReserveFormBody = document.getElementById(ReserveFormBodyId);
-            let ReserveFormImage = document.getElementById(ReserveFormImageId);
-            ReserveFormBody.classList.toggle("show");
-            ReserveFormImage.classList.toggle("show");
-        }
-    </script>
 </body>
 
 </html>

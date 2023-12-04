@@ -72,16 +72,22 @@ nav .menu-items {
     /* border: solid; */
 }
 
+.menu-items button {
+    border: none;
+    cursor: pointer;
+    width: 221px;
+}
+
 .menu-items li {
     list-style: none;
 }
 
-.menu-items li a:hover {
+.menu-items li button:hover {
     background-color: white;
     border-radius: 20px;
 }
 
-.menu-items li a {
+.menu-items li button {
     display: flex;
     align-items: center;
     height: 60px;
@@ -89,7 +95,7 @@ nav .menu-items {
     position: relative;
 }
 
-.nav-links li a:hover:before {
+.nav-links li button:hover:before {
     content: "";
     position: absolute;
     left: -7px;
@@ -99,12 +105,12 @@ nav .menu-items {
     background-color: rgb(255, 200, 0);
 }
 
-.nav-links li a:hover i,
-.nav-links li a:hover .link-name {
+.nav-links li button:hover i,
+.nav-links li button:hover .link-name {
     color: rgb(255, 200, 0);
 }
 
-.menu-items li a i {
+.menu-items li button i {
     font-size: 24px;
     min-width: 45px;
     height: 100%;
@@ -114,7 +120,7 @@ nav .menu-items {
     color: #70707071;
 }
 
-.menu-items li a .link-name {
+.menu-items li button .link-name {
     padding-left: 10px;
     font-size: 18px;
     font-weight: 600;
@@ -123,7 +129,7 @@ nav .menu-items {
 }
 
 
-nav.close li a .link-name {
+nav.close li button .link-name {
     opacity: 0;
     pointer-events: none;
 }
@@ -347,15 +353,15 @@ nav.close~.board .top {
 }
 
 
-.keyrecord {
+.keyRecord {
     display: none;
 }
 
-.keyrecord.show {
+.keyRecord.show {
     display: block;
 }
 
-.keyrecordTitle {
+.keyRecordTitle {
     display: flex;
     justify-content: space-between;
     font-size: 30px !important;
@@ -363,7 +369,7 @@ nav.close~.board .top {
     padding-bottom: 10px;
 }
 
-.keyrecordContent {
+.keyRecordContent {
     display: flex;
     margin-top: 20px;
     justify-content: space-between;
@@ -371,7 +377,7 @@ nav.close~.board .top {
     /* border: solid; */
 }
 
-.keyrecordContent:hover {
+.keyRecordContent:hover {
     background-color: red;
 }
 
@@ -455,28 +461,28 @@ nav.close~.board .top {
     margin-left: 10px;
 }
 
-.ClassroomInquiry {
+.classroomInquiry {
     display: none;
 }
 
-.ClassroomInquiry.show {
+.classroomInquiry.show {
     display: flex;
     flex-direction: column;
 }
 
-.ClassroomInquiryTitle h1{
+.classroomInquiryTitle h1{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.ClassroomInquiryContent {
+.classroomInquiryContent {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
     font-size: 25px !important;
 }
 
-.ClassroomInquiryContent button{
+.classroomInquiryContent button{
     width: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
