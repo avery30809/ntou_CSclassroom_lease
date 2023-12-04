@@ -21,3 +21,5 @@ class ClassroomController extends BaseController{
         $this->sendOutput(json_encode($classroomsName));
     }
 }
+$test = new ClassroomController();
+$test->handleRequest();
