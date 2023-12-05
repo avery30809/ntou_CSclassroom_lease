@@ -292,7 +292,7 @@
 
 .selectTime::before {
     position: absolute;
-    background-image: url("../image/dropdownIcon.png");
+    background-image: url("../../image/dropdownIcon.png");
     background-size: 25px 25px;
     pointer-events: none;
     top: 2px;
