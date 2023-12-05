@@ -14,6 +14,7 @@
             <select id="place"></select><br>
             <label>開始小時: </label>
             <select id="hour">
+                <option>8</option>
                 <option>9</option>
                 <option>10</option>
                 <option>11</option>
@@ -59,17 +60,24 @@
             },false);
 
             let classrooms = [];
-
-            fetch("獲取教室名稱.php", {method: 'POST'})
-            .then(response=>response.json())
-            .then(datas=>{
-                datas.forEach((data)=>{
-                    let nop = document.createElement("option");
-                    nop.innerHTML = data[0];
-                    classrooms.push(data[0]);
-                    document.getElementById("place").appendChild(nop);
+            getAllClassroomName();
+            function getAllClassroomName() {
+                let testForm = new FormData();
+                testForm.append("action", "getAllClassroomName");
+                fetch("HTMLandPHP/Controller/Api/ClassroomController.php", {
+                    method: 'POST',
+                    body: testForm
                 })
-            });
+                .then(response=>response.json())
+                .then(datas=>{
+                    datas.forEach((data)=>{
+                        let nop = document.createElement("option");
+                        nop.innerHTML = data[0];
+                        classrooms.push(data[0]);
+                        document.getElementById("place").appendChild(nop);
+                    })
+                });
+            }
 
             insertForm.addEventListener("submit", (event)=>{
                 event.preventDefault();
@@ -111,7 +119,7 @@
                 event.preventDefault();
                 const form = new FormData();
                 form.append("date", searchTimeBox.value);
-                fetch("當日所有教室使用情形.php", {
+                fetch("/當日所有教室使用情形.php", {
                     method: 'POST',
                     body: form
                 })
