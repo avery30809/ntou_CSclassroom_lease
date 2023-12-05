@@ -98,9 +98,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 room.innerHTML = data[0];
                 document.getElementById("classroomNameList").appendChild(room);
             });
+            getDateClassCondition();
         });
     }
-    getDateClassCondition();
     function getDateClassCondition() {
         let testForm = new FormData();
         testForm.append("action", "getCondition");
