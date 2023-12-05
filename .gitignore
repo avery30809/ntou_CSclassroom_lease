@@ -1,2 +1,4 @@
 HTMLandPHP/inc/config.php
 HTMLandPHP/web.config
+HTMLandPHP/database/*
+HTMLandPHP/sendemail/*
