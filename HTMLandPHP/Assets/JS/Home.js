@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         //已登入
         if(data.error === undefined) {
             user = data;
@@ -73,7 +72,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function searchDate() {
         const formdata = new FormData();
         formdata.append("date", selectedDate);
-        formdata.append("action", "getUserProfile");
+        formdata.append("action", "searchDate");
 
         fetch("../../Controller/Api/UserController.php", {
             method: 'POST',
