@@ -26,36 +26,47 @@ document.addEventListener("DOMContentLoaded", ()=>{
         email: "",
         phone: null
     };
-    fetch("../../Controller/APi/UserController.php", {
-        method: 'POST',
-        body: JSON.stringify({action: "getUserProfile"})
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.error === undefined) {
-            user = data;
-            document.getElementById("login-signup").innerHTML = "<img id='usericon'>" + user.username;
-            document.getElementById("usericon").src = image.usericon.src;
-            document.getElementById("login-signup").addEventListener("click", function (event) {
-                window.location.href = "../../Pages/使用者介面.html";
-            }, false);
-        }
-        else {
-            //沒有登入就回首頁
-            window.alert("請先登入！");
-            window.location.href = "../../Pages/Home.html";
-        }
-    });
+    getUserProfile();
+    function getUserProfile() {
+        //獲取使用者身分
+        let testForm = new FormData();
+        testForm.append("action", "getUserProfile");
+        fetch("../../Controller/APi/UserController.php", {
+            method: 'POST',
+            body: testForm
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.error === undefined) {
+                user = data;
+                document.getElementById("login-signup").innerHTML = "<img id='usericon'>" + user.username;
+                document.getElementById("usericon").src = image.usericon.src;
+                document.getElementById("login-signup").addEventListener("click", function (event) {
+                    window.location.href = "../../Pages/使用者介面.html";
+                }, false);
+            }
+            else {
+                //沒有登入就回首頁
+                window.alert("請先登入！");
+                window.location.href = "../../Pages/Home.html";
+            }
+        });
+    }
 
-    // 獲取查詢的日期值
-    fetch("../../Controller/Api/UserController.php", {
-        method: 'POST',
-        body: JSON.stringify({action: "handleSearchDate"})
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("selectedDatePlaceholder").textContent = data.date + " 教室狀態查詢結果";
-    });
+    getSearchDate();
+    function getSearchDate() {
+        // 獲取查詢的日期值
+        let testForm = new FormData();
+        testForm.append("action", "searchDate")
+        fetch("../../Controller/Api/UserController.php", {
+            method: 'POST',
+            body: testForm
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("selectedDatePlaceholder").textContent = data.date + " 教室狀態查詢結果";
+        });
+    }
     // 大部分功能
     const optionMenu = document.querySelector(".select-menu"),
         selectBtn = optionMenu.querySelector(".select-btn"),
@@ -68,11 +79,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
     //以後會被資料庫所取代
     let allClassroomName = [];
     let activities = {};
-    const startTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-        endTime = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
-        condition = [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1];
+    const startTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
+        endTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
 
-    fetch("獲取教室名稱.php", {method: 'POST'})
+    getAllClassroomName();
+    function getAllClassroomName() {
+        let testForm = new FormData();
+        testForm.append("action", "getAllClassroomName")
+        fetch("../../Controller/Api/ClassroomController.php", {
+            method: 'POST',
+            body: testForm
+        })
         .then(response => response.json())
         .then(datas => {
             datas.forEach((data) => {
@@ -82,15 +99,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 document.getElementById("classroomNameList").appendChild(room);
             });
         });
-
-    fetch("當日所有教室使用情形.php", {method: 'POST'})
-    .then(response => response.json())
-    .then(datas => {
-        allClassroomName.forEach((room) => {
-            activities[room] = datas[room];
+    }
+    getDateClassCondition();
+    function getDateClassCondition() {
+        let testForm = new FormData();
+        testForm.append("action", "getCondition");
+        fetch("../../Controller/Api/ClassroomController.php", {
+            method: 'POST',
+            body: testForm
+        })
+        .then(response => response.json())
+        .then(datas => {
+            allClassroomName.forEach((room) => {
+                activities[room] = datas[room];
+            });
+            showDefault();
         });
-        showDefault();
-    });
+    }
 
     //計算借用情況
     function roomCondition(room) {
