@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>查詢結果</title>
+    <link rel="stylesheet" href="CSS/index.css">
+</head>
+
+<body>
+
+    <!-- <form action="獲取課表.php" method="post" target="nm_iframe"> -->
+    <form action="獲取課表.php" method="post">
+
+        <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱" list="classroomNameList" name="roomname">
+        <datalist id="classroomNameList"></datalist>
+        <input type="submit" name="submit" value="新增" class="go">
+
+    </form>
+    <!-- <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe> -->
+    <h1 id="ttt"></h1>
+    <div class="classScheduleContent">
+        <table border="1">
+            <tr class="">
+                <td></td>
+                <td id="Monday" class="Monday"></td>
+                <td id="Tuesday"></td>
+                <td id="Wednesday"></td>
+                <td id="Thursday"></td>
+                <td id="Friday"></td>
+                <td id="Saturday"></td>
+                <td id="Sunday"></td>
+            <tr>
+            <tr>
+                <td>第一節</td>
+                <td id="Msection1"></td>
+                <td id="TUsection1"></td>
+                <td id="Wsection1"></td>
+                <td id="THsection1"></td>
+                <td id="Fsection1"></td>
+                <td id="SAsection1"></td>
+                <td id="SUsection1"></td>
+
+            <tr>
+            <tr>
+                <td>第二節</td>
+                <td id="Msection2"></td>
+                <td id="TUsection2"></td>
+                <td id="Wsection2"></td>
+                <td id="THsection2"></td>
+                <td id="Fsection2"></td>
+                <td id="SAsection2"></td>
+                <td id="SUsection2"></td>
+            <tr>
+            <tr>
+                <td>第三節</td>
+                <td id="Msection3"></td>
+                <td id="TUsection3"></td>
+                <td id="Wsection3"></td>
+                <td id="THsection3"></td>
+                <td id="Fsection3"></td>
+                <td id="SAsection3"></td>
+                <td id="SUsection3"></td>
+            <tr>
+            <tr>
+                <td>第四節</td>
+                <td id="Msection4"></td>
+                <td id="TUsection4"></td>
+                <td id="Wsection4"></td>
+                <td id="THsection4"></td>
+                <td id="Fsection4"></td>
+                <td id="SAsection4"></td>
+                <td id="SUsection4"></td>
+            <tr>
+            <tr>
+                <td>第五節</td>
+                <td id="Msection5"></td>
+                <td id="TUsection5"></td>
+                <td id="Wsection5"></td>
+                <td id="THsection5"></td>
+                <td id="Fsection5"></td>
+                <td id="SAsection5"></td>
+                <td id="SUsection5"></td>
+            <tr>
+            <tr>
+                <td>第六節</td>
+                <td id="Msection6"></td>
+                <td id="TUsection6"></td>
+                <td id="Wsection6"></td>
+                <td id="THsection6"></td>
+                <td id="Fsection6"></td>
+                <td id="SAsection6"></td>
+                <td id="SUsection6"></td>
+            <tr>
+            <tr>
+                <td>第七節</td>
+                <td id="Msection7"></td>
+                <td id="TUsection7"></td>
+                <td id="Wsection7"></td>
+                <td id="THsection7"></td>
+                <td id="Fsection7"></td>
+                <td id="SAsection7"></td>
+                <td id="SUsection7"></td>
+            <tr>
+            <tr>
+                <td>第八節</td>
+                <td id="Msection8"></td>
+                <td id="TUsection8"></td>
+                <td id="Wsection8"></td>
+                <td id="THsection8"></td>
+                <td id="Fsection8"></td>
+                <td id="SAsection8"></td>
+                <td id="SUsection8"></td>
+            <tr>
+            <tr>
+                <td>第九節</td>
+                <td id="Msection9"></td>
+                <td id="TUsection9"></td>
+                <td id="Wsection9"></td>
+                <td id="THsection9"></td>
+                <td id="Fsection9"></td>
+                <td id="SAsection9"></td>
+                <td id="SUsection9"></td>
+            <tr>
+        </table>
+
+        <h1 id="abc"></h1>
+    </div>
+
+    <script>
+        let allClassroomName = [];
+
+        const inputClassRoomName = document.querySelector('.inputClassRoomName');
+        const datalist = document.getElementById('classroomNameList');
+
+        fetch("獲取教室名稱.php", {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(datas => {
+                datas.forEach((data) => {
+                    allClassroomName.push(data[0]);
+                    let room = document.createElement("option")
+                    room.innerHTML = data[0];
+                    document.getElementById("classroomNameList").appendChild(room);
+                });
+            });
+
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止表單的默認提交行為
+
+            // 獲取表單數據
+            const formData = new FormData(event.target);
+
+            // 發送 AJAX 請求
+            fetch('獲取課表.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // 這裡處理返回的數據
+                    for (let i = 0; i < 7; i++) {
+                        for (let j = 0; j < 7; j++) {
+                            const array = [
+                                ["Msection1", "Msection2", "Msection3", "Msection4", "Msection5", "Msection6", "Msection7", "Msection8", "Msection9"],
+                                ["TUsection1", "TUsection2", "TUsection3", "TUsection4", "TUsection5", "TUsection6", "TUsection7", "TUsection8", "TUsection9"],
+                                ["Wsection1", "Wsection2", "Wsection3", "Wsection4", "Wsection5", "Wsection6", "Wsection7", "Wsection8", "Wsection9"],
+                                ["THsection1", "THsection2", "THsection3", "THsection4", "THsection5", "THsection6", "THsection7", "THsection8", "THsection9"],
+                                ["Fsection1", "Fsection2", "Fsection3", "Fsection4", "Fsection5", "Fsection6", "Fsection7", "Fsection8", "Fsection9"],
+                                ["SAsection1", "SAsection2", "SAsection3", "SAsection4", "SAsection5", "SAsection6", "SAsection7", "SAsection8", "SAsection9"],
+                                ["SUsection1", "SUsection2", "SUsection3", "SUsection4", "SUsection5", "SUsection6", "SUsection7", "SUsection8", "SUsection9"]
+                            ]
+                            document.getElementById(array[i][j]).innerText = data[i][j + 1];
+
+                        }
+                    }
+
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+
+</html>
