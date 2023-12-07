@@ -102,12 +102,12 @@ nav .menu-items {
     height: 50px;
     width: 5px;
     /* border-radius: 50%; */
-    background-color: rgb(255, 200, 0);
+    background-color: rgb(255, 7, 7);
 }
 
 .nav-links li button:hover i,
 .nav-links li button:hover .link-name {
-    color: rgb(255, 200, 0);
+    color: rgb(255, 0, 0);
 }
 
 .menu-items li button i {
@@ -178,7 +178,7 @@ nav.close~.board .top {
 
 .top img {
     width: 40px;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
 }
 
 .leftArrow.show {
