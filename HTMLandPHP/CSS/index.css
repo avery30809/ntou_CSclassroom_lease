@@ -411,6 +411,15 @@
     /* 讓游標變成手指 */
 }
 
+/* 課表名稱(文字) */
+.CourseName {
+    width: 70px;
+    text-decoration: underline;
+    /*加底線*/
+    cursor: pointer;
+    /* 讓游標變成手指 */
+}
+
 /* 借用狀態Bar */
 .totalBar {
     /* 總共100 * 2.5(放大倍數) */
@@ -493,6 +502,81 @@
 }
 
 .popup .content .wrap {
+    width: 100%;
+    border-bottom: 1px solid #000;
+}
+
+.classroomState {
+    text-decoration: underline;
+    /*加底線*/
+    cursor: pointer;
+    /* 讓游標變成手指 */
+}
+
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 彈跳視窗 */
+
+/* 彈跳視窗的樣式(預設為關閉) */
+.popupCourse {
+    width: 600px;
+    /* max-height: 80%; */
+    /* 設定最大高度，超過部分會出現滾動條 */
+    overflow-y: auto;
+    /* 啟用垂直滾動條 */
+    display: none;
+    /* 初始時隱藏 */
+    background-color: white;
+    border-radius: 6px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0 30px 30px;
+    border: 2px solid #000;
+}
+
+.open-popupCourse {
+    display: block;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 關閉按鈕 */
+.popupCourse .close {
+    width: 50px;
+    height: 50px;
+    border: transparent;
+    background: transparent;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+}
+
+/* 關閉按鈕圖片 */
+.popupCourse .close img {
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+}
+
+.popupCourse h1 {
+    margin-top: 30px;
+}
+
+.popupCourse .content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.popupCourse span {
+    padding-top: 10px;
+}
+
+.popupCourse .content .wrap {
     width: 100%;
     border-bottom: 1px solid #000;
 }
