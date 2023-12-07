@@ -87,7 +87,7 @@ class UserController extends BaseController
     //註冊
     private function handleRegister() {
         //確認是否驗證過email
-        if(isset($_SESSION['verification_code'])) {
+        if(isset($_SESSION['verification_code']) && $_SESSION['verification_code']['id'] === $_POST['account']) {
             if($_SESSION['verification_code_expiration']<time()) {
                 $this->sendOutput("驗證碼過期 請重新認證");
                 return;
@@ -98,7 +98,7 @@ class UserController extends BaseController
             $password = $_POST["pwd"];
             $confirm_pwd = $_POST["confirm_pwd"];
             $email = "$account@mail.ntou.edu.tw";
-            if($verification_code != $_SESSION['verification_code']){
+            if($verification_code != $_SESSION['verification_code']['code']){
                 $this->sendOutput('驗證碼錯誤');
             }
             else if($password !== $confirm_pwd) {
