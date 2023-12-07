@@ -104,4 +104,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
             window.alert("請輸入學號");
         }
     });
+    //忘記密碼
+    document.getElementById("forgetPWD").addEventListener("click", ()=>{
+        //TODO
+    }, false);
 })
