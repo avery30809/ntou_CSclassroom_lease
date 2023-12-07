@@ -5,6 +5,12 @@
     font-family: 'Poppins', sans-serif;
 }
 
+button {
+    border: none;
+    cursor: pointer;
+    width: 221px;
+}
+
 body {
     min-height: 100vh;
     /* background-color: #96e1ff; */
@@ -18,9 +24,9 @@ nav {
     height: 100%;
     width: 250px;
     padding: 10px 14px;
-    background-color: rgba(210, 210, 210, 0.2);
+    background-color: #f2f1f1;
     border-right: 1px solid #e6e5e5;
-    text-shadow: 0px 15px 5px rgba(0,0,0,0.1),  10px 20px 5px rgba(0,0,0,0.04),-10px 20px 5px rgba(0,0,0,0.04);
+    text-shadow: 0px 15px 5px rgba(0, 0, 0, 0.1), 10px 20px 5px rgba(0, 0, 0, 0.04), -10px 20px 5px rgba(0, 0, 0, 0.04);
     transition: all 0.5s ease;
 }
 
@@ -34,8 +40,9 @@ nav .logo-name {
     align-items: center;
     margin-top: 10px;
     padding-bottom: 10px;
+    padding-left: 10px;
     border-bottom: solid;
-    
+
 }
 
 nav .logo-image {
@@ -45,13 +52,13 @@ nav .logo-image {
 }
 
 nav .logo-image img {
-    width: 40px;
+    width: 50px;
     object-fit: cover;
     border-radius: 50%;
 }
 
 nav .logo-name .logo_name {
-    font-size: 22px;
+    font-size: 30px;
     font-weight: 600;
     color: #000;
     margin-left: 14px;
@@ -76,12 +83,17 @@ nav .menu-items {
     list-style: none;
 }
 
-.menu-items li a:hover {
-    background-color: white;
+.menu-items li button {
+    background-color: #f2f1f1;
     border-radius: 20px;
 }
 
-.menu-items li a {
+.menu-items li button:hover {
+    background-color: rgba(215, 215, 215, 0.66);
+    border-radius: 20px;
+}
+
+.menu-items li button {
     display: flex;
     align-items: center;
     height: 60px;
@@ -89,22 +101,26 @@ nav .menu-items {
     position: relative;
 }
 
-.nav-links li a:hover:before {
+.nav-links li {
+    margin-top: 10px;
+}
+
+.nav-links li button:hover:before {
     content: "";
     position: absolute;
     left: -7px;
     height: 50px;
     width: 5px;
     /* border-radius: 50%; */
-    background-color: rgb(255, 200, 0);
+    background-color: rgb(255, 7, 7);
 }
 
-.nav-links li a:hover i,
-.nav-links li a:hover .link-name {
-    color: rgb(255, 200, 0);
+.nav-links li button:hover i,
+.nav-links li button:hover .link-name {
+    color: rgb(255, 0, 0);
 }
 
-.menu-items li a i {
+.menu-items li button i {
     font-size: 24px;
     min-width: 45px;
     height: 100%;
@@ -112,10 +128,11 @@ nav .menu-items {
     align-items: center;
     justify-content: center;
     color: #70707071;
+    margin-left: 5px;
 }
 
-.menu-items li a .link-name {
-    padding-left: 10px;
+.menu-items li button .link-name {
+    padding-left: 20px;
     font-size: 18px;
     font-weight: 600;
     color: #000000;
@@ -123,11 +140,22 @@ nav .menu-items {
 }
 
 
-nav.close li a .link-name {
+nav.close li button .link-name {
     opacity: 0;
     pointer-events: none;
 }
-/* 右下方欄位 */
+
+.menu-items .logout-mode {
+    padding-top: 10px;
+    border-top: 1px solid rgb(77, 63, 3);
+}
+
+
+.menu-items .logout-mode li button:hover {
+    background-color:rgba(91, 89, 89, 0.607) !important;
+}
+
+/* 右方欄位 */
 .board {
     position: relative;
     left: 250px;
@@ -136,6 +164,8 @@ nav.close li a .link-name {
     width: calc(100% - 250px);
     padding: 10px 14px;
     transition: all 0.5s ease;
+    /* border: solid; */
+
 }
 
 nav.close~.board {
@@ -144,39 +174,43 @@ nav.close~.board {
 }
 
 /* 右上方欄位 */
-.board .top {
-    position: fixed;
-    top: 0;
-    left: 250px;
+.board-top {
+    /* margin-top: 15px; */
+    height: 7vh;
     display: flex;
-    width: calc(100% - 250px);
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    background-color: rgb(255, 255, 255);
-    transition: all 0.5s ease;
-    z-index: 10;
+    /* border: solid; */
 
 }
 
-nav.close~.board .top {
-    left: 73px;
-    width: calc(100% - 73px);
-}
 
-.board .top .sidebar-toggle {
-    font-size: 26px;
-    color: #000;
+.board-top img {
+    max-width: 100%;
+    /* 圖片寬度不超過容器的寬度 */
+    max-height: 100%;
+    /* 圖片高度不超過容器的高度 */
+    height: auto;
+    /* 保持原始比例 */
+    width: auto;
+    /* 保持原始比例 */
+    margin: 0;
+    padding: 0;
     cursor: pointer;
 }
 
-.top img {
-    width: 40px;
-    border-radius: 50%;
+.board-top a {
+    margin-left: auto;
+    text-decoration: none;
 }
 
 .leftArrow.show {
     transform: rotate(180deg);
+}
+
+/* 右下方欄位 */
+.board-content {
+    margin-top: 20px;
+    /* border: solid; */
+
 }
 
 
@@ -341,10 +375,6 @@ nav.close~.board .top {
 
 
 /* 鑰匙借用紀錄-------------------------------------------- */
-.board-content {
-    margin-top: 100px;
-    margin-left: 10px;
-}
 
 
 .keyrecord {
@@ -376,9 +406,6 @@ nav.close~.board .top {
 }
 
 /* 課表排程-------------------------------------------- */
-.board-content {
-    margin-left: 10px;
-}
 
 .classSchedule {
     display: none;
@@ -450,10 +477,6 @@ nav.close~.board .top {
 }
 
 /* 教室搜尋-------------------------------------------- */
-.board-content {
-    margin-top: 100px;
-    margin-left: 10px;
-}
 
 .ClassroomInquiry {
     display: none;

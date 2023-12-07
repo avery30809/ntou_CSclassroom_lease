@@ -13,41 +13,51 @@
         <!-- 左上半部欄位  -->
         <div class="logo-name">
             <div class="logo-image">
-                <img src="image/close.png" alt="">
+                <img src="image/usericon.png" alt="">
             </div>
 
-            <span class="logo_name">Admin</span>
+            <span class="logo_name"></span>
 
         </div>
 
         <!-- 左下半部欄位 -->
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#" onclick="clearAll() , showBorrowRequest()">
+                <li><button onclick="clearAll() , showBorrowRequest()">
                         <i><img src="image/request40.png" alt=""></i>
                         <span class="link-name">借用請求</span>
-                    </a></li>
-                <li><a href="#" onclick="clearAll() , showKeyrecord()">
+                        </a></li>
+                <li><button onclick="clearAll() , showKeyrecord()">
                         <i><img src="image/keyrecord40.png" alt=""></i>
                         <span class="link-name">鑰匙借用紀錄</span>
-                    </a></li>
-                <li><a href="#" onclick="clearAll() , showClassSchedule()">
+                        </a></li>
+                <li><button onclick="clearAll() , showClassSchedule()">
                         <i><img src="image/keyrecord40.png" alt=""></i>
                         <span class="link-name">課表排程</span>
-                    </a></li>
-                <li><a href="#" onclick="clearAll() , showClassroomInquiry()">
+                        </a></li>
+                <li><button onclick="clearAll() , showClassroomInquiry()">
                         <i><img src="image/keyrecord40.png" alt=""></i>
                         <span class="link-name">教室查詢</span>
-                    </a></li>
+                        </a></li>
             </ul>
+
+            <ul class="logout-mode">
+                <li class="logout">
+                    <button id="logoutBtn">
+                        <i><img src="image/logoutIcon.png" alt=""></i>
+                        <span class="link-name">登出</span>
+                    </button>
+                </li>
+            </ul>
+
         </div>
     </nav>
 
     <section class="board">
         <!-- 右上半部欄位  -->
-        <div class="top">
+        <div class="board-top">
             <i class="sidebar-toggle"><img src="image/left.png" class="leftArrow" id="leftArrow"></i>
-            <img src="image/user.jpg" alt="">
+            <a href="Home.html"><img src="image/home.png"></a>
 
         </div>
 
@@ -442,7 +452,7 @@
                     <datalist id="classroomNameList"></datalist>
 
                     <button>提交</button>
-                    
+
                     <span>選擇日期: <input type="date" id="datePicker" name="datePicker"></span>
                     <button>提交</button>
                 </div>
@@ -451,6 +461,8 @@
     </section>
 
     <script>
+        const logoutButton = document.getElementById("logoutBtn");
+
 
         fetch("獲取教室名稱.php", { method: 'POST' })
             .then(response => response.json())
@@ -590,6 +602,11 @@
             ReserveFormBody.classList.toggle("show");
             ReserveFormImage.classList.toggle("show");
         }
+
+        logoutButton.addEventListener("click", () => {
+            fetch("使用者登出.php", { method: 'POST' });
+            window.location.href = "Home.html";
+        }, false);
     </script>
 </body>
 
