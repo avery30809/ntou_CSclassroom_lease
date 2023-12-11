@@ -66,7 +66,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
     });
 
     function updateLabel() {
-        selectedDate = datePicker.value;
+        //if(dateToString(now) > datePicker.value || add30(now) < datePicker.value )
+            //window.location.href = "https://www.youtube.com/watch?v=zL19uMsnpSU";
+        //else 
+            selectedDate = datePicker.value;
     }
 
     function searchDate() {
