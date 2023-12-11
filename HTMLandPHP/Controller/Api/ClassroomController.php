@@ -17,6 +17,11 @@ class ClassroomController extends BaseController{
                 case 'getCondition':
                     $this->getDateClassCondition();
                     break;
+                case 'submitSelectedSlot':
+                    $this->handleSubmitSelectedSlot();
+                    break;
+                case 'getWeeklySchedule':
+                    $this->getWeeklySchedule();
                 default:
                     break;
             }
@@ -34,8 +39,8 @@ class ClassroomController extends BaseController{
         $getRooms = $this->classroomModel->getAllClassroomName();
         $activities = [];
         foreach($getRooms as $room) {
-            // 每個教室有12個時間段 紀錄該時間段的活動名稱
-            $activities["$room[0]"] = ["","","","","","","","","","","",""];
+            // 每個教室有9個時間段 紀錄該時間段的活動名稱
+            $activities["$room[0]"] = ["","","","","","","","",""];
         }
 
         // 查詢指定日期的所有預定活動
@@ -52,6 +57,36 @@ class ClassroomController extends BaseController{
             }
         }
         $this->sendOutput(json_encode($activities));
+    }
+    private function getWeeklySchedule() {
+        $roomName = $_POST['roomName'];
+        $selectDay = new DateTime($_SESSION['date']);
+
+        // 本周星期一日期
+        $thisMonday = clone $selectDay;
+        $thisMonday->modify('this week');
+
+        // 本周星期日日期
+        $thisSunday = clone $selectDay;
+        $thisSunday->modify('this week +6 days');
+
+        $currentDate = clone $thisMonday;
+        $result = [];
+        while ($currentDate <= $thisSunday) {
+            array_push($result, $this->classroomModel->searchSingleRoomActivities($roomName, $currentDate->format("Y-m-d")));
+            $currentDate->modify('+1 day');
+        }
+        $this->sendOutput(json_encode($result));
+    }
+    private function handleSubmitSelectedSlot() {
+        if(isset($_POST['state']))
+            $this->sendOutput(json_encode($_POST['state']));
+        else {
+            $obj = [
+                'error' => 'empty select'
+            ];
+            $this->sendOutput(json_encode($obj));
+        }
     }
 }
 $test = new ClassroomController();

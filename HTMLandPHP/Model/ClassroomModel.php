@@ -12,4 +12,8 @@ class ClassroomModel extends Database{
     public function insertCourse() {
         
     }
+    public function searchSingleRoomActivities($roomName, $date) {
+        $result = $this->query("SELECT HourOfDay, Activity FROM roomschedule WHERE RoomName = ? AND DateOfDay = ?", [$roomName, $date]);
+        return $result;
+    }
 }
