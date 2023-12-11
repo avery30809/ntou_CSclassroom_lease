@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     //以後會被資料庫所取代
     let allClassroomName = [];
     let activities = {};
-    const startTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-        endTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
+    const startTime = ["第一節", "第二節", "第三節", "第四節", "第五節", "第六節", "第七節", "第八節", "第九節"],
+        endTime = ["第一節", "第二節", "第三節", "第四節", "第五節", "第六節", "第七節", "第八節", "第九節後"];
 
     getAllClassroomName();
     function getAllClassroomName() {
@@ -149,14 +149,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
     //加入點擊借用的監聽器
     function addBorrowListener() {
-        let elements = document.getElementsByClassName("borrow");
+        let elements = document.querySelectorAll(".borrow");
         for(let i=0; i<elements.length; i++) {
             elements[i].addEventListener("click", showPopupClassroom, false);
         }
     }
     //加入點擊教室名稱的監聽器
     function addNameListenter() {
-        let elements = document.getElementsByClassName("classroomName");
+        let elements = document.querySelectorAll(".classroomName");
         for(let i=0; i<elements.length; i++) {
             elements[i].addEventListener("click", showPopupCourse, false);
         }
@@ -321,72 +321,60 @@ document.addEventListener("DOMContentLoaded", ()=>{
         dropdownStart.classList.remove("active");
         dropdownEnd.classList.remove("active");
         popup.style.width = "600px";
-        let roomName = event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.getElementsByClassName("classroomName")[0].innerHTML;
+        let roomName = event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.querySelector(".classroomName").innerHTML;
         document.getElementById("popupName").innerHTML = roomName;
-        document.querySelector(".content").innerHTML = `
-        <span>起始時間</span><span>結束時間</span><span>借用狀態</span>
-        <div class="wrap"></div>
-        <span>8 a.m.</span><span>9 a.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>9 a.m.</span><span>10 a.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>10 a.m.</span><span>11 a.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>11 a.m.</span><span>12 p.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>12 p.m.</span><span>13 p.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>13 p.m.</span><span>14 p.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>14 p.m.</span><span>15 p.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>15 p.m.</span><span>16 p.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>16 p.m.</span><span>17 p.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>17 p.m.</span><span>18 p.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>18 p.m.</span><span>19 p.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>
-        <span>19 p.m.</span><span>20 p.m.</span>
-        <span><span
-            class="classroomState"></span></span>
-        <div class="wrap"></div>`;
-        let states = document.getElementsByClassName("classroomState");
-        for(let i=0; i<states.length; i++) {
-            if(activities[roomName][i] == "") {
-                states[i].innerHTML = "未借用";
-                states[i].classList.remove("borrowed");
-                states[i].addEventListener("click", applicationForm, false)
+        document.querySelector(".content").innerHTML = `<form id="borrowForm"></form>`;
+        addBorrowForm(roomName);
+
+        document.getElementById("borrowForm").addEventListener("submit", (event)=>{
+            event.preventDefault();
+            const myForm = new FormData(document.getElementById("borrowForm"));
+            myForm.append("action", "submitSelectedSlot");
+            fetch("../../Controller/Api/ClassroomController.php", {
+                method: 'POST',
+                body: myForm
+            })
+            .then(response=>response.json())
+            .then(data => {
+                console.log(data);
+                // TODO
+            })
+        }, false);
+
+        let disabledElements = document.querySelectorAll(".classroomState");
+        disabledElements.forEach((element)=>{
+            if(element.getAttribute("disabled") !== null) {
+                element.nextElementSibling.addEventListener("click", ()=>{
+                    element.setAttribute("disabled", null);
+                    element.checked = false;
+                    window.alert("不可借用此時段！");
+                }, false);
             }
             else {
-                states[i].innerHTML = activities[roomName][i];
-                states[i].classList.add("borrowed");
-                states[i].removeEventListener("click", applicationForm, false);
+                element.nextElementSibling.addEventListener("click", ()=>{
+                    element.removeAttribute("disabled");
+                }, false);
             }
+        })
+    }
+    // 加入popup表單的內容
+    function addBorrowForm(roomName) {
+        let timeList = ["08:20～09:10", "09:20～10:10", "10:20～11:10", "11:15～12:05", "12:10～13:00", "13:10～14:00", "14:10～15:00", "15:10～16:00", "16:10～"];
+        let content = `<span>節次</span><span>時間段</span><span>借用狀態</span>
+        <div class="wrap"></div>`;
+
+        for(let i=0; i<startTime.length; i++) {
+            content += `
+            <span>${startTime[i]}</span><span>${timeList[i]}</span>
+            <span>
+                <input id='ck${i}' type='checkbox' class='classroomState' name='state[]' value='${startTime[i]}' ${activities[roomName][i] == ""?'':'disabled="null"'}>
+                <label for='ck${i}'></label>
+            </span>
+            <div class="wrap"></div>`;
         }
+        content += `<span style="height:21px;"></span>
+        <button class="borrowSubmit" type='submit'>確認</button>`;
+        document.getElementById("borrowForm").innerHTML = content;
     }
 
     function showPopupCourse(event) {
@@ -395,16 +383,113 @@ document.addEventListener("DOMContentLoaded", ()=>{
         optionMenu.classList.remove("active");
         dropdownStart.classList.remove("active");
         dropdownEnd.classList.remove("active");
-        popup.style.width = "1000px";
+        popup.style.width = "900px";
         let roomName = event.target.innerHTML;
         document.getElementById("popupName").innerHTML = roomName + "課表";
-        let myFrame = document.createElement("iframe");
-        myFrame.src = "Course.html";
-        myFrame.style.width = '100%';
-        myFrame.style.height = '600px';
-        let content = document.querySelector(".content");
-        content.innerHTML = "";
-        content.appendChild(myFrame);
+        let testForm = new FormData();
+        testForm.append("roomName", roomName);
+        testForm.append("action", "getWeeklySchedule");
+        fetch("../../Controller/Api/ClassroomController.php", {
+            method: 'POST',
+            body: testForm
+        })
+        .then(response=>response.json())
+        .then(data => {
+            let schedule =  [
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""]
+            ];
+            for(let i=0; i<data.length; i++) {
+                if(data[i]) {
+                    for(let j=0; j<data[i].length; j++)
+                        schedule[i][data[i][j][0]-8] = data[i][j][1];
+                }
+            }
+            document.querySelector(".content").innerHTML = weeklySchedule(schedule);
+        })
+    }
+
+    function weeklySchedule(schedule) {
+        let timeList = ["08:20～09:10", "09:20～10:10", "10:20～11:10", "11:15～12:05", "12:10～13:00", "13:10～14:00", "14:10～15:00", "15:10～16:00", "16:10～16:55"];
+        let content = `
+        <table border='1'>
+            <tr>
+                <td></td>
+                <td>禮拜日</td>
+                <td>禮拜一</td>
+                <td>禮拜二</td>
+                <td>禮拜三</td>
+                <td>禮拜四</td>
+                <td>禮拜五</td>
+                <td>禮拜六</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <!-- 新增方塊 -->
+                    <div class="block">
+                        <span>課程名稱</span>
+                    </div>
+                </td>
+                <td>
+                    <!-- 新增方塊 -->
+                    <div class="block">
+                        <span>課程名稱</span>
+                    </div>
+                </td>
+                <td>
+                    <!-- 新增方塊 -->
+                    <div class="block">
+                        <span>課程名稱</span>
+                    </div>
+                </td>
+                <td>
+                    <!-- 新增方塊 -->
+                    <div class="block">
+                        <span>課程名稱</span>
+                    </div>
+                </td>
+                <td>
+                    <!-- 新增方塊 -->
+                    <div class="block">
+                        <span>課程名稱</span>
+                    </div>
+                </td>
+                <td>
+                    <!-- 新增方塊 -->
+                    <div class="block">
+                        <span>課程名稱</span>
+                    </div>
+                </td>
+                <td>
+                    <!-- 新增方塊 -->
+                    <div class="addBlock">
+                        <span>課程名稱</span>
+                    </div>
+                </td>
+            </tr>
+        `;
+        for(let i=0; i<startTime.length; i++) {
+            content += `
+            <tr>
+                <td>${startTime[i]}<br>${timeList[i]}</td>
+                <td>${schedule[6][i]}</td>
+                <td>${schedule[0][i]}</td>
+                <td>${schedule[1][i]}</td>
+                <td>${schedule[2][i]}</td>
+                <td>${schedule[3][i]}</td>
+                <td>${schedule[4][i]}</td>
+                <td>${schedule[5][i]}</td>
+            </tr>
+            `;
+        }
+        content += "</table>";
+        return content;
     }
 
     function applicationForm() {
