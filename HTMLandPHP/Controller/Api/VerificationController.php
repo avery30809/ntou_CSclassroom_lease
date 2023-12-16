@@ -15,6 +15,7 @@ class VerificationController extends BaseController{
                     break;
                 case 'resetPWD':
                     $this->handleResetPWD();
+                    break;
                 default:
                     break;
             }
