@@ -22,6 +22,8 @@ class ClassroomController extends BaseController{
                     break;
                 case 'getWeeklySchedule':
                     $this->getWeeklySchedule();
+                case 'fastInsert':
+                    $this->handleFastInsert();
                 default:
                     break;
             }
@@ -86,6 +88,32 @@ class ClassroomController extends BaseController{
                 'error' => 'empty select'
             ];
             $this->sendOutput(json_encode($obj));
+        }
+    }
+    private function handleFastInsert() {
+        $activity = $_POST['activity'];
+        $room = $_POST['room'];
+        $start = $_POST['start']+8;
+        $end = $_POST['end']+8;
+        $date = $_POST['date'];
+        $activities = $this->classroomModel->searchActivities($date);
+
+        $flag = true;
+        if($activities) {
+            foreach($activities as $item) {
+                if($start <= $item[1] && $item[1] <= $end) {
+                    $flag = false;
+                }
+            }
+        }
+        if($flag) {
+            for($i=$start; $i<=$end; $i++){
+                $this->classroomModel->insertCourse($room, $date, $i, $activity);
+            }
+            $this->sendOutput("新增成功！");
+        }
+        else {
+            $this->sendOutput("有衝堂 請調整時間");
         }
     }
 }

@@ -487,3 +487,128 @@ nav.close~.board .top {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+/*快速新增*/
+/* Add some basic styling to the form container */
+.fastAddForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Style the form title */
+.fastAddForm h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style the form inputs and labels */
+.fastAddForm div {
+    margin-bottom: 15px;
+}
+
+.fastAddForm input[type="text"],
+.fastAddForm input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin-right: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.fastSelectRoom::after,
+.fastSelectLesson::after {
+    background-image: url("../../image/dropdownIcon48.png");
+    background-size: 25px 25px;
+    width: 25px;
+    height: 25px;
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+}
+
+.fastSelectRoom.checked::after,
+.fastSelectLesson.checked::after {
+    transform: rotate(180deg) translateY(50%);
+}
+
+.fastAddForm .fastSelectRoom,
+.fastAddForm .fastSelectLesson {
+    position: relative;
+}
+
+.fastAddForm .fastDropdownBox:hover {
+    cursor: pointer;
+}
+
+.fastAddForm .fastDropdownBox:focus {
+    outline: none;
+}
+
+.fastAddForm .fastDropdown {
+    border: 2px solid lightgray;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 200px;
+    display: none;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.fastAddForm .fastDropdown.show {
+    display: block
+}
+
+.fastAddForm .fastDropdown ul{
+    list-style: none;
+}
+
+.fastAddForm .fastDropdown li{
+    text-align: center;
+    background-color: white;
+    padding-block: 5px;
+    border-bottom: 2px solid lightgray;
+}
+
+.fastAddForm .fastDropdown li:hover{
+    cursor: pointer;
+    background-color: rgb(90, 163, 223);
+}
+
+/* Style the submit button */
+.fastAddForm #fastSubmit {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 60px;
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+.fastAddForm #fastSubmit:hover {
+    background-color: #45a049;
+}
+
+/* Optional: Style the datePicker input */
+.fastAddForm #datePicker {
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
