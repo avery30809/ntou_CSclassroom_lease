@@ -413,81 +413,6 @@ nav.close~.board .top {
     display: block;
 }
 
-
-
-.classScheduleTitle {
-    display: flex;
-    flex-direction: column;
-    font-size: 30px !important;
-    border-bottom: 1px solid;
-    padding-bottom: 10px;
-}
-.classScheduleTitle h1{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.classScheduleContent {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    font-size: 25px !important;
-    /* border: solid; */
-}
-
-.classSchedule table{
-    border-collapse: collapse; /* 合併邊框，只顯示內邊框 */
-    margin-top: 10px;
-}
-.classSchedule .addBlock{
-    display: flex;
-    flex-direction: column;
-    font-size: 10px;
-}
-.classSchedule span{
-    margin-right:auto;
-
-}
-
-.classSchedule button{
-    width: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-/* 教室搜尋-------------------------------------------- */
-.board-content {
-    margin-top: 100px;
-    margin-left: 10px;
-}
-
-.classroomInquiry {
-    display: none;
-}
-
-.classroomInquiry.show {
-    display: flex;
-    flex-direction: column;
-}
-
-.classroomInquiryTitle h1{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.classroomInquiryContent {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    font-size: 25px !important;
-}
-
-.classroomInquiryContent button{
-    width: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
 /*快速新增*/
 /* Add some basic styling to the form container */
 .fastAddForm {
@@ -497,6 +422,15 @@ nav.close~.board .top {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
+}
+
+.fastAddForm .classScheduleTitle {
+    border-bottom: 1px solid;
+    display: flex;
+    flex-direction: column;
+    font-size: 30px !important;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
 }
 
 /* Style the form title */
@@ -610,5 +544,220 @@ nav.close~.board .top {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
+    height: 46px;
+}
+
+/*課表新增*/
+/* Add some basic styling to the form container */
+.classAddForm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.classAddForm .classScheduleTitle,
+.classAddForm .classSchedulePage {
+    width: 50%;
+    border-bottom: 1px solid;
+    display: flex;
+    flex-direction: column;
+    font-size: 30px !important;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
+}
+
+.classScheduleBody {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Style the form title */
+.classAddForm h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Style the form inputs and labels */
+.classAddForm div {
+    margin-bottom: 15px;
+}
+
+.classAddForm input[type="text"],
+.classAddForm input[type="date"] {
+    width: 98.5%;
+    padding: 8px;
+    margin-right: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.classSelectRoom::after,
+.classSelectLesson::after,
+.classSelectWeek::after {
+    background-image: url("../../image/dropdownIcon48.png");
+    background-size: 25px 25px;
+    width: 25px;
+    height: 25px;
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+}
+
+.classSelectRoom.checked::after,
+.classSelectLesson.checked::after,
+.classSelectWeek.checked::after {
+    transform: rotate(180deg) translateY(50%);
+}
+
+.classAddForm .classSelectRoom,
+.classAddForm .classSelectLesson,
+.classAddForm .classSelectWeek {
+    position: relative;
+}
+
+.classAddForm .classDropdownBox:hover {
+    cursor: pointer;
+}
+
+.classAddForm .classDropdownBox:focus {
+    outline: none;
+}
+
+.classAddForm .classDropdown {
+    border: 2px solid lightgray;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 200px;
+    display: none;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.classAddForm .classDropdown.show {
+    display: block
+}
+
+.classAddForm .classDropdown ul{
+    list-style: none;
+}
+
+.classAddForm .classDropdown li{
+    text-align: center;
+    background-color: white;
+    padding-block: 5px;
+    border-bottom: 2px solid lightgray;
+}
+
+.classAddForm .classDropdown li:hover{
+    cursor: pointer;
+    background-color: rgb(90, 163, 223);
+}
+
+/* Style the submit button */
+.classAddForm #classSubmit {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 60px;
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+.classAddForm #classSubmit:hover {
+    background-color: #45a049;
+}
+
+.classAddForm #semesterSelectStart,
+.classAddForm #semesterSelectEnd {
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    height: 46px;
+}
+.classAddForm #semesterSelectEnd {
+    margin-bottom: 0px;
+}
+
+.classScheduleTitle h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.classScheduleContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 25px !important;
+    /* border: solid; */
+}
+
+.classSchedule table{
+    border-collapse: collapse; /* 合併邊框，只顯示內邊框 */
+    margin-top: 10px;
+}
+.classSchedule .addBlock{
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+}
+.classSchedule span{
+    margin-right:auto;
+
+}
+
+.classSchedule button{
+    width: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 教室搜尋-------------------------------------------- */
+.board-content {
+    margin-top: 100px;
+    margin-left: 10px;
+}
+
+.classroomInquiry {
+    display: none;
+}
+
+.classroomInquiry.show {
+    display: flex;
+    flex-direction: column;
+}
+
+.classroomInquiryTitle h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.classroomInquiryContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 25px !important;
+}
+
+.classroomInquiryContent button{
+    width: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

@@ -24,6 +24,8 @@ class ClassroomController extends BaseController{
                     $this->getWeeklySchedule();
                 case 'fastInsert':
                     $this->handleFastInsert();
+                case 'classInsert':
+                    $this->handleClassInsert();
                 default:
                     break;
             }
@@ -96,6 +98,7 @@ class ClassroomController extends BaseController{
         $start = $_POST['start']+8;
         $end = $_POST['end']+8;
         $date = $_POST['date'];
+        $userID = $_POST['userID'];
         $activities = $this->classroomModel->searchActivities($date);
 
         $flag = true;
@@ -108,12 +111,62 @@ class ClassroomController extends BaseController{
         }
         if($flag) {
             for($i=$start; $i<=$end; $i++){
-                $this->classroomModel->insertCourse($room, $date, $i, $activity);
+                $this->classroomModel->insertCourse($room, $date, $i, $activity, $userID);
             }
             $this->sendOutput("新增成功！");
         }
         else {
             $this->sendOutput("有衝堂 請調整時間");
+        }
+    }
+    private function handleClassInsert() {
+        $activity = $_POST["activity"];
+        $semesterStart = $_POST["semesterStart"];
+        $semesterEnd = $_POST["semesterEnd"];
+        $week = $_POST["week"];
+        $room = $_POST["room"];
+        $start = $_POST["start"]+8;
+        $end = $_POST["end"]+8;
+        $userID = $_POST["userID"];
+
+        // 轉換為 DateTime 物件
+        $start_date = new DateTime($semesterStart);
+        $end_date = new DateTime($semesterEnd);
+
+        // 課程開始的第一天
+        $start_date->modify("this week +$week days");
+
+        // 包含最後一天
+        $end_date->modify('+1 day');
+
+        // 初始化迴圈的 DateInterval
+        $interval = new DateInterval('P7D'); // P7D 代表七天
+
+        // 初始化 DatePeriod 用於遍歷日期範圍
+        $daterange = new DatePeriod($start_date, $interval, $end_date);
+        
+        $flag = true;
+        // 遍歷每一天
+        foreach ($daterange as $date) {
+            for($i=$start; $i<=$end; $i++) {
+                if($flag)
+                    $activities = $this->classroomModel->searchActivities($date->format('Y-m-d'));
+
+                if($flag && $activities) {
+                    foreach($activities as $item) {
+                        if($i == $item[1]) {
+                            $flag = false;
+                        }
+                    }
+                }
+                $this->classroomModel->insertCourse($room, $date->format('Y-m-d'), $i, $activity, $userID);
+            }
+        }
+        if($flag) {
+            $this->sendOutput("新增成功！");
+        }
+        else {
+            $this->sendOutput("有部分衝堂 已忽略衝堂的新增");
         }
     }
 }

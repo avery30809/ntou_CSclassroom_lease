@@ -18,13 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
             datas.forEach((data) => {
                 allClassroomName.push(data[0]);
                 fastRoom.value = allClassroomName[0];
-                let room = [document.createElement("option"), document.createElement("li")];
+                classRoom.value = allClassroomName[0];
+                let room = [document.createElement("li"), document.createElement("li")];
                 room[0].innerHTML = data[0];
                 room[1].innerHTML = data[0];
+                room[0].addEventListener("click", ()=>{
+                    classRoom.value = room[0].innerHTML;
+                }, false);
                 room[1].addEventListener("click", ()=>{
                     fastRoom.value = room[1].innerHTML;
                 }, false);
-                document.querySelector(".roomSelect").appendChild(room[0]);
+                document.getElementById("classRoomSelect").appendChild(room[0]);
                 document.getElementById("fastRoomSelect").appendChild(room[1]);
             });
         });
@@ -34,8 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const fastDropdownRoom = document.getElementById("fastDropdownRoom"),
         fastDropdownLessonStart = document.getElementById("fastDropdownLessonStart"),
         fastDropdownLessonEnd = document.getElementById("fastDropdownLessonEnd"),
-        fastStartTime = ["第一節", "第二節", "第三節", "第四節", "第五節", "第六節", "第七節", "第八節", "第九節"],
-        fastEndTime = ["第一節", "第二節", "第三節", "第四節", "第五節", "第六節", "第七節", "第八節", "第九節"];
+        StartTime = ["第一節", "第二節", "第三節", "第四節", "第五節", "第六節", "第七節", "第八節", "第九節"],
+        EndTime = ["第一節", "第二節", "第三節", "第四節", "第五節", "第六節", "第七節", "第八節", "第九節"],
+        WeekTime = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
     document.getElementById("fastRoomBox").addEventListener("click", (event)=>{
         event.stopPropagation();
         event.target.parentElement.classList.toggle("checked");
@@ -76,6 +81,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".checked").forEach((element)=>{
             element.classList.remove("checked");
         });
+        document.querySelectorAll(".classDropdown").forEach((element)=>{
+            element.classList.remove("show");
+        });
     }, false);
     const fastRoom = document.getElementById("fastRoomBox"),
         fastLessonBoxStart = document.getElementById("fastLessonBoxStart"),
@@ -85,9 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
         element.addEventListener("click", ()=>{
             fastLessonBoxStart.value = element.innerHTML;
             fastLessonBoxEnd.value = element.innerHTML;
-            let i = fastStartTime.indexOf(element.innerHTML);
+            let i = StartTime.indexOf(element.innerHTML);
             document.getElementById("fastLessonSelectEnd").innerHTML = "";
-            fastEndTime.slice(i).forEach((time)=>{
+            EndTime.slice(i).forEach((time)=>{
                 let newItem = document.createElement("li");
                 newItem.innerHTML = time;
                 newItem.addEventListener("click", () => {
@@ -110,15 +118,155 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         let myForm = new FormData(fastForm);
         myForm.append("action", "fastInsert");
-        myForm.set("start", fastStartTime.indexOf(myForm.get("start")));
-        myForm.set("end", fastStartTime.indexOf(myForm.get("end")));
-        fetch("../../Controller/Api/ClassroomController.php", {
+        myForm.set("start", StartTime.indexOf(myForm.get("start")));
+        myForm.set("end", EndTime.indexOf(myForm.get("end")));
+        getIDForm = new FormData();
+        getIDForm.append("account", myForm.get("userAccount"));
+        getIDForm.append("action", "getID");
+        fetch("../../Controller/Api/UserController.php", {
             method: 'POST',
-            body: myForm
+            body: getIDForm
         })
         .then(response => response.text())
         .then(data => {
-            window.alert(data.replace(" ", "\n"));
+            if(data !== "未找到使用者") {
+                myForm.append("userID", data);
+                fetch("../../Controller/Api/ClassroomController.php", {
+                    method: 'POST',
+                    body: myForm
+                })
+                .then(response => response.text())
+                .then(res => {
+                    window.alert(res.replace(" ", "\n"));
+                });
+            }
+            else {
+                window.alert("未找到該使用者");
+            }
+        });
+    }, false);
+
+    // 課表新增的下拉式選單
+    const classDropdownWeek = document.getElementById("classDropdownWeek"),
+        classDropdownRoom = document.getElementById("classDropdownRoom"),
+        classDropdownLessonStart = document.getElementById("classDropdownLessonStart"),
+        classDropdownLessonEnd = document.getElementById("classDropdownLessonEnd");
+
+    document.getElementById("classWeekBox").addEventListener("click", (event)=>{
+        event.stopPropagation();
+        event.target.parentElement.classList.toggle("checked");
+        classDropdownWeek.classList.toggle("show");
+        classDropdownRoom.classList.remove("show");
+        classDropdownLessonStart.classList.remove("show");
+        classDropdownLessonEnd.classList.remove("show");
+    });
+
+    document.getElementById("classRoomBox").addEventListener("click", (event)=>{
+        event.stopPropagation();
+        event.target.parentElement.classList.toggle("checked");
+        classDropdownRoom.classList.toggle("show");
+        classDropdownWeek.classList.remove("show");
+        classDropdownLessonStart.classList.remove("show");
+        classDropdownLessonEnd.classList.remove("show");
+        document.querySelectorAll(".checked").forEach((element)=>{
+            if(element != event.target.parentElement)
+                element.classList.remove("checked");
+        });
+    });
+    document.getElementById("classLessonBoxStart").addEventListener("click", (event)=>{
+        event.stopPropagation();
+        event.target.parentElement.classList.toggle("checked");
+        classDropdownLessonStart.classList.toggle("show");
+        classDropdownWeek.classList.remove("show");
+        classDropdownRoom.classList.remove("show");
+        classDropdownLessonEnd.classList.remove("show");
+        document.querySelectorAll(".checked").forEach((element)=>{
+            if(element != event.target.parentElement)
+                element.classList.remove("checked");
+        });
+    });
+    document.getElementById("classLessonBoxEnd").addEventListener("click", (event)=>{
+        event.stopPropagation();
+        event.target.parentElement.classList.toggle("checked");
+        classDropdownLessonEnd.classList.toggle("show");
+        classDropdownWeek.classList.remove("show");
+        classDropdownRoom.classList.remove("show");
+        classDropdownLessonStart.classList.remove("show");
+        document.querySelectorAll(".checked").forEach((element)=>{
+            if(element != event.target.parentElement)
+                element.classList.remove("checked");
+        });
+    });
+    const classWeek = document.getElementById("classWeekBox"),
+        classRoom = document.getElementById("classRoomBox"),
+        classLessonBoxStart = document.getElementById("classLessonBoxStart"),
+        classLessonBoxEnd = document.getElementById("classLessonBoxEnd");
+    
+    document.getElementById("classWeekSelect").childNodes.forEach((element)=>{
+        element.addEventListener("click", ()=>{
+            classWeek.value = element.innerHTML;
+        }, false);
+    }, false);
+
+    document.getElementById("classLessonSelectStart").childNodes.forEach((element)=>{
+        element.addEventListener("click", ()=>{
+            classLessonBoxStart.value = element.innerHTML;
+            classLessonBoxEnd.value = element.innerHTML;
+            let i = StartTime.indexOf(element.innerHTML);
+            document.getElementById("classLessonSelectEnd").innerHTML = "";
+            EndTime.slice(i).forEach((time)=>{
+                let newItem = document.createElement("li");
+                newItem.innerHTML = time;
+                newItem.addEventListener("click", () => {
+                    classLessonBoxEnd.value = newItem.textContent;
+                });
+                document.getElementById("classLessonSelectEnd").appendChild(newItem);
+            });
+        }, false);
+    });
+
+    document.getElementById("classLessonSelectEnd").childNodes.forEach((element)=>{
+        element.addEventListener("click", ()=>{
+            classLessonBoxEnd.value = element.innerHTML;
+        }, false);
+    });
+
+    const classForm = document.querySelector(".classAddForm");
+
+    classForm.addEventListener("submit", (event)=>{
+        event.preventDefault();
+        let myForm = new FormData(classForm);
+        if(myForm.get("semesterStart") > myForm.get("semesterEnd")) {
+            window.alert("學期開始時間不得大於結束時間！");
+            return;
+        }
+        myForm.append("action", "classInsert");
+        myForm.set("week", WeekTime.indexOf(myForm.get("week")));
+        myForm.set("start", StartTime.indexOf(myForm.get("start")));
+        myForm.set("end", EndTime.indexOf(myForm.get("end")));
+        getIDForm = new FormData();
+        getIDForm.append("account", myForm.get("userAccount"));
+        getIDForm.append("action", "getID");
+        fetch("../../Controller/Api/UserController.php", {
+            method: 'POST',
+            body: getIDForm
+        })
+        .then(response => response.text())
+        .then(data => {
+            if(data !== "未找到使用者"){
+                myForm.append("userID", data);
+                fetch("../../Controller/Api/ClassroomController.php", {
+                    method: 'POST',
+                    body: myForm
+                })
+                .then(response => response.text())
+                .then(res => {
+                    window.alert(res.replace(" ", "\n"));
+                });
+            }
+            else {
+                window.alert("未找到該使用者");
+            }
         });
     }, false);
 

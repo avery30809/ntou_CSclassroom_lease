@@ -188,235 +188,136 @@
                 </div>
 
                 <!-- 快速新增 -->
-                <div class="fastAddForm">
+                <form class="fastAddForm">
                     <div class="classScheduleTitle">
-                        <h1>新增</h1>
-                        <span>課程新增: <input type="text"></span>
+                        <h1>單一新增</h1>
+                        <div>借用人學號: </div>
+                        <input type="text" name="userAccount" required>
+                        <div>課程名稱: </div>
+                        <input type="text" name="activity" required>
 
-                        <span>教室名稱: <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱"
-                                list="classroomNameList"></span>
-                        <datalist id="classroomNameList"></datalist>
-                        <span>開始小時:
-                            <select name="" id="">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                        </span>
-
-                        <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
-                        <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
-                        <button>提交</button>
-                    </div>
-
-                </div>
-                <!-- 課表新增 -->
-                <div class="classAddForm">
-                    <div class="classScheduleTitle">
-                        <h1>新增</h1>
-                        <div class="classScheduleContent">
-                            <span>教室名稱: <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱"
-                                    list="classroomNameList"></span>
-                            <datalist id="classroomNameList"></datalist>
-                            <table border="1">
-                                <tr>
-                                    <td></td>
-                                    <td>禮拜一</td>
-                                    <td>禮拜二</td>
-                                    <td>禮拜三</td>
-                                    <td>禮拜四</td>
-                                    <td>禮拜五</td>
-                                    <td>禮拜六</td>
-                                    <td>禮拜日</td>
-                                <tr>
-                                <tr>
-                                    <td>第0節</td>
-                                    <td>
-                                        <!-- 新增方塊 -->
-                                        <div class="addBlock">
-                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
-                                            <span>開始小時 :
-                                                <select name="" id="">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                </select>
-                                            </span>
-                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <button>提交</button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <!-- 新增方塊 -->
-                                        <div class="addBlock">
-                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
-                                            <span>開始小時 :
-                                                <select name="" id="">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                </select>
-                                            </span>
-                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <button>提交</button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <!-- 新增方塊 -->
-                                        <div class="addBlock">
-                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
-                                            <span>開始小時 :
-                                                <select name="" id="">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                </select>
-                                            </span>
-                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <button>提交</button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <!-- 新增方塊 -->
-                                        <div class="addBlock">
-                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
-                                            <span>開始小時 :
-                                                <select name="" id="">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                </select>
-                                            </span>
-                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <button>提交</button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <!-- 新增方塊 -->
-                                        <div class="addBlock">
-                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
-                                            <span>開始小時 :
-                                                <select name="" id="">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                </select>
-                                            </span>
-                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <button>提交</button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <!-- 新增方塊 -->
-                                        <div class="addBlock">
-                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
-                                            <span>開始小時 :
-                                                <select name="" id="">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                </select>
-                                            </span>
-                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <button>提交</button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <!-- 新增方塊 -->
-                                        <div class="addBlock">
-                                            <span>課程新增 : <input type="text" placeholder="課程新增"></span>
-                                            <span>開始小時 :
-                                                <select name="" id="">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                </select>
-                                            </span>
-                                            <span>開始日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <span>結束日期: <input type="date" id="datePicker" name="datePicker"></span>
-                                            <button>提交</button>
-                                        </div>
-                                    </td>
-                                <tr>
-                                <tr>
-                                    <td>第1節</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                <tr>
-                            </table>
-
+                        <div>使用教室: </div>
+                        <div class="fastSelectRoom">
+                            <input class="fastDropdownBox" type="text" id="fastRoomBox" name="room" readonly>
+                            <div class="fastDropdown" id="fastDropdownRoom">
+                                <ul id="fastRoomSelect"></ul>
+                            </div>
                         </div>
+                        <div>選擇節次:</div>
+                        <div class="fastSelectLesson">
+                            <input class="fastDropdownBox" type="text" id="fastLessonBoxStart" value="第一節" name="start" readonly>
+                            <div class="fastDropdown" id="fastDropdownLessonStart">
+                                <ul id="fastLessonSelectStart">
+                                    <li>第一節</li>
+                                    <li>第二節</li>
+                                    <li>第三節</li>
+                                    <li>第四節</li>
+                                    <li>第五節</li>
+                                    <li>第六節</li>
+                                    <li>第七節</li>
+                                    <li>第八節</li>
+                                    <li>第九節</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <span style="transform: rotate(90deg) translateX(-50%); font-size: 24px; margin-inline: auto">~</span>
+                        <div class="fastSelectLesson">
+                            <input class="fastDropdownBox" type="text" id="fastLessonBoxEnd" value="第一節" name="end" readonly>
+                            <div class="fastDropdown" id="fastDropdownLessonEnd">
+                                <ul id="fastLessonSelectEnd">
+                                    <li>第一節</li>
+                                    <li>第二節</li>
+                                    <li>第三節</li>
+                                    <li>第四節</li>
+                                    <li>第五節</li>
+                                    <li>第六節</li>
+                                    <li>第七節</li>
+                                    <li>第八節</li>
+                                    <li>第九節</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>選擇日期: </div>
+                        <input type="date" id="datePicker" name="date" required>
+                        <button type="submit" id="fastSubmit">提交</button>
                     </div>
 
-
-                </div>
+                </form>
+                <!-- 課表新增 -->
+                <form class="classAddForm">
+                    <h1>學期新增</h1>
+                        <div class="classScheduleBody">
+                            <div class="classSchedulePage">
+                                <div>選擇學期: </div>
+                                <input type="date" id="semesterSelectStart" name="semesterStart" required>
+                                <span style="transform: rotate(90deg) translateX(-50%); font-size: 35px; margin-inline: auto;">~</span>
+                                <input type="date" id="semesterSelectEnd" name="semesterEnd" required>
+                                <div>選擇星期: </div>
+                                <div class="classSelectWeek">
+                                    <input class="classDropdownBox" type="text" id="classWeekBox" value="星期一" name="week" readonly>
+                                    <div class="classDropdown" id="classDropdownWeek">
+                                        <ul id="classWeekSelect">
+                                            <li>星期一</li>
+                                            <li>星期二</li>
+                                            <li>星期三</li>
+                                            <li>星期四</li>
+                                            <li>星期五</li>
+                                            <li>星期六</li>
+                                            <li>星期日</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="classScheduleTitle">
+                                <div>借用人學號: </div>
+                                <input type="text" name="userAccount" required>
+                                <div>課程名稱: </div>
+                                <input type="text" name="activity" required>
+                                <div>使用教室: </div>
+                                <div class="classSelectRoom">
+                                    <input class="classDropdownBox" type="text" id="classRoomBox" name="room" readonly>
+                                    <div class="classDropdown" id="classDropdownRoom">
+                                        <ul id="classRoomSelect"></ul>
+                                    </div>
+                                </div>
+                                <div>選擇節次:</div>
+                                <div class="classSelectLesson">
+                                    <input class="classDropdownBox" type="text" id="classLessonBoxStart" value="第一節" name="start" readonly>
+                                    <div class="classDropdown" id="classDropdownLessonStart">
+                                        <ul id="classLessonSelectStart">
+                                            <li>第一節</li>
+                                            <li>第二節</li>
+                                            <li>第三節</li>
+                                            <li>第四節</li>
+                                            <li>第五節</li>
+                                            <li>第六節</li>
+                                            <li>第七節</li>
+                                            <li>第八節</li>
+                                            <li>第九節</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <span style="transform: rotate(90deg) translateX(-50%); font-size: 24px; margin-inline: auto">~</span>
+                                <div class="classSelectLesson">
+                                    <input class="classDropdownBox" type="text" id="classLessonBoxEnd" value="第一節" name="end" readonly>
+                                    <div class="classDropdown" id="classDropdownLessonEnd">
+                                        <ul id="classLessonSelectEnd">
+                                            <li>第一節</li>
+                                            <li>第二節</li>
+                                            <li>第三節</li>
+                                            <li>第四節</li>
+                                            <li>第五節</li>
+                                            <li>第六節</li>
+                                            <li>第七節</li>
+                                            <li>第八節</li>
+                                            <li>第九節</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button type="submit" id="classSubmit">提交</button>
+                            </div>
+                    </div>
+                </form>
             </div>
 
             <!-- 教室查詢 -->
