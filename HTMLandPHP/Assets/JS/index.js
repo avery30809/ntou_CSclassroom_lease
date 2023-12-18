@@ -29,12 +29,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     getUserProfile();
     function getUserProfile() {
         //獲取使用者身分
-        let testForm = new FormData();
-        testForm.append("action", "getUserProfile");
-        fetch("../../Controller/Api/UserController.php", {
-            method: 'POST',
-            body: testForm
-        })
+        fetch("../../Controller/Api/UserController.php?action=getUserProfile")
         .then(response => response.json())
         .then(data => {
             if(data.error === undefined) {
@@ -87,12 +82,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     getAllClassroomName();
     function getAllClassroomName() {
-        let testForm = new FormData();
-        testForm.append("action", "getAllClassroomName")
-        fetch("../../Controller/Api/ClassroomController.php", {
-            method: 'POST',
-            body: testForm
-        })
+        fetch("../../Controller/Api/ClassroomController.php?action=getAllClassroomName")
         .then(response => response.json())
         .then(datas => {
             datas.forEach((data) => {
@@ -105,12 +95,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
     }
     function getDateClassCondition() {
-        let testForm = new FormData();
-        testForm.append("action", "getCondition");
-        fetch("../../Controller/Api/ClassroomController.php", {
-            method: 'POST',
-            body: testForm
-        })
+        fetch("../../Controller/Api/ClassroomController.php?action=getCondition")
         .then(response => response.json())
         .then(datas => {
             allClassroomName.forEach((room) => {
@@ -329,27 +314,21 @@ document.addEventListener("DOMContentLoaded", ()=>{
         document.getElementById("borrowForm").addEventListener("submit", (event)=>{
             event.preventDefault();
             const myForm = new FormData(document.getElementById("borrowForm"));
-            myForm.append("action", "submitSelectedSlot");
+            const requires = myForm.getAll("state[]");
+            if(requires.length == 0) {
+                window.alert("尚未選擇借用時段");
+                return;
+            }
+            for(let i=0; i<requires.length; i++) {
+                myForm.append("TimeSlot[]", startTime.indexOf(requires[i]));
+            }
+            myForm.append("roomName", roomName);
+            myForm.append("action", "createApplicationForm");
             fetch("../../Controller/Api/ClassroomController.php", {
                 method: 'POST',
                 body: myForm
             })
-            .then(response=>response.json())
-            .then(data => {
-                if(data['error'] === undefined) {
-                    const applicationForm = new FormData();
-                    for(let i=0; i<data.length; i++) {
-                        applicationForm.append("TimeSlot[]", data[i]);
-                    }
-                    applicationForm.append("roomName", roomName);
-                    applicationForm.append("action", "createApplicationForm");
-                    fetch("../../Controller//Api/UserController.php", {
-                        method: 'POST',
-                        body: applicationForm
-                    })
-                    window.location.href = 'Application form.html';
-                }
-            })
+            window.location.href = 'Application form.html';
         }, false);
 
         let disabledElements = document.querySelectorAll(".classroomState");
@@ -396,13 +375,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         popup.style.width = "900px";
         let roomName = event.target.innerHTML;
         document.getElementById("popupName").innerHTML = roomName + "課表";
-        let testForm = new FormData();
-        testForm.append("roomName", roomName);
-        testForm.append("action", "getWeeklySchedule");
-        fetch("../../Controller/Api/ClassroomController.php", {
-            method: 'POST',
-            body: testForm
-        })
+        fetch(`../../Controller/Api/ClassroomController.php?roomName=${roomName}&action=getWeeklySchedule`)
         .then(response=>response.json())
         .then(data => {
             let schedule =  [

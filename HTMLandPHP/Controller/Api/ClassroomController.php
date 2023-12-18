@@ -11,22 +11,37 @@ class ClassroomController extends BaseController{
             $action = isset($_POST["action"]) ? $_POST["action"] : null;
 
             switch ($action) {
+                case 'createApplicationForm':
+                    $this->createApplicationForm();
+                    break;
+                case 'fastInsert':
+                    $this->handleFastInsert();
+                    break;
+                case 'classInsert':
+                    $this->handleClassInsert();
+                    break;
+                case 'cancelForm':
+                    $this->handleCancelForm();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $action = isset($_GET["action"]) ? $_GET["action"] : null;
+            
+            switch ($action) {
                 case 'getAllClassroomName':
                     $this->getAllClassroomName();
                     break;
                 case 'getCondition':
                     $this->getDateClassCondition();
                     break;
-                case 'submitSelectedSlot':
-                    $this->handleSubmitSelectedSlot();
+                case 'getApplicationForm':
+                    $this->getApplicationForm();
                     break;
                 case 'getWeeklySchedule':
                     $this->getWeeklySchedule();
-                case 'fastInsert':
-                    $this->handleFastInsert();
-                case 'classInsert':
-                    $this->handleClassInsert();
-                default:
                     break;
             }
         }
@@ -63,7 +78,7 @@ class ClassroomController extends BaseController{
         $this->sendOutput(json_encode($activities));
     }
     private function getWeeklySchedule() {
-        $roomName = $_POST['roomName'];
+        $roomName = $_GET['roomName'];
         $selectDay = new DateTime($_SESSION['date']);
 
         // 本周星期一日期
@@ -81,16 +96,6 @@ class ClassroomController extends BaseController{
             $currentDate->modify('+1 day');
         }
         $this->sendOutput(json_encode($result));
-    }
-    private function handleSubmitSelectedSlot() {
-        if(isset($_POST['state']))
-            $this->sendOutput(json_encode($_POST['state']));
-        else {
-            $obj = [
-                'error' => 'empty select'
-            ];
-            $this->sendOutput(json_encode($obj));
-        }
     }
     private function handleFastInsert() {
         $activity = $_POST['activity'];
@@ -168,6 +173,28 @@ class ClassroomController extends BaseController{
         else {
             $this->sendOutput("有部分衝堂 已忽略衝堂的新增");
         }
+    }
+    // 產生借用表單
+    private function createApplicationForm() {
+        $application = [
+            "room" => $_POST["roomName"],
+            "time" => $_POST["TimeSlot"]
+        ];
+        $_SESSION["application"] = $application;
+    }
+    // 取得借用表單內容
+    private function getApplicationForm() {
+        if(isset($_SESSION["application"]))
+            $this->sendOutput(json_encode($_SESSION["application"]));
+        else {
+            $obj = [
+                "error" => "no TimeSlot"
+            ];
+            $this->sendOutput(json_encode($obj));
+        }
+    }
+    private function handleCancelForm() {
+        unset($_SESSION["application"]);
     }
 }
 $test = new ClassroomController();

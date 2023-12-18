@@ -17,20 +17,24 @@ class UserController extends BaseController
                 case 'register':
                     $this->handleRegister();
                     break;
+                case 'searchDate':
+                    $this->handleSearchDate();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $action = isset($_GET["action"]) ? $_GET["action"] : null;
+            switch ($action) {
+                case 'getID':
+                    $this->getID();
+                    break;
                 case 'getUserProfile':
                     $this->getUserProfile();
                     break;
                 case 'logout':
                     $this->handleLogout();
-                    break;
-                case 'searchDate':
-                    $this->handleSearchDate();
-                    break;
-                case 'createApplicationForm':
-                    $this->createApplicationForm();
-                    break;
-                case 'getID':
-                    $this->getID();
                     break;
                 default:
                     break;
@@ -54,10 +58,7 @@ class UserController extends BaseController
     }
     //登出
     private function handleLogout() {
-        //確保已經登入
-        if(isset($_SESSION["userID"])) {
-            unset($_SESSION["userID"]);
-        }
+        session_destroy();
     }
     //搜尋日期
     private function handleSearchDate() {
@@ -125,13 +126,10 @@ class UserController extends BaseController
             $this->sendOutput('請先進行認證');
         }
     }
-    // 產生借用表單
-    private function createApplicationForm() {
-        
-    }
 
+    // 用於管理員新增課程時獲取使用者的連絡資訊
     private function getID() {
-        $account = $_POST['account'];
+        $account = $_GET['account'];
         $result = $this->userModel->accountGetID($account);
         if($result)
             $this->sendOutput($result[0]);

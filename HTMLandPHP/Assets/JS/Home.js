@@ -41,12 +41,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         email: "",
         phone: null
     };
-    let testForm = new FormData();
-    testForm.append("action", "getUserProfile");
-    fetch("../../Controller/Api/UserController.php", {
-        method: 'POST',
-        body: testForm
-    })
+    fetch("../../Controller/Api/UserController.php?action=getUserProfile")
     .then(response => response.json())
     .then(data => {
         //已登入

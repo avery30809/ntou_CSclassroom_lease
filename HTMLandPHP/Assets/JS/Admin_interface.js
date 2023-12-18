@@ -7,12 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const allClassroomName = [];
     getClassroomName();
     function getClassroomName() {
-        const testForm = new FormData();
-        testForm.append("action", "getAllClassroomName");
-        fetch("../../Controller/Api/ClassroomController.php", {
-            method: 'POST',
-            body: testForm
-        })
+        fetch("../../Controller/Api/ClassroomController.php?action=getAllClassroomName")
         .then(response => response.json())
         .then(datas => {
             datas.forEach((data) => {
@@ -120,13 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         myForm.append("action", "fastInsert");
         myForm.set("start", StartTime.indexOf(myForm.get("start")));
         myForm.set("end", EndTime.indexOf(myForm.get("end")));
-        getIDForm = new FormData();
-        getIDForm.append("account", myForm.get("userAccount"));
-        getIDForm.append("action", "getID");
-        fetch("../../Controller/Api/UserController.php", {
-            method: 'POST',
-            body: getIDForm
-        })
+        fetch(`../../Controller/Api/UserController.php?account=${myForm.get("userAccount")}&action=getID`)
         .then(response => response.text())
         .then(data => {
             if(data !== "未找到使用者") {
@@ -244,13 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
         myForm.set("week", WeekTime.indexOf(myForm.get("week")));
         myForm.set("start", StartTime.indexOf(myForm.get("start")));
         myForm.set("end", EndTime.indexOf(myForm.get("end")));
-        getIDForm = new FormData();
-        getIDForm.append("account", myForm.get("userAccount"));
-        getIDForm.append("action", "getID");
-        fetch("../../Controller/Api/UserController.php", {
-            method: 'POST',
-            body: getIDForm
-        })
+        fetch(`../../Controller/Api/UserController.php?account=${myForm.get("userAccount")}&action=getID`)
         .then(response => response.text())
         .then(data => {
             if(data !== "未找到使用者"){

@@ -24,12 +24,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     getUserProfile();
     function getUserProfile() {
         //獲取使用者身分
-        let testForm = new FormData();
-        testForm.append("action", "getUserProfile");
-        fetch("../../Controller/Api/UserController.php", {
-            method: 'POST',
-            body: testForm
-        })
+        fetch("../../Controller/Api/UserController.php?action=getUserProfile")
         .then(response => response.json())
         .then(data => {
             if (data.error === undefined) {
@@ -64,12 +59,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         applyRequestImage.classList.toggle("show");
     }
     logoutButton.addEventListener("click", () => {
-        let myForm = new FormData();
-        myForm.append("action", "logout");
-        fetch("../../Controller/Api/UserController.php", {
-            method: 'POST',
-            body: myForm
-        });
+        fetch("../../Controller/Api/UserController.php?action=logout");
         window.location.href = "../../Pages/Home.html";
     }, false);
 
