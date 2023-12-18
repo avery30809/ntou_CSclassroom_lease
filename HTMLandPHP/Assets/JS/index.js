@@ -319,6 +319,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 window.alert("尚未選擇借用時段");
                 return;
             }
+            if(startTime.indexOf(requires[requires.length-1])-startTime.indexOf(requires[0])+1 != requires.length) {
+                window.alert("不可借用不連續的時間");
+                return;
+            }
             for(let i=0; i<requires.length; i++) {
                 myForm.append("TimeSlot[]", startTime.indexOf(requires[i]));
             }
