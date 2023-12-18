@@ -14,15 +14,15 @@
     <!-- 按鈕選擇----------------------------------------------  -->
 
     <div class="conditions">
-        <button class="immediately" id="immediately" onclick="CheckImmediatelyForm()">立即借用</button>
-        <button class="reserve" id="reserve" onclick="CheckReserveForm()">預約借用</button>
+        <button class="immediately" id="immediately">立即借用</button>
+        <button class="reserve" id="reserve">預約借用</button>
     </div>
 
     <!--  表單----------------------------------------------  -->
     <div class="form-container">
         <div class="content">
 
-            <h5>XXX教室<sub class="date" id="selectedDatePlaceholder"></sub></h5>
+            <h5 id="form-title">XXX教室<sub class="date" id="selectedDatePlaceholder"></sub></h5>
 
             <div class="line_block">
                 <span>1:00 <sup>PM</sup> </span>
@@ -38,8 +38,8 @@
                 <input type="tel" pattern="09\d{2}-\d{6}" placeholder="09xx-xxxxxx" required>
                 <hr>
                 <div class="YesOrNo">
-                    <button onclick="SendOut()">送出</button>
-                    <button onclick="Cancel()">取消</button>
+                    <button id="sendOut">送出</button>
+                    <button id="cancel">取消</button>
                 </div>
             </div>
 
