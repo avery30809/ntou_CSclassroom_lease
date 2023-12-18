@@ -13,13 +13,12 @@ class UserModel extends Database
         return $obj;
     }
     public function authenticate($account, $password, $op) {
-        
-        $query = "SELECT userID FROM userdata WHERE useraccount = ? AND pwd = ? AND isAdmin = ?";
-        $params = [$account, $password, $op];
-
         try {
-            $result = $this->query($query, $params);
-            return $result?$result[0]:false;
+            $result = $this->query("SELECT userID, pwd FROM userdata WHERE useraccount = ? AND isAdmin = ?", [$account, $op]);
+            if($result && password_verify($password, $result[0][1])) {
+                return $result[0];
+            }
+            else return false;
         } catch (Exception $e) {
             return false;
         }
@@ -30,7 +29,8 @@ class UserModel extends Database
             $result = $this->query("SELECT useraccount FROM userdata WHERE useraccount = ?", [$account]);
             // 不是第一次 回傳false給controller
             if($result !== false) return true;
-            $this->query("INSERT INTO userdata (username, useraccount, pwd, email)VALUES (?,?,?,?)",[$username, $account, $password, $email]);
+            $hash_pwd = password_hash($password, PASSWORD_DEFAULT);
+            $this->query("INSERT INTO userdata (username, useraccount, pwd, email)VALUES (?,?,?,?)",[$username, $account, $hash_pwd, $email]);
             return false;
 
         } catch (Exception $e) {
