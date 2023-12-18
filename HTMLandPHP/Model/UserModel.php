@@ -37,4 +37,13 @@ class UserModel extends Database
             return false;
         }
     }
+    public function accountGetID($account) {
+        try {
+            $result = $this->query("SELECT userID FROM userdata WHERE useraccount = ?", [$account]);
+            if($result !== false) return $result[0];
+            return false;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }

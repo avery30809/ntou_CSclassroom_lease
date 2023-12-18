@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         //獲取使用者身分
         let testForm = new FormData();
         testForm.append("action", "getUserProfile");
-        fetch("../../Controller/APi/UserController.php", {
+        fetch("../../Controller/Api/UserController.php", {
             method: 'POST',
             body: testForm
         })
@@ -336,8 +336,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
             })
             .then(response=>response.json())
             .then(data => {
-                console.log(data);
-                // TODO
+                if(data['error'] === undefined) {
+                    const applicationForm = new FormData();
+                    for(let i=0; i<data.length; i++) {
+                        applicationForm.append("TimeSlot[]", data[i]);
+                    }
+                    applicationForm.append("roomName", roomName);
+                    applicationForm.append("action", "createApplicationForm");
+                    fetch("../../Controller//Api/UserController.php", {
+                        method: 'POST',
+                        body: applicationForm
+                    })
+                    window.location.href = 'Application form.html';
+                }
             })
         }, false);
 
@@ -372,8 +383,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             </span>
             <div class="wrap"></div>`;
         }
-        content += `<span style="height:21px;"></span>
-        <button class="borrowSubmit" type='submit'>確認</button>`;
+        content += `<button class="borrowSubmit" type='submit'>確認</button>`;
         document.getElementById("borrowForm").innerHTML = content;
     }
 
@@ -404,17 +414,28 @@ document.addEventListener("DOMContentLoaded", ()=>{
             ["", "", "", "", "", "", "", "", ""],
             ["", "", "", "", "", "", "", "", ""]
             ];
+            let userData = [
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", "", ""]
+            ];
             for(let i=0; i<data.length; i++) {
                 if(data[i]) {
-                    for(let j=0; j<data[i].length; j++)
+                    for(let j=0; j<data[i].length; j++) {
                         schedule[i][data[i][j][0]-8] = data[i][j][1];
+                        userData[i][data[i][j][0]-8] = `${data[i][j][2]} ${data[i][j][3]} ${data[i][j][4]}`;
+                    }
                 }
             }
-            document.querySelector(".content").innerHTML = weeklySchedule(schedule);
+            document.querySelector(".content").innerHTML = weeklySchedule(schedule, userData);
         })
     }
 
-    function weeklySchedule(schedule) {
+    function weeklySchedule(schedule, userData) {
         let timeList = ["08:20～09:10", "09:20～10:10", "10:20～11:10", "11:15～12:05", "12:10～13:00", "13:10～14:00", "14:10～15:00", "15:10～16:00", "16:10～16:55"];
         let content = `
         <table border='1'>
@@ -474,27 +495,41 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 </td>
             </tr>
         `;
-        for(let i=0; i<startTime.length; i++) {
+        for (let i = 0; i < startTime.length; i++) {
             content += `
             <tr>
-                <td>${startTime[i]}<br>${timeList[i]}</td>
-                <td>${schedule[6][i]}</td>
-                <td>${schedule[0][i]}</td>
-                <td>${schedule[1][i]}</td>
-                <td>${schedule[2][i]}</td>
-                <td>${schedule[3][i]}</td>
-                <td>${schedule[4][i]}</td>
-                <td>${schedule[5][i]}</td>
-            </tr>
-            `;
+                <td>${startTime[i]}<br>${timeList[i]}</td>`;
+
+            const order = [6, 0, 1, 2, 3, 4, 5];
+            for (let j of order) {
+                let userDataSplit;
+                content += `<td class='schedule-cell'>${schedule[j][i]}`;
+                if(userData[j][i]) {
+                    userDataSplit = userData[j][i].split(" ");
+                    content += `<div class="userData-popup">${userDataSplit[0]==""?"":"借用人: "+userDataSplit[0]}${userDataSplit[1]==""?"":"<br>信箱: "+userDataSplit[1]}${userDataSplit[2]=="null"?"":"<br>電話: "+userDataSplit[2]}</div>`;
+                }
+                content += "</td>";
+            }
+            content += `</tr>`;
         }
+
         content += "</table>";
         return content;
     }
+    // 顯示使用者訊息
+    const userDataCells = document.querySelectorAll('.userDataCell');
 
-    function applicationForm() {
-        window.location.href = "Application form.html";
-    }
+    userDataCells.forEach(cell => {
+        cell.addEventListener('mouseover', function () {
+            const popup = this.querySelector('.userData-popup');
+            popup.style.display = 'block';
+        });
+
+        cell.addEventListener('mouseout', function () {
+            const popup = this.querySelector('.userData-popup');
+            popup.style.display = 'none';
+        });
+    });
 
     function closePopupClassroom() {
         popup.classList.remove("open-popup");

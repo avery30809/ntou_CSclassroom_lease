@@ -26,6 +26,12 @@ class UserController extends BaseController
                 case 'searchDate':
                     $this->handleSearchDate();
                     break;
+                case 'createApplicationForm':
+                    $this->createApplicationForm();
+                    break;
+                case 'getID':
+                    $this->getID();
+                    break;
                 default:
                     break;
             }
@@ -118,6 +124,19 @@ class UserController extends BaseController
         else {
             $this->sendOutput('請先進行認證');
         }
+    }
+    // 產生借用表單
+    private function createApplicationForm() {
+        
+    }
+
+    private function getID() {
+        $account = $_POST['account'];
+        $result = $this->userModel->accountGetID($account);
+        if($result)
+            $this->sendOutput($result[0]);
+        else 
+            $this->sendOutput("未找到使用者");
     }
 /* 
 * "/user/list" Endpoint - Get list of users 
