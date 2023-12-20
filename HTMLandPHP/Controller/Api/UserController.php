@@ -41,6 +41,7 @@ class UserController extends BaseController
             }
         }
     }
+    
     //獲取身分資訊
     private function getUserProfile() {
         //確保已經登入

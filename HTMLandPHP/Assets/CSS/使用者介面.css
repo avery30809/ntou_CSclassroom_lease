@@ -335,11 +335,9 @@ nav.close~.board {
 }
 
 .text.show {
-
     display: flex;
     flex-direction: column;
     margin-left: 30px;
-
     font-size: 20px;
 }
 

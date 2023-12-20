@@ -5,10 +5,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     });
     document.getElementById("menuBtn2").addEventListener("click", ()=>{
         clearAll();
-        showApplyrequest();
+        showApplyRequest();
     });
-    document.getElementById("immediatelyFormImg1").addEventListener("click", ()=>{toggleContent('applyRequestContent1','immediatelyFormImg1')});
-    document.getElementById("immediatelyFormImg2").addEventListener("click", ()=>{toggleContent('applyRequestContent2','immediatelyFormImg2')});
+
     let userInformation = document.getElementById("userInformation");
     let applyRequest = document.getElementById("applyRequest");
     const logoutButton = document.getElementById("logoutBtn");
@@ -24,7 +23,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     getUserProfile();
     function getUserProfile() {
         //獲取使用者身分
-        fetch("../../Controller/Api/UserController.php?action=getUserProfile")
+        fetch("../Controller/Api/UserController.php?action=getUserProfile")
         .then(response => response.json())
         .then(data => {
             if (data.error === undefined) {
@@ -41,7 +40,41 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
         });
     }
-
+    getApplyRequest();
+    function getApplyRequest() {
+        fetch("../Controller/Api/HistoryController.php?action=getApplyRequest")
+        .then(response => response.json())
+        .then(datas => {
+            datas.forEach((data, index) => {
+                applyRequest.innerHTML +=  `<div class="content">
+                                                <div class="title">
+                                                    <p>${data[0]}<img src="../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index}"></p>
+                                                </div>
+                                                <div class="text" data-index="${index}">
+                                                    <p>借用日期: ${data[8]}</p>
+                                                    <p>歸還日期: ${data[9] === null ? '未歸還' : data[9]}</p>
+                                                    <p>借用目的: ${data[5]}</p>
+                                                    <p>借用型態: ${data[6] === 1 ? '立即借用' : '預約借用'}</p>
+                                                    <div class="ApplyrequestText">
+                                                        <p>Start Time : </p>
+                                                        <p>End Time : </p>
+                                                        <p>第${data[3]}堂</p>
+                                                        <p>${data[4] === 9 ? "第9堂後" : `第${data[4]}堂`}</p>
+                                                        <button class=${data[7] === 1 ? 'OK' : 'accounting'}> ${data[7] === 1 ? '通過' : '審核中'}</button>
+                                                    </div>
+                                                </div>
+                                            </div>`;
+            });
+            document.querySelectorAll('.immediatelyFormImg').forEach(img => {
+                img.addEventListener('click', () => {
+                    const index = img.getAttribute('data-index');
+                    let applyRequestContent = document.querySelector(`.text[data-index="${index}"]`);
+                    applyRequestContent.classList.toggle("show");
+                    img.classList.toggle("show");
+                });
+            });
+        });
+    }
     function clearAll() {
         applyRequest.classList.remove("show");
         userInformation.classList.remove("show");
@@ -50,20 +83,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function showEditstate() {
         userInformation.classList.add("show");
     }
-
-    function showApplyrequest() {
-        applyRequest.classList.add("show");
-    }
-
-    function toggleContent(applyRequestContentId, applyRequestImageId) {
-        let applyRequestContent = document.getElementById(applyRequestContentId);
-        let applyRequestImage = document.getElementById(applyRequestImageId);
-        applyRequestContent.classList.toggle("show");
-        applyRequestImage.classList.toggle("show");
+    function showApplyRequest() {
+         applyRequest.classList.add("show");
     }
     logoutButton.addEventListener("click", () => {
-        fetch("../../Controller/Api/UserController.php?action=logout");
-        window.location.href = "../../Pages/Home.html";
+        fetch("../Controller/Api/UserController.php?action=logout");
+        window.location.href = "../Pages/Home.html";
     }, false);
-
 })

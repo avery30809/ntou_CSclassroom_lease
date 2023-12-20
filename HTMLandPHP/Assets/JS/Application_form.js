@@ -9,13 +9,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let isToday;
 
     getForm();
-
     getSearchDate();
     function getSearchDate() {
         // 獲取查詢的日期值
         let testForm = new FormData();
         testForm.append("action", "searchDate");
-        fetch("../../Controller/Api/UserController.php", {
+        fetch("../Controller/Api/UserController.php", {
             method: 'POST',
             body: testForm
         })
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
     let startTime, endTime, roomName;
     function getForm() {
-        fetch("../../Controller/Api/ClassroomController.php?action=getApplicationForm")
+        fetch("../Controller/Api/ClassroomController.php?action=getApplicationForm")
         .then(response => response.json())
         .then(data => {
             if(data["error"] === undefined) {
@@ -58,8 +57,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 formTitle.innerHTML = `${roomName}<sub class="date" id="selectedDatePlaceholder"></sub>`;
                 let newContent = '';
                 newContent += `<span>第${startTime}節</span>
-                                <img src="../../image/right.png">
-                                <span>第${endTime}節</span>`;
+                                <img src="../image/right.png">
+                                <span>${endTime === 9 ? "第9節後" : `第${endTime}節`}</span>`;
                 lineBlockDiv.insertAdjacentHTML('afterbegin', newContent);
             }
             else {
@@ -71,19 +70,26 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
     document.getElementById("form-title").innerHTML = `XXX教室<sub class="date" id="selectedDatePlaceholder"></sub>`;
     //////////////////////////////////////////////////////////////////////////////////////////
-    //待完成//待完成//待完成//待完成//待完成//待完成//待完成//待完成//待完成//待完成//待完成//待完成
     document.getElementById("sendOut").addEventListener("click", SendOut);
     function SendOut() {
         let formContent = document.getElementById("form_content");
         let testForm = new FormData();
+        let currentDate = new Date();
+        let formattedDate = currentDate.toISOString().slice(0, 19).replace("T", " ");
+        const historyForm = {
+            "roomName": roomName,
+            "date": formDate,
+            "startTime": startTime,
+            "endTime": endTime,
+            "content": formContent.value,
+            "immediate": (isToday ? 1 : 0),
+            "borrowTime": formattedDate
+        };
+        for (let key in historyForm) {
+            testForm.append(key, historyForm[key]);
+        }
         testForm.append("action", "submitForm");
-        testForm.append("roomName", roomName);
-        testForm.append("selectedDate", formDate);
-        testForm.append("startTime", startTime);
-        testForm.append("endTime", endTime);
-        testForm.append("immediate", isToday ? 1 : 0);
-        testForm.append("content", formContent.value);
-        fetch("../../Controller/Api/ClassroomController.php", {
+        fetch("../Controller/Api/HistoryController.php", {
             method: 'POST',
             body: testForm
         })
@@ -93,15 +99,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
             window.location.href = "index.html";
         });
     }
-
     document.getElementById("cancel").addEventListener("click", Cancel, false);
     function Cancel() {
         const testForm = new FormData();
-        testForm.append("action", "cancelForm")
-        fetch("../../Controller/Api/ClassroomController.php", {
+        testForm.append("action", "cancelForm");
+        fetch("../Controller/Api/ClassroomController.php", {
             method: 'POST',
             body: testForm
         });
         window.location.href = "index.html";
     }
-}, false)
+}, false);

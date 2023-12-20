@@ -9,4 +9,5 @@ require_once PROJECT_ROOT_PATH . "/Model/UserModel.php";
 require_once PROJECT_ROOT_PATH . "/Model/Database.php";
 require_once PROJECT_ROOT_PATH . "/Model/ClassroomModel.php";
 require_once PROJECT_ROOT_PATH . "/Model/VerificationModel.php";
+require_once PROJECT_ROOT_PATH . "/Model/HistoryModel.php";
 ?>

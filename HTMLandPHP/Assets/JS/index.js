@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         usericon: new Image()
     }
     for(const [key, value] of Object.entries(image)) {
-        value.src = `../../image/${key}.png`;
+        value.src = `../image/${key}.png`;
     }
     document.getElementById("homeIcon").src = image.home.src;
     document.getElementById("dropdownIcon").src = image.dropdownIcon.src;
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     getUserProfile();
     function getUserProfile() {
         //獲取使用者身分
-        fetch("../../Controller/Api/UserController.php?action=getUserProfile")
+        fetch("../Controller/Api/UserController.php?action=getUserProfile")
         .then(response => response.json())
         .then(data => {
             if(data.error === undefined) {
@@ -37,13 +37,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 document.getElementById("login-signup").innerHTML = "<img id='usericon'>" + user.username;
                 document.getElementById("usericon").src = image.usericon.src;
                 document.getElementById("login-signup").addEventListener("click", function (event) {
-                    window.location.href = "../../Pages/使用者介面.html";
+                    window.location.href = "../Pages/使用者介面.html";
                 }, false);
             }
             else {
                 //沒有登入就回首頁
                 window.alert("請先登入！");
-                window.location.href = "../../Pages/Home.html";
+                window.location.href = "../Pages/Home.html";
             }
         });
     }
@@ -52,8 +52,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function getSearchDate() {
         // 獲取查詢的日期值
         let testForm = new FormData();
-        testForm.append("action", "searchDate")
-        fetch("../../Controller/Api/UserController.php", {
+        testForm.append("action", "searchDate");
+        fetch("../Controller/Api/UserController.php", {
             method: 'POST',
             body: testForm
         })
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     getAllClassroomName();
     function getAllClassroomName() {
-        fetch("../../Controller/Api/ClassroomController.php?action=getAllClassroomName")
+        fetch("../Controller/Api/ClassroomController.php?action=getAllClassroomName")
         .then(response => response.json())
         .then(datas => {
             datas.forEach((data) => {
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
     }
     function getDateClassCondition() {
-        fetch("../../Controller/Api/ClassroomController.php?action=getCondition")
+        fetch("../Controller/Api/ClassroomController.php?action=getCondition")
         .then(response => response.json())
         .then(datas => {
             allClassroomName.forEach((room) => {
@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
             myForm.append("roomName", roomName);
             myForm.append("action", "createApplicationForm");
-            fetch("../../Controller/Api/ClassroomController.php", {
+            fetch("../Controller/Api/ClassroomController.php", {
                 method: 'POST',
                 body: myForm
             })
@@ -379,7 +379,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         popup.style.width = "900px";
         let roomName = event.target.innerHTML;
         document.getElementById("popupName").innerHTML = roomName + "課表";
-        fetch(`../../Controller/Api/ClassroomController.php?roomName=${roomName}&action=getWeeklySchedule`)
+        fetch(`../Controller/Api/ClassroomController.php?roomName=${roomName}&action=getWeeklySchedule`)
         .then(response=>response.json())
         .then(data => {
             let schedule =  [

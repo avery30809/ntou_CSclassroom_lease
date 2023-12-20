@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         formData.append("password", password);
         formData.append("operation", op);
         formData.append("action", "login");
-        fetch("../../Controller/Api/UserController.php", {
+        fetch("../Controller/Api/UserController.php", {
             method: "POST",
             body: formData
         })
@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
         .then(data => {
             let temp = data.split(' ');
             if (temp[0] === "登入成功！") {
-                if(temp[1] == 0) window.location.href = "../../Pages/Home.html";
-                else if(temp[1] == 1) window.location.href = "../../Pages/Admin interface.html";
+                if(temp[1] == 0) window.location.href = "../Pages/Home.html";
+                else if(temp[1] == 1) window.location.href = "../Pages/Admin interface.html";
             } else {
                 const errorMessage = document.getElementById("error-message");
                 errorMessage.innerText = temp[0];
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         formData.append("pwd",pwd);
         formData.append("confirm_pwd",confirm_pwd);
         formData.append("action", "register");
-        fetch('../../Controller/Api/UserController.php', {
+        fetch('../Controller/Api/UserController.php', {
             method: 'POST',
             body: formData
         })
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             formData.append("email", email);
             formData.append("action", "verification");
 
-            fetch('../../Controller/Api/VerificationController.php', {
+            fetch('../Controller/Api/VerificationController.php', {
                 method: 'POST',
                 body: formData
             })

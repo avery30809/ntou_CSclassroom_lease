@@ -18,8 +18,4 @@ class ClassroomModel extends Database{
         $result = $this->query("SELECT HourOfDay, Activity, username, email, phone FROM roomschedule NATURAL JOIN userdata WHERE RoomName = ? AND DateOfDay = ?", [$roomName, $date]);
         return $result;
     }
-    public function insertApplication($roomName, $userID, $date, $start, $end, $content, $immediate) {
-        $result = $this->query("INSERT IGNORE INTO userwantborrow(RoomName, userID, date, startTime, endTime, content, immediate)"
-                                . " VALUES (?,?,?,?,?,?,?)", [$roomName, $userID, $date, $start, $end, $content, $immediate]);
-    }
 }
