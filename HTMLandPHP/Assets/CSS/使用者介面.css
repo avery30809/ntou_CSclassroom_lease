@@ -148,6 +148,8 @@ nav.close li button .link-name {
 .menu-items .logout-mode {
     padding-top: 10px;
     border-top: 1px solid rgb(77, 63, 3);
+    position: absolute;
+    bottom: 10px;
 }
 
 
@@ -233,6 +235,11 @@ nav.close~.board {
     margin-bottom: 5px;
 }
 
+.userInformation #userAccount {
+    font-weight: 600;
+    font-size: 30px;
+}
+
 .userInformation .userInformationContent {
     display: flex;
     flex-direction: column;
@@ -255,20 +262,6 @@ nav.close~.board {
     width: 50%;
     font-size: 30px;
     border-radius: 10px;
-}
-
-.verification-button {
-    width: 80px;
-    margin-left: 10px;
-    background-color: rgba(220, 84, 84, 0.607) !important;
-    color: white;
-
-    border-radius: 10px;
-    text-decoration: none;
-
-    font-weight: 600;
-    font-size: 25px;
-
 }
 
 .saveUserInformation {

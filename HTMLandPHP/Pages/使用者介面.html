@@ -53,37 +53,35 @@
         <div class="board-content">
 
             <!--編輯使用者資訊 -->
-            <div class="userInformation" id="userInformation">
+            <form class="userInformation" id="userInformation">
                 <div class="boardTitle">編輯個人資訊</div>
                 <div class="hr"></div>
                 <div class="userInformationContent">
                     <p class="quention_text">姓名 : </p>
-                    <input type="text">
+                    <input id="infoName" type="text" name="username" required>
                 </div>
                 <div class="userInformationContent">
-                    <p class="quention_text">學號 :
-                        <button id="vertify" class="verification-button">驗證</button>
-                    </p>
-                    <input type="text">
+                    <p class="quention_text">學號 :</p>
+                    <p id="userAccount"></p>
 
                 </div>
                 <div class="userInformationContent">
                     <p class="quention_text">舊密碼 : </p>
-                    <input type="text">
+                    <input type="text" name="oldPWD">
                 </div>
                 <div class="userInformationContent">
                     <p class="quention_text">新密碼 : </p>
-                    <input type="text">
+                    <input type="text" name="newPWD">
                 </div>
                 <div class="userInformationContent">
                     <p class="quention_text">聯絡手機 : </p>
-                    <input type="text">
+                    <input id="infoPhone" type="text" name="phone">
                 </div>
 
                 <div class="userInformationContent">
-                    <button id="saveInfo" class="saveUserInformation">儲存</button>
+                    <button type="submit" class="saveUserInformation">儲存</button>
                 </div>
-            </div>
+            </form>
 
             <!--申請紀錄 -->
             <div class="Applyrequest" id="applyRequest">

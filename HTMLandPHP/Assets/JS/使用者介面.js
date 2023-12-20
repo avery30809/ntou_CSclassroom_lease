@@ -30,6 +30,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
             if (data.error === undefined) {
                 user = data;
                 logoName.innerHTML = user.username;
+                document.getElementById("infoName").value = user.username;
+                document.getElementById("userAccount").innerHTML = user.useraccount;
+                if(user.phone !== null) document.getElementById("infoPhone").value = user.phone;
             }
             else {
                 //沒有登入就回首頁
