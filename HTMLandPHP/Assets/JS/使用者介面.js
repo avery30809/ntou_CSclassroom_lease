@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     getUserProfile();
     function getUserProfile() {
         //獲取使用者身分
-        fetch("../Controller/Api/UserController.php?action=getUserProfile")
+        fetch("../../Controller/Api/UserController.php?action=getUserProfile")
         .then(response => response.json())
         .then(data => {
             if (data.error === undefined) {
@@ -42,13 +42,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
     getApplyRequest();
     function getApplyRequest() {
-        fetch("../Controller/Api/HistoryController.php?action=getApplyRequest")
+        fetch("../../Controller/Api/HistoryController.php?action=getApplyRequest")
         .then(response => response.json())
         .then(datas => {
             datas.forEach((data, index) => {
                 applyRequest.innerHTML +=  `<div class="content">
                                                 <div class="title">
-                                                    <p>${data[0]}<img src="../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index}"></p>
+                                                    <p>${data[0]}<img src="../../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index}"></p>
                                                 </div>
                                                 <div class="text" data-index="${index}">
                                                     <p>借用日期: ${data[8]}</p>
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
          applyRequest.classList.add("show");
     }
     logoutButton.addEventListener("click", () => {
-        fetch("../Controller/Api/UserController.php?action=logout");
-        window.location.href = "../Pages/Home.html";
+        fetch("../../Controller/Api/UserController.php?action=logout");
+        window.location.href = "../../Pages/Home.html";
     }, false);
 })

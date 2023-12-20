@@ -1,13 +1,13 @@
 let image = {
     home: new Image()
 };
-image.home.src = "../image/home.png";
+image.home.src = "../../image/home.png";
 
 document.addEventListener("DOMContentLoaded", () => {
     const allClassroomName = [];
     getClassroomName();
     function getClassroomName() {
-        fetch("../Controller/Api/ClassroomController.php?action=getAllClassroomName")
+        fetch("../../Controller/Api/ClassroomController.php?action=getAllClassroomName")
         .then(response => response.json())
         .then(datas => {
             datas.forEach((data) => {
@@ -115,12 +115,12 @@ document.addEventListener("DOMContentLoaded", () => {
         myForm.append("action", "fastInsert");
         myForm.set("start", StartTime.indexOf(myForm.get("start")));
         myForm.set("end", EndTime.indexOf(myForm.get("end")));
-        fetch(`../Controller/Api/UserController.php?account=${myForm.get("userAccount")}&action=getID`)
+        fetch(`../../Controller/Api/UserController.php?account=${myForm.get("userAccount")}&action=getID`)
         .then(response => response.text())
         .then(data => {
             if(data !== "未找到使用者") {
                 myForm.append("userID", data);
-                fetch("../Controller/Api/ClassroomController.php", {
+                fetch("../../Controller/Api/ClassroomController.php", {
                     method: 'POST',
                     body: myForm
                 })
@@ -233,12 +233,12 @@ document.addEventListener("DOMContentLoaded", () => {
         myForm.set("week", WeekTime.indexOf(myForm.get("week")));
         myForm.set("start", StartTime.indexOf(myForm.get("start")));
         myForm.set("end", EndTime.indexOf(myForm.get("end")));
-        fetch(`../Controller/Api/UserController.php?account=${myForm.get("userAccount")}&action=getID`)
+        fetch(`../../Controller/Api/UserController.php?account=${myForm.get("userAccount")}&action=getID`)
         .then(response => response.text())
         .then(data => {
             if(data !== "未找到使用者"){
                 myForm.append("userID", data);
-                fetch("../Controller/Api/ClassroomController.php", {
+                fetch("../../Controller/Api/ClassroomController.php", {
                     method: 'POST',
                     body: myForm
                 })

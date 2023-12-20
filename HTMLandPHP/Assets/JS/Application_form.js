@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         // 獲取查詢的日期值
         let testForm = new FormData();
         testForm.append("action", "searchDate");
-        fetch("../Controller/Api/UserController.php", {
+        fetch("../../Controller/Api/UserController.php", {
             method: 'POST',
             body: testForm
         })
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
     let startTime, endTime, roomName;
     function getForm() {
-        fetch("../Controller/Api/ClassroomController.php?action=getApplicationForm")
+        fetch("../../Controller/Api/ClassroomController.php?action=getApplicationForm")
         .then(response => response.json())
         .then(data => {
             if(data["error"] === undefined) {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 formTitle.innerHTML = `${roomName}<sub class="date" id="selectedDatePlaceholder"></sub>`;
                 let newContent = '';
                 newContent += `<span>第${startTime}節</span>
-                                <img src="../image/right.png">
+                                <img src="../../image/right.png">
                                 <span>${endTime === 9 ? "第9節後" : `第${endTime}節`}</span>`;
                 lineBlockDiv.insertAdjacentHTML('afterbegin', newContent);
             }
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             testForm.append(key, historyForm[key]);
         }
         testForm.append("action", "submitForm");
-        fetch("../Controller/Api/HistoryController.php", {
+        fetch("../../Controller/Api/HistoryController.php", {
             method: 'POST',
             body: testForm
         })
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function Cancel() {
         const testForm = new FormData();
         testForm.append("action", "cancelForm");
-        fetch("../Controller/Api/ClassroomController.php", {
+        fetch("../../Controller/Api/ClassroomController.php", {
             method: 'POST',
             body: testForm
         });
