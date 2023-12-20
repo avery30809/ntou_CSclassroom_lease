@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     const signupform = document.getElementById("signup-form");
     const loginform = document.getElementById("login-form");
+
+    const forgetPWD = document.getElementById('forgetPWD');
+    const back = document.getElementById('back');
+
     registerBtn.addEventListener('click', () => {
         container.classList.add("active");
     });
@@ -105,7 +109,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }
     });
     //忘記密碼
-    document.getElementById("forgetPWD").addEventListener("click", ()=>{
-        //TODO
+    // document.getElementById("forgetPWD").addEventListener("click", ()=>{
+    //     container.classList.add("down");
+    // }, false);
+
+    forgetPWD.addEventListener('click', () => {
+        container.classList.add("down");
     }, false);
+    back.addEventListener('click', () => {
+        container.classList.remove("down");
+    }, false);
+
 })

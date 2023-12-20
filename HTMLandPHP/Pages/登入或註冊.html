@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,11 @@
     <link rel="stylesheet" href="../Assets/CSS/登入或註冊.css">
 </head>
 
-<body>
+<body style="background-image: url('../image/classroom\ cover.jpg');">
+    <a href="Home.html">
+        <img src="../image/home.png" style="width: 80px;position:absolute;top:30px;left: 30px;">
+    </a>
     <div class="container" id="container">
-
         <!-- 註冊表單 -->
         <div class="form-container sign-up">
             <form id="signup-form" method="POST">
@@ -17,7 +20,8 @@
                 <input type="text" id="signup_username" name="username" placeholder="姓名" required>
                 <div class="email">
                     <input type="text" id="signup_account" class="email-text" name="account" placeholder="學號">
-                    <span style="color: grey; position: relative; top: 27px;font-size: 50%;width: 100px">@mail.ntou.edu.tw</span>
+                    <span
+                        style="color: grey; position: relative; top: 27px;font-size: 50%;width: 100px">@mail.ntou.edu.tw</span>
                     <button id="vertify" class="verification-button" type="button">驗證</button>
                 </div>
                 <input type="text" id="signup_verification_code" name="verification_code" placeholder="驗證碼" required>
@@ -35,8 +39,36 @@
                 <h1 id="error-message" style="color: red; font-size: 90%; display: none;">帳號或密碼錯誤</h1>
                 <input type="text" id="signin_account" name="account" placeholder="學號">
                 <input type="password" id="signin_pwd" name="password" placeholder="密碼">
-                <a href="" id="forgetPWD">忘記密碼了嗎 ?</a>
+                <a href="#" id="forgetPWD">忘記密碼了嗎 ?</a>
                 <button type="submit" name="sign-in-submit">Sign In</button>
+            </form>
+        </div>
+
+        <!-- 忘記密碼表單 -->
+        <div class="form-container forgetPassword">
+
+            <form
+                style="background-image: url('../image/kb.jpg'); background-repeat: no-repeat; background-position: center right;  background-size: 100% 110%;">
+
+                <a href="#" id="back"
+                    style="display: flex; margin-right: auto; margin-left: 30px; font-size: 30px !important; text-decoration: none;">
+                    <img src="../image/back.png" style="width: 40px; margin-top: auto;">
+                </a>
+                <h1 style="color: white;">忘記密碼</h1>
+                <div class="forget">
+                    <input type="text" id="signup_account" class="xxx-text" name="account" placeholder="學號">
+                    <span
+                        style="color: white; position: relative; top: 27px;font-size: 50%;width: 100px">@mail.ntou.edu.tw</span>
+                    <button id="vertify" class="verification2-button">驗證</button>
+                </div>
+                <input type="text" id="signup_verification_code" name="verification_code" placeholder="驗證碼" required>
+
+                <button type="submit" name="sign-in-submit">重新登入</button>
+            </form>
+        </div>
+
+        <div class="form-container blank">
+            <form>
             </form>
         </div>
 
