@@ -9,6 +9,7 @@
     <script src="../Assets/JS/Admin_interface.js"></script>
 </head>
 
+
 <body>
     <nav>
         <!-- 左上半部欄位  -->
@@ -17,7 +18,7 @@
                 <img src="../image/usericon.png" alt="">
             </div>
 
-            <span class="logo_name">系統管理員</span>
+            <span class="logo_name" id="username" style="cursor: pointer;">系統管理員</span>
 
         </div>
 
@@ -25,35 +26,45 @@
         <div class="menu-items">
             <ul class="nav-links">
                 <li><button class="menu-borrowRequest">
-                        <i><img src="../image/request40.png" alt=""></i>
+                        <i><img src="../image/request40.png" width="50px"></i>
                         <span class="link-name">借用請求</span>
                     </button></li>
                 <li><button class="menu-keyRecord">
-                        <i><img src="../image/keyrecord40.png" alt=""></i>
+                        <i><img src="../image/keyrecord40.png" width="50px"></i>
                         <span class="link-name">鑰匙借用紀錄</span>
                     </button></li>
                 <li><button class="menu-classSchedule">
-                        <i><img src="../image/keyrecord40.png" alt=""></i>
+                        <i><img src="../image/timetable.png" width="50px"></i>
                         <span class="link-name">課表排程</span>
                     </button></li>
                 <li><button class="menu-classroomInquiry">
-                        <i><img src="../image/keyrecord40.png" alt=""></i>
+                        <i><img src="../image/test.gif" width="50px"></i>
                         <span class="link-name">教室查詢</span>
                     </button></li>
+            </ul>
+
+            <ul class="logout-mode">
+                <li class="logout">
+                    <button id="logoutBtn">
+                        <i><img src="../image/logoutIcon.png" alt=""></i>
+                        <span class="link-name">登出</span>
+                    </button>
+                </li>
             </ul>
         </div>
     </nav>
 
     <section class="board">
         <!-- 右上半部欄位  -->
-        <div class="top">
+        <div class="top" style="background-color: #f9f7ea;">
             <i class="sidebar-toggle"><img src="../image/left.png" class="leftArrow" id="leftArrow"></i>
             <a href="Home.html"><img src="../image/home.png" alt=""></a>
 
         </div>
 
         <!-- 右下半部欄位  -->
-        <div class="board-content">
+        <div class="board-content"
+            style="background-color: #f9f7ea; background-image: url('../image/test4.gif'); background-position: center bottom; background-size: 50% 25%; background-repeat: no-repeat; opacity: 1;">
             <!-- 借用請求 -->
             <div class="borrowRequest" id="borrowRequest">
 
@@ -67,7 +78,8 @@
                 <div class="immediatelyForm">
                     <div class="content">
                         <div class="title">
-                            <p>XXX教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg1" alt="immediatelyFormImg2"></p>
+                            <p>XXX教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg1"
+                                    alt="immediatelyFormImg2"></p>
                         </div>
                         <div class="text" id="immediatelyFormContent1">
                             <p>艾利</p>
@@ -85,7 +97,8 @@
 
                     <div class="content">
                         <div class="title">
-                            <p>XXX教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg2" alt="immediatelyFormImg2"></p>
+                            <p>XXX教室 <img src="../image/dropdownIcon48.png" id="immediatelyFormImg2"
+                                    alt="immediatelyFormImg2"></p>
                         </div>
                         <div class="text" id="immediatelyFormContent2">
                             <p>艾利</p>
@@ -109,7 +122,8 @@
                 <div class="reserveForm">
                     <div class="content">
                         <div class="title">
-                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg1" alt="reserveFormImg1"> </p>
+                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg1" alt="reserveFormImg1">
+                            </p>
                         </div>
                         <div class="text" id="reserveFormContent1">
                             <p>艾利</p>
@@ -126,7 +140,8 @@
                     </div>
                     <div class="content">
                         <div class="title">
-                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg2" alt="reserveFormImg2"></p>
+                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg2" alt="reserveFormImg2">
+                            </p>
                         </div>
                         <div class="text" id="reserveFormContent2">
                             <p>艾利</p>
@@ -143,7 +158,8 @@
                     </div>
                     <div class="content">
                         <div class="title">
-                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg3" alt="reserveFormImg3"></p>
+                            <p>YYY教室<img src="../image/dropdownIcon48.png" id="reserveFormImg3" alt="reserveFormImg3">
+                            </p>
                         </div>
                         <div class="text" id="reserveFormContent3">
                             <p>艾利</p>
@@ -174,150 +190,183 @@
                     <span>艾利</span>
                     <span>4.PM</span>
                     <span>5.PM</span>
-                    <span>未歸還</span>
+
+                    <!-- 雙重按鈕確認歸還 -->
+                    <button id="returnButton" onclick="keyDoubleCheck()">未歸還</button>
+
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" id="closeModal">&times;</span>
+                            <p>已確認使用者歸還嗎？</p>
+                            <button id="confirmBtn">確認</button>
+                            <button id="cancelBtn">取消</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- 課表排程 -->
-            <div class="classSchedule" id="classSchedule">
+            <div class="classSchedule" id="classSchedule" style="border: 1px solid;">
 
                 <!-- 兩個按鈕選擇顯示快速新增還是課表新增 -->
                 <div class="classScheduleConditions">
-                    <button class="fastAdd" id="fastAdd">快速新增</button>
+                    <button class="fastAdd" id="fastAdd" >快速新增</button>
                     <button class="classAdd" id="classAdd">課表新增</button>
                 </div>
 
                 <!-- 快速新增 -->
                 <form class="fastAddForm">
-                    <div class="classScheduleTitle">
-                        <h1>單一新增</h1>
-                        <div>借用人學號: </div>
-                        <input type="text" name="userAccount" required>
-                        <div>課程名稱: </div>
-                        <input type="text" name="activity" required>
+                    <h1 style="width: 100%; display: flex; justify-content: center;font-size: 30px;">單一新增</h1>
+                    <div class="classScheduleContainer">
 
-                        <div>使用教室: </div>
-                        <div class="fastSelectRoom">
-                            <input class="fastDropdownBox" type="text" id="fastRoomBox" name="room" readonly>
-                            <div class="fastDropdown" id="fastDropdownRoom">
-                                <ul id="fastRoomSelect"></ul>
-                            </div>
+                        <div class="fastAddForm_left">
+                            <p>借用人學號: </p>
+                            <input type="text" name="userAccount" required>
+                            <p style="margin-top: 10px;">課程名稱: </p>
+                            <input type="text" name="activity" required>
+                            <p style="margin-top: 10px;">選擇日期:
+                                <input type="date" id="datePicker" name="date" required>
+                            </p>
                         </div>
-                        <div>選擇節次:</div>
-                        <div class="fastSelectLesson">
-                            <input class="fastDropdownBox" type="text" id="fastLessonBoxStart" value="第一節" name="start" readonly>
-                            <div class="fastDropdown" id="fastDropdownLessonStart">
-                                <ul id="fastLessonSelectStart">
-                                    <li>第一節</li>
-                                    <li>第二節</li>
-                                    <li>第三節</li>
-                                    <li>第四節</li>
-                                    <li>第五節</li>
-                                    <li>第六節</li>
-                                    <li>第七節</li>
-                                    <li>第八節</li>
-                                    <li>第九節</li>
-                                </ul>
+                        
+                        <div class="fastAddForm_right">
+                            <p>使用教室:</p>
+                            <div class="fastSelectRoom">
+                                <input class="fastDropdownBox" type="text" id="fastRoomBox" name="room" readonly>
+                                <div class="fastDropdown" id="fastDropdownRoom">
+                                    <ul id="fastRoomSelect"></ul>
+                                </div>
                             </div>
-                        </div>
-                        <span style="transform: rotate(90deg) translateX(-50%); font-size: 24px; margin-inline: auto">~</span>
-                        <div class="fastSelectLesson">
-                            <input class="fastDropdownBox" type="text" id="fastLessonBoxEnd" value="第一節" name="end" readonly>
-                            <div class="fastDropdown" id="fastDropdownLessonEnd">
-                                <ul id="fastLessonSelectEnd">
-                                    <li>第一節</li>
-                                    <li>第二節</li>
-                                    <li>第三節</li>
-                                    <li>第四節</li>
-                                    <li>第五節</li>
-                                    <li>第六節</li>
-                                    <li>第七節</li>
-                                    <li>第八節</li>
-                                    <li>第九節</li>
-                                </ul>
+                            <p>選擇節次:</p>
+                            <div class="fastSelectLesson">
+                                <input class="fastDropdownBox" type="text" id="fastLessonBoxStart" value="第一節"
+                                    name="start" readonly>
+                                <div class="fastDropdown" id="fastDropdownLessonStart">
+                                    <ul id="fastLessonSelectStart">
+                                        <li>第一節</li>
+                                        <li>第二節</li>
+                                        <li>第三節</li>
+                                        <li>第四節</li>
+                                        <li>第五節</li>
+                                        <li>第六節</li>
+                                        <li>第七節</li>
+                                        <li>第八節</li>
+                                        <li>第九節</li>
+                                    </ul>
+                                </div>
                             </div>
+                            <span
+                                style="transform: rotate(90deg) translateX(-50%); font-size: 24px; margin-inline: auto">~</span>
+                            <div class="fastSelectLesson">
+                                <input class="fastDropdownBox" type="text" id="fastLessonBoxEnd" value="第一節" name="end"
+                                    readonly>
+                                <div class="fastDropdown" id="fastDropdownLessonEnd">
+                                    <ul id="fastLessonSelectEnd">
+                                        <li>第一節</li>
+                                        <li>第二節</li>
+                                        <li>第三節</li>
+                                        <li>第四節</li>
+                                        <li>第五節</li>
+                                        <li>第六節</li>
+                                        <li>第七節</li>
+                                        <li>第八節</li>
+                                        <li>第九節</li>
+                                    </ul>
+                                </div>
+                            </div>
+
                         </div>
-                        <div>選擇日期: </div>
-                        <input type="date" id="datePicker" name="date" required>
-                        <button type="submit" id="fastSubmit">提交</button>
+                        
                     </div>
-
+                    <button type="submit" id="fastSubmit" style="width: 100%;">提交</button>
                 </form>
+
                 <!-- 課表新增 -->
                 <form class="classAddForm">
-                    <h1>學期新增</h1>
-                        <div class="classScheduleBody">
-                            <div class="classSchedulePage">
-                                <div>選擇學期: </div>
-                                <input type="date" id="semesterSelectStart" name="semesterStart" required>
-                                <span style="transform: rotate(90deg) translateX(-50%); font-size: 35px; margin-inline: auto;">~</span>
-                                <input type="date" id="semesterSelectEnd" name="semesterEnd" required>
-                                <div>選擇星期: </div>
-                                <div class="classSelectWeek">
-                                    <input class="classDropdownBox" type="text" id="classWeekBox" value="星期一" name="week" readonly>
-                                    <div class="classDropdown" id="classDropdownWeek">
-                                        <ul id="classWeekSelect">
-                                            <li>星期一</li>
-                                            <li>星期二</li>
-                                            <li>星期三</li>
-                                            <li>星期四</li>
-                                            <li>星期五</li>
-                                            <li>星期六</li>
-                                            <li>星期日</li>
-                                        </ul>
-                                    </div>
+                    <h1 style="display: flex; justify-content: center; font-size: 30px; margin-right: 140px;">學期新增</h1>
+                    <div class="classScheduleBody">
+                        <div class="classScheduleTitle">
+                            <p>借用人學號: </p>
+                            <input type="text" name="userAccount" required>
+                            <p>使用教室: </p>
+                            <div class="classSelectRoom">
+                                <input class="classDropdownBox" type="text" id="classRoomBox" name="room" readonly>
+                                <div class="classDropdown" id="classDropdownRoom">
+                                    <ul id="classRoomSelect"></ul>
                                 </div>
                             </div>
-                            <div class="classScheduleTitle">
-                                <div>借用人學號: </div>
-                                <input type="text" name="userAccount" required>
-                                <div>課程名稱: </div>
-                                <input type="text" name="activity" required>
-                                <div>使用教室: </div>
-                                <div class="classSelectRoom">
-                                    <input class="classDropdownBox" type="text" id="classRoomBox" name="room" readonly>
-                                    <div class="classDropdown" id="classDropdownRoom">
-                                        <ul id="classRoomSelect"></ul>
-                                    </div>
+                            <p>選擇學期: </p>
+                            <input type="date" id="semesterSelectStart" name="semesterStart" required>
+                            <p style="display: flex; justify-content: center; margin-bottom: 10px;margin-top: 8px; font-size: 30px;"> ⇕</p>
+                            <input type="date" id="semesterSelectEnd" name="semesterEnd" required>
+                           
+                           
+                            
+                        </div>
+                        
+                        <div class="classSchedulePage">
+                            <p>課程名稱: </p>
+                            <input type="text" name="activity" required>
+                            <p>選擇星期: </p>
+                            <div class="classSelectWeek">
+                                <input class="classDropdownBox" type="text" id="classWeekBox" value="星期一" name="week"
+                                    readonly>
+                                <div class="classDropdown" id="classDropdownWeek">
+                                    <ul id="classWeekSelect">
+                                        <li>星期一</li>
+                                        <li>星期二</li>
+                                        <li>星期三</li>
+                                        <li>星期四</li>
+                                        <li>星期五</li>
+                                        <li>星期六</li>
+                                        <li>星期日</li>
+                                    </ul>
                                 </div>
-                                <div>選擇節次:</div>
-                                <div class="classSelectLesson">
-                                    <input class="classDropdownBox" type="text" id="classLessonBoxStart" value="第一節" name="start" readonly>
-                                    <div class="classDropdown" id="classDropdownLessonStart">
-                                        <ul id="classLessonSelectStart">
-                                            <li>第一節</li>
-                                            <li>第二節</li>
-                                            <li>第三節</li>
-                                            <li>第四節</li>
-                                            <li>第五節</li>
-                                            <li>第六節</li>
-                                            <li>第七節</li>
-                                            <li>第八節</li>
-                                            <li>第九節</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <span style="transform: rotate(90deg) translateX(-50%); font-size: 24px; margin-inline: auto">~</span>
-                                <div class="classSelectLesson">
-                                    <input class="classDropdownBox" type="text" id="classLessonBoxEnd" value="第一節" name="end" readonly>
-                                    <div class="classDropdown" id="classDropdownLessonEnd">
-                                        <ul id="classLessonSelectEnd">
-                                            <li>第一節</li>
-                                            <li>第二節</li>
-                                            <li>第三節</li>
-                                            <li>第四節</li>
-                                            <li>第五節</li>
-                                            <li>第六節</li>
-                                            <li>第七節</li>
-                                            <li>第八節</li>
-                                            <li>第九節</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <button type="submit" id="classSubmit">提交</button>
                             </div>
+
+                             <p>選擇節次:</p>
+                            <div class="classSelectLesson">
+                                <input class="classDropdownBox" type="text" id="classLessonBoxStart" value="第一節"
+                                    name="start" readonly>
+                                <div class="classDropdown" id="classDropdownLessonStart">
+                                    <ul id="classLessonSelectStart">
+                                        <li>第一節</li>
+                                        <li>第二節</li>
+                                        <li>第三節</li>
+                                        <li>第四節</li>
+                                        <li>第五節</li>
+                                        <li>第六節</li>
+                                        <li>第七節</li>
+                                        <li>第八節</li>
+                                        <li>第九節</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p style="display: flex; justify-content: center; margin-bottom: 15px; font-size: 30px;"> ⇕</p>
+                            <!-- <span style="transform: rotate(90deg) translateX(-50%);margin-inline: auto;">~</span> -->
+                            <div class="classSelectLesson">
+                                <input class="classDropdownBox" type="text" id="classLessonBoxEnd" value="第一節"
+                                    name="end" readonly>
+                                <div class="classDropdown" id="classDropdownLessonEnd">
+                                    <ul id="classLessonSelectEnd">
+                                        <li>第一節</li>
+                                        <li>第二節</li>
+                                        <li>第三節</li>
+                                        <li>第四節</li>
+                                        <li>第五節</li>
+                                        <li>第六節</li>
+                                        <li>第七節</li>
+                                        <li>第八節</li>
+                                        <li>第九節</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
+                    <button type="submit" id="classSubmit" style="width: 100%; margin-top: 20px;">提交</button>
                 </form>
+
             </div>
 
             <!-- 教室查詢 -->
@@ -333,7 +382,7 @@
                     <datalist id="classroomNameList"></datalist>
 
                     <button>提交</button>
-                    
+
                     <span>選擇日期: <input type="date" id="datePicker" name="datePicker"></span>
                     <button>提交</button>
                 </div>

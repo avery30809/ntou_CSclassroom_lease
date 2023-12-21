@@ -36,47 +36,47 @@ document.addEventListener("DOMContentLoaded", () => {
         StartTime = ["第一節", "第二節", "第三節", "第四節", "第五節", "第六節", "第七節", "第八節", "第九節"],
         EndTime = ["第一節", "第二節", "第三節", "第四節", "第五節", "第六節", "第七節", "第八節", "第九節"],
         WeekTime = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
-    document.getElementById("fastRoomBox").addEventListener("click", (event)=>{
+    document.getElementById("fastRoomBox").addEventListener("click", (event) => {
         event.stopPropagation();
         event.target.parentElement.classList.toggle("checked");
         fastDropdownRoom.classList.toggle("show");
         fastDropdownLessonStart.classList.remove("show");
         fastDropdownLessonEnd.classList.remove("show");
-        document.querySelectorAll(".checked").forEach((element)=>{
-            if(element != event.target.parentElement)
+        document.querySelectorAll(".checked").forEach((element) => {
+            if (element != event.target.parentElement)
                 element.classList.remove("checked");
         });
     });
-    document.getElementById("fastLessonBoxStart").addEventListener("click", (event)=>{
+    document.getElementById("fastLessonBoxStart").addEventListener("click", (event) => {
         event.stopPropagation();
         event.target.parentElement.classList.toggle("checked");
         fastDropdownLessonStart.classList.toggle("show");
         fastDropdownRoom.classList.remove("show");
         fastDropdownLessonEnd.classList.remove("show");
-        document.querySelectorAll(".checked").forEach((element)=>{
-            if(element != event.target.parentElement)
+        document.querySelectorAll(".checked").forEach((element) => {
+            if (element != event.target.parentElement)
                 element.classList.remove("checked");
         });
     });
-    document.getElementById("fastLessonBoxEnd").addEventListener("click", (event)=>{
+    document.getElementById("fastLessonBoxEnd").addEventListener("click", (event) => {
         event.stopPropagation();
         event.target.parentElement.classList.toggle("checked");
         fastDropdownLessonEnd.classList.toggle("show");
         fastDropdownRoom.classList.remove("show");
         fastDropdownLessonStart.classList.remove("show");
-        document.querySelectorAll(".checked").forEach((element)=>{
-            if(element != event.target.parentElement)
+        document.querySelectorAll(".checked").forEach((element) => {
+            if (element != event.target.parentElement)
                 element.classList.remove("checked");
         });
     });
-    document.addEventListener("click",(event)=>{
-        document.querySelectorAll(".fastDropdown").forEach((element)=>{
+    document.addEventListener("click", (event) => {
+        document.querySelectorAll(".fastDropdown").forEach((element) => {
             element.classList.remove("show");
         });
-        document.querySelectorAll(".checked").forEach((element)=>{
+        document.querySelectorAll(".checked").forEach((element) => {
             element.classList.remove("checked");
         });
-        document.querySelectorAll(".classDropdown").forEach((element)=>{
+        document.querySelectorAll(".classDropdown").forEach((element) => {
             element.classList.remove("show");
         });
     }, false);
@@ -84,13 +84,13 @@ document.addEventListener("DOMContentLoaded", () => {
         fastLessonBoxStart = document.getElementById("fastLessonBoxStart"),
         fastLessonBoxEnd = document.getElementById("fastLessonBoxEnd");
 
-    document.getElementById("fastLessonSelectStart").childNodes.forEach((element)=>{
-        element.addEventListener("click", ()=>{
+    document.getElementById("fastLessonSelectStart").childNodes.forEach((element) => {
+        element.addEventListener("click", () => {
             fastLessonBoxStart.value = element.innerHTML;
             fastLessonBoxEnd.value = element.innerHTML;
             let i = StartTime.indexOf(element.innerHTML);
             document.getElementById("fastLessonSelectEnd").innerHTML = "";
-            EndTime.slice(i).forEach((time)=>{
+            EndTime.slice(i).forEach((time) => {
                 let newItem = document.createElement("li");
                 newItem.innerHTML = time;
                 newItem.addEventListener("click", () => {
@@ -101,15 +101,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }, false);
     });
 
-    document.getElementById("fastLessonSelectEnd").childNodes.forEach((element)=>{
-        element.addEventListener("click", ()=>{
+    document.getElementById("fastLessonSelectEnd").childNodes.forEach((element) => {
+        element.addEventListener("click", () => {
             fastLessonBoxEnd.value = element.innerHTML;
         }, false);
     });
 
     const fastForm = document.querySelector(".fastAddForm");
 
-    fastForm.addEventListener("submit", (event)=>{
+    fastForm.addEventListener("submit", (event) => {
         event.preventDefault();
         let myForm = new FormData(fastForm);
         myForm.append("action", "fastInsert");
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         classDropdownLessonStart = document.getElementById("classDropdownLessonStart"),
         classDropdownLessonEnd = document.getElementById("classDropdownLessonEnd");
 
-    document.getElementById("classWeekBox").addEventListener("click", (event)=>{
+    document.getElementById("classWeekBox").addEventListener("click", (event) => {
         event.stopPropagation();
         event.target.parentElement.classList.toggle("checked");
         classDropdownWeek.classList.toggle("show");
@@ -150,39 +150,39 @@ document.addEventListener("DOMContentLoaded", () => {
         classDropdownLessonEnd.classList.remove("show");
     });
 
-    document.getElementById("classRoomBox").addEventListener("click", (event)=>{
+    document.getElementById("classRoomBox").addEventListener("click", (event) => {
         event.stopPropagation();
         event.target.parentElement.classList.toggle("checked");
         classDropdownRoom.classList.toggle("show");
         classDropdownWeek.classList.remove("show");
         classDropdownLessonStart.classList.remove("show");
         classDropdownLessonEnd.classList.remove("show");
-        document.querySelectorAll(".checked").forEach((element)=>{
-            if(element != event.target.parentElement)
+        document.querySelectorAll(".checked").forEach((element) => {
+            if (element != event.target.parentElement)
                 element.classList.remove("checked");
         });
     });
-    document.getElementById("classLessonBoxStart").addEventListener("click", (event)=>{
+    document.getElementById("classLessonBoxStart").addEventListener("click", (event) => {
         event.stopPropagation();
         event.target.parentElement.classList.toggle("checked");
         classDropdownLessonStart.classList.toggle("show");
         classDropdownWeek.classList.remove("show");
         classDropdownRoom.classList.remove("show");
         classDropdownLessonEnd.classList.remove("show");
-        document.querySelectorAll(".checked").forEach((element)=>{
-            if(element != event.target.parentElement)
+        document.querySelectorAll(".checked").forEach((element) => {
+            if (element != event.target.parentElement)
                 element.classList.remove("checked");
         });
     });
-    document.getElementById("classLessonBoxEnd").addEventListener("click", (event)=>{
+    document.getElementById("classLessonBoxEnd").addEventListener("click", (event) => {
         event.stopPropagation();
         event.target.parentElement.classList.toggle("checked");
         classDropdownLessonEnd.classList.toggle("show");
         classDropdownWeek.classList.remove("show");
         classDropdownRoom.classList.remove("show");
         classDropdownLessonStart.classList.remove("show");
-        document.querySelectorAll(".checked").forEach((element)=>{
-            if(element != event.target.parentElement)
+        document.querySelectorAll(".checked").forEach((element) => {
+            if (element != event.target.parentElement)
                 element.classList.remove("checked");
         });
     });
@@ -190,20 +190,20 @@ document.addEventListener("DOMContentLoaded", () => {
         classRoom = document.getElementById("classRoomBox"),
         classLessonBoxStart = document.getElementById("classLessonBoxStart"),
         classLessonBoxEnd = document.getElementById("classLessonBoxEnd");
-    
-    document.getElementById("classWeekSelect").childNodes.forEach((element)=>{
-        element.addEventListener("click", ()=>{
+
+    document.getElementById("classWeekSelect").childNodes.forEach((element) => {
+        element.addEventListener("click", () => {
             classWeek.value = element.innerHTML;
         }, false);
     }, false);
 
-    document.getElementById("classLessonSelectStart").childNodes.forEach((element)=>{
-        element.addEventListener("click", ()=>{
+    document.getElementById("classLessonSelectStart").childNodes.forEach((element) => {
+        element.addEventListener("click", () => {
             classLessonBoxStart.value = element.innerHTML;
             classLessonBoxEnd.value = element.innerHTML;
             let i = StartTime.indexOf(element.innerHTML);
             document.getElementById("classLessonSelectEnd").innerHTML = "";
-            EndTime.slice(i).forEach((time)=>{
+            EndTime.slice(i).forEach((time) => {
                 let newItem = document.createElement("li");
                 newItem.innerHTML = time;
                 newItem.addEventListener("click", () => {
@@ -214,18 +214,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }, false);
     });
 
-    document.getElementById("classLessonSelectEnd").childNodes.forEach((element)=>{
-        element.addEventListener("click", ()=>{
+    document.getElementById("classLessonSelectEnd").childNodes.forEach((element) => {
+        element.addEventListener("click", () => {
             classLessonBoxEnd.value = element.innerHTML;
         }, false);
     });
 
     const classForm = document.querySelector(".classAddForm");
 
-    classForm.addEventListener("submit", (event)=>{
+    classForm.addEventListener("submit", (event) => {
         event.preventDefault();
         let myForm = new FormData(classForm);
-        if(myForm.get("semesterStart") > myForm.get("semesterEnd")) {
+        if (myForm.get("semesterStart") > myForm.get("semesterEnd")) {
             window.alert("學期開始時間不得大於結束時間！");
             return;
         }
@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const body = document.querySelector("body"),
         sidebar = body.querySelector("nav"),
         leftArrow = document.getElementById("leftArrow"),
-    sidebarToggle = body.querySelector(".sidebar-toggle");
+        sidebarToggle = body.querySelector(".sidebar-toggle");
 
     sidebarToggle.addEventListener("click", () => {
         sidebar.classList.toggle("close");
@@ -266,6 +266,10 @@ document.addEventListener("DOMContentLoaded", () => {
             leftArrow.classList.remove("show");
         }
     })
+    let username = document.getElementById("username");
+    username.addEventListener("click", () => {
+        window.location.href = "使用者介面.html";
+    });
 
     // 當點擊左側選當後在右側顯示
     let borrowRequestBtn = document.querySelector(".menu-borrowRequest");
@@ -276,29 +280,29 @@ document.addEventListener("DOMContentLoaded", () => {
     let keyRecord = document.getElementById("keyRecord");
     let classSchedule = document.getElementById("classSchedule");
     let classroomInquiry = document.getElementById("classroomInquiry");
-    
+
     borrowRequestBtn.addEventListener("click", () => {
         showBtn("borrowRequest");
     });
-    
+
     keyRecordBtn.addEventListener("click", () => {
         showBtn("keyRecord");
     });
-    
+
     classScheduleBtn.addEventListener("click", () => {
-        showBtn("classSchedule"); 
+        showBtn("classSchedule");
     });
-    
+
     classroomInquiryBtn.addEventListener("click", () => {
         showBtn("classroomInquiry");
     });
-    
+
     function showBtn(btnID) {
         let main = document.getElementById(btnID);
         clearAll();
         main.classList.add("show");
     }
-    
+
     function clearAll() {
         borrowRequest.classList.remove("show");
         keyRecord.classList.remove("show");
@@ -310,10 +314,10 @@ document.addEventListener("DOMContentLoaded", () => {
     //-----點擊按鈕後改變顏色
     let immediatelyButton = document.getElementById("immediately");
     let reserveButton = document.getElementById("reserve");
-    
+
     let fastAddButton = document.getElementById("fastAdd");
     let classAddButton = document.getElementById("classAdd");
-    
+
     //-----點擊按鈕後顯示多個清單
     //// 1.借用請求
     let immediatelyForm = document.querySelector(".immediatelyForm");
@@ -330,27 +334,29 @@ document.addEventListener("DOMContentLoaded", () => {
     let reserveFormBody = document.getElementById("reserveFormcontent");
     let reserveFormImage = document.getElementById("reserveFormImg");
 
+    let btn = document.getElementById('returnButton');
+
 
     immediatelyButton.addEventListener("click", () => {
         clearAllForm();
         openImmediatelyForm();
     });
-    
+
     reserveButton.addEventListener("click", () => {
         clearAllForm();
         openReserveForm();
     });
-    
+
     fastAddButton.addEventListener("click", () => {
         clearAllForm();
         openFastAddForm();
     });
-    
+
     classAddButton.addEventListener("click", () => {
         clearAllForm();
         openClassAddForm();
     });
-    
+
     for (let i = 1; i <= 3; i++) {
         let imgId = "reserveFormImg" + i;
         let contentId = "reserveFormContent" + i;
@@ -359,7 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
             reserveFormToggleContent(contentId, imgId);
         });
     }
-    
+
     for (let i = 1; i <= 2; i++) {
         let imgId = "immediatelyFormImg" + i;
         let contentId = "immediatelyFormContent" + i;
@@ -368,9 +374,14 @@ document.addEventListener("DOMContentLoaded", () => {
             immediatelyFormToggleContent(contentId, imgId);
         });
     }
-    
+
+    // <!-- 雙重按鈕確認歸還
+    returnButton.addEventListener("click", () => {
+        keyDoubleCheck();
+    });
+
     ///////////////////////////////////////////////////////////////////////////////////
-    
+
     function clearAllForm() {
         //// 1.借用請求
         immediatelyButton.classList.remove("show");
@@ -382,6 +393,9 @@ document.addEventListener("DOMContentLoaded", () => {
         //// 2. 課表排程
         fastAddForm.classList.remove("show");
         classAddForm.classList.remove("show");
+
+        classAddButton.classList.remove("show");
+        fastAddButton.classList.remove("show");
 
     }
 
@@ -398,9 +412,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //// 2. 課表排程
     function openFastAddForm() {
+        fastAddButton.classList.add("show");
         fastAddForm.classList.add("show");
     }
     function openClassAddForm() {
+        classAddButton.classList.add("show");
         classAddForm.classList.add("show");
     }
     //點箭頭控制清單開關
@@ -425,4 +441,39 @@ document.addEventListener("DOMContentLoaded", () => {
         reserveFormContent.classList.toggle("show");
         reserveFormImage.classList.toggle("show");
     }
+
+    
+    // 雙重按鈕確認歸還
+    function keyDoubleCheck() {
+        let modal = document.getElementById('myModal');
+        let span = document.getElementById('closeModal');
+        let confirmBtn = document.getElementById('confirmBtn');
+        let cancelBtn = document.getElementById('cancelBtn');
+    
+        btn.onclick = function () {
+            modal.style.display = 'block';
+        };
+    
+        span.onclick = function () {
+            modal.style.display = 'none';
+        };
+    
+        confirmBtn.onclick = function () {
+            // 在這裡放置確認按下後的處理邏輯
+            modal.style.display = 'none';
+        };
+    
+        cancelBtn.onclick = function () {
+            // 在這裡放置取消按下後的處理邏輯
+            modal.style.display = 'none';
+        };
+    
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    
+    }
+
 });

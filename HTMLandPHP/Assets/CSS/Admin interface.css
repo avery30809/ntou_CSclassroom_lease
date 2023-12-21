@@ -18,10 +18,11 @@ nav {
     height: 100%;
     width: 250px;
     padding: 10px 14px;
-    background-color: rgba(210, 210, 210, 0.2);
+    background-color: #f89639;
     border-right: 1px solid #e6e5e5;
-    text-shadow: 0px 15px 5px rgba(0,0,0,0.1),  10px 20px 5px rgba(0,0,0,0.04),-10px 20px 5px rgba(0,0,0,0.04);
+    text-shadow: 0px 15px 5px rgba(0, 0, 0, 0.1), 10px 20px 5px rgba(0, 0, 0, 0.04), -10px 20px 5px rgba(0, 0, 0, 0.04);
     transition: all 0.5s ease;
+
 }
 
 nav.close {
@@ -35,7 +36,7 @@ nav .logo-name {
     margin-top: 10px;
     padding-bottom: 10px;
     border-bottom: solid;
-    
+
 }
 
 nav .logo-image {
@@ -80,6 +81,7 @@ nav .menu-items {
 
 .menu-items li {
     list-style: none;
+    margin-top: 5px;
 }
 
 .menu-items li button:hover {
@@ -93,6 +95,8 @@ nav .menu-items {
     height: 60px;
     text-decoration: none;
     position: relative;
+    background-color: #f89639;
+    
 }
 
 .nav-links li button:hover:before {
@@ -102,12 +106,12 @@ nav .menu-items {
     height: 50px;
     width: 5px;
     /* border-radius: 50%; */
-    background-color: rgb(255, 7, 7);
+    background-color: rgb(0, 0, 0);
 }
 
 .nav-links li button:hover i,
 .nav-links li button:hover .link-name {
-    color: rgb(255, 0, 0);
+    color: rgb(0, 0, 0);
 }
 
 .menu-items li button i {
@@ -117,14 +121,15 @@ nav .menu-items {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #70707071;
+    /* color: #70707071; */
+    margin-left: 5px;
 }
 
 .menu-items li button .link-name {
-    padding-left: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #000000;
+    padding-left: 20px;
+    font-size: 22px;
+    font-weight: 550;
+    color: #ffffff;
     transition: all 0.2s ease;
 }
 
@@ -133,12 +138,24 @@ nav.close li button .link-name {
     opacity: 0;
     pointer-events: none;
 }
+
+.menu-items .logout-mode {
+    padding-top: 10px;
+    border-top: 1px solid rgb(77, 63, 3);
+}
+
+
+.menu-items .logout-mode li button:hover {
+    background-color: #ffaf65;
+}
+
+
 /* 右下方欄位 */
 .board {
     position: relative;
     left: 250px;
     background-color: #ffffff;
-    min-height: 100vh;
+    height: 100vh;
     width: calc(100% - 250px);
     padding: 10px 14px;
     transition: all 0.5s ease;
@@ -152,6 +169,7 @@ nav.close~.board {
 /* 右上方欄位 */
 .board .top {
     position: fixed;
+    height: 10%;
     top: 0;
     left: 250px;
     display: flex;
@@ -204,17 +222,18 @@ nav.close~.board .top {
     display: flex;
     align-items: center;
 }
-.conditions button
-{
+
+.conditions button {
     font-size: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
     font-weight: 600;
     background-color: white;
     cursor: pointer;
-    border: 3px solid;
+    border: 1px solid;
 }
-.conditions button:hover{
+
+.conditions button:hover {
     background-color: #e5e5e5;
 }
 
@@ -222,12 +241,15 @@ nav.close~.board .top {
     height: 100%;
     width: 50%;
 }
-.immediately.show{
-    background-color: rgb(255, 159, 57);
+
+.immediately.show {
+    background-color: rgb(143, 143, 143);
 }
-.immediately.show:hover{
-    background-color: rgb(255, 159, 57);
+
+.immediately.show:hover {
+    background-color:  rgb(143, 143, 143);
 }
+
 .immediatelyForm {
     display: none;
     margin-top: 20px;
@@ -241,12 +263,15 @@ nav.close~.board .top {
     height: 100%;
     width: 50%;
 }
-.reserve.show{
-    background-color: rgb(255, 159, 57);
+
+.reserve.show {
+    background-color:  rgb(143, 143, 143);
 }
-.reserve.show:hover{
-    background-color: rgb(255, 159, 57);
+
+.reserve.show:hover {
+    background-color:  rgb(143, 143, 143);
 }
+
 .reserveForm {
     display: none;
     margin-top: 20px;
@@ -348,10 +373,23 @@ nav.close~.board .top {
 
 /* 鑰匙借用紀錄-------------------------------------------- */
 .board-content {
-    margin-top: 100px;
+    position: fixed;
     margin-left: 10px;
+    width: calc(100% - 250px);
+    height: 90%;
+    top: 10%;
+    left: 240px;
+    padding: 10px 200px;
+    background-color: rgb(255, 255, 255);
+    transition: all 0.5s ease;
+    z-index: 10;
+
 }
 
+nav.close~.board .board-content {
+    left: 63px;
+    width: calc(100% - 73px);
+}
 
 .keyRecord {
     display: none;
@@ -366,57 +404,178 @@ nav.close~.board .top {
     justify-content: space-between;
     font-size: 30px !important;
     border-bottom: 1px solid;
+    align-items: center;
     padding-bottom: 10px;
+    padding-right: 10px;
 }
 
 .keyRecordContent {
     display: flex;
     margin-top: 20px;
     justify-content: space-between;
+    text-align: center;
+    align-items: center;
     font-size: 25px !important;
     /* border: solid; */
 }
 
 .keyRecordContent:hover {
-    background-color: red;
+    /* background-color: red; */
+}
+
+
+/* 雙重按鈕確認歸還 */
+.keyRecordContent button {
+    margin-right: 10px;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 12px 24px;
+    border: 0;
+    color: #fff;
+    background: #ff5000;
+    line-height: 1.15;
+    font-size: 16px;
+
+}
+
+.keyRecordContent button:hover {
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 #fff, 0 0 0 3px #e91d1d;
+}
+
+.keyRecordContent p {
+    margin-bottom: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* 課表排程-------------------------------------------- */
-.board-content {
-    margin-left: 10px;
-}
+
 
 .classSchedule {
     display: none;
 }
 
 .classSchedule.show {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 
 .fastAddForm {
     display: none;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
-.fastAddForm.show{
+.fastAddForm.show {
     display: block;
 }
 
 .classAddForm {
     display: none;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
-.classAddForm.show{
+.classAddForm.show {
     display: block;
+}
+
+.classScheduleConditions {
+    display: flex;
+    width: 100%;
+    /* border: solid; */
+}
+
+.classScheduleConditions button {
+    font-size: 25px;
+    font-weight: 500;
+    padding: 10px 0;
+}
+
+.fastAdd {
+    width: 50% !important;
+    border-right: 2px solid !important;
+    outline: 0;
+    cursor: pointer;
+    background-color: #fff;
+    color: rgb(0, 0, 0);
+    font-weight: 400;
+    font-size: 16px;
+    border: none;
+    transition: 0.8s;
+}
+
+.fastAdd.show {
+    background-color: #9b9c9d;
+}
+
+.fastAdd:hover {
+    width: 99% !important;
+}
+
+.classAdd {
+    width: 50% !important;
+    outline: 0;
+    cursor: pointer;
+    background-color: #fff;
+    color: rgb(0, 0, 0);
+    font-weight: 400;
+    font-size: 16px;
+    border: none;
+    transition: 0.8s;
+}
+
+.classAdd.show {
+    background-color: #9b9c9d;
+}
+
+.classAdd:hover {
+    /* box-shadow: 0 6px 20px rgb(0 118 255 / 23%); */
+    width: 99% !important;
 }
 
 /*快速新增*/
 /* Add some basic styling to the form container */
 .fastAddForm {
-    max-width: 400px;
+    width: 100%;
+    /* height: 60vh; */
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -424,13 +583,12 @@ nav.close~.board .top {
     background-color: #f9f9f9;
 }
 
-.fastAddForm .classScheduleTitle {
-    border-bottom: 1px solid;
+.classScheduleContainer {
     display: flex;
-    flex-direction: column;
-    font-size: 30px !important;
-    border-bottom: 1px solid;
-    padding-bottom: 10px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    font-size: 30px;
 }
 
 /* Style the form title */
@@ -505,18 +663,18 @@ nav.close~.board .top {
     display: block
 }
 
-.fastAddForm .fastDropdown ul{
+.fastAddForm .fastDropdown ul {
     list-style: none;
 }
 
-.fastAddForm .fastDropdown li{
+.fastAddForm .fastDropdown li {
     text-align: center;
     background-color: white;
     padding-block: 5px;
     border-bottom: 2px solid lightgray;
 }
 
-.fastAddForm .fastDropdown li:hover{
+.fastAddForm .fastDropdown li:hover {
     cursor: pointer;
     background-color: rgb(90, 163, 223);
 }
@@ -550,28 +708,28 @@ nav.close~.board .top {
 /*課表新增*/
 /* Add some basic styling to the form container */
 .classAddForm {
-    max-width: 800px;
+    width: 100%;
+    /* height: 60vh; */
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
+    font-size: 20px;
 }
 
-.classAddForm .classScheduleTitle,
+.classAddForm .classScheduleContainer,
 .classAddForm .classSchedulePage {
     width: 50%;
-    border-bottom: 1px solid;
     display: flex;
     flex-direction: column;
-    font-size: 30px !important;
-    border-bottom: 1px solid;
     padding-bottom: 10px;
 }
 
 .classScheduleBody {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 
 /* Style the form title */
@@ -583,13 +741,13 @@ nav.close~.board .top {
 }
 
 /* Style the form inputs and labels */
-.classAddForm div {
-    margin-bottom: 15px;
+.classAddForm p {
+    margin-top: 15px;
 }
 
 .classAddForm input[type="text"],
 .classAddForm input[type="date"] {
-    width: 98.5%;
+    width: 100%;
     padding: 8px;
     margin-right: 8px;
     box-sizing: border-box;
@@ -650,18 +808,18 @@ nav.close~.board .top {
     display: block
 }
 
-.classAddForm .classDropdown ul{
+.classAddForm .classDropdown ul {
     list-style: none;
 }
 
-.classAddForm .classDropdown li{
+.classAddForm .classDropdown li {
     text-align: center;
     background-color: white;
     padding-block: 5px;
     border-bottom: 2px solid lightgray;
 }
 
-.classAddForm .classDropdown li:hover{
+.classAddForm .classDropdown li:hover {
     cursor: pointer;
     background-color: rgb(90, 163, 223);
 }
@@ -692,49 +850,35 @@ nav.close~.board .top {
     margin-bottom: 15px;
     height: 46px;
 }
+
 .classAddForm #semesterSelectEnd {
     margin-bottom: 0px;
 }
 
-.classScheduleTitle h1{
+.classScheduleContainer h1 {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.classScheduleContent {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    font-size: 25px !important;
-    /* border: solid; */
-}
 
-.classSchedule table{
-    border-collapse: collapse; /* 合併邊框，只顯示內邊框 */
-    margin-top: 10px;
-}
-.classSchedule .addBlock{
+.classSchedule .addBlock {
     display: flex;
     flex-direction: column;
     font-size: 10px;
 }
-.classSchedule span{
-    margin-right:auto;
+
+.classSchedule span {
+    margin-right: auto;
 
 }
 
-.classSchedule button{
+.classSchedule button {
     width: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /* margin-top: 20px; */
+    /* margin-bottom: 20px; */
 }
 
 /* 教室搜尋-------------------------------------------- */
-.board-content {
-    margin-top: 100px;
-    margin-left: 10px;
-}
-
 .classroomInquiry {
     display: none;
 }
@@ -744,11 +888,12 @@ nav.close~.board .top {
     flex-direction: column;
 }
 
-.classroomInquiryTitle h1{
+.classroomInquiryTitle h1 {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .classroomInquiryContent {
     display: flex;
     flex-direction: column;
@@ -756,7 +901,7 @@ nav.close~.board .top {
     font-size: 25px !important;
 }
 
-.classroomInquiryContent button{
+.classroomInquiryContent button {
     width: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
