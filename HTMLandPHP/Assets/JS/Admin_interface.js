@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //獲取使用者身分
         fetch("../../Controller/Api/UserController.php?action=getUserProfile")
         .then(response => response.json())
-        .then(data => {
+        .then(data => { 
             if (data.error !== undefined) {
                 //沒有登入就回首頁
                 window.alert("請先登入！");
@@ -295,10 +295,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     borrowRequestBtn.addEventListener("click", () => {
         showBtn("borrowRequest");
+        getHistoryForm();
     });
 
     keyRecordBtn.addEventListener("click", () => {
         showBtn("keyRecord");
+        getKeyRecord();
     });
 
     classScheduleBtn.addEventListener("click", () => {
@@ -368,12 +370,12 @@ document.addEventListener("DOMContentLoaded", () => {
         clearAllForm();
         openClassAddForm();
     });
-    
+    /*
     // <!-- 雙重按鈕確認歸還
     returnButton.addEventListener("click", () => {
         keyDoubleCheck();
     });
-
+    */
     ///////////////////////////////////////////////////////////////////////////////////
 
     function clearAllForm() {
@@ -426,13 +428,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
     // 雙重按鈕確認歸還
-    function keyDoubleCheck() {
-        let modal = document.getElementById('myModal');
-        let span = document.getElementById('closeModal');
-        let confirmBtn = document.getElementById('confirmBtn');
-        let cancelBtn = document.getElementById('cancelBtn');
-    
-        returnButton.onclick = function () {
+    function keyDoubleCheck(target) {
+        let modal = target.nextElementSibling;
+        let span = modal.children[0];
+        let confirmBtn = span.children[2];
+        let cancelBtn = span.children[3];
+        target.onclick = function () {
             modal.style.display = 'block';
         };
     
@@ -443,6 +444,21 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmBtn.onclick = function () {
             // 在這裡放置確認按下後的處理邏輯
             modal.style.display = 'none';
+            const testForm = new FormData();
+            let arg = target.getAttribute("data-argument").split(" ");
+            testForm.append("roomName", arg[0]);
+            testForm.append("userID", arg[1]);
+            testForm.append("date", arg[2]);
+            testForm.append("startTime", arg[3]);
+            testForm.append("action", "setKeyRecord");
+            fetch("../../Controller/Api/HistoryController.php", {
+                method: 'POST',
+                body: testForm
+            })
+            .then(response=>response.text())
+            .then(data=>{
+                target.innerHTML = "已歸還";
+            })
         };
     
         cancelBtn.onclick = function () {
@@ -457,7 +473,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     
     }
-    getHistoryForm();
     function getHistoryForm() {
         fetch("../../Controller/Api/HistoryController.php?action=getHistoryForm")
         .then(response => response.json())
@@ -480,14 +495,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                             <p>${data[10]}</p>
                                             <p>借用目的: ${data[5]}</p>
                                             <p>借用日期: ${data[8]}</p>
-                                            <p>歸還日期: ${data[9] === null ? '未歸還' : data[9]}</p>
+                                            <p>歸還日期: ${data[9] === null ? '未借用/未歸還' : data[9]}</p>
                                             <div class="accounting">
                                                 <p>Start Time : </p>
                                                 <p>End Time : </p>
                                                 <p>第${data[3]}堂</p>
                                                 <p>${data[4] === 9 ? "第9堂後" : `第${data[4]}堂`}</p>
-                                                <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 0">拒絕</button>
-                                                <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 1">同意</button>
+                                                <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 0 ${data[4]} ${data[5]}">拒絕</button>
+                                                <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 1 ${data[4]} ${data[5]}">同意</button>
                                             </div>
                                         </div>
                                     </div>`;
@@ -500,14 +515,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                                     <p>${data[10]}</p>
                                                     <p>借用目的: ${data[5]}</p>
                                                     <p>借用日期: ${data[8]}</p>
-                                                    <p>歸還日期: ${data[9] === null ? '未歸還' : data[9]}</p>
+                                                    <p>歸還日期: ${data[9] === null ? '未借用/未歸還' : data[9]}</p>
                                                     <div class="accounting">
                                                         <p>Start Time : </p>
                                                         <p>End Time : </p>
                                                         <p>第${data[3]}堂</p>
                                                         <p>${data[4] === 9 ? "第9堂後" : `第${data[4]}堂`}</p>
-                                                        <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 0">拒絕</button>
-                                                        <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 1">同意</button>
+                                                        <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 0 ${data[4]} ${data[5]}">拒絕</button>
+                                                        <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 1 ${data[4]} ${data[5]}">同意</button>
                                                     </div>
                                                 </div>
                                             </div>`;
@@ -533,6 +548,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     .then(response => response.text())
                     .then(data => {
                         getHistoryForm();
+                        if(arg[4]=='0') return;
+                        testForm.set("action", "applicationApprove");
+                        testForm.append("times", arg[5]-arg[3]+1);
+                        testForm.append("activity", arg[6]);
+                        fetch("../../Controller/Api/ClassroomController.php", {
+                            method: "POST",
+                            body: testForm
+                        })
+                        .then(res=>res.text())
+                        .then(dt=>{
+                            console.log(dt);
+                        })
                     });
                 });
             });
@@ -552,6 +579,50 @@ document.addEventListener("DOMContentLoaded", () => {
                     img.classList.toggle("show");
                 });
             });
+        });
+    }
+    function getKeyRecord() {
+        let content = `<div class="keyRecordTitle">
+                        <span>借用教室</span>
+                        <span>借用者</span>
+                        <span>借用目的</span>
+                        <span>借用時間</span>
+                        <span>預計歸還時間</span>
+                        <span>借用狀態</span>
+                    </div>`;
+        fetch("../../Controller/Api/HistoryController.php?action=getKeyRecord")
+        .then(response=>response.json())
+        .then(datas=>{
+            if(datas.error === undefined) {
+                datas.forEach(data=>{
+                    content += `<div class="keyRecordContent">
+                                    <span>${data[0]}</span>
+                                    <span>${data[1]}</span>
+                                    <span>${data[2]}</span>
+                                    <span>${data[3]} 第${data[4]}節</span>
+                                    <span>${data[3]} 第${data[5]}節</span>
+                        
+                                    <!-- 雙重按鈕確認歸還 -->
+                                    <button class="returnButton" data-argument="${data[0]} ${data[7]} ${data[3]} ${data[4]}">${data[6]==null?"未借用/未歸還":"已歸還"}</button>
+                        
+                                    <div id="myModal" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close" id="closeModal">&times;</span>
+                                            <p>已確認使用者歸還嗎？</p>
+                                            <button id="confirmBtn">確認</button>
+                                            <button id="cancelBtn">取消</button>
+                                        </div>
+                                    </div>
+                                </div>`;
+                });
+            }
+            document.getElementById("keyRecord").innerHTML = content;
+            document.querySelectorAll(".returnButton").forEach(element=>{
+                element.addEventListener("click", (e)=>{
+                    e.target.nextElementSibling.style.display = 'block';
+                    keyDoubleCheck(e.target);
+                }, false);
+            })
         });
     }
 });

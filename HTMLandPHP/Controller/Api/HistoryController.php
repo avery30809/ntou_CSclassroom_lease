@@ -17,6 +17,9 @@ class HistoryController extends BaseController
                 case 'examineForm':
                     $this->handleExamineForm();
                     break;
+                case 'setKeyRecord':
+                    $this->handleSetKeyRecord();
+                    break;
                 default:
                     break;
             }
@@ -29,6 +32,9 @@ class HistoryController extends BaseController
                     break;
                 case 'getHistoryForm':
                     $this->getHistoryForm();
+                    break;
+                case 'getKeyRecord':
+                    $this->handleGetKeyRecord();
                     break;
                 default:
                     break;
@@ -80,6 +86,26 @@ class HistoryController extends BaseController
         $this->historyModel->insertApplication($roomName, $userID, $date, $start, $end, $content, $immediate, $borrowTime);
         $this->sendOutput("提交成功");
         unset($_SESSION["application"]);
+    }
+    private function handleGetKeyRecord() {
+        date_default_timezone_set("Asia/Taipei");
+        $date = date("Y-m-d");
+        $result = $this->historyModel->getKeyRecord($date);
+        if($result == false) {
+            $obj = ['error'=> "沒有任何紀錄"];
+            $this->sendOutput(json_encode($obj));
+            return;
+        }
+        $this->sendOutput(json_encode($result));
+    }
+    private function handleSetKeyRecord() {
+        date_default_timezone_set("Asia/Taipei");
+        $returnTime = date("Y-m-d H:i:s");
+        $roomName = $_POST['roomName'];
+        $userID = $_POST['userID'];
+        $date = $_POST['date'];
+        $startTime = $_POST['startTime'];
+        $this->historyModel->setKeyRecord($roomName, $userID, $date, $startTime, $returnTime);
     }
 }
 $test = new HistoryController();

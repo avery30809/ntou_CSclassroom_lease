@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                                 </div>
                                                 <div class="text" data-index="${index}">
                                                     <p>借用日期: ${data[8]}</p>
-                                                    <p>歸還日期: ${data[9] === null ? '未歸還' : data[9]}</p>
+                                                    <p>歸還日期: ${data[9] === null ? '未借用/未歸還' : data[9]}</p>
                                                     <p>借用目的: ${data[5]}</p>
                                                     <p>借用型態: ${data[6] === 1 ? '立即借用' : '預約借用'}</p>
                                                     <div class="ApplyrequestText">

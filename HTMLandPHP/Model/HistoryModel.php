@@ -26,4 +26,12 @@ class HistoryModel extends Database
         $result = $this->query("UPDATE history SET allow = ? WHERE RoomName = ? and userID = ? and date = ? and startTime = ?"
                                 , [$allow, $roomName, $userID, $date, $startTime]);
     }
+    public function getKeyRecord($date) {
+        $result = $this->query("SELECT RoomName, username, content, date, startTime, endTime, returnTime, userID FROM history NATURAL JOIN userdata WHERE allow=1 AND date <= '$date' ORDER BY date");
+        return $result;
+    }
+    public function setKeyRecord($roomName, $userID, $date, $startTime, $returnTime) {
+        $this->query("UPDATE history SET returnTime = ? WHERE RoomName = ? and userID = ? and date = ? and startTime = ?"
+                    , [$returnTime, $roomName, $userID, $date, $startTime]);
+    }
 }
