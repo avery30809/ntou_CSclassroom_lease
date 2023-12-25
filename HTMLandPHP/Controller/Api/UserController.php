@@ -23,6 +23,9 @@ class UserController extends BaseController
                 case 'forgetPWD':
                     $this->handleForgetPWD();
                     break;
+                case 'updateProfile':
+                    $this->handleUpdateProfile();
+                    break;
                 default:
                     break;
             }
@@ -176,6 +179,9 @@ class UserController extends BaseController
         else {
             $this->sendOutput('請先進行認證');
         }
+    }
+    private function handleUpdateProfile() {
+
     }
 /* 
 * "/user/list" Endpoint - Get list of users 

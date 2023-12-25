@@ -3,12 +3,13 @@ require_once __DIR__ . "/Database.php";
 class UserModel extends Database
 {
     public function getUserProfile($userID) {
-        $result = $this->query("SELECT username, useraccount, email, phone FROM userdata WHERE userID = ?", [$userID]);
+        $result = $this->query("SELECT username, useraccount, email, phone, isAdmin FROM userdata WHERE userID = ?", [$userID]);
         $obj = [
             "username"=>$result[0][0],
             "useraccount"=>$result[0][1],
             "email"=>$result[0][2],
-            "phone"=>$result[0][3]
+            "phone"=>$result[0][3],
+            "isAdmin"=>$result[0][4]
         ];
         return $obj;
     }

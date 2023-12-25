@@ -49,7 +49,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
             user = data;
             document.getElementById("login-signup").innerHTML = "<img src='../../image/usericon.png' class='usericon'>" + user.username;
             document.getElementById("login-signup").addEventListener("click", function (event) {
-                window.location.href = "../../Pages/使用者介面.html";
+                if(data.isAdmin) window.location.href = "../../Pages/Admin interface.html";
+                else window.location.href = "../../Pages/使用者介面.html";
             }, false);
         }
         //未登入

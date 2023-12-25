@@ -75,6 +75,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
             });
         });
     }
+    document.getElementById("userInformation").addEventListener("submit", (e)=>{
+        e.preventDefault();
+        let testForm = new FormData(e.target);
+        if(testForm.get("oldPWD") === "") {
+            
+        }
+    }, false);
     function clearAll() {
         applyRequest.classList.remove("show");
         userInformation.classList.remove("show");
@@ -84,7 +91,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         userInformation.classList.add("show");
     }
     function showApplyRequest() {
-         applyRequest.classList.add("show");
+        applyRequest.classList.add("show");
     }
     logoutButton.addEventListener("click", () => {
         fetch("../../Controller/Api/UserController.php?action=logout");
