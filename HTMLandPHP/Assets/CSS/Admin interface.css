@@ -253,6 +253,8 @@ nav.close~.board .top {
 .immediatelyForm {
     display: none;
     margin-top: 20px;
+    overflow-y: scroll;
+    max-height: 600px;
 }
 
 .immediatelyForm.show {
@@ -275,7 +277,8 @@ nav.close~.board .top {
 .reserveForm {
     display: none;
     margin-top: 20px;
-    ;
+    overflow-y: scroll;
+    max-height: 600px;
 }
 
 .reserveForm.show {

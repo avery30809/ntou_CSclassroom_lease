@@ -77,10 +77,17 @@ class UserModel extends Database
     }
     public function getUserName($userID) {
         try {
-            $result = $this->query("SELECT uesrname FROM userdata WHERE userID = ?", [$userID]);
+            $result = $this->query("SELECT username FROM userdata WHERE userID = ?", [$userID]);
             return $result;
         } catch (Exception $e) {
             return false;
         }
+    }
+    public function updateProfile($userID, $username, $newPWD, $phone) {
+        $hash_pwd = password_hash($newPWD, PASSWORD_DEFAULT);
+        $this->query("UPDATE userdata SET username = ?, pwd = ?, phone = ? WHERE userID = ?", [$username, $hash_pwd, $phone, $userID]);
+    }
+    public function updateProfileNoPWD($userID, $username, $phone) {
+        $this->query("UPDATE userdata SET username = ?, phone = ? WHERE userID = ?", [$username, $phone, $userID]);
     }
 }

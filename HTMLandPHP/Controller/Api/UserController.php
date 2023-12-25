@@ -181,7 +181,47 @@ class UserController extends BaseController
         }
     }
     private function handleUpdateProfile() {
+        $username = $_POST['username'] ?? '';
+        $account = $_POST['account'];
+        $password = $_POST['oldPWD'] ?? '';
+        $newPWD = $_POST['newPWD'] ?? '';
+        $phone = $_POST['phone']!='' ? $_POST['phone']:null;
+        $op = 0;
+        
+        if($username == '') {
+            $this->sendOutput("使用者名稱不得為空！");
+            return;
+        }
 
+        if($password != '') {
+            try {
+                $result = $this->userModel->authenticate($account, $password, $op);
+                if ($result) {
+                    if($newPWD == '') {
+                        $this->sendOutput("新密碼不得為空！");
+                        return;
+                    }
+                    $ID = $result[0];
+                    $this->userModel->updateProfile($ID, $username, $newPWD, $phone);
+                    $this->sendOutput("更新成功！");
+                } else {
+                    $this->sendOutput("舊密碼不相符！");
+                }
+            } catch (Exception $e) {
+                // 處理例外情況
+                $this->sendOutput("發生錯誤：" . $e->getMessage());
+            }
+        }
+        else {
+            try {
+                $ID = $_SESSION['userID'];
+                $this->userModel->updateProfileNoPWD($ID, $username, $phone);
+                $this->sendOutput("更新成功！");
+            } catch (Exception $e) {
+                // 處理例外情況
+                $this->sendOutput("發生錯誤：" . $e->getMessage());
+            }
+        }
     }
 /* 
 * "/user/list" Endpoint - Get list of users 

@@ -46,11 +46,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
         .then(response => response.json())
         .then(datas => {
             if (datas.error !== undefined) {
-                console.log("啥都沒");
+                //console.log("啥都沒");
                 return;
             }
             datas.forEach((data, index) => {
-                console.log(data);
+                //console.log(data);
                 applyRequest.innerHTML +=  `<div class="content">
                                                 <div class="title">
                                                     <p>${data[0]}<img src="../../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index}"></p>
@@ -84,9 +84,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
     document.getElementById("userInformation").addEventListener("submit", (e)=>{
         e.preventDefault();
         let testForm = new FormData(e.target);
-        if(testForm.get("oldPWD") === "") {
-            
-        }
+        testForm.append("account", user.useraccount);
+        testForm.append("action", "updateProfile");
+        fetch("../../Controller/Api/UserController.php", {
+            method: "POST",
+            body: testForm
+        })
+        .then(response=>response.text())
+        .then(data=>{
+            window.alert(data);
+            window.location.reload();
+        });
     }, false);
     function clearAll() {
         applyRequest.classList.remove("show");

@@ -23,6 +23,19 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+    getUserProfile();
+    function getUserProfile() {
+        //獲取使用者身分
+        fetch("../../Controller/Api/UserController.php?action=getUserProfile")
+        .then(response => response.json())
+        .then(data => {
+            if (data.error !== undefined) {
+                //沒有登入就回首頁
+                window.alert("請先登入！");
+                window.location.href = "Home.html";
+            }
+        });
+    }
     document.getElementById("logoutBtn").addEventListener("click", ()=>{
         fetch("../../Controller/Api/UserController.php?action=logout");
         window.location.href = "../../Pages/Home.html";
@@ -449,33 +462,37 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch("../../Controller/Api/HistoryController.php?action=getHistoryForm")
         .then(response => response.json())
         .then(datas => {
-            console.log(datas);
+            //console.log(datas);
             if (datas.error !== undefined) {
+                immediatelyForm.innerHTML = "";
+                reserveForm.innerHTML = "";
                 return;
             }
+            let imContent = "";
+            let rvContent = "";
             datas.forEach((data, index) => {
                 if (data[6] === 1) {
-                    immediatelyForm.innerHTML += `<div class="content">
-                                                    <div class="title">
-                                                        <p>${data[1]}<img src="../../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index}" alt="immediatelyFormImg2"></p>
-                                                    </div>
-                                                    <div class="text" data-index="${index}">
-                                                        <p>${data[10]}</p>
-                                                        <p>借用目的: ${data[5]}</p>
-                                                        <p>借用日期: ${data[8]}</p>
-                                                        <p>歸還日期: ${data[9] === null ? '未歸還' : data[9]}</p>
-                                                        <div class="accounting">
-                                                            <p>Start Time : </p>
-                                                            <p>End Time : </p>
-                                                            <p>第${data[3]}堂</p>
-                                                            <p>${data[4] === 9 ? "第9堂後" : `第${data[4]}堂`}</p>
-                                                            <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 0">拒絕</button>
-                                                            <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 1">同意</button>
-                                                        </div>
-                                                    </div>
-                                                </div>`;
+                    imContent += `<div class="content">
+                                        <div class="title">
+                                            <p>${data[1]}<img src="../../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index}" alt="immediatelyFormImg2"></p>
+                                        </div>
+                                        <div class="text" data-index="${index}">
+                                            <p>${data[10]}</p>
+                                            <p>借用目的: ${data[5]}</p>
+                                            <p>借用日期: ${data[8]}</p>
+                                            <p>歸還日期: ${data[9] === null ? '未歸還' : data[9]}</p>
+                                            <div class="accounting">
+                                                <p>Start Time : </p>
+                                                <p>End Time : </p>
+                                                <p>第${data[3]}堂</p>
+                                                <p>${data[4] === 9 ? "第9堂後" : `第${data[4]}堂`}</p>
+                                                <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 0">拒絕</button>
+                                                <button class="handleFormButton" data-argument = "${data[1]} ${data[0]} ${data[2]} ${data[3]} 1">同意</button>
+                                            </div>
+                                        </div>
+                                    </div>`;
                 } else {                      
-                    reserveForm.innerHTML += `<div class="content">
+                    rvContent += `<div class="content">
                                                 <div class="title">
                                                     <p>${data[1]}<img src="../../image/dropdownIcon48.png" class="reserveFormImg" data-index="${index}" alt="reserveFormImg2"></p>
                                                 </div>
@@ -495,42 +512,44 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 </div>
                                             </div>`;
                 }
-                document.querySelectorAll('.handleFormButton').forEach(btn => {
-                    btn.addEventListener('click', (event) => {
-                        let arg = event.target.getAttribute("data-argument").split(" ");
-                        let testForm = new FormData();
-                        testForm.append("roomName", arg[0]);
-                        testForm.append("userID", parseInt(arg[1]));
-                        testForm.append("date", arg[2]);
-                        testForm.append("startTime", parseInt(arg[3]));
-                        testForm.append("allow", parseInt(arg[4]));
-                        testForm.append("action", "examineForm");
-                        
-                        fetch("../../Controller/Api/HistoryController.php", {
-                            method: "POST",
-                            body: testForm
-                        })
-                        .then(response => response.text())
-                        .then(data => {
-                            console.log(data); 
-                        });
+            });
+            immediatelyForm.innerHTML = imContent;
+            reserveForm.innerHTML = rvContent;
+            document.querySelectorAll('.handleFormButton').forEach(btn => {
+                btn.addEventListener('click', (event) => {
+                    let arg = event.target.getAttribute("data-argument").split(" ");
+                    let testForm = new FormData();
+                    testForm.append("roomName", arg[0]);
+                    testForm.append("userID", parseInt(arg[1]));
+                    testForm.append("date", arg[2]);
+                    testForm.append("startTime", parseInt(arg[3]));
+                    testForm.append("allow", parseInt(arg[4]));
+                    testForm.append("action", "examineForm");
+                    
+                    fetch("../../Controller/Api/HistoryController.php", {
+                        method: "POST",
+                        body: testForm
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        getHistoryForm();
                     });
                 });
-                document.querySelectorAll('.immediatelyFormImg').forEach(img => {
-                    img.addEventListener('click', () => {
-                        const index = img.getAttribute('data-index');
-                        let formContent = document.querySelector(`.text[data-index="${index}"]`);
-                        formContent.classList.toggle("show");
-                        img.classList.toggle("show");
-                    });
+            });
+            document.querySelectorAll('.immediatelyFormImg').forEach(img => {
+                img.addEventListener('click', () => {
+                    const index = img.getAttribute('data-index');
+                    let formContent = document.querySelector(`.text[data-index="${index}"]`);
+                    formContent.classList.toggle("show");
+                    img.classList.toggle("show");
                 });
-                document.querySelectorAll('.reserveFormImg').forEach(img => {
-                    img.addEventListener('click', () => {
-                        const index = img.getAttribute('data-index');
-                        let formContent = document.querySelector(`.text[data-index="${index}"]`);
-                        formContent.classList.toggle("show");
-                        img.classList.toggle("show");
-                    });
+            });
+            document.querySelectorAll('.reserveFormImg').forEach(img => {
+                img.addEventListener('click', () => {
+                    const index = img.getAttribute('data-index');
+                    let formContent = document.querySelector(`.text[data-index="${index}"]`);
+                    formContent.classList.toggle("show");
+                    img.classList.toggle("show");
                 });
             });
         });
