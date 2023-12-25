@@ -55,7 +55,6 @@ class VerificationModel extends Database{
         }
         else if($action === "reset") {
             $mail->Subject = "Reset password";
-            $this->resetPWD();
             $mail->Body = "Your new pwd is: $this->pwd";
         }
         $mail->IsHTML(true); //設定郵件內容為HTML
@@ -63,13 +62,7 @@ class VerificationModel extends Database{
     private function generateCode() {
         $this->code = rand(100000, 999999);
     }
-    private function resetPWD() {
-        $ls = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        str_shuffle($ls);
-        $len = 15;
-        $this->pwd = "";
-        for($i = 0; $i<$len; $i++) {
-            $this->pwd = $this->pwd . $ls[rand(0, strlen($ls)-1)];
-        }
+    public function setPWD($resetPWD) {
+        $this->pwd = $resetPWD;
     }
 }

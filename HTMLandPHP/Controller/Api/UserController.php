@@ -20,6 +20,9 @@ class UserController extends BaseController
                 case 'searchDate':
                     $this->handleSearchDate();
                     break;
+                case 'forgetPWD':
+                    $this->handleForgetPWD();
+                    break;
                 default:
                     break;
             }
@@ -136,6 +139,36 @@ class UserController extends BaseController
             $this->sendOutput($result[0]);
         else 
             $this->sendOutput("未找到使用者");
+    }
+
+    // 忘記密碼
+    private function handleForgetPWD() {
+        //確認是否驗證過email
+        if(isset($_SESSION['verification_code']) && $_SESSION['verification_code']['id'] === $_POST['account']) {
+            if($_SESSION['verification_code_expiration']<time()) {
+                $this->sendOutput("驗證碼過期 請重新認證");
+                return;
+            }
+            $account = $_POST["account"];
+            $verification_code = $_POST["verification_code"];
+            $email = "$account@mail.ntou.edu.tw";
+            if($verification_code != $_SESSION['verification_code']['code']){
+                $this->sendOutput('驗證碼錯誤');
+            }
+            else {
+                $result = $this->userModel->resetPWD($account);
+                //確認帳號是否有註冊過
+                if($result == false) $this->sendOutput('此帳號不存在');
+                else{
+                    unset($_SESSION["verification_code"]);
+                    unset($_SESSION["verification_code_expiration"]);
+                    $this->sendOutput('新密碼已送出 請去海大信箱接收新密碼 記得在海大信箱選擇日期！');
+                };
+            }
+        }
+        else {
+            $this->sendOutput('請先進行認證');
+        }
     }
 /* 
 * "/user/list" Endpoint - Get list of users 

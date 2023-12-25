@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const registerBtn = document.getElementById('register');
 
     const loginBtn = document.getElementById('login');
-    const vertifyBtn = document.getElementById('vertify');
+    const signupVerifyBtn = document.getElementById('signupVerify');
 
     const signupform = document.getElementById("signup-form");
     const loginform = document.getElementById("login-form");
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         container.classList.remove("active");
     });
     //驗證
-    vertifyBtn.addEventListener('click', () => {
+    signupVerifyBtn.addEventListener('click', () => {
         const ID = document.getElementById("signup_account").value;
         if(ID !== "") {
             const formData = new FormData();
@@ -119,5 +119,43 @@ document.addEventListener("DOMContentLoaded", ()=>{
     back.addEventListener('click', () => {
         container.classList.remove("down");
     }, false);
+    document.getElementById("forgetVerify").addEventListener("click", () => {
+        const ID = document.getElementById("forgetAccount").value;
+        if(ID !== "") {
+            const formData = new FormData();
+            const email = ID + "@mail.ntou.edu.tw";
+            formData.append("email", email);
+            formData.append("action", "verification");
 
+            fetch('../../Controller/Api/VerificationController.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response=>response.text())
+            .then(data=>{
+                window.alert(data.replace(" ", "\n"));
+            })
+        }
+        else {
+            window.alert("請輸入學號");
+        }
+    }, false);
+    document.getElementById("forgetForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        const account = document.getElementById("forgetAccount").value;
+        const code = document.getElementById("forgetVerification_code").value;
+        formData.append("account", account);
+        formData.append("verification_code",code);
+        formData.append("action", "forgetPWD");
+        fetch('../../Controller/Api/UserController.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            window.alert(data.replace(" ", "\n"));
+            if(data.startsWith("新密碼已送出")) window.location.reload();
+        });
+    }, false);
 })

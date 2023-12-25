@@ -22,7 +22,7 @@
                     <input type="text" id="signup_account" class="email-text" name="account" placeholder="學號">
                     <span
                         style="color: grey; position: relative; top: 27px;font-size: 50%;width: 100px">@mail.ntou.edu.tw</span>
-                    <button id="vertify" class="verification-button" type="button">驗證</button>
+                    <button id="signupVerify" class="verification-button" type="button">驗證</button>
                 </div>
                 <input type="text" id="signup_verification_code" name="verification_code" placeholder="驗證碼" required>
                 <input type="password" id="signup_pwd" name="pwd" placeholder="密碼" required>
@@ -47,7 +47,7 @@
         <!-- 忘記密碼表單 -->
         <div class="form-container forgetPassword">
 
-            <form
+            <form id="forgetForm"
                 style="background-image: url('../image/kb.jpg'); background-repeat: no-repeat; background-position: center right;  background-size: 100% 110%;">
 
                 <a href="#" id="back"
@@ -56,14 +56,14 @@
                 </a>
                 <h1 style="color: white;">忘記密碼</h1>
                 <div class="forget">
-                    <input type="text" id="signup_account" class="xxx-text" name="account" placeholder="學號">
+                    <input type="text" id="forgetAccount" class="xxx-text" name="account" placeholder="學號">
                     <span
                         style="color: white; position: relative; top: 27px;font-size: 50%;width: 100px">@mail.ntou.edu.tw</span>
-                    <button id="vertify" class="verification2-button">驗證</button>
+                    <button type="button" id="forgetVerify" class="verification2-button">驗證</button>
                 </div>
-                <input type="text" id="signup_verification_code" name="verification_code" placeholder="驗證碼" required>
+                <input type="text" id="forgetVerification_code" name="verification_code" placeholder="驗證碼" required>
 
-                <button type="submit" name="sign-in-submit">重新登入</button>
+                <button type="submit" name="forgetSubmit">獲取新密碼</button>
             </form>
         </div>
 

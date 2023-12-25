@@ -27,7 +27,7 @@ class UserModel extends Database
         try {
             // 帳號是第一次註冊回傳 false(找不到)
             $result = $this->query("SELECT useraccount FROM userdata WHERE useraccount = ?", [$account]);
-            // 不是第一次 回傳false給controller
+            // 不是第一次 回傳true給controller
             if($result !== false) return true;
             $hash_pwd = password_hash($password, PASSWORD_DEFAULT);
             $this->query("INSERT INTO userdata (username, useraccount, pwd, email)VALUES (?,?,?,?)",[$username, $account, $hash_pwd, $email]);
@@ -45,5 +45,33 @@ class UserModel extends Database
         } catch (Exception $e) {
             return false;
         }
+    }
+    public function resetPWD($account) {
+        try {
+            // 確認帳號已註冊過 false(尚未註冊)
+            $result = $this->query("SELECT useraccount FROM userdata WHERE useraccount = ?", [$account]);
+            // 尚未註冊 回傳false給controller
+            if($result == false) return false;
+            $newPWD = $this->randomPWD();
+            $hash_pwd = password_hash($newPWD, PASSWORD_DEFAULT);
+            $sender = new VerificationModel();
+            $this->query("UPDATE userdata SET pwd = ? WHERE useraccount = ?",[$hash_pwd, $account]);
+            $sender->setPWD($newPWD);
+            $sender->sendEmail("$account@mail.ntou.edu.tw", "reset");
+            return true;
+
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    private function randomPWD() {
+        $ls = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        str_shuffle($ls);
+        $len = 15;
+        $pwd = "";
+        for($i = 0; $i<$len; $i++) {
+            $pwd = $pwd . $ls[rand(0, strlen($ls)-1)];
+        }
+        return $pwd;
     }
 }
