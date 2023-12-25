@@ -369,9 +369,13 @@ nav.close~.board {
 }
 
 .ApplyrequestText .accounting {
-    background-color: red;
+    background-color: yellow;
 }
 
-.ApplyrequestText .ok {
+.ApplyrequestText .approve {
     background-color: rgb(26, 255, 26);
+}
+
+.ApplyrequestText .reject {
+    background-color: red;
 }

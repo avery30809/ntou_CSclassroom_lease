@@ -45,7 +45,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
         fetch("../../Controller/Api/HistoryController.php?action=getApplyRequest")
         .then(response => response.json())
         .then(datas => {
+            if (datas.error !== undefined) {
+                console.log("啥都沒");
+                return;
+            }
             datas.forEach((data, index) => {
+                console.log(data);
                 applyRequest.innerHTML +=  `<div class="content">
                                                 <div class="title">
                                                     <p>${data[0]}<img src="../../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index}"></p>
@@ -60,7 +65,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                                         <p>End Time : </p>
                                                         <p>第${data[3]}堂</p>
                                                         <p>${data[4] === 9 ? "第9堂後" : `第${data[4]}堂`}</p>
-                                                        <button class=${data[7] === 1 ? 'OK' : 'accounting'}> ${data[7] === 1 ? '通過' : '審核中'}</button>
+                                                        <button class=${data[7] == 1 ? 'approve' : data[7] == 0 ? 'reject' : 'accounting'}>
+                                                                      ${data[7] == 1 ? '通過' : data[7] == 0 ? '拒絕' : '審核中'}</button>
                                                     </div>
                                                 </div>
                                             </div>`;
