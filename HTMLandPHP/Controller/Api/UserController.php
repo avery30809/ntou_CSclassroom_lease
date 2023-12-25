@@ -33,6 +33,9 @@ class UserController extends BaseController
                 case 'getID':
                     $this->getID();
                     break;
+                case 'getUserName':
+                    $this->getUserName();
+                    break;
                 case 'getUserProfile':
                     $this->getUserProfile();
                     break;
@@ -44,7 +47,11 @@ class UserController extends BaseController
             }
         }
     }
-    
+    private function getUserName() {
+        $userID = $_POST['userID'] ?? null;
+        $result = $this->userModel->getUserName($userID);
+        $this->sendOutput(json_encode($result[0]));
+    }
     //獲取身分資訊
     private function getUserProfile() {
         //確保已經登入

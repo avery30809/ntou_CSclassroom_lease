@@ -1,8 +1,3 @@
-let image = {
-    home: new Image()
-};
-image.home.src = "../../image/home.png";
-
 document.addEventListener("DOMContentLoaded", () => {
     const allClassroomName = [];
     getClassroomName();
@@ -28,6 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+    document.getElementById("logoutBtn").addEventListener("click", ()=>{
+        fetch("../../Controller/Api/UserController.php?action=logout");
+        window.location.href = "../../Pages/Home.html";
+    }, false);
 
     // 快速新增的下拉式選單
     const fastDropdownRoom = document.getElementById("fastDropdownRoom"),
@@ -356,7 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearAllForm();
         openClassAddForm();
     });
-
+/*
     for (let i = 1; i <= 3; i++) {
         let imgId = "reserveFormImg" + i;
         let contentId = "reserveFormContent" + i;
@@ -374,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
             immediatelyFormToggleContent(contentId, imgId);
         });
     }
-
+*/
     // <!-- 雙重按鈕確認歸還
     returnButton.addEventListener("click", () => {
         keyDoubleCheck();
@@ -474,6 +473,43 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
     
+    }
+    getApplyRequest();
+    function getApplyRequest() {
+        fetch("../../Controller/Api/HistoryController.php?action=getApplyRequest")
+        .then(response => response.json())
+        .then(datas => {
+            datas.forEach((data, index) => {
+                let formContent = `<div class="content">
+                                        <div class="title">
+                                            <p>${data[0]}<img src="../../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index} alt="immediatelyFormImg2"></p>
+                                        </div>
+                                        <div class="text" data-index="${index}">
+                                            <p>${data[1]}</p>
+                                            <p>借用目的: ${data[5]}</p>
+                                            <p>借用日期: ${data[8]}</p>
+                                            <p>歸還日期: ${data[9] === null ? '未歸還' : data[9]}</p>
+                                            <div class="accounting">
+                                                <p>Start Time : </p>
+                                                <p>End Time : </p>
+                                                <p>第${data[3]}堂</p>
+                                                <p>${data[4] === 9 ? "第9堂後" : `第${data[4]}堂`}</p>
+                                                <button>拒絕</button>
+                                                <button>同意</button>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                data[6] === 1 ? immediatelyForm += formContent : reserveForm += formContent;
+            });
+//            document.querySelectorAll('.immediatelyFormImg').forEach(img => {
+//                img.addEventListener('click', () => {
+//                    const index = img.getAttribute('data-index');
+//                    let applyRequestContent = document.querySelector(.text[data-index="${index}"]`);
+//                    applyRequestContent.classList.toggle("show");
+//                    img.classList.toggle("show");
+//                });
+//            });
+        });
     }
 
 });

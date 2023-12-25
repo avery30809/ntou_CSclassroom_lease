@@ -74,4 +74,12 @@ class UserModel extends Database
         }
         return $pwd;
     }
+    public function getUserName($userID) {
+        try {
+            $result = $this->query("SELECT uesrname FROM userdata WHERE userID = ?", [$userID]);
+            return $result;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
