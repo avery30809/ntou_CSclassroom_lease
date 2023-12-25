@@ -14,6 +14,9 @@ class HistoryController extends BaseController
                 case 'submitForm':
                     $this->handleSubmitForm();
                     break;
+                case 'examineForm':
+                    $this->handleExamineForm();
+                    break;
                 default:
                     break;
             }
@@ -24,15 +27,45 @@ class HistoryController extends BaseController
                 case 'getApplyRequest':
                     $this->getApplyRequest();
                     break;
+                case 'getHistoryForm':
+                    $this->getHistoryForm();
+                    break;
                 default:
                     break;
             }
         }
     }
+    private function getHistoryForm() {
+        $result = $this->historyModel->getHistoryForm();
+        $obj = [
+            'error' => 'no history'
+        ];
+        if ($result === false) {
+            $this->sendOutput(json_encode($obj));
+        } else {
+            $this->sendOutput(json_encode($result));
+        }
+    }
+    private function handleExamineForm() {
+        $roomName = $_POST["roomName"] ?? null;
+        $userID = $_POST["userID"] ?? null;
+        $date = $_POST["date"] ?? null;
+        $startTime = $_POST["startTime"] ?? null;
+        $allow = $_POST["allow"] ?? null;
+        $result = $this->historyModel->handleExamineForm($roomName, $userID, $date, $startTime, $allow);
+        return $result;
+    }
     private function getApplyRequest() {
         $userID = $_SESSION["userID"];
         $result = $this->historyModel->getApplyRequest($userID);
-        $this->sendOutput(json_encode($result));
+        $obj = [
+            'error' => 'not login'
+        ];
+        if ($result === false) {
+            $this->sendOutput(json_encode($obj));
+        } else {
+            $this->sendOutput(json_encode($result));
+        }
     }
     private function handleSubmitForm() {
         $roomName = $_POST["roomName"];
@@ -42,7 +75,8 @@ class HistoryController extends BaseController
         $end = $_POST["endTime"];
         $content = $_POST["content"];
         $immediate = $_POST["immediate"];
-        $borrowTime = $_POST["borrowTime"];
+        date_default_timezone_set("Asia/Taipei");
+        $borrowTime = date('Y-m-d H:i:s');
         $this->historyModel->insertApplication($roomName, $userID, $date, $start, $end, $content, $immediate, $borrowTime);
         $this->sendOutput("提交成功");
         unset($_SESSION["application"]);

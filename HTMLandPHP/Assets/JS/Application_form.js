@@ -74,16 +74,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function SendOut() {
         let formContent = document.getElementById("form_content");
         let testForm = new FormData();
-        let currentDate = new Date();
-        let formattedDate = currentDate.toISOString().slice(0, 19).replace("T", " ");
         const historyForm = {
             "roomName": roomName,
             "date": formDate,
             "startTime": startTime,
             "endTime": endTime,
             "content": formContent.value,
-            "immediate": (isToday ? 1 : 0),
-            "borrowTime": formattedDate
+            "immediate": (isToday ? 1 : 0)
         };
         for (let key in historyForm) {
             testForm.append(key, historyForm[key]);
