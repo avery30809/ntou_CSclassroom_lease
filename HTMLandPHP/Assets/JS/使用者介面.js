@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         showEditstate();
     });
     document.getElementById("menuBtn2").addEventListener("click", ()=>{
+        getApplyRequest();
         clearAll();
         showApplyRequest();
     });
@@ -23,15 +24,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
     getUserProfile();
     function getUserProfile() {
         //獲取使用者身分
-        fetch("../../Controller/Api/UserController.php?action=getUserProfile")
+        fetch(`../../Controller/Api/UserController.php?action=getUserProfile&ID=${window.localStorage.getItem("ID")}`)
         .then(response => response.json())
         .then(data => {
-            if (data.error === undefined) {
+            if (data.error === undefined && window.localStorage.getItem("ID")!="1") {
                 user = data;
                 logoName.innerHTML = user.username;
                 document.getElementById("infoName").value = user.username;
                 document.getElementById("userAccount").innerHTML = user.useraccount;
                 if(user.phone !== null) document.getElementById("infoPhone").value = user.phone;
+            }
+            else if(window.localStorage.getItem("ID")=="1") {
+                window.location.href = "../../Pages/Admin interface.html";
             }
             else {
                 //沒有登入就回首頁
@@ -42,7 +46,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
     getApplyRequest();
     function getApplyRequest() {
-        fetch("../../Controller/Api/HistoryController.php?action=getApplyRequest")
+        let content = "";
+        applyRequest.innerHTML = "";
+        fetch(`../../Controller/Api/HistoryController.php?action=getApplyRequest&ID=${window.localStorage.getItem("ID")}`)
         .then(response => response.json())
         .then(datas => {
             if (datas.error !== undefined) {
@@ -51,13 +57,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
             datas.forEach((data, index) => {
                 //console.log(data);
-                applyRequest.innerHTML +=  `<div class="content">
+                content +=  `<div class="content">
                                                 <div class="title">
                                                     <p>${data[0]}<img src="../../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index}"></p>
                                                 </div>
                                                 <div class="text" data-index="${index}">
                                                     <p>借用日期: ${data[8]}</p>
-                                                    <p>歸還日期: ${data[9] === null ? '未借用/未歸還' : data[9]}</p>
+                                                    <p>歸還日期: ${data[9] == 0 ? '尚未借用':data[10] == null ? '未歸還' : data[10]}</p>
                                                     <p>借用目的: ${data[5]}</p>
                                                     <p>借用型態: ${data[6] === 1 ? '立即借用' : '預約借用'}</p>
                                                     <div class="ApplyrequestText">
@@ -71,6 +77,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                                 </div>
                                             </div>`;
             });
+            applyRequest.innerHTML = content;
             document.querySelectorAll('.immediatelyFormImg').forEach(img => {
                 img.addEventListener('click', () => {
                     const index = img.getAttribute('data-index');
@@ -110,5 +117,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     logoutButton.addEventListener("click", () => {
         fetch("../../Controller/Api/UserController.php?action=logout");
         window.location.href = "../../Pages/Home.html";
+        window.localStorage.removeItem("ID");
     }, false);
 })

@@ -4,7 +4,7 @@ class HistoryModel extends Database
 {
     public function getApplyRequest($userID) {
         try {
-            $result = $this->query("SELECT * FROM history WHERE userID = ? ORDER BY borrowTime DESC", [$userID]);
+            $result = $this->query("SELECT * FROM history WHERE userID = ? ORDER BY borrowTime DESC, startTime ASC", [$userID]);
             return $result;
         } catch (Exception $e) {
             return false;
@@ -12,7 +12,7 @@ class HistoryModel extends Database
     }
     public function getHistoryForm() {
         try {
-            $result = $this->query("SELECT * FROM history NATURAL JOIN userdata WHERE allow is NULL ORDER BY borrowTime DESC");
+            $result = $this->query("SELECT * FROM history NATURAL JOIN userdata WHERE allow is NULL ORDER BY borrowTime DESC, startTime ASC");
             return $result;
         } catch (Exception $e) {
             return false;
@@ -27,11 +27,15 @@ class HistoryModel extends Database
                                 , [$allow, $roomName, $userID, $date, $startTime]);
     }
     public function getKeyRecord($date) {
-        $result = $this->query("SELECT RoomName, username, content, date, startTime, endTime, returnTime, userID FROM history NATURAL JOIN userdata WHERE allow=1 AND date <= '$date' ORDER BY date");
+        $result = $this->query("SELECT RoomName, username, content, date, startTime, endTime, returnTime, userID, borrowed FROM history NATURAL JOIN userdata WHERE allow=1 AND date <= '$date' ORDER BY borrowed, ISNULL(returnTime) DESC, date DESC, startTime ASC, returnTime ASC");
         return $result;
     }
     public function setKeyRecord($roomName, $userID, $date, $startTime, $returnTime) {
         $this->query("UPDATE history SET returnTime = ? WHERE RoomName = ? and userID = ? and date = ? and startTime = ?"
                     , [$returnTime, $roomName, $userID, $date, $startTime]);
+    }
+    public function setBorrowedKeyRecord($roomName, $userID, $date, $startTime) {
+        $this->query("UPDATE history SET borrowed = '1' WHERE RoomName = ? and userID = ? and date = ? and startTime = ?"
+                    , [$roomName, $userID, $date, $startTime]);
     }
 }

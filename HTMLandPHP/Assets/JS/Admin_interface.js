@@ -23,19 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-    getUserProfile();
-    function getUserProfile() {
-        //獲取使用者身分
-        fetch("../../Controller/Api/UserController.php?action=getUserProfile")
-        .then(response => response.json())
-        .then(data => { 
-            if (data.error !== undefined) {
-                //沒有登入就回首頁
-                window.alert("請先登入！");
-                window.location.href = "Home.html";
-            }
-        });
+    if(window.localStorage.getItem("ID")!=1) {
+        //沒有登入就回首頁
+        window.alert("請先登入！");
+        window.location.href = "Home.html";
     }
+
     document.getElementById("logoutBtn").addEventListener("click", ()=>{
         fetch("../../Controller/Api/UserController.php?action=logout");
         window.location.href = "../../Pages/Home.html";
@@ -443,22 +436,45 @@ document.addEventListener("DOMContentLoaded", () => {
     
         confirmBtn.onclick = function () {
             // 在這裡放置確認按下後的處理邏輯
-            modal.style.display = 'none';
-            const testForm = new FormData();
-            let arg = target.getAttribute("data-argument").split(" ");
-            testForm.append("roomName", arg[0]);
-            testForm.append("userID", arg[1]);
-            testForm.append("date", arg[2]);
-            testForm.append("startTime", arg[3]);
-            testForm.append("action", "setKeyRecord");
-            fetch("../../Controller/Api/HistoryController.php", {
-                method: 'POST',
-                body: testForm
-            })
-            .then(response=>response.text())
-            .then(data=>{
-                target.innerHTML = "已歸還";
-            })
+            if(target.innerHTML == "尚未借用") {
+                modal.style.display = 'none';
+                const testForm = new FormData();
+                let arg = target.getAttribute("data-argument").split(" ");
+                testForm.append("roomName", arg[0]);
+                testForm.append("userID", arg[1]);
+                testForm.append("date", arg[2]);
+                testForm.append("startTime", arg[3]);
+                testForm.append("action", "setBorrowed");
+                fetch("../../Controller/Api/HistoryController.php", {
+                    method: 'POST',
+                    body: testForm
+                })
+                .then(response=>response.text())
+                .then(data=>{
+                    target.innerHTML = "未歸還";
+                    getHistoryForm();
+                })
+            }
+            else {
+                modal.style.display = 'none';
+                const testForm = new FormData();
+                let arg = target.getAttribute("data-argument").split(" ");
+                testForm.append("roomName", arg[0]);
+                testForm.append("userID", arg[1]);
+                testForm.append("date", arg[2]);
+                testForm.append("startTime", arg[3]);
+                testForm.append("action", "setKeyRecord");
+                fetch("../../Controller/Api/HistoryController.php", {
+                    method: 'POST',
+                    body: testForm
+                })
+                .then(response=>response.text())
+                .then(data=>{
+                    target.innerHTML = "已歸還";
+                    target.disabled = true;
+                    getHistoryForm();
+                })
+            }
         };
     
         cancelBtn.onclick = function () {
@@ -486,16 +502,17 @@ document.addEventListener("DOMContentLoaded", () => {
             let imContent = "";
             let rvContent = "";
             datas.forEach((data, index) => {
+                console.log(data);
                 if (data[6] === 1) {
                     imContent += `<div class="content">
                                         <div class="title">
                                             <p>${data[1]}<img src="../../image/dropdownIcon48.png" class="immediatelyFormImg" data-index="${index}" alt="immediatelyFormImg2"></p>
                                         </div>
                                         <div class="text" data-index="${index}">
-                                            <p>${data[10]}</p>
+                                            <p>${data[11]}</p>
                                             <p>借用目的: ${data[5]}</p>
                                             <p>借用日期: ${data[8]}</p>
-                                            <p>歸還日期: ${data[9] === null ? '未借用/未歸還' : data[9]}</p>
+                                            <p>歸還日期: 尚未借用</p>
                                             <div class="accounting">
                                                 <p>Start Time : </p>
                                                 <p>End Time : </p>
@@ -512,10 +529,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                                     <p>${data[1]}<img src="../../image/dropdownIcon48.png" class="reserveFormImg" data-index="${index}" alt="reserveFormImg2"></p>
                                                 </div>
                                                 <div class="text" data-index="${index}">
-                                                    <p>${data[10]}</p>
+                                                    <p>${data[11]}</p>
                                                     <p>借用目的: ${data[5]}</p>
                                                     <p>借用日期: ${data[8]}</p>
-                                                    <p>歸還日期: ${data[9] === null ? '未借用/未歸還' : data[9]}</p>
+                                                    <p>歸還日期: 尚未借用</p>
                                                     <div class="accounting">
                                                         <p>Start Time : </p>
                                                         <p>End Time : </p>
@@ -583,32 +600,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function getKeyRecord() {
         let content = `<div class="keyRecordTitle">
-                        <span>借用教室</span>
-                        <span>借用者</span>
-                        <span>借用目的</span>
-                        <span>借用時間</span>
-                        <span>預計歸還時間</span>
-                        <span>借用狀態</span>
+                        <span style=width:10%;'>借用教室</span>
+                        <span style='width:15%;'>借用者</span>
+                        <span style='width:20%;'>借用目的</span>
+                        <span style='width:20%;'>借用時間</span>
+                        <span style='width:10%;'>預計歸還</span>
+                        <span style='width:20%;'>實際歸還</span>
+                        <span style='width:5%'>借用狀態</span>
                     </div>`;
         fetch("../../Controller/Api/HistoryController.php?action=getKeyRecord")
         .then(response=>response.json())
         .then(datas=>{
             if(datas.error === undefined) {
+                content += `<div class="keyRecordBody">`;
                 datas.forEach(data=>{
                     content += `<div class="keyRecordContent">
-                                    <span>${data[0]}</span>
-                                    <span>${data[1]}</span>
-                                    <span>${data[2]}</span>
-                                    <span>${data[3]} 第${data[4]}節</span>
-                                    <span>${data[3]} 第${data[5]}節</span>
+                                    <span style='width:10%;'>${data[0]}</span>
+                                    <span style='width:15%;'>${data[1]}</span>
+                                    <span style='width:20%;'>${data[2]}</span>
+                                    <span style='width:20%;'>${data[3]} 第${data[4]}節</span>
+                                    <span style='width:10%;'>第${data[5]}節</span>
+                                    <span style='width:20%;'>${data[6] ?? "無"}</span>
                         
                                     <!-- 雙重按鈕確認歸還 -->
-                                    <button class="returnButton" data-argument="${data[0]} ${data[7]} ${data[3]} ${data[4]}">${data[6]==null?"未借用/未歸還":"已歸還"}</button>
+                                    <button class="returnButton" data-argument="${data[0]} ${data[7]} ${data[3]} ${data[4]}">${data[8]==0?"尚未借用":data[6]==null?"未歸還":"已歸還"}</button>
                         
                                     <div id="myModal" class="modal">
                                         <div class="modal-content">
                                             <span class="close" id="closeModal">&times;</span>
-                                            <p>已確認使用者歸還嗎？</p>
+                                            <p>${data[8]==0?"確定借用？":"確認歸還？"}</p>
                                             <button id="confirmBtn">確認</button>
                                             <button id="cancelBtn">取消</button>
                                         </div>
@@ -616,8 +636,12 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </div>`;
                 });
             }
+            content += "</div>";
             document.getElementById("keyRecord").innerHTML = content;
             document.querySelectorAll(".returnButton").forEach(element=>{
+                if(element.innerHTML==="已歸還") {
+                    element.disabled = true;
+                }
                 element.addEventListener("click", (e)=>{
                     e.target.nextElementSibling.style.display = 'block';
                     keyDoubleCheck(e.target);

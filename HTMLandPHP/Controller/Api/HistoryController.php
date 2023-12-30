@@ -20,6 +20,9 @@ class HistoryController extends BaseController
                 case 'setKeyRecord':
                     $this->handleSetKeyRecord();
                     break;
+                case 'setBorrowed':
+                    $this->handleSetBorrowedKeyRecord();
+                    break;
                 default:
                     break;
             }
@@ -62,7 +65,7 @@ class HistoryController extends BaseController
         return $result;
     }
     private function getApplyRequest() {
-        $userID = $_SESSION["userID"];
+        $userID = $_GET["ID"];
         $result = $this->historyModel->getApplyRequest($userID);
         $obj = [
             'error' => 'not login'
@@ -75,7 +78,7 @@ class HistoryController extends BaseController
     }
     private function handleSubmitForm() {
         $roomName = $_POST["roomName"];
-        $userID = $_SESSION["userID"];
+        $userID = $_POST["userID"];
         $date = $_POST["date"];
         $start = $_POST["startTime"];
         $end = $_POST["endTime"];
@@ -106,6 +109,13 @@ class HistoryController extends BaseController
         $date = $_POST['date'];
         $startTime = $_POST['startTime'];
         $this->historyModel->setKeyRecord($roomName, $userID, $date, $startTime, $returnTime);
+    }
+    private function handleSetBorrowedKeyRecord() {
+        $roomName = $_POST['roomName'];
+        $userID = $_POST['userID'];
+        $date = $_POST['date'];
+        $startTime = $_POST['startTime'];
+        $this->historyModel->setBorrowedKeyRecord($roomName, $userID, $date, $startTime);
     }
 }
 $test = new HistoryController();

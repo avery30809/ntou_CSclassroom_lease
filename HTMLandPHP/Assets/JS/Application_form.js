@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         for (let key in historyForm) {
             testForm.append(key, historyForm[key]);
         }
+        testForm.append("userID", window.localStorage.getItem("ID"));
         testForm.append("action", "submitForm");
         fetch("../../Controller/Api/HistoryController.php", {
             method: 'POST',

@@ -41,10 +41,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
         email: "",
         phone: null
     };
-    fetch("../../Controller/Api/UserController.php?action=getUserProfile")
+    fetch(`../../Controller/Api/UserController.php?action=getUserProfile&ID=${window.localStorage.getItem("ID")}`)
     .then(response => response.json())
     .then(data => {
         //已登入
+        console.log(window.localStorage.getItem("ID"));
         if(data.error === undefined) {
             user = data;
             document.getElementById("login-signup").innerHTML = "<img src='../../image/usericon.png' class='usericon'>" + user.username;

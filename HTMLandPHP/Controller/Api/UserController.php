@@ -51,15 +51,15 @@ class UserController extends BaseController
         }
     }
     private function getUserName() {
-        $userID = $_POST['userID'] ?? null;
+        $userID = $_GET['userID'] ?? null;
         $result = $this->userModel->getUserName($userID);
         $this->sendOutput(json_encode($result[0]));
     }
     //獲取身分資訊
     private function getUserProfile() {
         //確保已經登入
-        if(isset($_SESSION["userID"])) {
-            $userID = $_SESSION["userID"];
+        if(isset($_GET["ID"]) && $_GET["ID"]!="null") {
+            $userID = $_GET["ID"];
             $result = $this->userModel->getUserProfile($userID);
             $this->sendOutput(json_encode($result));
         }
@@ -95,8 +95,7 @@ class UserController extends BaseController
             $result = $this->userModel->authenticate($account, $password, $op);
 
             if ($result) {
-                $_SESSION["userID"] = $result[0];
-                $this->sendOutput("登入成功！ $op");
+                $this->sendOutput("登入成功！ $op " . $result[0]);
             } else {
                 $this->sendOutput("帳號或密碼錯誤");
             }

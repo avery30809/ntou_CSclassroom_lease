@@ -387,49 +387,56 @@ nav.close~.board .top {
     transition: all 0.5s ease;
     z-index: 10;
 
-}
+    /* border: solid; */
 
-nav.close~.board .board-content {
-    left: 63px;
-    width: calc(100% - 73px);
 }
-
 .keyRecord {
     display: none;
+    height: 70%;
 }
 
 .keyRecord.show {
-    display: block;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 10%;
+    left: 100px;
+    width: calc(100% - 250px);
+    z-index: 9999;
 }
 
 .keyRecordTitle {
     display: flex;
-    justify-content: space-between;
-    font-size: 30px !important;
     border-bottom: 1px solid;
-    align-items: center;
     padding-bottom: 10px;
-    padding-right: 10px;
 }
-
+.keyRecordTitle span{
+    text-align: center;
+    font-size: 25px;
+    /* border: solid; */
+}
+.keyRecordBody {
+    overflow-y: scroll;
+}
 .keyRecordContent {
     display: flex;
     margin-top: 20px;
-    justify-content: space-between;
-    text-align: center;
-    align-items: center;
-    font-size: 25px !important;
-    /* border: solid; */
 }
+.keyRecordContent span{
+    text-align: center;
+    overflow-x: auto;
+    font-size: 20px;
+    /* border: solid; */
 
+}
 .keyRecordContent:hover {
     /* background-color: red; */
 }
 
 
 /* 雙重按鈕確認歸還 */
-.keyRecordContent button {
-    margin-right: 10px;
+.keyRecordContent .returnButton {
+    width: 5%;
     display: inline-block;
     outline: none;
     cursor: pointer;
@@ -439,9 +446,15 @@ nav.close~.board .board-content {
     border: 0;
     color: #fff;
     background: #ff5000;
-    line-height: 1.15;
+    line-height: 1.1;
     font-size: 16px;
-
+    margin-left: 10px;
+}
+.keyRecordContent .returnButton:disabled {
+    background-color: #888;
+    transition: none;
+    box-shadow: none;
+    cursor: default;
 }
 
 .keyRecordContent button:hover {
@@ -473,6 +486,22 @@ nav.close~.board .board-content {
     padding: 20px;
     border: 1px solid #888;
     text-align: center;
+    width: 300px;
+}
+.modal-content button {
+    width: auto;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 12px 24px;
+    border: 0;
+    color: #fff;
+    background: #ff5000;
+    line-height: 1.1;
+    font-size: 16px;
+    margin-left: 10px;
 }
 
 .close {

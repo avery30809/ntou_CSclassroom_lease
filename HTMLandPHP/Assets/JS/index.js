@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     getUserProfile();
     function getUserProfile() {
         //獲取使用者身分
-        fetch("../../Controller/Api/UserController.php?action=getUserProfile")
+        fetch(`../../Controller/Api/UserController.php?action=getUserProfile&ID=${window.localStorage.getItem("ID")}`)
         .then(response => response.json())
         .then(data => {
             if(data.error === undefined) {
@@ -409,6 +409,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 }
             }
             document.querySelector(".content").innerHTML = weeklySchedule(schedule, userData);
+            getDateClassCondition();
         })
     }
 
