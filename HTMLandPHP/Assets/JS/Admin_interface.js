@@ -452,7 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response=>response.text())
                 .then(data=>{
                     target.innerHTML = "未歸還";
-                    getHistoryForm();
+                    getKeyRecord();
                 })
             }
             else {
@@ -472,7 +472,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(data=>{
                     target.innerHTML = "已歸還";
                     target.disabled = true;
-                    getHistoryForm();
+                    getKeyRecord();
                 })
             }
         };
