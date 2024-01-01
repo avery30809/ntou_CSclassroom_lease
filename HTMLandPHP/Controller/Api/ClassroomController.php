@@ -29,6 +29,9 @@ class ClassroomController extends BaseController{
                 case 'applicationApprove':
                     $this->handleApplicationApprove();
                     break;
+                case 'applicationCancel':
+                    $this->handleApplicationCancel();
+                    break;
                 default:
                     break;
             }
@@ -212,6 +215,14 @@ class ClassroomController extends BaseController{
         for($i = 0; $i<$times; $i++)
             $this->classroomModel->insertCourse($roomName, $date, $start+$i, $activity, $userID);
         $this->sendOutput("新增成功！");
+    }
+    private function handleApplicationCancel() {
+        $roomName = $_POST['roomName'];
+        $date = $_POST['date'];
+        $start = $_POST['startTime'] + 7;
+        $times = $_POST['times'] + 0;
+        for($i = 0; $i<$times; $i++)
+            $this->classroomModel->deleteCourse($roomName, $date, $start+$i);
     }
 }
 $test = new ClassroomController();

@@ -23,6 +23,15 @@ class HistoryController extends BaseController
                 case 'setBorrowed':
                     $this->handleSetBorrowedKeyRecord();
                     break;
+                case 'cancelHistory':
+                    $this->handleCancelHistory();
+                    break;
+                case 'fastInsert':
+                    $this->handleFastInsert();
+                    break;
+                case 'classInsert':
+                    $this->handleClassInsert();
+                    break;
                 default:
                     break;
             }
@@ -38,6 +47,9 @@ class HistoryController extends BaseController
                     break;
                 case 'getKeyRecord':
                     $this->handleGetKeyRecord();
+                    break;
+                case 'getAllowedHistory':
+                    $this->handleAllowedHistory();
                     break;
                 default:
                     break;
@@ -116,6 +128,68 @@ class HistoryController extends BaseController
         $date = $_POST['date'];
         $startTime = $_POST['startTime'];
         $this->historyModel->setBorrowedKeyRecord($roomName, $userID, $date, $startTime);
+    }
+    private function handleAllowedHistory() {
+        $result = $this->historyModel->getAllowedHistory();
+        if($result == false) {
+            $obj = ['error'=> "沒有任何紀錄"];
+            $this->sendOutput(json_encode($obj));
+            return;
+        }
+        $this->sendOutput(json_encode($result));
+    }
+    private function handleCancelHistory() {
+        $roomName = $_POST['roomName'];
+        $userID = $_POST['userID'];
+        $date = $_POST['date'];
+        $startTime = $_POST['startTime'];
+        $this->historyModel->cancelHistory($roomName, $userID, $date, $startTime);
+    }
+    private function handleFastInsert() {
+        $activity = $_POST['activity'];
+        $room = $_POST['room'];
+        $start = $_POST['start']+1;
+        $end = $_POST['end']+1;
+        $date = $_POST['date'];
+        $userID = $_POST['userID'];
+        date_default_timezone_set("Asia/Taipei");
+        $borrowTime = date('Y-m-d H:i:s');
+        $immediate = $date == date('Y-m-d');
+        $this->historyModel->fastInsert($room, $userID, $date, $start, $end, $activity, $immediate, 1, $borrowTime);
+    }
+    private function handleClassInsert() {
+        $activity = $_POST["activity"];
+        $semesterStart = $_POST["semesterStart"];
+        $semesterEnd = $_POST["semesterEnd"];
+        $week = $_POST["week"];
+        $room = $_POST["room"];
+        $start = $_POST["start"]+1;
+        $end = $_POST["end"]+1;
+        $userID = $_POST["userID"];
+
+        // 轉換為 DateTime 物件
+        $start_date = new DateTime($semesterStart);
+        $end_date = new DateTime($semesterEnd);
+
+        // 課程開始的第一天
+        $start_date->modify("this week +$week days");
+
+        // 包含最後一天
+        $end_date->modify('+1 day');
+
+        // 初始化迴圈的 DateInterval
+        $interval = new DateInterval('P7D'); // P7D 代表七天
+
+        // 初始化 DatePeriod 用於遍歷日期範圍
+        $daterange = new DatePeriod($start_date, $interval, $end_date);
+        
+        date_default_timezone_set("Asia/Taipei");
+        $borrowTime = date('Y-m-d H:i:s');
+        // 遍歷每一天
+        foreach ($daterange as $date) {
+            $immediate = $date == date('Y-m-d');
+            $this->historyModel->fastInsert($room, $userID, $date->format('Y-m-d'), $start, $end, $activity, $immediate, 1, $borrowTime);
+        }
     }
 }
 $test = new HistoryController();

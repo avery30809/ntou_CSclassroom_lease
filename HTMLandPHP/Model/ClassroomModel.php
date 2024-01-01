@@ -18,4 +18,7 @@ class ClassroomModel extends Database{
         $result = $this->query("SELECT HourOfDay, Activity, username, email, phone FROM roomschedule NATURAL JOIN userdata WHERE RoomName = ? AND DateOfDay = ?", [$roomName, $date]);
         return $result;
     }
+    public function deleteCourse($place, $date, $hour) {
+        $this->query("DELETE FROM roomschedule WHERE RoomName = ? and DateOfDay = ? and HourOfDay = ?", [$place, $date, $hour]);
+    }
 }

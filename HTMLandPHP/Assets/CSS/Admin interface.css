@@ -290,6 +290,7 @@ nav.close~.board .top {
 .content {
     border: solid;
     border-radius: 20px;
+    margin-top: 5px;
 }
 
 .title {
@@ -933,8 +934,94 @@ nav.close~.board .top {
     font-size: 25px !important;
 }
 
-.classroomInquiryContent button {
-    width: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.inquirySelectRoom::after {
+    background-image: url("../../image/dropdownIcon48.png");
+    background-size: 25px 25px;
+    width: 25px;
+    height: 25px;
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+}
+
+.inquirySelectRoom.checked::after {
+    transform: rotate(180deg) translateY(50%);
+}
+
+.inquirySelectRoom {
+    position: relative;
+}
+
+.inquirySelectRoom .inquiryDropdown {
+    border: 2px solid lightgray;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 200px;
+    display: none;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.inquirySelectRoom .inquiryDropdownBox:hover {
+    cursor: pointer;
+}
+
+.inquirySelectRoom .inquiryDropdownBox:focus {
+    outline: none;
+}
+
+.inquirySelectRoom .inquiryDropdown {
+    border: 2px solid lightgray;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 200px;
+    display: none;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.inquirySelectRoom .inquiryDropdown.show {
+    display: block;
+}
+
+.inquirySelectRoom .inquiryDropdown ul {
+    list-style: none;
+}
+
+.inquirySelectRoom .inquiryDropdown li {
+    text-align: center;
+    background-color: white;
+    padding-block: 5px;
+    border-bottom: 2px solid lightgray;
+}
+
+.inquirySelectRoom .inquiryDropdown li:hover {
+    cursor: pointer;
+    background-color: rgb(90, 163, 223);
+}
+
+.inquirySelectRoom input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-right: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.classroomInquiryResult {
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+.handleCancelButton {
+    margin-left: auto;
 }

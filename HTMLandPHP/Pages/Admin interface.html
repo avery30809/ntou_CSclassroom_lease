@@ -247,19 +247,20 @@
             <!-- 教室查詢 -->
             <div class="classroomInquiry" id="classroomInquiry">
                 <div class="classroomInquiryTitle">
-                    <h1>找教室</h1>
+                    <h1>修改教室請求</h1>
 
                 </div>
 
                 <div class="classroomInquiryContent">
-                    <span>教室名稱: <input class="inputClassRoomName" type="text" placeholder="輸入教室名稱"
-                            list="classroomNameList"></span>
-                    <datalist id="classroomNameList"></datalist>
-
-                    <button>提交</button>
-
-                    <span>選擇日期: <input type="date" id="datePicker" name="datePicker"></span>
-                    <button>提交</button>
+                    <span>教室名稱: </span>
+                    <div class="inquirySelectRoom">
+                        <input class="inquiryDropdownBox" type="text" id="inquiryRoomBox" name="room" readonly>
+                        <div class="inquiryDropdown" id="inquiryDropdownRoom">
+                            <ul id="inquiryRoomSelect"></ul>
+                        </div>
+                    </div>
+                    <div class="classroomInquiryResult">
+                    </div>
                 </div>
             </div>
         </div>
