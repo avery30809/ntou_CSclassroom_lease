@@ -17,5 +17,9 @@
 
 ## Demo影片
 (直接把mp4的檔案拉進來即可)
+1. 90% 實作影片
 https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/84e8f407-2676-4ce1-8614-2708b97ebec8
+
+2. 新增管理員教室查詢功能
+https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/e3d8d99b-e174-4815-9115-954c83659943
 
