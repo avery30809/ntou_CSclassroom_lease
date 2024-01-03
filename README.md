@@ -6,7 +6,7 @@
 
 楊乃諺: 後端功能實現、前後端資料整合、前後端分離的MVC架構、書面報告
 
-曹宥翔: 
+曹宥翔: 前端整體畫面設計規劃及基本功能(頁面跳轉，下拉式選單等)、實作影片錄製及講解、文書報告(jamboard,drawio,SRD,STD)
 
 蘇浚皓: 
 
@@ -17,3 +17,5 @@
 
 ## Demo影片
 (直接把mp4的檔案拉進來即可)
+https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/84e8f407-2676-4ce1-8614-2708b97ebec8
+
