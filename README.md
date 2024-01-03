@@ -23,3 +23,6 @@ https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/84e8f407-26
 2. 新增管理員教室查詢功能
 https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/e3d8d99b-e174-4815-9115-954c83659943
 
+3. 完善鑰匙借用流程
+https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/e3de60b7-fc83-4345-98c9-8e352d52621c
+
