@@ -17,12 +17,17 @@
 
 ## Demo影片
 (直接把mp4的檔案拉進來即可)
-1. 90% 實作影片
-https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/84e8f407-2676-4ce1-8614-2708b97ebec8
 
-2. 新增管理員教室查詢功能(該頁面只會顯示當天以前已經同意借用，並且尚未借鑰匙的)
+**1. 90% 實作影片**  
+
+https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/84e8f407-2676-4ce1-8614-2708b97ebec8  
+
+**2. 新增管理員教室查詢功能(該頁面只會顯示當天以前已經同意借用，並且尚未借鑰匙的)**
+   
 https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/e3d8d99b-e174-4815-9115-954c83659943
 
-3. 完善鑰匙借用流程
+**3. 完善鑰匙借用流程**
+
 https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/e3de60b7-fc83-4345-98c9-8e352d52621c
+
 
