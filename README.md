@@ -16,8 +16,6 @@
 進行使用者體驗測試，以確保系統易於使用且符合使用者期望。
 
 ## Demo影片
-(直接把mp4的檔案拉進來即可)
-
 **1. 90% 實作影片**  
 
 https://github.com/avery30809/ntou_CSclassroom_lease/assets/52877238/84e8f407-2676-4ce1-8614-2708b97ebec8  
